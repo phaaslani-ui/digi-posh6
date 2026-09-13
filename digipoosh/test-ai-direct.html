@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="UTF-8"><title>Test AI Direct</title>
+<style>
+body { font-family: monospace; padding: 20px; background: #000; color: #0f0; }
+.box { background: #111; padding: 16px; border-radius: 8px; margin: 8px 0; border: 1px solid #0f0; }
+.err { color: #f55; border-color: #f55; }
+.ok { color: #0f0; }
+.warn { color: #ff0; }
+button { padding: 12px 24px; background: #d4af37; color: #000; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; margin: 8px 4px; }
+pre { white-space: pre-wrap; word-break: break-all; }
+</style>
+</head>
+<body>
+<h1>🧪 تست مستقیم AI</h1>
+<button onclick="runAll()">▶ اجرای همه تست‌ها</button>
+<button onclick="location.reload()">🔄 Reload</button>
+<div id="result"></div>
+
+<script src="./seller/js/dp-config.js"></script>
+<script src="./dp-products.js"></script>
+<script src="./dp-product-loader.js"></script>
+<script src="./dp-ai-nlu.js"></script>
+<script src="./dp-chat-ai.js"></script>
+
+<script>
+async function runAll() {
+  const result = document.getElementById('result');
+  result.innerHTML = '<div class="box">⏳ در حال اجرا...</div>';
+  
+  let html = '';
+  
+  // ۱) پاک کردن کش
+  try {
+    localStorage.removeItem('dp_products');
+    localStorage.removeItem('dp_seed_version');
+    localStorage.removeItem('dp_products_cleared');
+    html += '<div class="box ok">✓ localStorage پاک شد</div>';
+  } catch (e) {
+    html += '<div class="box err">❌ ' + e.message + '</div>';
+  }
+  
+  // ۲) sync از سرور
+  try {
+    if (window.DPProductLoader && window.DPProductLoader.syncWithServer) {
+      await window.DPProductLoader.syncWithServer();
+      html += '<div class="box ok">✓ sync از سرور</div>';
+    }
+  } catch (e) {
+    html += '<div class="box warn">⚠️ sync: ' + e.message + '</div>';
+  }
+  
+  // ۳) بررسی محصولات
+  const products = window.DPProducts ? window.DPProducts.all() : [];
+  html += `<div class="box ok">📦 محصولات: ${products.length}</div>`;
+  
+  if (products.length > 0) {
+    const ids = products.map(p => p.id);
+    const unique = new Set(ids);
+    html += `<div class="box ${ids.length === unique.size ? 'ok' : 'err'}">`;
+    html += `یونیک: ${unique.size} | تکراری: ${ids.length - unique.size}</div>`;
+    
+    html += '<div class="box"><strong>نمونه محصولات:</strong><pre>';
+    products.slice(0, 5).forEach(p => {
+      html += `${p.id}: ${p.name} (${p.price} تومان)\n`;
+    });
+    html += '</pre></div>';
+  }
+  
+  // ۴) تست چت با query های مختلف
+  const queries = [
+    'یه پیراهن قرمز بپوشم',
+    'کفش ورزشی',
+    'ست عروسی',
+    'بهترین محصول',
+    'پیشنهاد ویژه'
+  ];
+  
+  for (const q of queries) {
+    html += `<div class="box"><strong>💬 "${q}"</strong><pre>`;
+    try {
+      const r = window.DPChatAI.generateResponse(q, {});
+      html += `text: ${(r.text || '').substring(0, 100)}\n`;
+      if (r.products && r.products.length > 0) {
+        html += `products (${r.products.length}):\n`;
+        r.products.slice(0, 4).forEach(p => {
+          html += `  → ${p.id}: ${p.name} (${p.price})\n`;
+        });
+        // بررسی محصولات hardcode
+        const hardcoded = ['p1', 'p2', 'p3', 'test1', 'demo1', 'sample1', 'item1', 'prod1'];
+        const isHardcode = r.products.some(p => hardcoded.includes(String(p.id)));
+        if (isHardcode) {
+          html += `🚨 محصول hardcode پیدا شد!\n`;
+        } else {
+          html += `✅ محصولات واقعی\n`;
+        }
+      } else {
+        html += `⚠️ محصولی ندارد\n`;
+      }
+    } catch (e) {
+      html += `❌ خطا: ${e.message}\n`;
+    }
+    html += '</pre></div>';
+  }
+  
+  result.innerHTML = html;
+}
+
+// اجرای خودکار
+setTimeout(runAll, 1500);
+</script>
+</body>
+</html>

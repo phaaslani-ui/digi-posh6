@@ -1,0 +1,427 @@
+/* ============================================================
+   دیجی‌پوش — بخش نظر و امتیاز
+   ============================================================ */
+
+/* ---------- ستاره‌های نمایشی ---------- */
+.dp-stars {
+  display: inline-flex;
+  gap: 2px;
+  vertical-align: middle;
+}
+
+.dp-star {
+  width: var(--s, 16px);
+  height: var(--s, 16px);
+  flex: none;
+}
+
+.dp-star.full { fill: #d4b85a; }
+.dp-star.half { fill: url(#dpHalf); fill: #d4b85a; opacity: 0.55; }
+.dp-star.empty { fill: rgba(138, 126, 114, 0.26); }
+
+/* ============================================================
+   جعبه‌ی نظرها
+   ============================================================ */
+[data-reviews] {
+  padding: 24px;
+  border-radius: 20px;
+  background: #faf8f5;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.rv-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 15px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+}
+
+.rv-head h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.rv-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-inline-start: auto;
+  font-size: 14px;
+  font-weight: 700;
+  color: #b8943c;
+}
+
+/* ---------- خلاصه‌ی امتیاز ---------- */
+.rv-summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 18px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), rgba(201, 168, 76, 0.03));
+  border: 1px solid rgba(201, 168, 76, 0.24);
+}
+
+.rv-score { text-align: center; min-width: 108px; }
+
+.rv-score b {
+  display: block;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #b8943c;
+}
+
+.rv-score small {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #796e64;
+}
+
+.rv-bars { display: grid; gap: 6px; }
+
+.rv-bar {
+  display: grid;
+  grid-template-columns: 62px 1fr 34px;
+  gap: 9px;
+  align-items: center;
+  font-size: 11.5px;
+  color: #796e64;
+}
+
+.rv-bar i {
+  display: block;
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(138, 126, 114, 0.18);
+  overflow: hidden;
+}
+
+.rv-bar i b {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #c9a84c, #d4b85a);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rv-bar em { font-style: normal; text-align: start; }
+
+/* ============================================================
+   دعوت به ورود
+   ============================================================ */
+.rv-gate {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  background: rgba(201, 168, 76, 0.09);
+  border: 1.5px dashed rgba(201, 168, 76, 0.42);
+}
+
+.rv-gate > svg { width: 30px; height: 30px; color: #b8943c; flex: none; }
+.rv-gate div { flex: 1; min-width: 180px; }
+.rv-gate strong { display: block; font-size: 14.5px; }
+.rv-gate p { margin: 2px 0 0; font-size: 12.5px; color: #796e64; }
+
+.rv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 22px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  color: #faf8f5;
+  background: linear-gradient(135deg, #c9a84c, #b8943c);
+  box-shadow: 0 10px 22px -12px rgba(201, 168, 76, 0.95);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+}
+
+.rv-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -12px rgba(201, 168, 76, 1); }
+.rv-btn[disabled] { opacity: 0.6; pointer-events: none; }
+
+/* ============================================================
+   فرم نوشتن نظر
+   ============================================================ */
+.rv-form {
+  padding: 18px;
+  margin-bottom: 22px;
+  border-radius: 15px;
+  background: #f5f0e8;
+  border: 1px solid rgba(201, 168, 76, 0.26);
+}
+
+.rv-form-head { display: flex; align-items: center; gap: 11px; margin-bottom: 14px; }
+.rv-form-head strong { display: block; font-size: 14px; }
+.rv-form-head small { font-size: 11.5px; color: #796e64; }
+
+.rv-ava {
+  width: 40px; height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 800;
+  color: #faf8f5;
+  background: linear-gradient(135deg, #c9a84c, #b8943c);
+  flex: none;
+}
+
+/* ---------- ستاره‌های انتخابی ---------- */
+.rv-pick {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 12px;
+}
+
+.rv-pick-star {
+  width: 38px; height: 38px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.rv-pick-star svg {
+  width: 28px; height: 28px;
+  fill: rgba(138, 126, 114, 0.26);
+  transition: fill 0.18s ease;
+}
+
+.rv-pick-star:hover { transform: scale(1.14); background: rgba(201, 168, 76, 0.12); }
+.rv-pick-star.on svg { fill: #d4b85a; }
+
+.rv-pick-label {
+  margin-inline-start: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #b8943c;
+}
+
+/* ---------- متن ---------- */
+.rv-text {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #faf8f5;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  outline: none;
+  font: inherit;
+  font-size: 13.5px;
+  line-height: 1.9;
+  resize: vertical;
+  transition: border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.rv-text:focus { border-color: #c9a84c; box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.16); }
+
+.rv-form-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.rv-count { font-size: 11.5px; color: #796e64; margin-inline-end: auto; }
+
+.rv-del {
+  padding: 9px 14px;
+  border: 1px solid rgba(180, 84, 79, 0.34);
+  border-radius: 999px;
+  background: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #b4544f;
+  cursor: pointer;
+  transition: background 0.22s ease;
+}
+
+.rv-del:hover { background: rgba(180, 84, 79, 0.1); }
+
+/* ============================================================
+   فهرست نظرها
+   ============================================================ */
+.rv-list { display: grid; gap: 4px; }
+
+.rv-item {
+  display: flex;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.22);
+}
+
+.rv-item:last-child { border-bottom: none; }
+
+.rv-item.mine {
+  padding: 16px;
+  margin-bottom: 6px;
+  border-radius: 14px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  background: rgba(201, 168, 76, 0.06);
+}
+
+.rv-body { flex: 1; min-width: 0; }
+
+.rv-top {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+
+.rv-top strong { font-size: 13.5px; }
+
+.rv-tag {
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 700;
+  color: #8a6d1f;
+  background: rgba(201, 168, 76, 0.2);
+}
+
+.rv-top time { margin-inline-start: auto; font-size: 11.5px; color: #796e64; }
+
+.rv-body p {
+  margin: 7px 0 0;
+  font-size: 13.5px;
+  line-height: 1.95;
+  color: #4a443e;
+  overflow-wrap: anywhere;
+}
+
+.rv-empty {
+  padding: 34px 16px;
+  text-align: center;
+  font-size: 13.5px;
+  color: #796e64;
+}
+
+/* ============================================================
+   صفحات تیره — مردانه و تینیجر
+   ============================================================ */
+[data-dp-page="man"] [data-reviews],
+[data-dp-page="teen"] [data-reviews] {
+  background: rgba(22, 22, 22, 0.66);
+  border-color: rgba(201, 168, 76, 0.3);
+  color: #ede8e0;
+}
+
+[data-dp-page="man"] .rv-form,
+[data-dp-page="teen"] .rv-form { background: rgba(12, 12, 12, 0.6); }
+
+[data-dp-page="man"] .rv-text,
+[data-dp-page="teen"] .rv-text { background: rgba(0, 0, 0, 0.34); color: #ede8e0; }
+
+[data-dp-page="man"] .rv-body p,
+[data-dp-page="teen"] .rv-body p { color: #c8bdb1; }
+
+[data-dp-page="man"] .rv-item.mine,
+[data-dp-page="teen"] .rv-item.mine { background: rgba(201, 168, 76, 0.1); }
+
+/* ============================================================
+   واکنش‌گرا
+   ============================================================ */
+@media (max-width: 620px) {
+  [data-reviews] { padding: 18px 15px; }
+  .rv-summary { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+  .rv-score { min-width: 0; }
+  .rv-bar { grid-template-columns: 54px 1fr 28px; }
+  .rv-pick-star { width: 34px; height: 34px; }
+  .rv-pick-star svg { width: 25px; height: 25px; }
+  .rv-pick-label { margin-inline-start: 4px; font-size: 12px; }
+  .rv-form-foot .rv-btn { width: 100%; }
+  .rv-gate { text-align: center; justify-content: center; }
+  .rv-gate .rv-btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv-bar i b, .rv-pick-star, .rv-btn { transition: none; }
+}
+
+/* ============================================================
+   پاسخ فروشنده به نظر
+   ============================================================ */
+.rv-reply {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 13px;
+  border-inline-start: 3px solid var(--gold, #c9a84c);
+  background: rgba(201, 168, 76, 0.09);
+}
+
+.rv-reply-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 5px;
+  font-size: 12.5px;
+}
+
+.rv-reply-top svg { width: 16px; height: 16px; color: #b8943c; flex: none; }
+.rv-reply-top strong { color: #b8943c; font-weight: 800; }
+.rv-reply-top time { margin-inline-start: auto; font-size: 11px; color: #796e64; }
+
+.rv-reply p {
+  margin: 0 !important;
+  font-size: 12.5px !important;
+  line-height: 1.95 !important;
+  color: #4a443e;
+}
+
+[data-dp-page="man"] .rv-reply,
+[data-dp-page="teen"] .rv-reply { background: rgba(201, 168, 76, 0.12); }
+
+[data-dp-page="man"] .rv-reply p,
+[data-dp-page="teen"] .rv-reply p { color: #c8bdb1; }
+
+/* ============================================================
+   نشان «خرید تأییدشده»
+   ------------------------------------------------------------
+   امتیاز فقط از کسی گرفته می‌شود که واقعاً خریده و سفارشش
+   تحویل شده. این نشان همان را به بازدیدکننده می‌گوید.
+   ============================================================ */
+.rv-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: #2e7d32;
+  background: rgba(76, 175, 80, 0.12);
+  border: 1px solid rgba(76, 175, 80, 0.28);
+}
+
+.rv-ok svg { width: 11px; height: 11px; flex: none; }
+
+[data-dp-page="man"] .rv-ok,
+[data-dp-page="teen"] .rv-ok {
+  color: #7fd18a;
+  background: rgba(76, 175, 80, 0.16);
+}

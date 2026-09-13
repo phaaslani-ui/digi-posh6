@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تست ویجت چت</title>
+  <link rel="stylesheet" href="./style-clean.css">
+</head>
+<body style="padding:40px;background:#fafaf7">
+  <h1>🧪 تست ویجت چت + حافظه بی‌نهایت</h1>
+  <p>این صفحه فقط برای تست است. دکمه چت باید در پایین سمت چپ باشد.</p>
+  <p>روی دکمه کلیک کنید و چند پیام ارسال کنید. حافظه باید همه چیز را ذخیره کند.</p>
+
+  <!-- Mock dependencies -->
+  <script>
+    window.DPUser = { me: () => ({ profile: { name: 'مریم', preferredColors: ['قرمز'] } }) };
+    window.DPAIEngine = {
+      recommend: () => [
+        { id: 'p1', name: 'پیراهن قرمز مجلسی', price: 1200000, matchPercent: 95 },
+        { id: 'p2', name: 'پیراهن آبی کلاسیک', price: 980000, matchPercent: 88 }
+      ]
+    };
+    window.DP_Products = [];
+  </script>
+
+  <!-- Engines -->
+  <script src="./dp-ai-engine.js"></script>
+  <script src="./dp-taste-engine.js"></script>
+  <script src="./dp-wardrobe.js"></script>
+  <script src="./dp-memory.js"></script>
+  <script src="./dp-chat-ai.js"></script>
+  <script src="./dp-chat-widget.js"></script>
+
+  <div style="margin-top:40px;padding:20px;background:#fff;border-radius:12px;border:2px dashed #d4af37">
+    <h2>📊 آمار حافظه (real-time)</h2>
+    <pre id="statsBox" style="font-size:12px;line-height:1.8">در حال بارگذاری...</pre>
+  </div>
+
+  <script>
+    function updateStats() {
+      if (!window.DPMemory) return;
+      const s = window.DPMemory.getStats();
+      document.getElementById('statsBox').textContent = JSON.stringify({
+        مکالمات: s.totalConversations,
+        رنگ_محبوب: s.topColors,
+        دسته_محبوب: s.topCategories,
+        mood_مسلط: s.topMoods,
+        intent_مسلط: s.topIntents,
+        شخصیت: s.personality,
+        engagement: s.engagement,
+        exploration: s.exploration,
+        وفاداری: s.loyalty + '%',
+        health: s.healthScore + '/100',
+        ultra_size: s.memorySize?.ultra,
+        پیش_بینی: s.prediction
+      }, null, 2);
+    }
+    setInterval(updateStats, 2000);
+    setTimeout(updateStats, 1000);
+  </script>
+</body>
+</html>

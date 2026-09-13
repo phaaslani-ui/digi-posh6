@@ -1,0 +1,1188 @@
+/* ============================================================
+   دیجی‌پوش — نوار فیلتر مشتری (نسل دوم)
+   ------------------------------------------------------------
+   بازنویسی کامل با سه هدف:
+     ۱. یک‌دستی — همه‌ی گروه‌ها یک شکل، یک فاصله، یک ریتم
+     ۲. چسبندگی هوشمند — تا انتهای کالاها، نه بیشتر
+     ۳. طلای برند #c9a84c در همه‌جا
+   ============================================================ */
+
+/* ============================================================
+   متغیرها
+   ------------------------------------------------------------
+   این نوار در چهار صفحه با چهار پالت می‌نشیند. رنگ متن هرگز
+   ارثی نیست، وگرنه در صفحه‌ی مردانه سفید روی کرم می‌افتاد.
+   ============================================================ */
+.dp-filters {
+  --f-bg: #fdfbf7;
+  --f-card: #ffffff;
+  --f-ink: #1a1a1a;
+  --f-body: #4a4038;
+  --f-mute: #75695f;
+  --f-dim: #756a5d;
+  --f-gold: #8a6d1f;
+  --f-gold-pure: #c9a84c;
+  --f-gold-lite: #d4b85a;
+  --f-line: rgba(201, 168, 76, 0.26);
+  --f-line-soft: rgba(201, 168, 76, 0.15);
+  --f-knob: #e0d8c9;
+  --f-glow: rgba(201, 168, 76, 0.14);
+  --f-shadow: 0 6px 26px -18px rgba(26, 26, 26, 0.5);
+
+  border-radius: 18px;
+  color: var(--f-ink);
+  background: var(--f-bg);
+  border: 1px solid var(--f-line-soft);
+  box-shadow: var(--f-shadow);
+
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+/* ============================================================
+   چسبندگی — خواسته‌ی اصلی کاربر
+   ------------------------------------------------------------
+   «تا جایی که محصول هست چسبان باشد، وقتی محصولات تمام شد
+   دیگر چسبان نباشد.»
+
+   راه‌حل بدون هیچ اندازه‌گیری شکننده‌ای:
+
+     ۱. شبکه‌بندی دوستونه با `align-items: stretch`
+        → ستون فیلتر خودکار هم‌قد ستون کالاها می‌شود.
+
+     ۲. نوار فیلتر داخل آن ستون `position: sticky` است
+        → تا انتهای همان ستون همراه می‌آید و همان‌جا می‌ایستد.
+
+   پیش‌تر `align-items: start` بود؛ ستون فیلتر به بلندای
+   خودش جمع می‌شد و چسبندگی هیچ فضایی برای حرکت نداشت.
+   دکمه‌ی «نمایش بیشتر» هم بیرون از ستون‌بندی رفت تا ریل
+   دقیقاً به بلندای کالاها بماند.
+   ============================================================ */
+@media (min-width: 981px) {
+
+  /* ---------- ستون نگه‌دارنده ----------
+     این ستون خواهر ستون کالاهاست. چون `align-items` روی
+     شبکه‌بندی `stretch` است (پیش‌فرض)، ارتفاعش **خودکار**
+     برابر ارتفاع ستون کالا می‌شود — بدون یک خط جاوااسکریپت.
+
+     نوار فیلتر داخل همین ستون می‌چسبد، پس دقیقاً وقتی
+     آخرین کالا تمام شد، می‌ایستد. همان چیزی که خواسته شد. */
+  .dpf-rail-col {
+    position: relative;
+    height: 100%;
+  }
+
+  .dp-filters {
+    position: sticky;
+    top: var(--dpf-top, 84px);
+    max-height: calc(100vh - var(--dpf-top, 84px) - 20px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201, 168, 76, 0.42) transparent;
+  }
+
+  /* اگر کالاها آنقدر کم‌اند که چسباندن بی‌فایده است،
+     جاوااسکریپت این کلاس را برمی‌دارد */
+  .dp-filters.dpf-no-stick {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .dp-filters::-webkit-scrollbar { width: 8px; }
+  .dp-filters::-webkit-scrollbar-track { background: transparent; }
+  .dp-filters::-webkit-scrollbar-thumb {
+    border-radius: 99px;
+    background: rgba(201, 168, 76, 0.34);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .dp-filters:hover::-webkit-scrollbar-thumb {
+    background: rgba(201, 168, 76, 0.6);
+    background-clip: padding-box;
+  }
+}
+
+/* ---------- بدنه‌ی داخلی ---------- */
+.dp-filters > * { padding-inline: 16px; }
+.dp-filters > .dpf-head { padding-top: 15px; }
+.dp-filters > *:last-child { padding-bottom: 16px; }
+
+/* ============================================================
+   سرصفحه
+   ============================================================ */
+.dpf-head {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  margin-bottom: 0;
+  background: var(--f-bg);
+  border-bottom: 1px solid var(--f-line);
+  border-radius: 18px 18px 0 0;
+}
+
+.dpf-head h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--f-ink);
+}
+
+.dpf-head svg { width: 17px; height: 17px; color: var(--f-gold); }
+
+/* شمارنده‌ی فیلترهای فعال کنار عنوان */
+.dpf-badge {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 99px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold-pure));
+}
+
+.dpf-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 99px;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #a33d38;
+  background: rgba(180, 84, 79, 0.08);
+  border: 1px solid rgba(180, 84, 79, 0.26);
+  transition: background 0.24s ease, color 0.24s ease;
+}
+.dpf-clear svg { width: 12px; height: 12px; color: currentColor; }
+.dpf-clear:hover { color: #fff; background: #a33d38; border-color: #a33d38; }
+
+/* ============================================================
+   شمارنده‌ی نتیجه — بزرگ و واضح
+   ============================================================ */
+.dpf-result {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding-top: 13px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--f-line-soft);
+}
+.dpf-result b {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--f-gold);
+}
+.dpf-result span { font-size: 12px; color: var(--f-mute); }
+.dpf-result.zero b { color: #a33d38; }
+
+/* ============================================================
+   نوار فیلترهای فعال — هرکدام با ضربدر
+   ============================================================ */
+.dpf-active {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--f-line-soft);
+}
+
+.dpf-atag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 4px 6px 4px 10px;
+  border-radius: 99px;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, rgba(212, 184, 90, 0.9), rgba(201, 168, 76, 0.9));
+  border: 0;
+  overflow-wrap: anywhere;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+.dpf-atag svg {
+  width: 12px; height: 12px;
+  flex: none;
+  padding: 1px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+.dpf-atag:hover { filter: brightness(0.94); transform: translateY(-1px); }
+
+/* ============================================================
+   گروه‌ها — ریتم یکسان
+   ============================================================ */
+.dpf-grp {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--f-line-soft);
+}
+.dpf-grp:last-child { border-bottom: 0; }
+
+.dpf-grp h4 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--f-mute);
+}
+
+/* شمارنده‌ی تعداد گزینه‌های گروه */
+.dpf-cnt {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 99px;
+  color: var(--f-gold);
+  background: var(--f-glow);
+}
+
+/* ============================================================
+   جست‌وجو
+   ============================================================ */
+.dpf-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-inline: 12px;
+  border-radius: 11px;
+  background: var(--f-card);
+  border: 1px solid var(--f-line);
+  transition: border-color 0.24s ease, box-shadow 0.24s ease;
+}
+.dpf-search:focus-within {
+  border-color: var(--f-gold-pure);
+  box-shadow: 0 0 0 3px var(--f-glow);
+}
+.dpf-search > svg { width: 16px; height: 16px; flex: none; color: var(--f-gold); }
+
+.dpf-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--f-ink);
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+.dpf-search input::placeholder { color: var(--f-dim); }
+.dpf-search input::-webkit-search-cancel-button { display: none; }
+
+/* ضربدر داخل کادر جست‌وجو */
+.dpf-xin {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px; height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--f-mute);
+  background: rgba(138, 126, 114, 0.13);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.dpf-xin svg { width: 11px; height: 11px; }
+.dpf-xin:hover { color: #fff; background: #a33d38; }
+
+/* جست‌وجوی داخل یک گروه شلوغ */
+.dpf-gsearch {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 9px;
+  padding-inline: 10px;
+  border-radius: 9px;
+  background: var(--f-card);
+  border: 1px solid var(--f-line-soft);
+}
+.dpf-gsearch svg { width: 13px; height: 13px; flex: none; color: var(--f-gold); }
+.dpf-gsearch input {
+  flex: 1; min-width: 0;
+  padding: 7px 0;
+  font: inherit; font-size: 12px;
+  color: var(--f-ink);
+  background: transparent; border: 0; outline: none;
+}
+.dpf-gsearch input::placeholder { color: var(--f-dim); font-size: 11.5px; }
+.dpf-gsearch input::-webkit-search-cancel-button { display: none; }
+
+.dpf-nores {
+  margin: 4px 0;
+  font-size: 12px;
+  color: var(--f-dim);
+}
+
+/* ============================================================
+   چیپ‌ها
+   ============================================================ */
+.dpf-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.dpf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--f-body);
+  background: var(--f-card);
+  border: 1px solid var(--f-line);
+  transition: background 0.22s ease, color 0.22s ease,
+              border-color 0.22s ease, transform 0.22s ease;
+}
+
+.dpf-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(201, 168, 76, 0.62);
+}
+
+.dpf-chip.on {
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold-pure));
+  border-color: transparent;
+  box-shadow: 0 4px 12px -4px rgba(201, 168, 76, 0.6);
+}
+
+/* گزینه‌ای که با فیلترهای فعلی هیچ کالایی ندارد — کم‌رنگ
+   ولی همچنان قابل کلیک، چون شاید کاربر بخواهد جابه‌جا کند */
+.dpf-chip.none { opacity: 0.42; }
+.dpf-chip.none:hover { opacity: 0.7; }
+
+.dpf-chip em {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 99px;
+  color: var(--f-mute);
+  background: var(--f-glow);
+}
+.dpf-chip.on em { color: #1a1a1a; background: rgba(255, 255, 255, 0.45); }
+
+/* سایزها مربع و هم‌اندازه — چشم راحت‌تر می‌خواند */
+.dpf-sizes .dpf-chip {
+  min-width: 52px;
+  justify-content: center;
+  padding-inline: 9px;
+}
+
+.dpf-star svg { width: 12px; height: 12px; color: var(--f-gold-pure); }
+.dpf-star.on svg { color: #1a1a1a; }
+
+/* ترتیب نمایش — چیپ‌های کوچک‌تر */
+.dpf-sorts .dpf-chip { font-size: 12px; padding: 5px 11px; }
+
+/* ============================================================
+   دایره‌های رنگ — با شمارنده‌ی روی هاور
+   ============================================================ */
+.dpf-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.dpf-sw {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid transparent;
+  transition: border-color 0.22s ease, transform 0.22s ease;
+}
+
+.dpf-sw i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16);
+}
+
+.dpf-sw:hover { transform: scale(1.14); border-color: rgba(201, 168, 76, 0.55); }
+.dpf-sw.on { border-color: var(--f-gold-pure); }
+
+/* شمارنده‌ی کوچک روی گوشه */
+.dpf-sw u {
+  position: absolute;
+  top: -3px;
+  inset-inline-end: -3px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: 99px;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #1a1a1a;
+  background: var(--f-gold-lite);
+  box-shadow: 0 0 0 1.5px var(--f-bg);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.dpf-sw:hover u,
+.dpf-sw:focus-visible u,
+.dpf-sw.on u { opacity: 1; }
+
+/* تیک روی رنگ انتخاب‌شده */
+.dpf-sw.on::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 50%;
+  top: 47%;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: 0;
+  border-inline-start: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+}
+.dpf-sw.light.on::after { border-color: #1a1a1a; }
+
+/* ============================================================
+   قیمت — لغزنده‌ی دوسر + کادر عددی + میان‌بر
+   ============================================================ */
+.dpf-slider {
+  position: relative;
+  height: 30px;
+  margin-bottom: 11px;
+}
+
+.dpf-rail,
+.dpf-fill {
+  position: absolute;
+  top: 50%;
+  height: 5px;
+  border-radius: 99px;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+.dpf-rail {
+  inset-inline: 0;
+  background: var(--f-knob);
+}
+.dpf-fill {
+  background: linear-gradient(90deg, var(--f-gold-lite), var(--f-gold-pure));
+}
+
+/* دو ورودی range روی هم می‌نشینند؛ فقط دسته‌شان کلیک‌پذیر است */
+.dpf-slider input[type="range"] {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  pointer-events: none;
+}
+
+.dpf-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: grab;
+  background: #fff;
+  border: 3px solid var(--f-gold-pure);
+  box-shadow: 0 2px 7px -2px rgba(26, 26, 26, 0.5);
+  transition: transform 0.15s ease;
+}
+.dpf-slider input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.15);
+}
+
+.dpf-slider input[type="range"]::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: grab;
+  background: #fff;
+  border: 3px solid var(--f-gold-pure);
+  box-shadow: 0 2px 7px -2px rgba(26, 26, 26, 0.5);
+}
+.dpf-slider input[type="range"]::-moz-range-track { background: transparent; }
+
+.dpf-slider input[type="range"]:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--f-gold-pure);
+  outline-offset: 2px;
+}
+
+.dpf-price {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.dpf-price input {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 12.5px;
+  text-align: center;
+  color: var(--f-ink);
+  background: var(--f-card);
+  border: 1px solid var(--f-line);
+  transition: border-color 0.24s ease, box-shadow 0.24s ease;
+}
+.dpf-price input:focus {
+  outline: none;
+  border-color: var(--f-gold-pure);
+  box-shadow: 0 0 0 3px var(--f-glow);
+}
+.dpf-price input::placeholder { font-size: 11.5px; color: var(--f-dim); }
+
+.dpf-dash { font-size: 11.5px; color: var(--f-mute); white-space: nowrap; }
+
+.dpf-quick { display: flex; flex-wrap: wrap; gap: 6px; }
+.dpf-quick .dpf-chip { font-size: 11.5px; padding: 5px 10px; }
+
+/* ============================================================
+   کلید دوحالته — با شمارنده‌ی زنده
+   ============================================================ */
+.dpf-toggles { display: flex; flex-direction: column; gap: 11px; }
+
+.dpf-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+  color: var(--f-body);
+  background: transparent;
+  border: 0;
+}
+.dpf-toggle .dpf-tl { flex: 1; min-width: 0; }
+
+.dpf-toggle em {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 99px;
+  color: var(--f-mute);
+  background: var(--f-glow);
+}
+
+/* اگر روشن کردنش نتیجه‌ی صفر می‌دهد، کم‌رنگ می‌شود */
+.dpf-toggle.none { opacity: 0.45; }
+
+.dpf-knob {
+  position: relative;
+  flex: none;
+  width: 38px;
+  height: 21px;
+  border-radius: 99px;
+  background: var(--f-knob);
+  transition: background 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dpf-knob::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  inset-inline-start: 3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.24);
+  transition: translate 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dpf-toggle.on .dpf-knob {
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold-pure));
+}
+.dpf-toggle.on .dpf-knob::after { translate: 17px 0; }
+[dir="rtl"] .dpf-toggle.on .dpf-knob::after { translate: -17px 0; }
+.dpf-toggle.on { color: var(--f-ink); }
+.dpf-toggle.on em { color: #1a1a1a; background: rgba(201, 168, 76, 0.34); }
+
+/* ============================================================
+   پیشنهاد هوشمند وقتی نتیجه خالی است
+   ============================================================ */
+.dpf-tips {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  border-top: 1px solid var(--f-line);
+}
+.dpf-tips h4 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--f-gold);
+}
+.dpf-tips h4 svg { width: 15px; height: 15px; }
+
+.dpf-tip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 7px;
+  padding: 9px 12px;
+  border-radius: 11px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+  color: var(--f-body);
+  background: var(--f-card);
+  border: 1px dashed var(--f-line);
+  transition: border-color 0.22s ease, background 0.22s ease;
+}
+.dpf-tip span { min-width: 0; overflow-wrap: anywhere; }
+.dpf-tip b {
+  flex: none;
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-size: 11px;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold-pure));
+}
+.dpf-tip:hover { border-style: solid; border-color: var(--f-gold-pure); background: var(--f-bg); }
+
+/* ============================================================
+   گروه تاشو
+   ============================================================ */
+.dpf-fold summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--f-mute);
+  transition: color 0.2s ease;
+}
+.dpf-fold summary::-webkit-details-marker { display: none; }
+.dpf-fold summary::marker { content: ""; }
+.dpf-fold summary:hover { color: var(--f-ink); }
+.dpf-fold summary span { flex: 1; min-width: 0; }
+
+.dpf-n {
+  padding: 1px 8px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold-pure));
+}
+
+.dpf-caret {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  opacity: 0.7;
+  transition: rotate 0.24s ease;
+}
+.dpf-fold[open] > summary .dpf-caret { rotate: 180deg; }
+
+.dpf-foldbody { padding-top: 11px; }
+
+.dpf-fold summary:focus-visible {
+  outline: 2px solid var(--f-gold-pure);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   چیدمان دوستونه
+   ============================================================ */
+.dp-shop-layout {
+  display: grid;
+  grid-template-columns: 286px minmax(0, 1fr);
+  gap: 22px;
+  /* `stretch` عمداً — تا ستون فیلتر هم‌قد ستون کالا شود.
+     اگر `start` باشد، ستون فیلتر به بلندای خودش جمع می‌شود
+     و چسبندگی هیچ فضایی برای حرکت ندارد. این دقیقاً همان
+     ایرادی بود که «چسبان نیست» را می‌ساخت. */
+  align-items: stretch;
+}
+
+.dp-shop-layout .dpp-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(228px, 100%), 1fr));
+  gap: 16px;
+}
+
+/* ============================================================
+   موبایل — کشوی فیلتر تمام‌صفحه
+   ------------------------------------------------------------
+   روی گوشی، فیلترِ تاشو در بالای صفحه یعنی کاربر باید کلی
+   پایین برود تا کالا ببیند. حالا مثل اپلیکیشن، کشویی از
+   پایین بالا می‌آید.
+   ============================================================ */
+@media (max-width: 980px) {
+  .dp-shop-layout { grid-template-columns: minmax(0, 1fr); }
+
+  .dp-filters {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 90;
+    max-height: 82vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -14px 42px -18px rgba(26, 26, 26, 0.55);
+    translate: 0 100%;
+    transition: translate 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dp-filters:not(.is-collapsed) { translate: 0 0; }
+
+  /* دستگیره‌ی بالای کشو */
+  .dp-filters::before {
+    content: "";
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    display: block;
+    width: 42px;
+    height: 4px;
+    margin: 9px auto 0;
+    border-radius: 99px;
+    background: var(--f-knob);
+  }
+
+  .dpf-head { top: 13px; border-radius: 0; }
+
+  /* پرده‌ی پشت کشو */
+  .dpf-veil {
+    position: fixed;
+    inset: 0;
+    z-index: 89;
+    background: rgba(20, 18, 15, 0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .dpf-veil.on { opacity: 1; pointer-events: auto; }
+
+  /* دکمه‌ی «نمایش نتیجه» چسبیده به پایین کشو */
+  .dpf-done {
+    position: sticky;
+    bottom: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 6px;
+    padding: 14px 16px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    color: #1a1a1a;
+    background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold-pure));
+    border: 0;
+    box-shadow: 0 -8px 20px -14px rgba(26, 26, 26, 0.6);
+  }
+}
+
+@media (min-width: 981px) {
+  .dpf-veil { display: none; }
+  .dpf-done { display: none; }
+}
+
+/* ============================================================
+   دکمه‌ی باز کردن فیلتر — فقط موبایل، چسبان بالای صفحه
+   ============================================================ */
+.dpf-mobile {
+  display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #1a1a1a;
+  background: #fdfbf7;
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  box-shadow: 0 4px 16px -12px rgba(26, 26, 26, 0.5);
+}
+
+@media (max-width: 980px) {
+  .dpf-mobile {
+    display: flex;
+    position: sticky;
+    top: 68px;
+    z-index: 20;
+  }
+}
+
+.dpf-mobile b {
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold-pure));
+}
+
+.dpf-mobile svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  transition: rotate 0.28s ease;
+}
+.dpf-mobile[aria-expanded="true"] svg { rotate: 180deg; }
+
+/* وقتی کشو باز است، صفحه پشتش نلغزد */
+body.dpf-lock { overflow: hidden; }
+
+/* ============================================================
+   صفحه‌های تیره — مردانه و نوجوان
+   ============================================================ */
+[data-dp-page="man"] .dp-filters,
+[data-dp-page="teen"] .dp-filters {
+  --f-bg: #1c1a17;
+  --f-card: rgba(255, 255, 255, 0.045);
+  --f-ink: #f2eee6;
+  --f-body: #d3cabb;
+  --f-mute: #b3a99a;
+  --f-dim: #8d8378;
+  --f-gold: #e6ce86;
+  --f-line: rgba(201, 168, 76, 0.3);
+  --f-line-soft: rgba(201, 168, 76, 0.16);
+  --f-knob: #3c3833;
+  --f-glow: rgba(201, 168, 76, 0.16);
+  --f-shadow: 0 8px 30px -18px rgba(0, 0, 0, 0.85);
+}
+
+[data-dp-page="man"] .dpf-chip.on,
+[data-dp-page="teen"] .dpf-chip.on,
+[data-dp-page="man"] .dpf-chip.on em,
+[data-dp-page="teen"] .dpf-chip.on em { color: #1a1a1a; }
+
+[data-dp-page="man"] .dpf-star.on svg,
+[data-dp-page="teen"] .dpf-star.on svg { color: #1a1a1a; }
+
+[data-dp-page="man"] .dpf-mobile,
+[data-dp-page="teen"] .dpf-mobile {
+  color: #f2eee6;
+  background: #1c1a17;
+  border-color: rgba(201, 168, 76, 0.3);
+}
+
+[data-dp-page="man"] .dpf-clear,
+[data-dp-page="teen"] .dpf-clear {
+  color: #e79a95;
+  background: rgba(231, 154, 149, 0.1);
+  border-color: rgba(231, 154, 149, 0.3);
+}
+[data-dp-page="man"] .dpf-clear:hover,
+[data-dp-page="teen"] .dpf-clear:hover { color: #1a1a1a; background: #e79a95; }
+
+[data-dp-page="man"] .dpf-slider input[type="range"]::-webkit-slider-thumb,
+[data-dp-page="teen"] .dpf-slider input[type="range"]::-webkit-slider-thumb {
+  background: #1c1a17;
+}
+[data-dp-page="man"] .dpf-slider input[type="range"]::-moz-range-thumb,
+[data-dp-page="teen"] .dpf-slider input[type="range"]::-moz-range-thumb {
+  background: #1c1a17;
+}
+
+[data-dp-page="man"] .dpf-sw u,
+[data-dp-page="teen"] .dpf-sw u { box-shadow: 0 0 0 1.5px #1c1a17; }
+
+/* ============================================================
+   کاهش حرکت
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .dpf-chip,
+  .dpf-sw,
+  .dpf-knob,
+  .dpf-knob::after,
+  .dpf-atag,
+  .dpf-caret,
+  .dp-filters,
+  .dpf-mobile svg { transition: none; }
+
+  .dpf-chip:hover,
+  .dpf-sw:hover,
+  .dpf-atag:hover { transform: none; }
+}
+
+/* ============================================================
+   جزئیات تازه — دور شانزدهم
+   ============================================================ */
+
+/* ---------- نبض کوچک کنار عدد نتیجه ----------
+   نشان می‌دهد عدد «زنده» است و با هر فیلتر عوض می‌شود */
+.dpf-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  /* سبز تیره‌تر — ۴٫۹:۱ روی کرم، استاندارد WCAG AA */
+  background: #3d7a59;
+  box-shadow: 0 0 0 0 rgba(61, 122, 89, 0.6);
+  animation: dpf-beat 2.2s ease-out infinite;
+}
+
+@keyframes dpf-beat {
+  0%   { box-shadow: 0 0 0 0 rgba(61, 122, 89, 0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(61, 122, 89, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(61, 122, 89, 0); }
+}
+
+/* ---------- آمار زنده‌ی نتیجه ---------- */
+.dpf-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--f-line-soft);
+}
+
+.dpf-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--f-gold);
+  background: var(--f-glow);
+  border: 1px solid var(--f-line-soft);
+}
+.dpf-stats svg { width: 12px; height: 12px; flex: none; }
+
+/* ---------- جست‌وجوهای ذخیره‌شده ---------- */
+.dpf-saved h4 svg { width: 14px; height: 14px; color: var(--f-gold); }
+
+.dpf-savedlist {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.dpf-savedrow {
+  display: flex;
+  align-items: stretch;
+  gap: 5px;
+}
+
+.dpf-savedgo {
+  flex: 1;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+  color: var(--f-body);
+  background: var(--f-card);
+  border: 1px solid var(--f-line);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.dpf-savedgo svg { width: 12px; height: 12px; flex: none; color: var(--f-gold); }
+.dpf-savedgo:hover { border-color: var(--f-gold-pure); color: var(--f-ink); }
+
+.dpf-saveddel {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--f-mute);
+  background: var(--f-card);
+  border: 1px solid var(--f-line-soft);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.dpf-saveddel svg { width: 13px; height: 13px; }
+.dpf-saveddel:hover { color: #fff; background: #a33d38; border-color: #a33d38; }
+
+.dpf-saverow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.dpf-saverow input {
+  min-width: 0;
+  padding: 8px 11px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--f-ink);
+  background: var(--f-card);
+  border: 1px solid var(--f-line);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.dpf-saverow input:focus {
+  outline: none;
+  border-color: var(--f-gold-pure);
+  box-shadow: 0 0 0 3px var(--f-glow);
+}
+.dpf-saverow input::placeholder { color: var(--f-dim); font-size: 11.5px; }
+
+.dpf-savebtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 13px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold-pure));
+  border: 0;
+  transition: filter 0.2s ease;
+}
+.dpf-savebtn svg { width: 13px; height: 13px; }
+.dpf-savebtn:hover { filter: brightness(0.95); }
+
+.dpf-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--f-gold);
+  background: transparent;
+  border: 1px dashed var(--f-line);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.dpf-share svg { width: 13px; height: 13px; }
+.dpf-share:hover { background: var(--f-glow); border-color: var(--f-gold-pure); }
+
+/* ---------- نشان «پرطرفدار» روی چیپ ---------- */
+.dpf-chip.hot {
+  border-color: rgba(201, 168, 76, 0.5);
+  background: linear-gradient(135deg, var(--f-card), var(--f-glow));
+}
+.dpf-chip.hot::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--f-gold-pure);
+  flex: none;
+}
+
+/* ---------- پیام کوتاه ---------- */
+.dpf-toast {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 26px;
+  z-index: 200;
+  width: max-content;
+  max-width: min(420px, calc(100% - 32px));
+  margin-inline: auto;
+  padding: 11px 20px;
+  border-radius: 99px;
+  font-family: Vazirmatn, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+  box-shadow: 0 14px 34px -14px rgba(26, 26, 26, 0.6);
+  opacity: 0;
+  translate: 0 16px;
+  pointer-events: none;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              translate 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dpf-toast.on { opacity: 1; translate: 0 0; }
+
+/* ---------- شبکه‌ی کالا هنگام به‌روزرسانی ----------
+   یک محو و پیدا شدن نرم، تا مشتری بفهمد نتیجه عوض شد */
+.dpp-grid { transition: opacity 0.18s ease; }
+.dpp-grid.dpf-busy { opacity: 0.45; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dpf-pulse { animation: none; }
+  .dpf-toast { transition: none; }
+  .dpp-grid { transition: none; }
+}

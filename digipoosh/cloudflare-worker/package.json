@@ -1,0 +1,17 @@
+{
+  "name": "digipoosh-ai-proxy",
+  "version": "1.0.0",
+  "description": "AI Proxy for DigiPoosh - Persian Fashion Marketplace",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod",
+    "start": "node src/index.js"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "devDependencies": {
+    "vercel": "^4.0.0"
+  }
+}

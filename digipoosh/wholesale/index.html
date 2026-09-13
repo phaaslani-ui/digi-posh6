@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="بازار عمده‌فروشان دیجی‌پوش — خرید عمده پوشاک، پارچه و اکسسوری از تأمین‌کننده‌های معتبر ایرانی با قیمت عمده و استعلام آنلاین." />
+  <title>بازار عمده‌فروشان | دیجی‌پوش</title>
+
+  <script>
+  /* تم را پیش از رسم صفحه اعمال می‌کنیم تا پرش رنگ دیده نشود */
+  (function () {
+    var t;
+    try { t = localStorage.getItem('dpw_theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') {
+      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+        ? 'light' : 'dark';
+    }
+    document.documentElement.setAttribute('data-w-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'light' ? '#f5f0e8' : '#0b1220');
+  })();
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://digipoosh.ir/wholesale/index.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="دیجی‌پوش" />
+  <meta property="og:locale" content="fa_IR" />
+  <meta property="og:title" content="بازار عمده‌فروشان | دیجی‌پوش" />
+  <meta property="og:description" content="خرید عمده پوشاک و پارچه از تأمین‌کننده‌های معتبر ایرانی." />
+  <meta property="og:image" content="https://digipoosh.ir/favicon.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="./css/wholesale.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "Organization", "@id": "https://digipoosh.ir/#org", "name": "دیجی‌پوش",
+        "url": "https://digipoosh.ir/", "logo": "https://digipoosh.ir/favicon.svg" },
+      { "@type": "WebSite", "@id": "https://digipoosh.ir/#site", "url": "https://digipoosh.ir/",
+        "name": "دیجی‌پوش", "inLanguage": "fa-IR",
+        "publisher": { "@id": "https://digipoosh.ir/#org" } },
+      { "@type": "WebPage", "url": "https://digipoosh.ir/wholesale/", "name": "بازار عمده‌فروشان | دیجی‌پوش",
+        "description": "خرید عمده پوشاک از تأمین‌کننده‌های معتبر ایرانی.", "inLanguage": "fa-IR",
+        "isPartOf": { "@id": "https://digipoosh.ir/#site" } }
+    ]
+  }
+  </script>
+</head>
+<body data-dp-page="wholesale">
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<!-- ═══════════ ۱. نوار بالا ═══════════ -->
+<header class="w-head">
+  <div class="wrap">
+    <nav class="w-bar gs-border" aria-label="ناوبری اصلی">
+
+      <a class="w-logo" href="../index.html">
+        <span class="w-mark">د</span>
+        <span class="w-logo-txt">
+          <strong>دیجی‌پوش</strong>
+          <small>بازار عمده‌فروشان</small>
+        </span>
+      </a>
+
+      <ul class="w-nav" id="wNav">
+        <li><a class="on" href="#products">بازار عمده</a></li>
+        <li><a href="#sellers">فروشندگان</a></li>
+        <li><a href="#bulk">سفارش انبوه</a></li>
+        <li><a href="#join">ورود تأمین‌کننده</a></li>
+      </ul>
+
+      <div class="w-search">
+        <label class="sr-only" for="wTopSearch" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">جست‌وجوی کالا</label>
+        <input id="wTopSearch" type="search" placeholder="جست‌وجوی کالا، برند یا فروشنده…" autocomplete="off" />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
+      </div>
+
+      <div class="w-acts">
+        <a class="w-panel-btn" id="wPanelBtn" href="#join" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5 12 5l8 7.5"/><path d="M6.5 11v8.5h11V11"/></svg>
+          <span>پنل من</span>
+        </a>
+
+        <a class="w-icon-btn" id="wLoginBtn" href="#join" aria-label="ورود تأمین‌کننده" title="ورود تأمین‌کننده">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-4 3.4-6.4 7.5-6.4s7.5 2.4 7.5 6.4"/></svg>
+        </a>
+
+        <button class="w-theme-btn" type="button" id="wThemeBtn"
+                aria-label="تغییر روشنایی صفحه" title="تغییر روشنایی صفحه" aria-pressed="false">
+          <svg class="w-ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+          <svg class="w-ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+        </button>
+
+        <button class="w-icon-btn" type="button" id="wCartBtn" aria-label="سبد خرید">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M3.5 4.5h2.2l2.3 10.2h10L20 8H7"/></svg>
+          <em class="w-badge" id="wCartN" hidden>۰</em>
+        </button>
+
+        <button class="w-icon-btn w-burger" type="button" id="wBurger" aria-label="منو">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ═══════════ ۲. سربرگ ═══════════ -->
+  <section class="w-hero">
+    <div class="wrap">
+      <div class="w-hero-in gs-border">
+        <div>
+          <h1>بازار عمده‌فروشان دیجی‌پوش</h1>
+          <p>
+            تأمین‌کننده‌های بررسی‌شده، قیمت‌های پلکانی عمده، و استعلام آنلاین.
+            برای بوتیک‌داران، خرده‌فروشان و خریداران حرفه‌ای.
+          </p>
+          <div class="w-cta-row">
+            <a class="w-btn w-btn-gold" href="#products">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg>
+              مشاهده محصولات
+            </a>
+            <a class="w-btn w-btn-silver" href="#bulk">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg>
+              سفارش انبوه
+            </a>
+          </div>
+        </div>
+
+        <div class="w-stats" id="wStats"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ بنر صدر بازار ═══════════ -->
+  <section class="w-sec" id="wHero" hidden style="padding-top:0"></section>
+
+  <!-- ═══════════ ۳. فیلترها ═══════════ -->
+  <section class="w-filters">
+    <div class="wrap">
+      <div class="w-fbar">
+
+        <div class="w-field">
+          <label for="fQ">جست‌وجو</label>
+          <input class="w-input" id="fQ" type="search" placeholder="نام کالا…" autocomplete="off" />
+        </div>
+
+        <div class="w-field">
+          <label for="fCat">دسته‌بندی</label>
+          <select class="w-input" id="fCat"></select>
+        </div>
+
+        <div class="w-field">
+          <label for="fMin">بازه‌ی قیمت (تومان)</label>
+          <div class="w-range">
+            <input class="w-input" id="fMin" placeholder="از" inputmode="numeric" aria-label="کمترین قیمت" />
+            <span>—</span>
+            <input class="w-input" id="fMax" placeholder="تا" inputmode="numeric" aria-label="بیشترین قیمت" />
+          </div>
+        </div>
+
+        <div class="w-field">
+          <label for="fMoq">حداقل سفارش</label>
+          <select class="w-input" id="fMoq">
+            <option value="">بدون محدودیت</option>
+            <option value="10">تا ۱۰ عدد</option>
+            <option value="20">تا ۲۰ عدد</option>
+            <option value="50">تا ۵۰ عدد</option>
+          </select>
+        </div>
+
+        <div class="w-field">
+          <label for="fStock">موجودی</label>
+          <select class="w-input" id="fStock">
+            <option value="">همه</option>
+            <option value="in">فقط موجود</option>
+            <option value="out">ناموجود</option>
+          </select>
+        </div>
+
+        <div class="w-field">
+          <label for="fRate">امتیاز فروشنده</label>
+          <select class="w-input" id="fRate">
+            <option value="">همه</option>
+            <option value="4.5">۴.۵ به بالا</option>
+            <option value="4">۴ به بالا</option>
+            <option value="3.5">۳.۵ به بالا</option>
+          </select>
+        </div>
+
+        <div class="w-field">
+          <label for="fSort">مرتب‌سازی</label>
+          <select class="w-input" id="fSort">
+            <option value="pop">محبوب‌ترین</option>
+            <option value="cheap">ارزان‌ترین</option>
+            <option value="exp">گران‌ترین</option>
+            <option value="newest">جدیدترین</option>
+            <option value="off">بیشترین تخفیف</option>
+            <option value="moq">کمترین حداقل سفارش</option>
+          </select>
+        </div>
+
+        <div class="w-field w-fbtns">
+          <button class="w-chip-btn" type="button" id="fSave">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 4.5h11v16l-5.5-3.6-5.5 3.6z"/></svg>
+            ذخیره‌ی این فیلتر
+          </button>
+          <button class="w-chip-btn" type="button" id="fReset">پاک کردن فیلترها</button>
+        </div>
+
+        <div class="w-brands" id="fBrands" role="group" aria-label="برندها"></div>
+
+        <div class="w-saved" id="wSaved" role="group" aria-label="فیلترهای ذخیره‌شده" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ۴. کالاها ═══════════ -->
+  <section class="w-sec" id="products">
+    <div class="wrap">
+      <div class="w-sec-head">
+        <h2>کالاهای عمده</h2>
+        <span id="wCount">—</span>
+        <span id="wSellerNote" hidden style="color:var(--w-gold-l)"></span>
+      </div>
+      <div class="w-grid" id="wGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ۹. بازدیدهای اخیر ═══════════ -->
+  <section class="w-sec" id="wRecentSec" hidden>
+    <div class="wrap">
+      <div class="w-sec-head">
+        <h2>بازدیدهای اخیر شما</h2>
+        <span>روی هر کدام بزنید تا دوباره ببینید</span>
+      </div>
+      <div class="w-recent" id="wRecent"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ نشان‌های اعتماد ═══════════ -->
+  <section class="w-sec" id="trust">
+    <div class="wrap">
+      <div class="w-sec-head">
+        <h2>چرا خرید عمده از دیجی‌پوش</h2>
+        <span>شش تعهدی که پشت هر سفارش عمده ایستاده است</span>
+      </div>
+
+      <ul class="w-trust">
+        <li class="w-trust-i gs-border">
+          <span class="w-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5.5c0 4.2 2.9 8.1 7 9.5 4.1-1.4 7-5.3 7-9.5V6z"/><path d="m9.2 12 1.9 1.9 3.7-3.8"/></svg></span>
+          <strong>تأمین‌کننده‌ی بررسی‌شده</strong>
+          <p>هویت و پروانه‌ی کسب هر تأمین‌کننده پیش از عرضه در بازار عمده راستی‌آزمایی می‌شود.</p>
+        </li>
+
+        <li class="w-trust-i gs-border">
+          <span class="w-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="9.5" rx="1.6"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7"/></svg></span>
+          <strong>پرداخت امانی</strong>
+          <p>مبلغ سفارش تا تأیید سلامت و تعداد محموله نزد دیجی‌پوش می‌ماند، نه نزد فروشنده.</p>
+        </li>
+
+        <li class="w-trust-i gs-border">
+          <span class="w-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg></span>
+          <strong>ضمانت اصالت کالا</strong>
+          <p>نمونه‌ی فیزیکی هر محموله با تصویر و توضیح ثبت‌شده مطابقت داده می‌شود.</p>
+        </li>
+
+        <li class="w-trust-i gs-border">
+          <span class="w-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v10h-11z"/><path d="M13.5 10h4l3 3.2v3.3h-7z"/><circle cx="6.5" cy="18.5" r="1.8"/><circle cx="17" cy="18.5" r="1.8"/></svg></span>
+          <strong>ارسال محموله‌ای</strong>
+          <p>باربری و پستِ سنگین برای سفارش‌های عمده، با کد رهگیری در پنل خریدار.</p>
+        </li>
+
+        <li class="w-trust-i gs-border">
+          <span class="w-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h3l1.6 4-2 1.4a12 12 0 0 0 5.5 5.5l1.4-2 4 1.6v3a1.6 1.6 0 0 1-1.8 1.6C10.4 18 6 13.6 4.4 5.3A1.6 1.6 0 0 1 6 3.5Z"/></svg></span>
+          <strong>پاسخ استعلام تا ۲۴ ساعت</strong>
+          <p>هر درخواست استعلام قیمت مستقیم به پنل تأمین‌کننده می‌رود و پیگیری می‌شود.</p>
+        </li>
+
+        <li class="w-trust-i gs-border">
+          <span class="w-trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 20.5-8-11L7 4h10l3 5.5z"/><path d="M4 9.5h16M9 4l-2 5.5 5 11 5-11L15 4"/></svg></span>
+          <strong>قیمت پلکانی شفاف</strong>
+          <p>جدول کامل پله‌های تعداد و تخفیف هر کالا پیش از سفارش دیده می‌شود؛ بدون چانه‌زنی.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ ۷. فروشندگان ═══════════ -->
+  <section class="w-sec" id="sellers">
+    <div class="wrap">
+      <div class="w-sec-head">
+        <h2>تأمین‌کننده‌های برگزیده</h2>
+        <span>روی هر فروشگاه بزنید تا فقط کالاهای آن را ببینید</span>
+      </div>
+      <div class="w-sellers" id="wSellers"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ۸. سفارش انبوه ═══════════ -->
+  <section class="w-sec" id="bulk">
+    <div class="wrap">
+      <div class="w-bulk gs-border">
+
+        <form id="quickForm" novalidate>
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5 13.5h6L11 21l8-10.5h-6z"/></svg>
+            افزودن سریع با کد کالا
+          </h3>
+          <p>اگر کد کالا را می‌دانید، بدون گشتن مستقیم به سبد اضافه کنید. کدها از ۱ تا ۵۴ هستند.</p>
+          <div class="w-quick-row">
+            <input class="w-input" id="qCode" placeholder="کد کالا" inputmode="numeric" aria-label="کد کالا" />
+            <input class="w-input" id="qQty" placeholder="تعداد" inputmode="numeric" aria-label="تعداد" />
+            <button class="w-btn w-btn-gold" type="submit">افزودن</button>
+          </div>
+        </form>
+
+        <div>
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3.5H7a1.5 1.5 0 0 0-1.5 1.5v14A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3.5V8h4.5"/><path d="M9 13h6M9 16.5h6"/></svg>
+            بارگذاری فهرست سفارش
+          </h3>
+          <p>فایل CSV با دو ستون «کد کالا» و «تعداد» را اینجا بیندازید.</p>
+
+          <div class="w-drop" id="csvDrop" tabindex="0" role="button" aria-label="بارگذاری فایل CSV">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15.5V4.5"/><path d="m8 8.5 4-4 4 4"/><path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15"/></svg>
+            <b>فایل را بکشید یا کلیک کنید</b>
+            <span>فقط CSV — حداکثر ۵۰۰ ردیف</span>
+          </div>
+
+          <input type="file" id="csvFile" accept=".csv,text/csv" aria-label="انتخاب فایل CSV سفارش انبوه" hidden />
+          <button class="w-chip-btn" type="button" id="csvTpl" style="margin-top:10px">
+            دانلود قالب CSV
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ۱۱. ورود و ثبت‌نام تأمین‌کننده ═══════════ -->
+  <section class="w-sec" id="join">
+    <div class="wrap">
+
+      <!-- الف) وقتی فروشنده وارد شده — میان‌بر به پنل خودش -->
+      <div class="w-join gs-border" id="wMePanel" hidden>
+        <div class="w-me-badge" id="wMeLetter">؟</div>
+        <h2 id="wMeTitle">خوش آمدید</h2>
+        <p id="wMeNote">شما به‌عنوان تأمین‌کننده وارد شده‌اید.</p>
+        <div class="w-cta-row" style="justify-content:center">
+          <a class="w-btn w-btn-gold" id="wMeGo" href="./panel/wholesale-dashboard.html">
+            ورود به پنل من
+          </a>
+          <button class="w-btn w-btn-silver" type="button" id="wMeOut">خروج از حساب</button>
+        </div>
+      </div>
+
+      <!-- ب) وقتی کسی وارد نشده — ورود یا ثبت‌نام -->
+      <div class="w-auth gs-border" id="wAuthBox">
+
+        <div class="w-auth-side">
+          <h2>تأمین‌کننده‌اید؟</h2>
+          <p>
+            وارد شوید تا مستقیم به پنل خودتان بروید — ثبت کالا،
+            پاسخ به استعلام‌ها، سفارش‌ها و انبار، همه یک‌جا.
+          </p>
+          <ul class="w-auth-list">
+            <li>ثبت کالا با قیمت پلکانی</li>
+            <li>پاسخ به استعلام خریداران</li>
+            <li>مدیریت انبار و سفارش انبوه</li>
+            <li>نردبان و برجسته‌سازی در همین بازار</li>
+          </ul>
+          <div class="w-auth-alt">
+            هنوز حساب ندارید؟
+            <a href="../seller/seller-signup.html">ثبت‌نام تأمین‌کننده‌ی عمده</a>
+          </div>
+        </div>
+
+        <form class="w-auth-form" id="wLoginForm" novalidate>
+          <h3>ورود به پنل</h3>
+
+          <div class="w-field" style="margin-bottom:12px">
+            <label for="wLogMail">ایمیل</label>
+            <input class="w-input" id="wLogMail" type="email"
+                   autocomplete="email" placeholder="you@example.com" />
+          </div>
+
+          <div class="w-field" style="margin-bottom:8px">
+            <label for="wLogPass">رمز عبور</label>
+            <div class="w-pass-wrap">
+              <input class="w-input" id="wLogPass" type="password"
+                     autocomplete="current-password" placeholder="رمز عبور" />
+              <button class="w-pass-eye" type="button" id="wLogEye"
+                      aria-label="نمایش رمز" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="w-auth-msg" id="wLogMsg" hidden role="alert"></div>
+
+          <button class="w-btn w-btn-gold" type="submit" id="wLogBtn"
+                  style="width:100%;justify-content:center;margin-top:10px">
+            ورود به پنل
+          </button>
+
+          <p class="w-auth-tiny">
+            خریدار عمده‌اید؟ برای دیدن کالاها و فرستادن استعلام
+            نیازی به ورود نیست.
+          </p>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════ ۱۲. پابرگ ═══════════ -->
+<footer class="w-foot">
+  <div class="wrap">
+    <div class="w-foot-in gs-border">
+
+      <div>
+        <h4>دیجی‌پوش — بازار عمده</h4>
+        <p>
+          واسط میان تولیدکنندگان پوشاک ایرانی و خرده‌فروشان.
+          هر تأمین‌کننده پیش از پذیرش بررسی می‌شود.
+        </p>
+        <div class="w-social">
+          <a href="#" aria-label="تلگرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 3 11l5 2 2 6 3-4 5 4z"/><path d="m8 13 9-6-6 8"/></svg></a>
+          <a href="#" aria-label="اینستاگرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r="1"/></svg></a>
+          <a href="#" aria-label="واتساپ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 12a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.2-4.3A8.5 8.5 0 1 1 20.5 12Z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h4>دسترسی سریع</h4>
+        <ul>
+          <li><a href="#products">کالاهای عمده</a></li>
+          <li><a href="#sellers">تأمین‌کننده‌ها</a></li>
+          <li><a href="#bulk">سفارش انبوه</a></li>
+          <li><a href="../index.html">فروشگاه خرده</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>راهنما</h4>
+        <ul>
+          <li><a href="#">شرایط خرید عمده</a></li>
+          <li><a href="#">شیوه‌های پرداخت</a></li>
+          <li><a href="#">ارسال و بسته‌بندی</a></li>
+          <li><a href="#">مرجوعی کالا</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>خبرنامه‌ی عمده</h4>
+        <p>از قیمت‌های تازه و کالاهای جدید باخبر شوید.</p>
+        <form class="w-news" id="newsForm" novalidate>
+          <input class="w-input" id="newsMail" type="email" placeholder="نشانی ایمیل" aria-label="نشانی ایمیل" />
+          <button class="w-btn w-btn-gold" type="submit" style="padding:9px 16px">ثبت</button>
+        </form>
+      </div>
+
+    </div>
+    <div class="w-copy">© ۱۴۰۴ دیجی‌پوش — بازار عمده‌فروشان</div>
+  </div>
+</footer>
+
+<!-- ═══════════ ۱۰. نوار مقایسه ═══════════ -->
+<div class="w-cmpbar" id="wCmpBar">
+  <div class="wrap w-cmpbar-in">
+    <strong style="font-size:13px;white-space:nowrap">مقایسه:</strong>
+    <div class="w-cmp-items" id="wCmpItems"></div>
+    <button class="w-btn w-btn-gold" type="button" id="wCmpGo" style="padding:9px 18px" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M7 8H3l2-4 2 4H3M21 8h-4l2-4 2 4h-4"/><path d="M5 8v3a2 2 0 0 0 4 0V8M15 8v3a2 2 0 0 0 4 0V8"/></svg>
+      مقایسه کن
+    </button>
+    <button class="w-chip-btn" type="button" id="wCmpClear">پاک کردن</button>
+  </div>
+</div>
+
+<!-- ═══════════ ۵. پنجره‌ی جزئیات ═══════════ -->
+<div class="w-modal" id="wDetail" role="dialog" aria-modal="true" aria-label="جزئیات کالا">
+  <div class="w-modal-card gs-border">
+    <button class="w-x" type="button" data-close aria-label="بستن">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="wDetailBody"></div>
+  </div>
+</div>
+
+<!-- ═══════════ ۶. پنجره‌ی استعلام ═══════════ -->
+<div class="w-modal" id="wRfq" role="dialog" aria-modal="true" aria-label="درخواست استعلام قیمت">
+  <div class="w-modal-card gs-border" style="width:min(560px,100%)">
+    <button class="w-x" type="button" data-close aria-label="بستن">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+
+    <h2 style="margin:0 0 6px;font-size:19px">درخواست استعلام قیمت</h2>
+    <p style="margin:0 0 18px;font-size:13px;color:var(--w-gray)">
+      تعداد مورد نیازتان را بنویسید تا فروشنده بهترین قیمت را پیشنهاد دهد.
+    </p>
+
+    <form id="rfqForm" novalidate>
+      <div class="w-field" style="margin-bottom:12px">
+        <label for="rfqProduct">کالا</label>
+        <input class="w-input" id="rfqProduct" readonly />
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div class="w-field">
+          <label for="rfqQty">تعداد مورد نیاز</label>
+          <input class="w-input" id="rfqQty" inputmode="numeric" placeholder="مثلاً ۱۰۰" />
+        </div>
+        <div class="w-field">
+          <label for="rfqTarget">قیمت هدف (اختیاری)</label>
+          <input class="w-input" id="rfqTarget" inputmode="numeric" placeholder="تومان / عدد" />
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div class="w-field">
+          <label for="rfqName">نام شما</label>
+          <input class="w-input" id="rfqName" placeholder="نام و نام خانوادگی" autocomplete="name" />
+        </div>
+        <div class="w-field">
+          <label for="rfqPhone">شماره تماس</label>
+          <input class="w-input" id="rfqPhone" inputmode="tel" placeholder="۰۹۱۲…" autocomplete="tel" />
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div class="w-field">
+          <label for="rfqCompany">نام کسب‌وکار (اختیاری)</label>
+          <input class="w-input" id="rfqCompany" placeholder="فروشگاه یا شرکت" />
+        </div>
+        <div class="w-field">
+          <label for="rfqDate">مهلت تحویل</label>
+          <input class="w-input" id="rfqDate" type="date" />
+        </div>
+      </div>
+
+      <div class="w-field" style="margin-bottom:18px">
+        <label for="rfqNote">توضیح بیشتر</label>
+        <textarea class="w-input" id="rfqNote" rows="3" placeholder="رنگ‌بندی، سایزبندی یا هر نکته‌ی دیگر…"></textarea>
+      </div>
+
+      <button class="w-btn w-btn-gold" type="submit" style="width:100%;justify-content:center">
+        ارسال درخواست استعلام
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════ پنجره‌ی سبد سفارش عمده ═══════════ -->
+<div class="w-modal" id="wCart" role="dialog" aria-modal="true" aria-label="سبد سفارش عمده">
+  <div class="w-modal-card gs-border" style="width:min(760px,100%)">
+    <button class="w-x" type="button" data-close aria-label="بستن">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <h2 style="margin:0 0 6px;font-size:19px">سبد سفارش عمده</h2>
+    <p style="margin:0 0 18px;font-size:13px;color:var(--w-gray)">
+      قیمت هر عدد بر پایه‌ی پلکان تعداد به‌روز می‌شود. سفارش برای هر تأمین‌کننده جداگانه ثبت می‌شود.
+    </p>
+    <div id="wCartBody"></div>
+  </div>
+</div>
+
+<!-- ═══════════ پنجره‌ی مقایسه ═══════════ -->
+<div class="w-modal" id="wCmp" role="dialog" aria-modal="true" aria-label="مقایسه‌ی کالاها">
+  <div class="w-modal-card gs-border">
+    <button class="w-x" type="button" data-close aria-label="بستن">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="wCmpBody"></div>
+  </div>
+</div>
+
+<div class="w-toasts" id="wToasts" aria-live="polite"></div>
+
+<script src="../seller/js/dp-config.js"></script>
+<script src="../seller/js/dp-store.js"></script>
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-taxonomy.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="./panel/js/dpw-store.js"></script>
+<script src="./panel/js/dpw-boost.js"></script>
+<script src="./js/wholesale.js"></script>
+</body>
+</html>

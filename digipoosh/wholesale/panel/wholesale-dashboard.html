@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="robots" content="noindex" />
+  <title>میزکار | پنل عمده‌فروشی دیجی‌پوش</title>
+
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="./css/wholesale-panel.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-stock.css" />
+</head>
+<body data-dp-page="wholesale-panel">
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="wp-side" id="wpSide"></aside>
+
+<main class="wp-main" id="main">
+
+  <header class="wp-top">
+    <button class="wp-burger" type="button" id="wpBurger" aria-label="منو">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="wp-title">
+      <h1>میزکار</h1>
+      <span>نمای کلی کسب‌وکار عمده‌ی شما</span>
+    </div>
+    <div class="wp-top-acts"></div>
+  </header>
+
+  <div class="wp-content">
+    <div id="alerts"></div>
+
+    <div class="wp-kpis" id="kpis"></div>
+
+    <div class="wp-card">
+      <div class="wp-card-head">
+        <h2>درآمد ۱۲ ماه گذشته</h2>
+        <span class="sub spacer" id="chartSum">—</span>
+      </div>
+      <div class="wp-chart" id="chart"></div>
+    </div>
+
+    <div class="wp-card">
+      <div class="wp-card-head">
+        <h2>استعلام‌های تازه</h2>
+        <a class="wp-btn wp-btn-ghost wp-btn-sm spacer" href="wholesale-rfq.html">همه‌ی استعلام‌ها</a>
+      </div>
+      <div id="rfqBox"></div>
+    </div>
+
+    <div class="wp-card">
+      <div class="wp-card-head">
+        <h2>سفارش‌های اخیر</h2>
+        <a class="wp-btn wp-btn-ghost wp-btn-sm spacer" href="wholesale-orders.html">همه‌ی سفارش‌ها</a>
+      </div>
+      <div id="ordBox"></div>
+    </div>
+
+    <div class="wp-card">
+      <div class="wp-card-head">
+        <h2>پرفروش‌ترین کالاها</h2>
+        <span class="sub spacer">بر پایه‌ی سفارش‌های تحویل‌شده</span>
+      </div>
+      <div id="topBox"></div>
+    </div>
+  </div>
+
+</main>
+
+
+
+<script src="../../seller/js/dp-config.js"></script>
+<script src="../../seller/js/dp-store.js"></script>
+<script src="../../assets/js/dp-guard.js"></script>
+<script src="../../assets/js/dp-safe.js"></script>
+<script src="../../assets/js/dp-stock.js"></script>
+<script src="../../assets/js/dp-taxonomy.js"></script>
+<script src="../../assets/js/dp-moderation.js"></script>
+<script src="../../assets/js/dp-reviews.js"></script>
+<script src="../../assets/js/dp-user.js"></script>
+<script src="./js/dpw-store.js"></script>
+<script src="./js/dpw-boost.js"></script>
+<script src="./js/dpw-ui.js"></script>
+<script>
+
+requireWholesale(function () {
+  var S = DPWStore, U = DPWUi, esc = U.esc;
+  var fa = S.fa, money = S.money;
+  var $ = function (s) { return document.querySelector(s); };
+
+  var IC = { box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg>', money: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>', quote: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg>', truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>', users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c0-3.3 2.5-5.4 5.5-5.4s5.5 2.1 5.5 5.4"/><path d="M16 6.5a3 3 0 0 1 0 6"/></svg>', chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V15M9 19.5V9M14 19.5v-7M19 19.5V5"/></svg>', warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5 21 19H3z"/><path d="M12 10v4M12 16.5h.01"/></svg>', check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>', x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>', info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>', clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>', store: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg>', bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5 13.5h6L11 21l8-10.5h-6z"/></svg>' };
+
+  function paintKpis() {
+    var s = S.stats();
+    var rows = [
+      { c: '#c9a84c', i: IC.money, t: 'درآمد کل',
+        v: money(s.revenue), s: fa(s.orders) + ' سفارش' },
+      { c: '#4caf50', i: IC.check, t: 'دریافت‌شده',
+        v: money(s.paid), s: s.unpaid ? money(s.unpaid) + ' مانده' : 'تسویه کامل' },
+      { c: '#7a96c8', i: IC.quote, t: 'استعلام باز',
+        v: fa(s.rfqOpen), s: 'نرخ پاسخ ٪' + fa(s.rfqRate) },
+      { c: '#c0c0c0', i: IC.truck, t: 'در انتظار تأیید',
+        v: fa(s.pendingOrders), s: fa(s.deliveredOrders) + ' تحویل‌شده' },
+      { c: '#d4b85a', i: IC.box, t: 'کالاهای فعال',
+        v: fa(s.active), s: 'ارزش انبار ' + money(s.stockValue) },
+      { c: '#e8b552', i: IC.warn, t: 'نیازمند توجه',
+        v: fa(s.lowStock + s.outOfStock), s: fa(s.lowStock) + ' کم · ' + fa(s.outOfStock) + ' تمام' },
+    ];
+    $('#kpis').innerHTML = rows.map(function (r) {
+      return '<div class="wp-kpi" style="--kc:' + r.c + '">' +
+        '<div class="wp-kpi-top">' + r.i + '<span>' + r.t + '</span></div>' +
+        '<b>' + r.v + '</b><small>' + r.s + '</small></div>';
+    }).join('');
+  }
+
+  function paintAlerts() {
+    var s = S.stats();
+    var out = [];
+    if (s.rfqOpen) {
+      out.push('<div class="wp-note warn">' + IC.quote +
+        '<div><b>' + fa(s.rfqOpen) + ' استعلام بی‌پاسخ دارید.</b> ' +
+        'خریداران عمده معمولاً سراغ کسی می‌روند که زودتر پاسخ می‌دهد. ' +
+        '<a href="wholesale-rfq.html" style="color:var(--wp-gold-l)">پاسخ بدهید</a></div></div>');
+    }
+    if (s.outOfStock) {
+      out.push('<div class="wp-note bad">' + IC.warn +
+        '<div><b>' + fa(s.outOfStock) + ' کالا تمام شده است.</b> ' +
+        'کالای ناموجود در بازار عمده نمایش داده نمی‌شود. ' +
+        '<a href="wholesale-inventory.html" style="color:var(--wp-gold-l)">پر کردن انبار</a></div></div>');
+    }
+    if (!s.products) {
+      out.push('<div class="wp-note">' + IC.info +
+        '<div><b>هنوز کالایی ثبت نکرده‌اید.</b> ' +
+        'با افزودن نخستین کالا، فروشگاهتان در بازار عمده دیده می‌شود. ' +
+        '<a href="wholesale-products.html" style="color:var(--wp-gold-l)">افزودن کالا</a></div></div>');
+    }
+    $('#alerts').innerHTML = out.join('');
+  }
+
+  function paintChart() {
+    var data = S.chart();
+    var max = Math.max.apply(null, data.map(function (d) { return d.value; })) || 1;
+    var total = data.reduce(function (a, d) { return a + d.value; }, 0);
+    $('#chartSum').textContent = total ? 'جمع ' + money(total) + ' تومان' : 'هنوز فروشی نبوده';
+    $('#chart').innerHTML = data.map(function (d) {
+      var h = Math.max(4, Math.round(d.value / max * 100));
+      return '<div class="wp-bar-col">' +
+        '<div class="wp-bar' + (d.value === max && max > 1 ? ' peak' : '') +
+        '" style="--h:' + h + '%" title="' + esc(d.label) + ' — ' + money(d.value) + '"></div>' +
+        '<span class="wp-bar-lbl">' + esc(d.label) + '</span></div>';
+    }).join('');
+  }
+
+  function paintRfq() {
+    var list = S.rfq.list().slice(0, 5);
+    if (!list.length) { $('#rfqBox').innerHTML = U.emptyBox('استعلامی نرسیده', 'وقتی خریداری استعلام بفرستد، اینجا می‌بینید.'); return; }
+    $('#rfqBox').innerHTML = '<div class="wp-table-wrap"><table class="wp-table"><thead><tr>' +
+      '<th>کالا</th><th>خریدار</th><th>تعداد</th><th>وضعیت</th><th>تاریخ</th></tr></thead><tbody>' +
+      list.map(function (r) {
+        var C = { open: 'warn', answered: 'info', accepted: 'ok', rejected: 'bad', expired: 'mute' };
+        return '<tr><td><b>' + esc(r.productName) + '</b></td>' +
+          '<td>' + esc(r.buyerName) + (r.buyerCompany ? '<span class="wp-tiny">' + esc(r.buyerCompany) + '</span>' : '') + '</td>' +
+          '<td class="num">' + fa(r.qty) + '</td>' +
+          '<td><span class="wp-tag ' + (C[r.status] || 'mute') + '">' + S.rfq.STATUS_FA[r.status] + '</span></td>' +
+          '<td class="muted">' + esc(r.date) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  function paintOrders() {
+    var list = S.orders.list().slice(0, 5);
+    if (!list.length) { $('#ordBox').innerHTML = U.emptyBox('سفارشی ثبت نشده', 'سفارش‌های عمده اینجا می‌آیند.'); return; }
+    $('#ordBox').innerHTML = '<div class="wp-table-wrap"><table class="wp-table"><thead><tr>' +
+      '<th>شماره</th><th>خریدار</th><th>تعداد</th><th>مبلغ</th><th>وضعیت</th></tr></thead><tbody>' +
+      list.map(function (o) {
+        var C = { pending: 'warn', confirmed: 'info', preparing: 'info', shipped: 'gold', delivered: 'ok', canceled: 'bad' };
+        return '<tr><td><b>' + esc(o.id) + '</b><span class="wp-tiny">' + esc(o.date) + '</span></td>' +
+          '<td>' + esc(o.buyerName) + '</td>' +
+          '<td class="num">' + fa(o.count) + '</td>' +
+          '<td class="num">' + money(o.total) + '</td>' +
+          '<td><span class="wp-tag ' + (C[o.status] || 'mute') + '">' + S.orders.STATUS_FA[o.status] + '</span></td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  function paintTop() {
+    var list = S.topProducts(5).filter(function (p) { return (p.sold || 0) > 0; });
+    if (!list.length) { $('#topBox').innerHTML = U.emptyBox('هنوز فروشی ثبت نشده', 'پس از نخستین تحویل، پرفروش‌ها اینجا می‌آیند.'); return; }
+    var max = list[0].sold || 1;
+    $('#topBox').innerHTML = list.map(function (p) {
+      var w = Math.round((p.sold || 0) / max * 100);
+      return '<div style="margin-bottom:12px">' +
+        '<div style="display:flex;gap:10px;font-size:13px;margin-bottom:5px">' +
+          '<b>' + esc(p.name) + '</b>' +
+          '<span style="margin-inline-start:auto;color:var(--wp-gold-l);font-weight:700">' +
+            fa(p.sold) + ' عدد</span></div>' +
+        '<div style="height:7px;border-radius:99px;background:rgba(138,126,114,.16);overflow:hidden">' +
+          '<i style="display:block;height:100%;width:' + w + '%;border-radius:99px;' +
+          'background:linear-gradient(90deg,#d4b85a,#b8943c)"></i></div></div>';
+    }).join('');
+  }
+
+  function all() { paintKpis(); paintAlerts(); paintChart(); paintRfq(); paintOrders(); paintTop(); }
+  document.addEventListener('dpw:change', all);
+  all();
+});
+</script>
+</body>
+</html>

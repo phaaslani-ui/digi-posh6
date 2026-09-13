@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <title>مدیریت دیجی‌پوش | تنظیمات</title>
+  <meta name="description" content="پنل مدیریت دیجی‌پوش — نظارت بر فروشگاه‌ها، سفارش‌ها و کالاها." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+
+<style>
+  .brain-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(130px, 100%), 1fr));
+    gap: 11px;
+    margin-bottom: 18px;
+  }
+  .brain-stat {
+    padding: 13px 14px;
+    border-radius: 12px;
+    background: rgba(201, 168, 76, 0.09);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+  }
+  .brain-stat b { display: block; font-size: 21px; font-weight: 800; color: #1a1a1a; }
+  .brain-stat span { font-size: 11px; color: #75695f; }
+
+  .brain-bar-wrap { margin-bottom: 18px; }
+  .brain-bar {
+    height: 9px;
+    border-radius: 99px;
+    overflow: hidden;
+    background: rgba(201, 168, 76, 0.16);
+    margin-bottom: 7px;
+  }
+  .brain-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #d4b85a, #c9a84c);
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .brain-grp { margin-top: 18px; }
+  .brain-grp h3 {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #1a1a1a;
+  }
+  .brain-pairs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .brain-pair {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    border-radius: 99px;
+    font-size: 12px;
+    background: #faf8f5;
+    border: 1px solid rgba(201, 168, 76, 0.22);
+  }
+  .brain-pair i {
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(26, 26, 26, 0.2);
+  }
+  .brain-pair b { font-weight: 700; color: #6f571a; font-size: 11px; }
+  .brain-empty {
+    padding: 22px;
+    text-align: center;
+    font-size: 13px;
+    color: #75695f;
+    background: #faf8f5;
+    border-radius: 12px;
+  }
+</style>
+
+<style>
+  .rules-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .rules-stat {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(201, 168, 76, 0.09);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+  }
+  .rules-stat b { display: block; font-size: 19px; font-weight: 800; color: #1a1a1a; }
+  .rules-stat span { font-size: 11px; color: #75695f; }
+  .rules-stat.is-bad { background: rgba(163, 61, 56, 0.1); border-color: rgba(163,61,56,.3); }
+  .rules-stat.is-bad b { color: #a33d38; }
+
+  .rules-why {
+    padding: 16px;
+    border-radius: 14px;
+    background: #faf8f5;
+    border: 1px solid rgba(201, 168, 76, 0.22);
+    margin-bottom: 18px;
+  }
+  .rules-why h3 { margin: 0 0 12px; font-size: 13.5px; font-weight: 800; color: #1a1a1a; }
+
+  .rules-pick {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 11px;
+    margin-bottom: 13px;
+  }
+  .rules-pick label { display: flex; flex-direction: column; gap: 5px; }
+  .rules-pick span { font-size: 11.5px; color: #75695f; }
+  .rules-pick select {
+    padding: 9px 11px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 12.5px;
+    color: #1a1a1a;
+    background: #fff;
+    border: 1px solid rgba(201, 168, 76, 0.28);
+    cursor: pointer;
+  }
+
+  .rules-answer {
+    padding: 12px 14px;
+    border-radius: 11px;
+    font-size: 12.5px;
+    line-height: 1.9;
+    background: #fff;
+    border-inline-start: 3px solid #c9a84c;
+  }
+  .rules-answer.is-ok { border-inline-start-color: #3d7a59; color: #3d7a59; }
+  .rules-answer.is-no { border-inline-start-color: #a33d38; color: #8a3733; }
+
+  .rules-list { display: flex; flex-direction: column; gap: 6px; }
+  .rules-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 13px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    background: #faf8f5;
+    border: 1px solid rgba(201, 168, 76, 0.18);
+  }
+  .rules-row b { font-weight: 700; color: #1a1a1a; }
+  .rules-row em {
+    font-style: normal;
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: rgba(201, 168, 76, 0.16);
+    color: #6f571a;
+  }
+  .rules-row em.warn { background: rgba(138, 90, 32, 0.13); color: #8a5a20; }
+</style>
+</head>
+<body data-dp-panel>
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a href="../index.html" title="بازگشت به سایت">
+      <div class="sb-logo">دیجی‌پوش</div>
+      <span class="sb-sub">پنل مدیریت</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="منوی مدیریت">
+    <div class="sb-label">مدیریت</div>
+      <a class="sb-link" href="admin-dashboard.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3" y="3" width="7.5" height="8.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="5" rx="2"/><rect x="13.5" y="11" width="7.5" height="10" rx="2"/><rect x="3" y="14.5" width="7.5" height="6.5" rx="2"/></svg><span>داشبورد</span></a>
+      <a class="sb-link" href="admin-sellers.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg><span>فروشگاه‌ها</span><span class="sb-badge" id="badgeAll" hidden></span></a>
+      <a class="sb-link" href="admin-pending.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg><span>در انتظار تأیید</span><span class="sb-badge" id="badgePending" hidden></span></a>
+      <a class="sb-link" href="admin-moderation.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15.5 4.5 19.5 8.5 9 19H5v-4z"/><path d="m14 6 4 4"/></svg><span>بازبینی پروفایل</span><span class="sb-badge" id="badgeMod" hidden></span></a>
+      <a class="sb-link" href="admin-boost.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13.5 3.5c3 0 6 3 6 6 0 4.5-5 8-5 8l-4-4s3.5-5 8-5"/><path d="M9.5 14.5 6 18l-1.5-1.5L8 13"/><path d="M5 19l-1.5 1.5"/></svg><span>نردبان و ارتقا</span><span class="sb-badge" id="badgeBoost" hidden></span></a>
+      <a class="sb-link" href="admin-wholesale.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span>بازار عمده</span><span class="sb-badge" id="badgeWhole" hidden></span></a>
+      <a class="sb-link" href="admin-catalog.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg><span>همه‌ی محصولات</span></a>
+      <a class="sb-link" href="admin-orders.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><span>همه‌ی سفارش‌ها</span></a>
+      <a class="sb-link" href="admin-reviews.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg><span>نظرها</span><span class="sb-badge" id="badgeFlag" hidden></span></a>
+      <a class="sb-link" href="admin-policy.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m6 18 12-12"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg><span>سیاست کمیسیون</span></a>
+      <a class="sb-link active" href="admin-settings.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg><span>تنظیمات</span></a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <a class="sb-link" href="../index.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7V20a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 20z"/><path d="M9.5 21.5v-7h5v7"/></svg><span>بازگشت به سایت</span></a>
+    <a class="sb-link logout" href="admin-login.html" data-logout><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15 4.5h3.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M10 8.5 6 12l4 3.5M6 12h9"/></svg><span>خروج</span></a>
+  </div>
+</aside>
+
+<div class="backdrop" id="backdrop"></div>
+
+<main class="main" id="main">
+  <header class="topbar">
+    <button class="burger" type="button" aria-label="منو"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div>
+      <h1 class="page-title">تنظیمات</h1>
+      <div class="page-sub">رمز مدیریت و وضعیت سامانه</div>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="card mb-18" style="max-width:560px">
+      <div class="card-head"><h2>تغییر رمز مدیریت</h2></div>
+
+      <div class="notice" id="defWarn" hidden>
+        <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16h.01"/></svg>
+        <span>رمز شما هنوز پیش‌فرض است. لطفاً همین حالا عوضش کنید.</span>
+      </div>
+
+      <form id="passForm" novalidate>
+        <div class="field">
+          <label for="oldPass">رمز فعلی</label>
+          <input class="input" type="password" id="oldPass" autocomplete="current-password" />
+          <span class="err-msg"></span>
+        </div>
+        <div class="field">
+          <label for="newPass">رمز تازه <span class="hint">(حداقل ۶ نویسه)</span></label>
+          <input class="input" type="password" id="newPass" autocomplete="new-password" />
+          <span class="err-msg"></span>
+        </div>
+        <div class="field">
+          <label for="newPass2">تکرار رمز تازه</label>
+          <input class="input" type="password" id="newPass2" autocomplete="new-password" />
+          <span class="err-msg"></span>
+        </div>
+        <button class="btn btn-primary" type="submit" id="passBtn">ذخیره‌ی رمز تازه</button>
+      </form>
+    </div>
+
+    <div class="card" style="max-width:560px">
+      <div class="card-head"><h2>وضعیت ذخیره‌سازی</h2></div>
+      <div class="info-row"><span class="k">محل ذخیره‌ی داده‌ها</span><span class="v" id="mode">—</span></div>
+      <div class="info-row"><span class="k">کل فروشگاه‌ها</span><span class="v num" id="mTotal">—</span></div>
+      <div class="info-row"><span class="k">کل محصولات</span><span class="v num" id="mProducts">—</span></div>
+      <p class="hint" style="margin-top:14px;line-height:1.9" id="modeHint"></p>
+    </div>
+
+    <!-- ===== پشتیبان و انتقال داده ===== -->
+    <div class="card sync-card" id="syncCard">
+      <div class="card-head">
+        <h2>پشتیبان و انتقال داده</h2>
+        <span class="sub spacer">بردن اطلاعات به مرورگر یا دستگاه دیگر</span>
+      </div>
+
+      <!-- هشدار وضعیت -->
+      <div class="sync-alert" id="syncAlert" hidden></div>
+
+      <!-- آمار زنده -->
+      <div class="sync-stats" id="syncStats"></div>
+
+      <div class="sync-actions">
+        <button class="btn btn-primary" type="button" id="syncSave">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true">
+            <path d="M12 3.5v11"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/>
+            <path d="M4.5 17.5v2a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-2"/></svg>
+          گرفتن فایل پشتیبان
+        </button>
+
+        <label class="btn btn-secondary sync-pick" for="syncFile">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true">
+            <path d="M12 20.5v-11"/><path d="m7.5 13.5 4.5-4.5 4.5 4.5"/>
+            <path d="M4.5 17.5v2a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-2"/></svg>
+          بازگرداندن از فایل
+        </label>
+        <input type="file" id="syncFile" accept=".json,application/json" hidden />
+      </div>
+
+      <p class="hint sync-tip">
+        فایل را جایی امن نگه دارید. برای بردن به مرورگر دیگر،
+        همانجا همین صفحه را باز کنید و «بازگرداندن» را بزنید.
+      </p>
+
+      <!-- پیش‌نمایش فایل انتخاب‌شده -->
+      <div class="sync-preview" id="syncPreview" hidden></div>
+    </div>
+
+    <!-- ============================================================
+         کارت مغز یادگیرنده
+         ============================================================ -->
+    <div class="card" id="brainCard" style="margin-top:20px">
+      <div class="card-head">
+        <h2>مغز یادگیرنده‌ی دیجی AI</h2>
+      </div>
+
+      <p class="hint" style="margin:0 0 16px">
+        این بخش از رفتار واقعی مشتری‌ها یاد می‌گیرد —
+        چه رنگ‌هایی با هم خریده می‌شوند، چه چیزی جست‌وجو می‌شود،
+        و کدام پیشنهاد پذیرفته می‌شود. هرچه فروش بیشتر، دقیق‌تر.
+      </p>
+
+      <div class="brain-stats" id="brainStats"></div>
+
+      <div class="brain-bar-wrap">
+        <div class="brain-bar"><span id="brainFill"></span></div>
+        <small id="brainLevel" class="hint"></small>
+      </div>
+
+      <div id="brainLearned"></div>
+
+      <div class="card-foot" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn ghost" type="button" id="brainRelearn">
+          یادگیری از همه‌ی سفارش‌ها
+        </button>
+        <button class="btn ghost" type="button" id="brainExport">
+          دریافت پشتیبان دانش
+        </button>
+        <button class="btn danger" type="button" id="brainReset">
+          پاک کردن حافظه
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         نگهبان قواعد — عیب‌یابی پیشنهاد
+         ============================================================ -->
+    <div class="card" id="rulesCard" style="margin-top:20px">
+      <div class="card-head">
+        <h2>نگهبان قواعد پیشنهاد</h2>
+      </div>
+
+      <p class="hint" style="margin:0 0 16px">
+        همه‌ی قاعده‌های «این دو با هم نمی‌روند» یک‌جا جمع شده‌اند.
+        اگر کالایی پیشنهاد نمی‌شود و نمی‌دانید چرا، اینجا بپرسید.
+      </p>
+
+      <div class="rules-status" id="rulesStatus"></div>
+
+      <div class="rules-why">
+        <h3>چرا این دو کالا با هم پیشنهاد نمی‌شوند؟</h3>
+        <div class="rules-pick">
+          <label>
+            <span>کالای اول</span>
+            <select id="ruleA"></select>
+          </label>
+          <label>
+            <span>کالای دوم</span>
+            <select id="ruleB"></select>
+          </label>
+        </div>
+        <div class="rules-answer" id="rulesAnswer"></div>
+      </div>
+
+      <div class="rules-list" id="rulesList"></div>
+    </div>
+  </div>
+</main>
+
+<div class="toast-wrap"></div>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="../assets/js/dp-taxonomy.js"></script>
+<script src="../assets/js/dp-promo.js"></script>
+<script src="../assets/js/dp-boost.js"></script>
+<script src="../assets/js/dp-boost-pro.js"></script>
+<script src="../assets/js/dp-moderation.js"></script>
+<script src="../assets/js/dp-returns.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="../assets/js/dp-rate-pop.js"></script>
+<script src="../seller/js/dp-config.js"></script>
+<script src="../assets/js/dp-sync.js"></script>
+<script src="js/admin-store.js"></script>
+<script src="js/admin-script.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+requireAdmin(async () => {
+  if (DPAdmin.auth.isDefaultPass()) document.getElementById('defWarn').hidden = false;
+
+  const form = document.getElementById('passForm');
+  const btn = document.getElementById('passBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const a = document.getElementById('oldPass').value;
+    const b = document.getElementById('newPass').value;
+    const c = document.getElementById('newPass2').value;
+
+    if (!a || !b) { toast('همه‌ی فیلدها را پر کنید.', 'error'); return; }
+    if (b !== c) { toast('رمز تازه و تکرارش یکسان نیستند.', 'error'); return; }
+
+    btn.disabled = true;
+    try {
+      await DPAdmin.auth.changePass(a, b);
+      toast('رمز مدیریت عوض شد.', 'success');
+      form.reset();
+      document.getElementById('defWarn').hidden = true;
+    } catch (err) { toast(err.message, 'error'); }
+    btn.disabled = false;
+  });
+
+  const st = await DPAdmin.stats();
+  document.getElementById('mTotal').textContent = fa(st.totalSellers);
+  document.getElementById('mProducts').textContent = fa(st.totalProducts);
+
+  const local = DPAdmin.mode === 'local';
+  document.getElementById('mode').textContent = local ? 'همین مرورگر' : 'سرور Supabase';
+  document.getElementById('modeHint').textContent = local
+    ? 'داده‌ها روی همین مرورگر ذخیره می‌شوند. برای آنلاین‌کردن، آدرس و کلید Supabase را در فایل seller/js/dp-config.js بگذارید.'
+    : 'داده‌ها روی سرور ذخیره می‌شوند و از هر دستگاهی در دسترس‌اند.';
+
+  /* ============================================================
+     پشتیبان و انتقال داده
+     ------------------------------------------------------------
+     تا وقتی Supabase وصل نشده، داده فقط در همین
+     مرورگر است. این بخش راه فوری انتقال می‌دهد.
+     ============================================================ */
+  const S = window.DPSync;
+  if (S) {
+    const bytes = (n) => {
+      if (n < 1024) return fa(n) + ' بایت';
+      if (n < 1048576) return fa(Math.round(n / 1024)) + ' کیلوبایت';
+      return fa((n / 1048576).toFixed(1)) + ' مگابایت';
+    };
+
+    function paintSync() {
+      const h = S.health();
+      const box = document.getElementById('syncStats');
+      const rows = [
+        ['فروشگاه', h.summary.sellers],
+        ['کالا', h.summary.products],
+        ['سفارش', h.summary.orders],
+        ['مشتری', h.summary.customers],
+        ['نظر', h.summary.reviews],
+        ['کد تخفیف', h.summary.coupons],
+      ];
+      box.innerHTML = rows.map(([k, v]) =>
+        `<div class="sync-stat"><b>${fa(v)}</b><span>${k}</span></div>`).join('')
+        + `<div class="sync-stat"><b>${bytes(h.bytes)}</b><span>حجم داده</span></div>`;
+
+      /* هشدار وضعیت */
+      const al = document.getElementById('syncAlert');
+      if (h.remote) {
+        al.className = 'sync-alert is-ok';
+        al.innerHTML = '<b>داده‌ها روی سرور هستند</b>'
+          + '<span>از هر مرورگر و دستگاهی در دسترس‌اند. '
+          + 'پشتیبان گرفتن باز هم کار خوبی است.</span>';
+      } else {
+        al.className = 'sync-alert is-warn';
+        al.innerHTML = '<b>داده‌ها فقط در همین مرورگر هستند</b>'
+          + '<span>اگر مرورگر دیگری باز کنید، چیزی نمی‌بینید — '
+          + 'این رفتار طبیعی مرورگرهاست، نه ایراد سایت. '
+          + 'با دکمه‌ی پایین فایل بگیرید و آنجا بازگردانید، '
+          + 'یا برای همیشگی Supabase را وصل کنید.</span>';
+      }
+      al.hidden = false;
+    }
+    paintSync();
+
+    /* ---------- گرفتن فایل ---------- */
+    document.getElementById('syncSave').addEventListener('click', () => {
+      try {
+        const sum = S.download();
+        toast('فایل پشتیبان ساخته شد — '
+          + fa(sum.products) + ' کالا و ' + fa(sum.orders) + ' سفارش.', 'success');
+      } catch (e) { toast('ساخت فایل انجام نشد.', 'error'); }
+    });
+
+    /* ---------- بازگرداندن ---------- */
+    let pending = null;
+
+    document.getElementById('syncFile').addEventListener('change', async (e) => {
+      const f = e.target.files && e.target.files[0];
+      e.target.value = '';
+      if (!f) return;
+
+      let text;
+      try { text = await S.readFile(f); }
+      catch (err) { toast(err.message, 'error'); return; }
+
+      let box;
+      try { box = JSON.parse(text); } catch (err) { box = null; }
+      if (!box || box.tag !== 'digipoosh-backup') {
+        toast('این فایل پشتیبان دیجی‌پوش نیست.', 'error');
+        return;
+      }
+
+      pending = text;
+      const sm = box.summary || {};
+      const when = box.at ? new Intl.DateTimeFormat('fa-IR', {
+        dateStyle: 'medium', timeStyle: 'short',
+      }).format(new Date(box.at)) : 'نامعلوم';
+
+      const pv = document.getElementById('syncPreview');
+      pv.innerHTML =
+        '<div class="sync-pv-head"><b>محتوای این فایل</b>'
+        + '<span>ساخته‌شده در ' + esc(when) + '</span></div>'
+        + '<div class="sync-stats">'
+        + [['فروشگاه', sm.sellers], ['کالا', sm.products],
+           ['سفارش', sm.orders], ['مشتری', sm.customers]]
+            .map(([k, v]) => `<div class="sync-stat"><b>${fa(v || 0)}</b><span>${k}</span></div>`).join('')
+        + '</div>'
+        + '<div class="sync-modes">'
+        +   '<button class="btn btn-secondary" type="button" data-mode="merge">'
+        +     'افزودن به داده‌ی فعلی</button>'
+        +   '<button class="btn btn-danger" type="button" data-mode="replace">'
+        +     'جایگزینی کامل</button>'
+        +   '<button class="btn btn-ghost" type="button" data-mode="cancel">انصراف</button>'
+        + '</div>';
+      pv.hidden = false;
+      pv.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+
+    document.getElementById('syncPreview').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-mode]');
+      if (!b) return;
+      const mode = b.dataset.mode;
+      const pv = document.getElementById('syncPreview');
+
+      if (mode === 'cancel') { pending = null; pv.hidden = true; return; }
+      if (!pending) return;
+
+      if (mode === 'replace' &&
+          !confirm('همه‌ی داده‌ی فعلی پاک و با فایل جایگزین می‌شود. مطمئنید؟')) return;
+
+      const r = S.restore(pending, mode);
+      if (!r.ok) { toast(r.error, 'error'); return; }
+
+      pending = null;
+      pv.hidden = true;
+      toast('داده‌ها بازگردانده شد — ' + fa(r.keys)
+        + ' بخش. صفحه تازه می‌شود…', 'success');
+      setTimeout(() => location.reload(), 1400);
+    });
+  }
+});
+</script>
+
+<script src="../assets/js/dp-palette.js"></script>
+<script src="../assets/js/dp-brain.js"></script>
+<script>
+/* ============================================================
+   کارت مغز یادگیرنده
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+  if (!window.DPBrain) return;
+
+  var FAD = '\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9';
+  function fa(n) { return String(n).replace(/\d/g, function (d) { return FAD[+d]; }); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  function paint() {
+    var st = DPBrain.stats();
+
+    document.getElementById('brainStats').innerHTML =
+      stat(st.signals, '\u0633\u06cc\u06af\u0646\u0627\u0644 \u06cc\u0627\u062f\u06af\u0631\u0641\u062a\u0647') +
+      stat(st.colorPairs, '\u062c\u0641\u062a \u0631\u0646\u06af') +
+      stat(st.itemPairs, '\u062c\u0641\u062a \u06a9\u0627\u0644\u0627') +
+      stat(st.terms, '\u0639\u0628\u0627\u0631\u062a \u062c\u0633\u062a\u200c\u0648\u062c\u0648') +
+      stat(st.users, '\u0645\u0634\u062a\u0631\u06cc \u0634\u0646\u0627\u062e\u062a\u0647') +
+      stat(st.days, '\u0631\u0648\u0632 \u0641\u0639\u0627\u0644\u06cc\u062a');
+
+    document.getElementById('brainFill').style.width = st.maturity + '%';
+
+    var lvl = st.maturity < 15 ? '\u062a\u0627\u0632\u0647\u200c\u06a9\u0627\u0631 \u2014 \u0647\u0646\u0648\u0632 \u0642\u0627\u0639\u062f\u0647\u200c\u0647\u0627\u06cc \u062b\u0627\u0628\u062a \u062d\u0631\u0641 \u0627\u0648\u0644 \u0631\u0627 \u0645\u06cc\u200c\u0632\u0646\u0646\u062f'
+      : st.maturity < 40 ? '\u062f\u0631 \u062d\u0627\u0644 \u06cc\u0627\u062f\u06af\u06cc\u0631\u06cc \u2014 \u06a9\u0645\u200c\u06a9\u0645 \u0627\u0644\u06af\u0648 \u067e\u06cc\u062f\u0627 \u0645\u06cc\u200c\u06a9\u0646\u062f'
+      : st.maturity < 70 ? '\u067e\u062e\u062a\u0647 \u2014 \u067e\u06cc\u0634\u0646\u0647\u0627\u062f\u0647\u0627 \u0631\u0648\u06cc \u062a\u062c\u0631\u0628\u0647\u200c\u06cc \u0648\u0627\u0642\u0639\u06cc \u0633\u0648\u0627\u0631 \u0634\u062f\u0647'
+      : '\u062d\u0631\u0641\u0647\u200c\u0627\u06cc \u2014 \u0645\u063a\u0632 \u0628\u0647 \u0628\u0644\u0648\u063a \u0631\u0633\u06cc\u062f\u0647';
+
+    document.getElementById('brainLevel').textContent =
+      '\u0628\u0644\u0648\u063a: ' + fa(st.maturity) + '\u066a \u2014 ' + lvl;
+
+    /* آنچه یاد گرفته */
+    var host = document.getElementById('brainLearned');
+    var html = '';
+
+    var pairs = DPBrain.topColorPairs(10);
+    if (pairs.length) {
+      html += '<div class="brain-grp"><h3>\u0631\u0646\u06af\u200c\u0647\u0627\u06cc\u06cc \u06a9\u0647 \u0645\u0634\u062a\u0631\u06cc\u200c\u0647\u0627 \u0628\u0627 \u0647\u0645 \u0645\u06cc\u200c\u062e\u0631\u0646\u062f</h3><div class="brain-pairs">';
+      pairs.forEach(function (p) {
+        var ha = window.DPPalette && DPPalette.HUE[p.a] ? DPPalette.HUE[p.a].hex : '#ccc';
+        var hb = window.DPPalette && DPPalette.HUE[p.b] ? DPPalette.HUE[p.b].hex : '#ccc';
+        html += '<span class="brain-pair">' +
+          '<i style="background:' + ha + '"></i>' + esc(p.nameA) +
+          ' + <i style="background:' + hb + '"></i>' + esc(p.nameB) +
+          '<b>' + fa(Math.round(p.w)) + '</b></span>';
+      });
+      html += '</div></div>';
+    }
+
+    var tr = DPBrain.trendingColors(8);
+    if (tr.length) {
+      html += '<div class="brain-grp"><h3>\u0631\u0646\u06af\u200c\u0647\u0627\u06cc \u0645\u062d\u0628\u0648\u0628 \u0627\u06cc\u0646 \u0641\u0635\u0644</h3><div class="brain-pairs">';
+      tr.forEach(function (c) {
+        var h = window.DPPalette && DPPalette.HUE[c.key] ? DPPalette.HUE[c.key].hex : '#ccc';
+        html += '<span class="brain-pair"><i style="background:' + h + '"></i>' +
+          esc(c.name) + '<b>' + fa(Math.round(c.weight)) + '</b></span>';
+      });
+      html += '</div></div>';
+    }
+
+    var terms = DPBrain.popularTerms('', 10);
+    if (terms.length) {
+      html += '<div class="brain-grp"><h3>\u067e\u0631\u062c\u0633\u062a\u200c\u0648\u062c\u0648\u062a\u0631\u06cc\u0646 \u0639\u0628\u0627\u0631\u062a\u200c\u0647\u0627</h3><div class="brain-pairs">';
+      terms.forEach(function (t) {
+        html += '<span class="brain-pair">' + esc(t.term) +
+          '<b>' + fa(t.n) + '</b></span>';
+      });
+      html += '</div></div>';
+    }
+
+    if (!html) {
+      html = '<div class="brain-empty">\u0647\u0646\u0648\u0632 \u0686\u06cc\u0632\u06cc \u06cc\u0627\u062f \u0646\u06af\u0631\u0641\u062a\u0647. \u067e\u0633 \u0627\u0632 \u0686\u0646\u062f \u0633\u0641\u0627\u0631\u0634 \u0648 \u062c\u0633\u062a\u200c\u0648\u062c\u0648\u060c \u0627\u06cc\u0646\u062c\u0627 \u067e\u0631 \u0645\u06cc\u200c\u0634\u0648\u062f.</div>';
+    }
+
+    host.innerHTML = html;
+  }
+
+  function stat(v, label) {
+    return '<div class="brain-stat"><b>' + fa(v) + '</b><span>' + label + '</span></div>';
+  }
+
+  paint();
+
+  /* وقتی مغز از تاریخچه یاد گرفت، دوباره رسم کن */
+  document.addEventListener('dp:brain', paint);
+
+  document.getElementById('brainRelearn').addEventListener('click', function () {
+    var n = DPBrain.learnFromHistory();
+    paint();
+    if (window.toast) {
+      toast(n ? '\u0627\u0632 ' + fa(n) + ' \u0633\u0641\u0627\u0631\u0634 \u062a\u0627\u0632\u0647 \u06cc\u0627\u062f \u06af\u0631\u0641\u062a'
+              : '\u0633\u0641\u0627\u0631\u0634 \u062a\u0627\u0632\u0647\u200c\u0627\u06cc \u0646\u0628\u0648\u062f', n ? 'success' : 'info');
+    }
+  });
+
+  document.getElementById('brainExport').addEventListener('click', function () {
+    var data = DPBrain.exportKnowledge();
+    var blob = new Blob([data], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'digipoosh-brain-' + new Date().toISOString().slice(0, 10) + '.json';
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+
+  document.getElementById('brainReset').addEventListener('click', function () {
+    if (!confirm('\u0647\u0645\u0647\u200c\u06cc \u0686\u06cc\u0632\u06cc \u06a9\u0647 \u0645\u063a\u0632 \u06cc\u0627\u062f \u06af\u0631\u0641\u062a\u0647 \u067e\u0627\u06a9 \u0645\u06cc\u200c\u0634\u0648\u062f. \u0645\u0637\u0645\u0626\u0646\u06cc\u062f\u061f')) return;
+    DPBrain.reset();
+    paint();
+    if (window.toast) toast('\u062d\u0627\u0641\u0638\u0647\u200c\u06cc \u0645\u063a\u0632 \u067e\u0627\u06a9 \u0634\u062f', 'success');
+  });
+});
+</script>
+
+<script src="../assets/js/dp-stylist.js"></script>
+<script src="../assets/js/dp-fashion.js"></script>
+<script src="../assets/js/dp-rules.js"></script>
+<script>
+/* ============================================================
+   کارت نگهبان قواعد
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+  if (!window.DPRules) return;
+
+  var FAD = '\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9';
+  function fa(n) { return String(n).replace(/\d/g, function (d) { return FAD[+d]; }); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+    });
+  }
+
+  function products() {
+    try {
+      var v = JSON.parse(localStorage.getItem('dp_products'));
+      return Array.isArray(v) ? v.filter(function (p) { return p && p.id; }) : [];
+    } catch (e) { return []; }
+  }
+
+  /* ---------- وضعیت ---------- */
+  function paintStatus() {
+    var st = DPRules.selfTest();
+    var rules = DPRules.list();
+    var off = rules.filter(function (r) { return !r.on; }).length;
+
+    document.getElementById('rulesStatus').innerHTML =
+      stat(rules.length, '\u0642\u0627\u0639\u062f\u0647\u200c\u06cc \u0641\u0639\u0627\u0644', false) +
+      stat(st.pass + '/' + st.total, '\u062e\u0648\u062f\u0622\u0632\u0645\u0627\u06cc\u06cc', st.fail > 0) +
+      stat(off, '\u062e\u0627\u0645\u0648\u0634', off > 0);
+  }
+
+  function stat(v, label, bad) {
+    return '<div class="rules-stat' + (bad ? ' is-bad' : '') + '">'
+      + '<b>' + fa(v) + '</b><span>' + label + '</span></div>';
+  }
+
+  /* ---------- فهرست قاعده‌ها ---------- */
+  function paintList() {
+    document.getElementById('rulesList').innerHTML =
+      DPRules.list().map(function (r) {
+        return '<div class="rules-row">'
+          + '<b>' + esc(r.name) + '</b>'
+          + '<em class="' + (r.level === 'warn' ? 'warn' : '') + '">'
+          + (r.level === 'warn' ? '\u0647\u0634\u062f\u0627\u0631' : '\u0631\u062f \u0642\u0637\u0639\u06cc')
+          + '</em></div>';
+      }).join('');
+  }
+
+  /* ---------- انتخابگرها ---------- */
+  function fillPickers() {
+    var ps = products().slice(0, 200);
+    if (!ps.length) {
+      document.getElementById('rulesAnswer').textContent =
+        '\u06a9\u0627\u0644\u0627\u06cc\u06cc \u062f\u0631 \u0633\u0627\u06cc\u062a \u0646\u06cc\u0633\u062a.';
+      return;
+    }
+    var opts = ps.map(function (p) {
+      return '<option value="' + esc(p.id) + '">' + esc(p.name) + '</option>';
+    }).join('');
+
+    var a = document.getElementById('ruleA');
+    var b = document.getElementById('ruleB');
+    a.innerHTML = opts;
+    b.innerHTML = opts;
+    if (ps.length > 1) b.selectedIndex = 1;
+
+    a.addEventListener('change', ask);
+    b.addEventListener('change', ask);
+    ask();
+  }
+
+  function ask() {
+    var ps = products();
+    function find(id) {
+      for (var i = 0; i < ps.length; i++) {
+        if (String(ps[i].id) === String(id)) return ps[i];
+      }
+      return null;
+    }
+    var A = find(document.getElementById('ruleA').value);
+    var B = find(document.getElementById('ruleB').value);
+    var box = document.getElementById('rulesAnswer');
+
+    if (!A || !B) { box.textContent = '\u2014'; return; }
+
+    var r = DPRules.explain(A, B);
+    box.className = 'rules-answer ' + (r.ok ? 'is-ok' : 'is-no');
+    box.textContent = r.text;
+  }
+
+  paintStatus();
+  paintList();
+  fillPickers();
+});
+</script>
+</body>
+</html>

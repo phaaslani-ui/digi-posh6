@@ -1,0 +1,396 @@
+/* ============================================================
+   دیجی‌پوش — جست‌وجوی واقعی
+   ============================================================ */
+
+:root {
+  --dsr-gold: #c9a84c;
+  --dsr-bronze: #b8943c;
+  --dsr-bg: #faf8f5;
+  --dsr-bg2: #f5f0e8;
+  --dsr-ink: #1a1a1a;
+  --dsr-gray: #8a7e72;
+  --dsr-line: rgba(201, 168, 76, 0.22);
+  --dsr-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-dp-page="man"], [data-dp-page="teen"] {
+  --dsr-bg: #141414;
+  --dsr-bg2: #0e0e0e;
+  --dsr-ink: #f0f0f0;
+  --dsr-gray: #9a9088;
+  --dsr-line: rgba(201, 168, 76, 0.3);
+}
+
+/* ---------- دکمه‌ی ذره‌بین ---------- */
+.dsr-btn {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--dsr-line);
+  border-radius: 13px;
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--dsr-ink);
+  cursor: pointer;
+  transition: background 0.24s var(--dsr-ease), transform 0.24s var(--dsr-ease);
+}
+
+.dsr-btn:hover { background: rgba(201, 168, 76, 0.18); }
+.dsr-btn:active { transform: scale(0.94); }
+.dsr-btn:focus-visible { outline: 2px solid var(--dsr-gold); outline-offset: 3px; }
+
+.dsr-i { width: 21px; height: 21px; flex: none; }
+.dsr-big { width: 40px; height: 40px; opacity: 0.4; }
+
+/* ============================================================
+   پنجره
+   ============================================================ */
+.dsr-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: start center;
+  padding: clamp(50px, 10vh, 110px) 18px 20px;
+  opacity: 0;
+  transition: opacity 0.26s var(--dsr-ease);
+}
+
+.dsr-wrap.is-on { opacity: 1; }
+
+/* محافظ — پنجره‌ی جست‌وجو همیشه روی پنجره ثابت بماند */
+body > .dsr-wrap,
+.dsr-wrap { position: fixed !important; z-index: 1000 !important; }
+.dsr-wrap[hidden] { display: none; }
+
+/* قفل پیمایش هنگام باز بودن — روی html، نه body.
+   اگر روی body باشد، خودِ همین کشو (که position: fixed است)
+   جایگاهش را از دست می‌دهد و ته صفحه می‌افتد. */
+html:has(body.dsr-lock) { overflow: hidden; }
+body.dsr-lock { overflow: hidden; }
+
+.dsr-veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.dsr-modal {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--dsr-bg);
+  border: 1px solid var(--dsr-line);
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.55);
+  transform: translateY(-14px) scale(0.98);
+  transition: transform 0.28s var(--dsr-ease);
+}
+
+.dsr-wrap.is-on .dsr-modal { transform: none; }
+
+/* ---------- کادر ورودی ---------- */
+.dsr-field {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--dsr-line);
+}
+
+.dsr-lead { color: var(--dsr-bronze); }
+
+.dsr-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 0;
+  border: 0;
+  outline: none;
+  background: none;
+  font: inherit;
+  font-size: 16px;
+  color: var(--dsr-ink);
+}
+
+.dsr-field input::placeholder { color: var(--dsr-gray); }
+.dsr-field input::-webkit-search-cancel-button { display: none; }
+
+.dsr-x {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--dsr-line);
+  border-radius: 10px;
+  background: none;
+  color: var(--dsr-gray);
+  cursor: pointer;
+  transition: background 0.22s var(--dsr-ease), color 0.22s, transform 0.26s var(--dsr-ease);
+}
+
+.dsr-x:hover { background: rgba(201, 168, 76, 0.14); color: var(--dsr-ink); transform: rotate(90deg); }
+
+/* ---------- نتیجه‌ها ---------- */
+.dsr-out {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dsr-label {
+  display: block;
+  padding: 12px 12px 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--dsr-gray);
+}
+
+.dsr-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: 2px;
+  border-radius: 13px;
+  text-decoration: none;
+  color: var(--dsr-ink);
+  transition: background 0.18s var(--dsr-ease);
+}
+
+.dsr-row:hover,
+.dsr-row.is-cur { background: rgba(201, 168, 76, 0.14); }
+
+.dsr-ava,
+.dsr-thumb {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.dsr-ava {
+  border-radius: 50%;
+  color: #faf8f5;
+  background: linear-gradient(135deg, var(--dsr-gold), var(--dsr-bronze));
+}
+
+.dsr-thumb {
+  border-radius: 12px;
+  color: var(--dsr-bronze);
+  background: rgba(201, 168, 76, 0.13);
+}
+
+.dsr-ava img,
+.dsr-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.dsr-txt { flex: 1; min-width: 0; }
+
+.dsr-txt strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dsr-txt small {
+  display: block;
+  font-size: 11.5px;
+  color: var(--dsr-gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dsr-price {
+  flex: none;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--dsr-bronze);
+  white-space: nowrap;
+}
+
+.dsr-go { color: var(--dsr-gray); opacity: 0.6; }
+
+/* ---------- حالت خالی ---------- */
+.dsr-hint {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 44px 20px;
+  text-align: center;
+  color: var(--dsr-bronze);
+}
+
+.dsr-hint strong { font-size: 15.5px; color: var(--dsr-ink); }
+.dsr-hint span { font-size: 13px; color: var(--dsr-gray); }
+
+/* ---------- پاورقی ---------- */
+.dsr-foot {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 11px 18px;
+  font-size: 11.5px;
+  color: var(--dsr-gray);
+  background: var(--dsr-bg2);
+  border-top: 1px solid var(--dsr-line);
+}
+
+.dsr-foot span { display: inline-flex; align-items: center; gap: 5px; }
+
+.dsr-foot kbd {
+  min-width: 20px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 10.5px;
+  text-align: center;
+  color: var(--dsr-ink);
+  background: var(--dsr-bg);
+  border: 1px solid var(--dsr-line);
+}
+
+@media (max-width: 620px) {
+  .dsr-wrap { padding-top: 20px; }
+  .dsr-modal { max-height: 86vh; }
+  .dsr-foot { display: none; }
+  .dsr-btn { width: 42px; height: 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsr-wrap, .dsr-modal, .dsr-row, .dsr-x, .dsr-btn { transition-duration: 0.001ms !important; }
+}
+
+/* ============================================================
+   جعبه‌ی آیکون‌های نوار بالا — جست‌وجو و منو داخلش می‌نشینند
+   ============================================================ */
+.dp-navbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+.dp-navbox > .dsr-btn,
+.dp-navbox > .dnv-btn { order: 5; }
+
+/* ============================================================
+   پیشنهاد عبارت — سبک دیجی‌کالا
+   ------------------------------------------------------------
+   جعبه‌ی جست‌وجو دیگر کالا نشان نمی‌دهد؛ عبارت پیشنهاد
+   می‌کند. این ردیف‌ها ساده‌ترند چون فقط متن دارند.
+   ============================================================ */
+.dsr-term .dsr-lead {
+  color: var(--dsr-bronze);
+  opacity: 0.7;
+}
+
+.dsr-term strong {
+  font-weight: 600;
+}
+
+/* بخشی که کاربر تایپ کرده، پررنگ می‌شود */
+.dsr-term strong b {
+  font-weight: 800;
+  color: var(--dsr-gold);
+}
+
+/* شمار کالاهای هر عبارت */
+.dsr-n {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dsr-gray);
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(201, 168, 76, 0.1);
+}
+
+/* ردیف «جست‌وجوی … در همه‌ی کالاها» */
+.dsr-all {
+  margin-top: 4px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.28);
+  padding-top: 12px;
+}
+.dsr-all strong {
+  font-weight: 700;
+  color: var(--dsr-bronze);
+}
+
+
+/* ============================================================
+   محافظ سرریز — متن بلند فارسی
+   ------------------------------------------------------------
+   بدون این، عبارت پیشنهادی بلند شمارنده‌ی کنارش را از قاب
+   بیرون می‌راند و ردیف به هم می‌ریزد.
+   ============================================================ */
+.dsr-row { min-width: 0; }
+
+.dsr-term > .dsr-txt,
+.dsr-term strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+/* شمارنده و پیکان هرگز جمع نشوند */
+.dsr-n,
+.dsr-go,
+.dsr-price { flex: none; }
+
+/* ============================================================
+   لایه‌ی پرداخت — جعبه‌ی جست‌وجو
+   ============================================================ */
+
+/* پنجره هرگز از صفحه بیرون نزند */
+.dsr-modal { max-width: calc(100vw - 36px); }
+
+/* ردیف‌ها: بخش ثابت و بخش جمع‌شدنی */
+.dsr-row > .dsr-i,
+.dsr-row > .dsr-ava,
+.dsr-row > .dsr-thumb { flex: none; }
+
+/* اعداد هم‌عرض */
+.dsr-n,
+.dsr-price { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+/* برچسب گروه چسبان بماند هنگام پیمایش */
+.dsr-label {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--dsr-bg);
+}
+
+/* گوشی باریک */
+@media (max-width: 380px) {
+  .dsr-modal { max-width: calc(100vw - 20px); }
+  .dsr-field input { font-size: 15px; }   /* زیر ۱۶ = زوم خودکار iOS */
+  .dsr-row { padding: 9px 10px; }
+  .dsr-foot { display: none; }            /* راهنمای کیبورد روی گوشی بی‌فایده */
+}
+
+/* روی گوشی، ورودی زیر ۱۶ پیکسل باعث زوم خودکار می‌شود */
+@media (max-width: 620px) {
+  .dsr-field input { font-size: 16px; }
+}

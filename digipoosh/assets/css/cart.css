@@ -1,0 +1,590 @@
+/* ============================================================
+   دیجی‌پوش — سبد خرید
+   ============================================================ */
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 22px;
+  align-items: start;
+  padding: 10px 0 60px;
+}
+
+.cart-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.cart-head h1 { margin: 0; font-size: 25px; font-weight: 800; }
+.cart-head span { font-size: 13.5px; color: var(--gray); }
+
+/* ---------- گروه هر فروشگاه ---------- */
+.shop-group {
+  margin-bottom: 16px;
+  border-radius: 18px;
+  background: var(--off-white);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  overflow: hidden;
+}
+
+.shop-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.04));
+  border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.shop-ava {
+  width: 40px; height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  flex: none;
+}
+
+.shop-ava img { width: 100%; height: 100%; object-fit: cover; }
+.shop-head div { flex: 1; min-width: 0; }
+.shop-head strong { display: block; font-size: 14.5px; }
+.shop-head small { font-size: 12px; color: var(--gray); }
+
+.shop-link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--bronze);
+  white-space: nowrap;
+}
+
+.shop-link:hover { text-decoration: underline; }
+
+/* ---------- ردیف کالا ---------- */
+.cart-row {
+  display: grid;
+  grid-template-columns: 74px 1fr auto auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 15px 18px;
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.2);
+}
+
+.cart-row:last-child { border-bottom: none; }
+
+.cart-img {
+  width: 74px; height: 86px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--cream), var(--beige));
+}
+
+.cart-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.cart-img b {
+  font-size: 26px;
+  background-image: linear-gradient(135deg, var(--gold), var(--bronze));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.cart-info { min-width: 0; }
+.cart-info strong { display: block; font-size: 14.5px; line-height: 1.7; }
+
+.cart-opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  color: var(--gray);
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+}
+
+.opt.dim { background: rgba(138, 126, 114, 0.1); border-color: rgba(138, 126, 114, 0.2); }
+
+.low {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--danger);
+}
+
+/* ---------- شمارنده ---------- */
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--cream);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+}
+
+.qty button {
+  width: 30px; height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--bronze);
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+}
+
+.qty button:hover { background: rgba(201, 168, 76, 0.2); }
+.qty span { min-width: 26px; text-align: center; font-weight: 700; font-size: 14px; }
+
+.cart-price { text-align: center; white-space: nowrap; }
+.cart-price b { display: block; font-size: 15.5px; font-weight: 800; }
+.cart-price small { font-size: 11px; color: var(--gray); }
+
+.cart-x {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(180, 84, 79, 0.28);
+  border-radius: 9px;
+  background: none;
+  color: var(--danger);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+}
+
+.cart-x:hover { background: rgba(180, 84, 79, 0.12); }
+
+/* ============================================================
+   خلاصه‌ی سفارش
+   ============================================================ */
+.cart-side { position: sticky; top: 96px; }
+
+.sum-card { padding: 22px; }
+.sum-card h2 { margin: 0 0 16px; font-size: 16.5px; font-weight: 800; }
+
+.sum-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 0;
+  font-size: 13.5px;
+  color: var(--gray);
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.2);
+}
+
+.sum-row b { color: var(--ink); font-weight: 700; }
+.sum-row b.free { color: var(--success); }
+
+.sum-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  border-radius: 13px;
+  font-size: 13.5px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.16), rgba(201, 168, 76, 0.05));
+  border: 1px solid rgba(201, 168, 76, 0.3);
+}
+
+.sum-total b { font-size: 20px; font-weight: 800; color: var(--bronze); }
+.sum-total small { font-size: 12px; font-weight: 500; }
+
+.sum-note {
+  margin: 12px 0 0;
+  font-size: 12.5px;
+  text-align: center;
+  color: var(--gray);
+}
+
+.sum-note a { font-weight: 700; color: var(--bronze); text-decoration: underline; }
+
+/* ============================================================
+   تسویه
+   ============================================================ */
+.checkout { padding: 10px 0 60px; }
+.co-card { width: min(620px, 100%); margin-inline: auto; padding: 26px; }
+
+.co-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+}
+
+.co-head h2 { margin: 0; font-size: 18px; font-weight: 800; }
+.co-head .link { margin-inline-start: auto; }
+
+.co-pay {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 16px;
+  margin: 6px 0 18px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: #7a611a;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.34);
+}
+
+.co-pay .ico { width: 20px; height: 20px; color: var(--bronze); flex: none; margin-top: 2px; }
+
+/* ============================================================
+   سفارش ثبت شد
+   ============================================================ */
+.done { padding: 30px 0 70px; }
+
+.done-card {
+  width: min(560px, 100%);
+  margin-inline: auto;
+  padding: 38px 28px;
+  text-align: center;
+}
+
+.done-mark {
+  width: 74px; height: 74px;
+  margin: 0 auto 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, #4a8f6b, #3e7c5c);
+  box-shadow: 0 14px 30px -14px rgba(74, 143, 107, 0.9);
+}
+
+.done-mark svg { width: 34px; height: 34px; }
+.done-card h2 { margin: 0 0 8px; font-size: 22px; font-weight: 800; }
+.done-card p { margin: 0; font-size: 14px; color: var(--gray); line-height: 2; }
+
+.done-ids {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+
+.oid {
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bronze);
+  background: rgba(201, 168, 76, 0.14);
+  border: 1px solid rgba(201, 168, 76, 0.34);
+}
+
+.done-acts {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.done-acts .btn { margin: 0; }
+
+/* ============================================================
+   واکنش‌گرا
+   ============================================================ */
+@media (max-width: 940px) {
+  .cart-layout { grid-template-columns: 1fr; }
+  .cart-side { position: static; }
+}
+
+@media (max-width: 620px) {
+  .cart-row {
+    grid-template-columns: 64px 1fr auto;
+    grid-template-areas:
+      "img info x"
+      "img opts opts"
+      "qty qty price";
+    gap: 10px;
+  }
+  .cart-img { grid-area: img; width: 64px; height: 76px; }
+  .cart-info { grid-area: info; }
+  .qty { grid-area: qty; justify-self: start; }
+  .cart-price { grid-area: price; text-align: end; }
+  .cart-x { grid-area: x; }
+  .shop-head { flex-wrap: wrap; }
+  .shop-link { width: 100%; }
+  .done-acts .btn { width: 100%; }
+}
+
+/* ---------- تخفیف در سبد ---------- */
+.opt.sale {
+  color: #8e3b37;
+  background: rgba(180, 84, 79, 0.1);
+  border-color: rgba(180, 84, 79, 0.3);
+  font-weight: 700;
+}
+
+.cart-price s {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray);
+  text-decoration: line-through;
+}
+
+/* ============================================================
+   کد تخفیف
+   ------------------------------------------------------------
+   مشتری کدی را که فروشنده ساخته اینجا می‌نویسد و تخفیفش
+   همان لحظه روی جمع می‌نشیند.
+   ============================================================ */
+.cpn-box {
+  margin: 14px 0 4px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px dashed rgba(201, 168, 76, 0.42);
+}
+
+.cpn-lbl {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gold-text, #8a6d1f);
+}
+
+.cpn-lbl svg { width: 17px; height: 17px; flex: none; }
+
+/* ---------- ورودی ---------- */
+.cpn-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.cpn-input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 13px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  /* کد همیشه انگلیسی است، پس چپ‌به‌راست خوانده می‌شود */
+  direction: ltr;
+  text-align: center;
+  letter-spacing: 0.09em;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(201, 168, 76, 0.36);
+  transition: border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.cpn-input::placeholder {
+  font-weight: 400;
+  font-size: 12.5px;
+  letter-spacing: 0;
+  direction: rtl;
+  color: #a09488;
+}
+
+.cpn-input:focus {
+  outline: none;
+  border-color: var(--gold, #c9a84c);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.cpn-go {
+  padding: 10px 20px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+  border: 0;
+  transition: filter 0.24s ease, transform 0.24s ease;
+}
+
+.cpn-go:hover:not(:disabled) { filter: brightness(1.06); transform: translateY(-1px); }
+.cpn-go:disabled { opacity: 0.55; cursor: progress; }
+
+/* ---------- کد فعال ---------- */
+.cpn-on {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(76, 175, 80, 0.09);
+  border: 1px solid rgba(76, 175, 80, 0.32);
+}
+
+.cpn-check {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 50%;
+  color: #fff;
+  background: #2f7033;
+}
+
+.cpn-check svg { width: 13px; height: 13px; }
+
+.cpn-on-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.cpn-on-txt b {
+  font-size: 13px;
+  font-weight: 800;
+  direction: ltr;
+  text-align: start;
+  letter-spacing: 0.06em;
+  color: #1f5c23;
+}
+
+.cpn-on-txt small { font-size: 11.5px; color: #3d6b40; }
+
+.cpn-drop {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #75695f;
+  background: transparent;
+  border: 0;
+  transition: color 0.22s ease, background 0.22s ease;
+}
+
+.cpn-drop:hover { color: #fff; background: #c0453f; }
+.cpn-drop svg { width: 13px; height: 13px; }
+
+/* ---------- پیام ---------- */
+.cpn-msg {
+  margin: 9px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.85;
+}
+
+.cpn-msg.is-ok { color: #2f7033; }
+.cpn-msg.is-bad { color: #c0453f; }
+
+/* ---------- ردیف تخفیف در خلاصه ---------- */
+.cpn-tag {
+  display: inline-block;
+  margin-inline-start: 5px;
+  padding: 1px 7px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 800;
+  direction: ltr;
+  color: #1a1a1a;
+  background: rgba(201, 168, 76, 0.3);
+}
+
+.sum-row b.cpn-off { color: #2f7033; }
+
+@media (max-width: 420px) {
+  .cpn-row { grid-template-columns: minmax(0, 1fr); }
+  .cpn-go { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpn-input, .cpn-go, .cpn-drop { transition: none; }
+  .cpn-go:hover:not(:disabled) { transform: none; }
+}
+
+/* ============================================================
+   نشان کد تخفیف روی گروه فروشنده
+   ------------------------------------------------------------
+   مشتری باید در خودِ سبد ببیند تخفیف روی کدام فروشگاه نشسته —
+   نه اینکه فقط عددی در خلاصه‌ی پایین عوض شود.
+   ============================================================ */
+.shop-cpn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 0 4px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(47, 112, 51, 0.08);
+  border: 1px dashed rgba(47, 112, 51, 0.36);
+}
+
+.shop-cpn-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 800;
+  direction: ltr;
+  letter-spacing: 0.07em;
+  color: #1f5c23;
+  background: rgba(47, 112, 51, 0.14);
+}
+
+.shop-cpn-tag svg { width: 13px; height: 13px; flex: none; }
+
+.shop-cpn-txt {
+  flex: 1;
+  min-width: 120px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #2f7033;
+}
+
+.shop-cpn-sum {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.shop-cpn-sum s { font-size: 12px; color: var(--gray, #75695f); }
+.shop-cpn-sum b { font-size: 13.5px; font-weight: 800; color: #2f7033; }
+
+@media (max-width: 480px) {
+  .shop-cpn { gap: 7px; padding: 9px 11px; }
+  .shop-cpn-sum { width: 100%; justify-content: flex-end; }
+}

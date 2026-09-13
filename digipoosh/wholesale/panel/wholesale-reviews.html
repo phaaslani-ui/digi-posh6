@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="robots" content="noindex" />
+  <title>نظرها | پنل عمده‌فروشی دیجی‌پوش</title>
+
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="./css/wholesale-panel.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-stock.css" />
+</head>
+<body data-dp-page="wholesale-panel">
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="wp-side" id="wpSide"></aside>
+
+<main class="wp-main" id="main">
+
+  <header class="wp-top">
+    <button class="wp-burger" type="button" id="wpBurger" aria-label="منو">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="wp-title">
+      <h1>نظرها</h1>
+      <span>بازخورد خریداران عمده</span>
+    </div>
+    <div class="wp-top-acts"></div>
+  </header>
+
+  <div class="wp-content">
+    <div class="wp-note">
+      <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+      <div><b>نظر خریداران عمده اعتبار شما را می‌سازد.</b>
+        پاسخ دادن به نظر — به‌ویژه نظر منفی — نشان می‌دهد پاسخ‌گو هستید.
+        اگر نظری توهین‌آمیز یا نادرست بود، به مدیر گزارش بدهید.</div>
+    </div>
+
+    <div class="wp-kpis" id="kpis"></div>
+
+    <div class="wp-card">
+      <div class="wp-card-head">
+        <h2>نظرها</h2>
+        <div class="wp-seg spacer" id="filter" role="tablist">
+          <button class="on" type="button" data-f="">همه</button>
+          <button type="button" data-f="noreply">بی‌پاسخ</button>
+          <button type="button" data-f="low">امتیاز پایین</button>
+          <button type="button" data-f="flagged">گزارش‌شده</button>
+        </div>
+      </div>
+      <div id="box"></div>
+    </div>
+  </div>
+
+</main>
+
+<div class="wp-modal" id="rModal" role="dialog" aria-modal="true" aria-label="پاسخ به نظر">
+  <div class="wp-modal-card" style="width:min(540px,100%)">
+    <button class="wp-x" type="button" data-wp-close aria-label="بستن"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2 id="rTitle">پاسخ به نظر</h2>
+    <div id="rQuote"></div>
+    <form id="rForm" novalidate>
+      <input type="hidden" id="rId" />
+      <div class="wp-field">
+        <label for="rText">پاسخ شما</label>
+        <textarea class="wp-input" id="rText" rows="4"
+          placeholder="محترمانه و کوتاه — این پاسخ برای همه دیده می‌شود."></textarea>
+        <span class="wp-hint">پاسخ خوب به نظر منفی، بیشتر از ده نظر مثبت ارزش دارد.</span>
+      </div>
+      <div class="wp-modal-foot">
+        <button class="wp-btn wp-btn-gold" type="submit">ثبت پاسخ</button>
+        <button class="wp-btn wp-btn-ghost" type="button" data-wp-close>انصراف</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../../seller/js/dp-config.js"></script>
+<script src="../../seller/js/dp-store.js"></script>
+<script src="../../assets/js/dp-guard.js"></script>
+<script src="../../assets/js/dp-safe.js"></script>
+<script src="../../assets/js/dp-stock.js"></script>
+<script src="../../assets/js/dp-taxonomy.js"></script>
+<script src="../../assets/js/dp-moderation.js"></script>
+<script src="../../assets/js/dp-reviews.js"></script>
+<script src="../../assets/js/dp-user.js"></script>
+<script src="./js/dpw-store.js"></script>
+<script src="./js/dpw-boost.js"></script>
+<script src="./js/dpw-ui.js"></script>
+<script>
+
+requireWholesale(function () {
+  var S = DPWStore, U = DPWUi, esc = U.esc;
+  var V = window.DPReviews;
+  var fa = S.fa;
+  var $ = function (s) { return document.querySelector(s); };
+  var IC = { box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg>', money: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>', quote: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg>', truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>', users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c0-3.3 2.5-5.4 5.5-5.4s5.5 2.1 5.5 5.4"/><path d="M16 6.5a3 3 0 0 1 0 6"/></svg>', chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V15M9 19.5V9M14 19.5v-7M19 19.5V5"/></svg>', warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5 21 19H3z"/><path d="M12 10v4M12 16.5h.01"/></svg>', check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>', x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>', info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>', clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>', store: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg>', bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5 13.5h6L11 21l8-10.5h-6z"/></svg>' };
+  var filter = '';
+
+  if (!V) {
+    $('#box').innerHTML = U.emptyBox('سامانه‌ی نظرها بارگذاری نشد', '');
+    return;
+  }
+
+  var STAR = 'm12 3.6 2.5 5.1 5.6.8-4 3.9 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4-3.9 5.6-.8z';
+
+  function stars(n) {
+    var out = '<span class="wp-stars">';
+    for (var i = 1; i <= 5; i++) {
+      out += '<svg class="wp-star' + (i <= n ? ' on' : '') + '" viewBox="0 0 24 24" ' +
+        'aria-hidden="true"><path d="' + STAR + '"/></svg>';
+    }
+    return out + '</span>';
+  }
+
+  function all() {
+    var id = S.me();
+    try { return V.forSeller(id) || []; } catch (e) { return []; }
+  }
+
+  function paintKpis() {
+    var list = all();
+    var n = list.length;
+    var sum = list.reduce(function (a, r) { return a + (Number(r.rating) || 0); }, 0);
+    var avg = n ? Math.round(sum / n * 10) / 10 : 0;
+    var noReply = list.filter(function (r) { return !r.reply; }).length;
+    var low = list.filter(function (r) { return r.rating <= 2; }).length;
+
+    var rows = [
+      { c: '#c9a84c', i: IC.quote, t: 'همه‌ی نظرها', v: fa(n),
+        s: n ? 'میانگین ' + fa(avg) + ' از ۵' : 'هنوز نظری نیست' },
+      { c: '#4caf50', i: IC.check, t: 'پاسخ داده‌شده', v: fa(n - noReply),
+        s: n ? '٪' + fa(Math.round((n - noReply) / n * 100)) + ' نرخ پاسخ' : '—' },
+      { c: '#e8b552', i: IC.warn, t: 'بی‌پاسخ', v: fa(noReply),
+        s: noReply ? 'نیازمند توجه' : 'همه پاسخ داده شده' },
+      { c: '#e57373', i: IC.x, t: 'امتیاز پایین', v: fa(low),
+        s: '۱ و ۲ ستاره' },
+    ];
+    $('#kpis').innerHTML = rows.map(function (r) {
+      return '<div class="wp-kpi" style="--kc:' + r.c + '">' +
+        '<div class="wp-kpi-top">' + r.i + '<span>' + r.t + '</span></div>' +
+        '<b>' + r.v + '</b><small>' + r.s + '</small></div>';
+    }).join('');
+  }
+
+  function paint() {
+    paintKpis();
+    var list = all();
+
+    if (filter === 'noreply') list = list.filter(function (r) { return !r.reply; });
+    else if (filter === 'low') list = list.filter(function (r) { return r.rating <= 2; });
+    else if (filter === 'flagged') list = list.filter(function (r) { return r.flagged; });
+
+    if (!list.length) {
+      $('#box').innerHTML = U.emptyBox('نظری نیست',
+        'وقتی خریداری نظر بگذارد، اینجا می‌بینید و می‌توانید پاسخ بدهید.');
+      return;
+    }
+
+    $('#box').innerHTML = list.map(function (r) {
+      return '<div class="wp-rev' + (r.rating <= 2 ? ' is-low' : '') + '">' +
+        '<div class="wp-rev-top">' +
+          '<strong>' + esc(r.userName || 'خریدار') + '</strong>' +
+          stars(Math.round(r.rating)) +
+          '<span class="wp-rev-about">' + esc(r.about || '') + '</span>' +
+          '<time>' + esc(r.date || '') + '</time>' +
+        '</div>' +
+
+        (r.text
+          ? '<p class="wp-rev-txt">' + esc(r.text) + '</p>'
+          : '<p class="wp-rev-txt dim">— بدون متن —</p>') +
+
+        (r.reply
+          ? '<div class="wp-rev-reply"><b>پاسخ شما:</b> ' + esc(r.reply) + '</div>'
+          : '') +
+
+        (r.flagged
+          ? '<div class="wp-note warn" style="margin:10px 0 0">' + IC.warn +
+            '<div>گزارش شده: ' + esc(r.flagReason || '') +
+            (r.reviewed ? ' — مدیر بررسی کرد.' : ' — در انتظار بررسی مدیر.') +
+            '</div></div>'
+          : '') +
+
+        '<div class="wp-row-acts" style="margin-top:11px">' +
+          '<button class="wp-btn wp-btn-ghost wp-btn-sm" type="button" data-reply="' +
+            esc(r.id) + '">' + (r.reply ? 'ویرایش پاسخ' : 'پاسخ بدهید') + '</button>' +
+          (r.reply
+            ? '<button class="wp-btn wp-btn-bad wp-btn-sm" type="button" data-unreply="' +
+              esc(r.id) + '">حذف پاسخ</button>' : '') +
+          (!r.flagged
+            ? '<button class="wp-btn wp-btn-bad wp-btn-sm" type="button" data-flag="' +
+              esc(r.id) + '">گزارش به مدیر</button>' : '') +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.addEventListener('click', function (e) {
+    var rp = e.target.closest('[data-reply]');
+    if (rp) {
+      var r = all().find(function (x) { return x.id === rp.dataset.reply; });
+      if (!r) return;
+      $('#rId').value = r.id;
+      $('#rText').value = r.reply || '';
+      $('#rQuote').innerHTML = '<div class="wp-note" style="margin-bottom:14px"><div>' +
+        '<b>' + esc(r.userName || 'خریدار') + '</b> — ' + fa(r.rating) + ' ستاره<br>' +
+        esc(r.text || '— بدون متن —') + '</div></div>';
+      U.openModal('#rModal');
+      return;
+    }
+
+    var un = e.target.closest('[data-unreply]');
+    if (un) {
+      if (!confirm('پاسخ شما حذف شود؟')) return;
+      try { V.unreply(un.dataset.unreply); U.toast('پاسخ حذف شد.', 'success'); paint(); }
+      catch (err) { U.toast(err.message, 'error'); }
+      return;
+    }
+
+    var fl = e.target.closest('[data-flag]');
+    if (fl) {
+      var why = prompt('چرا این نظر را گزارش می‌کنید؟');
+      if (why === null) return;
+      try { V.flag(fl.dataset.flag, why); U.toast('گزارش برای مدیر فرستاده شد.', 'success'); paint(); }
+      catch (err) { U.toast(err.message, 'error'); }
+    }
+  });
+
+  $('#rForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var t = $('#rText').value.trim();
+    if (t.length < 3) { U.toast('پاسخ را بنویسید.', 'error'); return; }
+    try {
+      V.reply($('#rId').value, t);
+      U.closeModal($('#rModal'));
+      U.toast('پاسخ شما ثبت شد.', 'success');
+      paint();
+    } catch (err) { U.toast(err.message, 'error'); }
+  });
+
+  $('#filter').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-f]');
+    if (!b) return;
+    [].slice.call(this.children).forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    filter = b.dataset.f;
+    paint();
+  });
+
+  try { V.markSeen(S.me()); } catch (e) { /* بی‌اهمیت */ }
+  paint();
+});
+</script>
+</body>
+</html>

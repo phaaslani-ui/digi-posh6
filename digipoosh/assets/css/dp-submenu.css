@@ -1,0 +1,200 @@
+/* ============================================================
+   دیجی‌پوش — زیرمنوی «فروشندگان»
+   ------------------------------------------------------------
+   چرا این فایل لازم شد؟
+
+   نوار ناوبری هر صفحه `backdrop-filter` دارد (شیشه‌ی مات).
+   این ویژگی در CSS یک «زمینه‌ی چینش» تازه می‌سازد؛ یعنی هر
+   چیزی داخلش، هر قدر هم z-index بالا بگیرد، نمی‌تواند از
+   نوار بیرون بزند. زیرمنو هم داخل همان نوار بود و بریده می‌شد.
+
+   راه‌حل: زیرمنو به‌جای absolute، با موقعیت fixed روی صفحه
+   می‌نشیند و جای دقیقش را جاوااسکریپت حساب می‌کند.
+   ============================================================ */
+
+/* ============================================================
+   ۱. ردیف منو دیگر چیزی را نمی‌بُرد
+   ============================================================ */
+.nav-menu,
+.menu,
+.menu-m,
+.sh-menu {
+  overflow: visible;
+}
+
+.has-sub {
+  position: relative;
+  overflow: visible;
+}
+
+.has-sub > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   ۲. فلش کوچک
+   ============================================================ */
+.sub-caret {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.has-sub:focus-within > a .sub-caret,
+.has-sub.is-open > a .sub-caret {
+  transform: rotate(180deg);
+}
+
+/* ============================================================
+   ۳. خود زیرمنو
+   ------------------------------------------------------------
+   با `fixed` از هر برش و هر زمینه‌ی چینشی آزاد است.
+   مقدار --dps-x و --dps-y را جاوااسکریپت پر می‌کند.
+   ============================================================ */
+.submenu {
+  position: fixed;
+  top: var(--dps-y, 0px);
+  inset-inline-start: auto;
+  left: var(--dps-x, 0px);
+  z-index: 1400;
+
+  min-width: 210px;
+  padding: 8px;
+  margin: 0;
+  list-style: none;
+
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(201, 168, 76, 0.34);
+  box-shadow: 0 20px 48px -18px rgba(26, 26, 26, 0.3);
+
+  /* اگر گزینه‌ها زیاد بود، خودش نوار پیمایش می‌گیرد —
+     نه اینکه از پایین صفحه بزند بیرون و نیمه‌اش دیده نشود */
+  max-height: min(70vh, 460px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  translate: 0 8px;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              translate 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.24s;
+}
+
+/* ============================================================
+   پل نامرئی بین دکمه و زیرمنو
+   ------------------------------------------------------------
+   پیش‌تر این پل روی خودِ زیرمنو بود؛ ولی زیرمنو `overflow-y`
+   دارد و هر چیزی بیرون کادرش را می‌بُرد — یعنی پل ساخته
+   می‌شد و بی‌درنگ بریده می‌شد.
+
+   حالا پل زیر خودِ دکمه است. آنجا چیزی آن را نمی‌بُرد.
+   ============================================================ */
+.has-sub > a::before {
+  content: "";
+  position: absolute;
+  inset-inline: -6px;
+  top: 100%;
+  height: 16px;
+  pointer-events: none;
+}
+
+.has-sub.is-open > a::before { pointer-events: auto; }
+
+/* ============================================================
+   باز شدن
+   ------------------------------------------------------------
+   دیگر به `:hover` خالص تکیه نمی‌کنیم. جاوااسکریپت کلاس
+   `is-open` را می‌گذارد و با کمی مهلت برمی‌دارد، تا کاربر
+   فرصت داشته باشد موشواره را داخل منو ببرد.
+
+   `:focus-within` برای کسانی می‌ماند که با صفحه‌کلید
+   می‌گردند.
+   ============================================================ */
+/*
+ * چرا `.submenu.is-open` و نه `.has-sub.is-open > .submenu`؟
+ *
+ * منو حالا فرزند `body` است، نه فرزند `.has-sub`. (دلیلش را
+ * در dp-submenu.js نوشته‌ام: نوار `backdrop-filter` دارد و
+ * `position: fixed` را حبس می‌کند.)
+ *
+ * پس گزینشگر فرزندی دیگر هرگز مطابقت نمی‌کند و کلاس باید
+ * روی خود منو بنشیند.
+ */
+.has-sub:focus-within > .submenu,
+.submenu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  translate: 0 0;
+}
+
+/* ============================================================
+   ۴. گزینه‌های داخل زیرمنو
+   ============================================================ */
+.submenu li {
+  width: 100%;
+  margin: 0;
+}
+
+.submenu a {
+  display: block;
+  width: 100%;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.7;
+  text-align: start;
+  white-space: nowrap;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.submenu a:hover,
+.submenu a:focus-visible {
+  color: #b8943c;
+  background: rgba(201, 168, 76, 0.13);
+  transform: none;          /* جلوگیری از لغزش ارثی منوی افقی */
+}
+
+.submenu a::after { display: none; }   /* خط زیر گزینه‌های افقی نیاید */
+
+/* ============================================================
+   ۵. صفحه‌های تیره — مردانه و تینیجر
+   ============================================================ */
+[data-dp-page="man"] .submenu,
+[data-dp-page="teen"] .submenu {
+  background: #1c1c1c;
+  border-color: rgba(201, 168, 76, 0.36);
+  box-shadow: 0 20px 48px -18px rgba(0, 0, 0, 0.7);
+}
+
+[data-dp-page="man"] .submenu a,
+[data-dp-page="teen"] .submenu a { color: #ede8e0; }
+
+[data-dp-page="man"] .submenu a:hover,
+[data-dp-page="teen"] .submenu a:hover {
+  color: #d4b85a;
+  background: rgba(201, 168, 76, 0.18);
+}
+
+/* ============================================================
+   ۶. موبایل — زیرمنو کنار گذاشته می‌شود
+   ------------------------------------------------------------
+   زیر ۹۰۰ پیکسل منوی افقی پنهان است و کشوی موبایل کار می‌کند.
+   ============================================================ */
+@media (max-width: 900px) {
+  .submenu { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submenu, .sub-caret { transition-duration: 0.001ms !important; }
+}

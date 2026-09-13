@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f0e8" />
+  <meta name="robots" content="noindex" />
+  <title>صفحه پیدا نشد | دیجی‌پوش</title>
+  <meta name="description" content="صفحه‌ی مورد نظر پیدا نشد — دیجی‌پوش، بازارگاه لوکس مد ایرانی." />
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./manifest.json" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-l: #d4b85a;
+      --bronze: #b8943c;
+      --cream: #f5f0e8;
+      --off-white: #faf8f5;
+      --ink: #1a1a1a;
+      --gray: #75695f;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { overflow-x: hidden; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: Vazirmatn, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 85% 15%, rgba(201, 168, 76, 0.12), transparent 42%),
+        radial-gradient(circle at 12% 82%, rgba(201, 160, 184, 0.1), transparent 38%),
+        var(--cream);
+      line-height: 1.9;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 540px;
+      padding: 40px 32px 32px;
+      text-align: center;
+      border-radius: 26px;
+      background: var(--off-white);
+      border: 1px solid rgba(201, 168, 76, 0.24);
+      box-shadow: 0 30px 70px -40px rgba(201, 168, 76, 0.65);
+    }
+
+    .mark {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      color: var(--off-white);
+      background: linear-gradient(135deg, var(--gold-l), var(--bronze));
+      box-shadow: 0 16px 32px -16px rgba(201, 168, 76, 0.9);
+    }
+
+    .mark svg { width: 32px; height: 32px; }
+
+    .code {
+      font-size: 60px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 2px;
+      background-image: linear-gradient(135deg, var(--gold), var(--bronze));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    p {
+      margin: 0 auto 26px;
+      max-width: 400px;
+      font-size: 14.5px;
+      color: var(--gray);
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease);
+    }
+
+    .btn svg { width: 17px; height: 17px; }
+
+    .btn-main {
+      color: var(--off-white);
+      background: linear-gradient(135deg, var(--gold), var(--bronze));
+      box-shadow: 0 14px 28px -14px rgba(201, 168, 76, 0.95);
+    }
+
+    .btn-soft {
+      color: var(--bronze);
+      background: transparent;
+      border: 1px solid rgba(201, 168, 76, 0.4);
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+    .btn-soft:hover { background: rgba(201, 168, 76, 0.08); }
+
+    .cats {
+      margin-top: 26px;
+      padding-top: 20px;
+      border-top: 1px dashed rgba(201, 168, 76, 0.3);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .cats span {
+      width: 100%;
+      font-size: 12.5px;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .cats a {
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--bronze);
+      background: rgba(201, 168, 76, 0.1);
+      transition: background 0.22s var(--ease);
+    }
+
+    .cats a:hover { background: rgba(201, 168, 76, 0.2); }
+
+    @media (max-width: 480px) {
+      .box { padding: 30px 20px 24px; }
+      .code { font-size: 48px; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/dp-cursor.css" />
+</head>
+<body>
+
+  <main class="box" id="main">
+    <div class="mark" aria-hidden="true">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m16.5 16.5 4 4"/>
+      </svg>
+    </div>
+
+    <div class="code">۴۰۴</div>
+    <h1>این صفحه پیدا نشد</h1>
+    <p>
+      شاید نشانی را اشتباه وارد کرده‌اید، یا این صفحه جابه‌جا شده است.
+      از راه‌های زیر می‌توانید ادامه دهید.
+    </p>
+
+    <div class="links">
+      <a class="btn btn-main" href="./index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m3.5 11 8.5-7 8.5 7"/><path d="M6 9.5V20h12V9.5"/>
+        </svg>
+        بازگشت به صفحه‌ی اصلی
+      </a>
+
+      <a class="btn btn-soft" href="javascript:history.back()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m14 7-5 5 5 5"/>
+        </svg>
+        صفحه‌ی قبل
+      </a>
+    </div>
+
+    <nav class="cats" aria-label="دسته‌بندی‌ها">
+      <span>یا یکی از بخش‌ها را ببینید:</span>
+      <a href="./woman/index.html">زنانه</a>
+      <a href="./man/index.html">مردانه</a>
+      <a href="./kids/index.html">بچگانه</a>
+      <a href="./teen/index.html">نوجوان</a>
+    </nav>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "دیجی‌پوش — بازارگاه لوکس مد ایران",
+  "short_name": "دیجی‌پوش",
+  "description": "بازارگاه پوشاک ایرانی — اتصال خریداران به فروشندگان معتبر پوشاک زنانه، مردانه، بچگانه و نوجوان.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "fa-IR",
+  "background_color": "#f5f0e8",
+  "theme_color": "#c9a84c",
+  "categories": ["shopping", "lifestyle"],
+  "icons": [
+    { "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "پوشاک زنانه", "url": "./woman/index.html" },
+    { "name": "پوشاک مردانه", "url": "./man/index.html" },
+    { "name": "سبد خرید", "url": "./cart.html" },
+    { "name": "حساب من", "url": "./account.html" }
+  ]
+}

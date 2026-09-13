@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ورود فروشندگان دیجی‌پوش" />
+  <meta name="theme-color" content="#f5f0e8" />
+  <title>دیجی‌پوش | ورود فروشندگان</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="css/seller-style.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+</head>
+<body data-dp-panel class="login-page">
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<main class="login-card">
+  <div class="login-brand">
+    <div class="mark">د</div>
+    <h1>پنل فروشندگان</h1>
+    <p>برای مدیریت فروشگاه خود وارد شوید</p>
+  </div>
+
+  <form class="login-form" id="loginForm" novalidate>
+    <div class="field">
+      <label for="email">ایمیل</label>
+      <input class="input" type="email" id="email" name="email"
+             placeholder="reza@mahrokh.ir" data-rules="required|email"
+             autocomplete="email" />
+      <span class="err-msg"></span>
+    </div>
+
+    <div class="field">
+      <label for="password">رمز عبور</label>
+      <input class="input" type="password" id="password" name="password"
+             placeholder="••••••" data-rules="required|min6"
+             autocomplete="current-password" />
+      <span class="err-msg"></span>
+    </div>
+
+    <div class="login-row">
+      <label class="checkbox">
+        <input type="checkbox" id="remember" checked / aria-label="remember">
+        <span>مرا به خاطر بسپار</span>
+      </label>
+      <a class="link-gold" href="#" id="forgot">رمز عبور را فراموش کرده‌اید؟</a>
+    </div>
+
+    <button class="btn btn-primary btn-block" type="submit" id="submitBtn">
+      <span class="spinner"></span>
+      <span class="btn-label">ورود به پنل</span>
+    </button>
+  </form>
+
+  <div class="login-foot">
+    فروشنده نیستید؟
+    <a class="link-gold" href="seller-signup.html">ثبت‌نام به عنوان فروشنده</a>
+    <div style="margin-top:10px">
+      <a class="link-gold" href="../index.html">&larr; بازگشت به دیجی‌پوش</a>
+    </div>
+  </div>
+</main>
+
+<div class="toast-wrap"></div>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="js/dp-config.js"></script>
+<script src="js/dp-store.js"></script>
+<script src="js/seller-script.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+(function () {
+  const form = document.getElementById('loginForm');
+  const btn  = document.getElementById('submitBtn');
+
+  // اگر قبلاً وارد شده‌اید، مستقیم به داشبورد
+  /* هر فروشنده به پنل خودش می‌رود — تک‌فروش یا عمده‌فروش */
+  if (DPStore.auth.isLoggedIn()) {
+    location.replace(DPStore.panelHome ? DPStore.panelHome() : 'seller-dashboard.html');
+  }
+
+  initValidation(form);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validateForm(form)) { toast('لطفاً خطاهای فرم را برطرف کنید.', 'error'); return; }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+    try {
+      await DPStore.auth.login(
+        document.getElementById('email').value,
+        document.getElementById('password').value
+      );
+      toast('ورود موفق. در حال انتقال…', 'success');
+      /* پس از ورود، مسیر بر پایه‌ی نوع فروشنده انتخاب می‌شود */
+      const home = DPStore.panelHome ? DPStore.panelHome() : 'seller-dashboard.html';
+      setTimeout(() => (location.href = home), 600);
+    } catch (err) {
+      toast(err.message || 'ورود ناموفق بود.', 'error');
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('forgot').addEventListener('click', (e) => {
+    e.preventDefault();
+    toast('برای بازیابی رمز با پشتیبانی تماس بگیرید.', 'info');
+  });
+})();
+</script>
+</body>
+</html>

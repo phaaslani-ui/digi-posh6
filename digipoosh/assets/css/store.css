@@ -1,0 +1,1298 @@
+/* ============================================================
+   دیجی‌پوش — صفحه‌ی فروشگاه (نمای مشتری)
+   هم‌سبک با صفحه‌ی اصلی: طلا + کرم گرم
+   ============================================================ */
+
+:root {
+  --gold: #c9a84c;
+  --gold-bright: #d4b85a;
+  --bronze: #b8943c;
+  --cream: #f5f0e8;
+  --off-white: #faf8f5;
+  --beige: #ede8e0;
+  --ink: #1a1a1a;
+    /* خاکستری متن — تیره‌تر از قبل (#8a7e72) تا استاندارد
+     دسترس‌پذیری WCAG AA را بگذراند.
+     پیش: ۳٫۴۹:۱ روی کرم — کمتر از حد لازم ۴٫۵
+     پس:  ۴٫۷۰:۱ — قابل خواندن برای همه، با همان حال‌وهوا */
+  --gray: #75695f;
+  --silver: #c0c0c0;
+  --success: #4a8f6b;
+  --danger: #b4544f;
+  --wrap: min(1560px, calc(100% - 36px));
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  margin: 0;
+  direction: rtl;
+  font-family: "Vazirmatn", system-ui, sans-serif;
+  color: var(--ink);
+  line-height: 1.85;
+  background:
+    radial-gradient(circle at top right, rgba(201, 168, 76, 0.09), transparent 28%),
+    radial-gradient(circle at left 30%, rgba(192, 192, 192, 0.07), transparent 26%),
+    var(--cream);
+}
+
+/* ============================================================
+   جلوگیری از پیمایش افقی — روی html، نه body
+   ------------------------------------------------------------
+   اگر `overflow` روی `body` باشد، عنصرهای `position: fixed`
+   (کشوی منوی موبایل، کشوی سبد، پنجره‌ی جست‌وجو) به‌جای پنجره
+   به `body` مقید می‌شوند و ته صفحه کنار پابرگ می‌افتند.
+   ============================================================ */
+html {
+  overflow-x: clip;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; color: inherit; }
+
+.wrap { width: var(--wrap); margin-inline: auto; }
+
+/* ---------- حاشیه‌ی طلایی متحرک ۲.۵px ---------- */
+.gold-border {
+  position: relative;
+  border-radius: 20px;
+  background: var(--off-white);
+}
+
+.gold-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2.5px;
+  border-radius: inherit;
+  background: linear-gradient(115deg, var(--gold), var(--gold-bright), var(--silver), var(--bronze), var(--gold));
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: goldFlow 9s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes goldFlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gold-border::before { animation: none; }
+}
+
+/* ============================================================
+   نوار بالا
+   ============================================================ */
+.sh {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  padding: 14px 0;
+  background: rgba(245, 240, 232, 0.9);
+  backdrop-filter: blur(14px);
+}
+
+.sh-bar {
+  width: var(--wrap);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 22px;
+}
+
+.sh-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex: none;
+}
+
+.sh-mark {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 13px;
+  font-size: 19px; font-weight: 800;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+}
+
+.sh-stack { display: flex; flex-direction: column; line-height: 1.35; }
+.sh-stack strong { font-size: 16px; letter-spacing: 0.03em; }
+.sh-stack small { font-size: 10.5px; color: var(--gray); }
+
+/* منوی افقی
+   ------------------------------------------------------------
+   پیش‌تر `margin: 0 auto 0 0` همه‌ی فضای خالی را یک‌طرفه
+   می‌بلعید. وقتی «dp-nav.js» جعبه‌ی آیکون‌ها را به نوار
+   اضافه کرد، چیدمان به هم ریخت و منو به سمت چپ پرت شد.
+
+   حالا منو وسط می‌ماند و دو سرِ نوار (لوگو و دکمه‌ها)
+   با `margin-inline-start: auto` روی دکمه‌ی فروشنده
+   از هم جدا می‌شوند — چیدمانی که با هر تعداد آیکون
+   پایدار می‌ماند. */
+.sh-menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+/* همان قانونی که در dp-shell.css هم هست — بدون آن، <li>
+   روی `display: list-item` می‌ماند و منو در فلکس‌باکس
+   بزرگ و درهم می‌شود. این فایل پس از dp-shell بارگذاری
+   می‌شود، پس باید اینجا هم باشد. */
+.sh-menu > li {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sh-menu > li > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.sh-menu a {
+  position: relative;
+  padding: 8px 3px;
+  font-size: 14.5px;
+  font-weight: 500;
+  transition: color 0.3s var(--ease);
+}
+
+.sh-menu a::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 2px;
+  inset-inline-end: 50%;
+  transform: translateX(50%);
+  width: 0; height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  transition: width 0.32s var(--ease);
+}
+
+.sh-menu a:hover { color: var(--bronze); }
+.sh-menu a:hover::after { width: 70%; }
+
+.sh-seller {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 17px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  box-shadow: 0 10px 24px -12px rgba(201, 168, 76, 0.9);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  white-space: nowrap;
+}
+
+.sh-seller svg { width: 17px; height: 17px; }
+.sh-seller:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -12px rgba(201, 168, 76, 0.95); }
+
+/* دکمه‌ها همیشه ته نوار — چه جعبه‌ی آیکون‌ها ساخته شود چه نه */
+.sh-bar > .dp-navbox { flex: none; }
+.sh-bar > .sh-seller { flex: none; }
+
+/* وقتی منو پنهان است، دکمه‌ها به ته نوار می‌چسبند */
+@media (max-width: 1000px) {
+  .sh-menu { display: none; }
+  .sh-bar > .sh-seller,
+  .sh-bar > .dp-navbox:last-child { margin-inline-start: auto; }
+  .sh-bar > .dp-navbox:not(:last-child) { margin-inline-start: auto; }
+  .sh-bar > .dp-navbox + .sh-seller { margin-inline-start: 0; }
+}
+
+@media (max-width: 620px)  { .sh-seller span { display: none; } .sh-seller { padding: 9px 11px; } }
+
+/* ============================================================
+   مسیر صفحه
+   ============================================================ */
+.crumbs { padding: 20px 0 6px; font-size: 13px; color: var(--gray); }
+.crumbs .wrap { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.crumbs a { transition: color 0.25s var(--ease); }
+.crumbs a:hover { color: var(--bronze); }
+.crumbs strong { color: var(--ink); font-weight: 600; }
+
+/* ============================================================
+   سربرگ فروشگاه
+   ============================================================ */
+.hero {
+  width: var(--wrap);
+  margin: 14px auto 40px;
+  padding: 34px;
+  border-radius: 24px;
+}
+
+.hero-in {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 26px;
+  align-items: center;
+}
+
+.hero-badge {
+  width: 108px; height: 108px;
+  display: grid; place-items: center;
+  border-radius: 28px;
+  font-size: 46px; font-weight: 800;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  box-shadow: 0 18px 40px -18px rgba(201, 168, 76, 0.85);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero-title-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.hero-text h1 {
+  margin: 0;
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.chip svg { width: 14px; height: 14px; }
+
+.chip--ok {
+  color: #2f6b4f;
+  background: rgba(74, 143, 107, 0.14);
+  border: 1px solid rgba(74, 143, 107, 0.34);
+}
+
+.chip--wait {
+  color: #8a6d1f;
+  background: rgba(201, 168, 76, 0.16);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+}
+
+.hero-desc {
+  margin: 8px 0 0;
+  color: var(--gray);
+  font-size: 15px;
+  max-width: 62ch;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13.5px;
+  color: var(--gray);
+}
+
+.hero-meta li { display: inline-flex; align-items: center; gap: 6px; }
+.hero-meta svg { width: 16px; height: 16px; color: var(--gold); }
+
+.hero-stats { display: flex; gap: 12px; }
+
+.hstat {
+  min-width: 96px;
+  padding: 16px 14px;
+  text-align: center;
+  border-radius: 16px;
+  background: linear-gradient(160deg, rgba(201, 168, 76, 0.13), rgba(201, 168, 76, 0.04));
+  border: 1px solid rgba(201, 168, 76, 0.26);
+}
+
+.hstat b { display: block; font-size: 21px; font-weight: 800; color: var(--bronze); }
+.hstat small { font-size: 11.5px; color: var(--gray); }
+
+@media (max-width: 900px) {
+  .hero-in { grid-template-columns: auto 1fr; }
+  .hero-stats { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .hero { padding: 24px 18px; }
+  .hero-in { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .hero-meta { justify-content: center; }
+  .hero-stats { width: 100%; }
+  .hstat { flex: 1; min-width: 0; }
+}
+
+/* ============================================================
+   بخش محصولات
+   ============================================================ */
+.products { padding: 8px 0 70px; }
+
+.sec-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--bronze);
+}
+
+.sec-head h2 { margin: 4px 0 0; font-size: clamp(20px, 2.6vw, 27px); font-weight: 800; }
+
+.tools { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--off-white);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.search:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.16);
+}
+
+.search svg { width: 17px; height: 17px; color: var(--gray); flex: none; }
+
+.search input {
+  width: 210px;
+  padding: 11px 0;
+  border: 0;
+  background: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.tools select {
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--off-white);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.25s var(--ease);
+}
+
+.tools select:focus { border-color: var(--gold); }
+
+@media (max-width: 560px) { .search input { width: 100%; } .tools { width: 100%; } .search { flex: 1; } }
+
+.result-line { margin: 4px 0 22px; font-size: 13.5px; color: var(--gray); }
+
+/* ---------- شبکه‌ی محصولات ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  gap: 24px;
+}
+
+.pcard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--off-white);
+  border: 1px solid rgba(201, 168, 76, 0.16);
+  cursor: pointer;
+  /* `translate` جداگانه از `transform` است، پس با انیمیشن
+     ورود تداخل نمی‌کند و هاور همیشه کار می‌کند. */
+  transition: translate 0.4s var(--ease),
+              box-shadow 0.4s var(--ease),
+              border-color 0.4s var(--ease);
+}
+
+.pcard:hover,
+.pcard:focus-visible {
+  translate: 0 -8px;
+  border-color: rgba(201, 168, 76, 0.45);
+  box-shadow: 0 28px 56px -30px rgba(201, 168, 76, 0.5);
+  outline: none;
+}
+
+.pthumb {
+  position: relative;
+  aspect-ratio: 4 / 4.4;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--cream), var(--beige));
+  display: grid;
+  place-items: center;
+}
+
+.pthumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.pcard:hover .pthumb img { transform: scale(1.06); }
+
+.pthumb-letter {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1;
+  background-image: linear-gradient(135deg, var(--gold), var(--gold-bright), var(--bronze));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ptag {
+  position: absolute;
+  inset-block-start: 11px;
+  inset-inline-start: 11px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(6px);
+}
+
+.ptag--out { color: #fff; background: rgba(180, 84, 79, 0.92); }
+.ptag--low { color: #fff; background: rgba(201, 168, 76, 0.95); }
+
+.pbody { display: flex; flex-direction: column; gap: 7px; padding: 16px 16px 18px; flex: 1; }
+
+.pcat { font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; color: var(--bronze); }
+
+.pname {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pdesc {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--gray);
+  line-height: 1.75;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pchips { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.pchip {
+  padding: 3px 9px;
+  border-radius: 7px;
+  font-size: 10.5px;
+  color: var(--gray);
+  background: rgba(201, 168, 76, 0.09);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.pfoot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.26);
+}
+
+.pprice { font-size: 17px; font-weight: 800; color: var(--ink); }
+.pprice small { font-size: 11px; font-weight: 500; color: var(--gray); margin-inline-start: 3px; }
+.pstock { font-size: 11.5px; color: var(--gray); }
+.pstock--out { color: var(--danger); font-weight: 700; }
+
+/* ---------- حالت خالی ---------- */
+.empty-box {
+  margin: 20px auto 60px;
+  padding: 56px 26px;
+  max-width: 560px;
+  text-align: center;
+  border-radius: 22px;
+  border: 1.5px dashed rgba(201, 168, 76, 0.42);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.09), transparent 65%),
+    rgba(250, 248, 245, 0.6);
+}
+
+.empty-ico { width: 54px; height: 54px; margin-inline: auto; color: var(--gold); opacity: 0.75; }
+.empty-box h2 { margin: 14px 0 6px; font-size: 20px; font-weight: 800; }
+.empty-box p { margin: 0; color: var(--gray); font-size: 14.5px; }
+
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  border: 0;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.btn-gold {
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  box-shadow: 0 12px 26px -12px rgba(201, 168, 76, 0.9);
+}
+
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -12px rgba(201, 168, 76, 0.95); }
+
+/* ============================================================
+   مودال محصول
+   ============================================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(26, 26, 26, 0.55);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.28s var(--ease);
+}
+
+.modal[hidden] { display: none; }
+.modal.open { opacity: 1; }
+
+.modal-card {
+  position: relative;
+  width: min(760px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  padding: 26px;
+  border-radius: 22px;
+  transform: translateY(14px) scale(0.985);
+  transition: transform 0.32s var(--ease);
+}
+
+.modal.open .modal-card { transform: none; }
+
+.modal-x {
+  position: absolute;
+  inset-block-start: 14px;
+  inset-inline-start: 14px;
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  border-radius: 11px;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  background: var(--cream);
+  cursor: pointer;
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.modal-x svg { width: 18px; height: 18px; }
+.modal-x:hover { background: var(--beige); transform: rotate(90deg); }
+
+/* ستون دوم باید بتواند جمع شود.
+   بدون `minmax(0, 1fr)` ستون گرید کمینه‌اش «اندازه‌ی محتوا»ست،
+   پس جدول اندازه (۴۳۰ پیکسل) ستون را پهن می‌کرد و همه‌چیز
+   از کادر طلایی می‌زد بیرون. */
+.m-grid {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+/* هر دو ستون هم باید اجازه‌ی جمع شدن داشته باشند */
+.m-grid > * { min-width: 0; }
+
+@media (max-width: 640px) { .m-grid { grid-template-columns: 1fr; } }
+
+.m-img {
+  aspect-ratio: 4 / 4.6;
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, var(--cream), var(--beige));
+}
+
+.m-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.m-thumbs { display: flex; gap: 8px; margin-top: 9px; flex-wrap: wrap; }
+
+.m-thumbs img {
+  width: 52px; height: 52px;
+  border-radius: 9px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.25s var(--ease);
+}
+
+.m-thumbs img.on { border-color: var(--gold); }
+
+.m-title { margin: 0 0 4px; font-size: 21px; font-weight: 800; padding-inline-start: 44px; }
+.m-cat { font-size: 12.5px; color: var(--bronze); font-weight: 600; }
+.m-desc { margin: 12px 0; font-size: 14px; color: var(--gray); line-height: 2; }
+
+.m-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.24);
+  font-size: 13.5px;
+}
+
+.m-row:last-of-type { border-bottom: 0; }
+.m-row span:first-child { color: var(--gray); }
+.m-row span:last-child { font-weight: 600; }
+
+.m-price {
+  margin-top: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.15), rgba(201, 168, 76, 0.05));
+  border: 1px solid rgba(201, 168, 76, 0.3);
+}
+
+.m-price b { font-size: 23px; font-weight: 800; color: var(--bronze); }
+
+.m-note {
+  margin-top: 14px;
+  padding: 12px 15px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: var(--gray);
+  background: rgba(192, 192, 192, 0.14);
+  border: 1px solid rgba(192, 192, 192, 0.3);
+}
+
+/* ============================================================
+   پابرگ
+   ============================================================ */
+.sf { margin-top: 40px; padding: 44px 0 0; background: var(--ink); color: var(--beige); }
+
+.sf-in {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
+
+.sf-logo {
+  font-size: 20px;
+  font-weight: 800;
+  background-image: linear-gradient(135deg, var(--gold), var(--gold-bright));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sf-in p { margin: 6px 0 0; font-size: 13.5px; color: #a79c90; max-width: 44ch; }
+.sf-links { display: flex; gap: 22px; flex-wrap: wrap; font-size: 13.5px; }
+.sf-links a { color: #c8bdb1; transition: color 0.25s var(--ease); }
+.sf-links a:hover { color: var(--gold-bright); }
+
+.sf-bottom {
+  padding: 16px 0;
+  text-align: center;
+  font-size: 12.5px;
+  color: #796e64;
+  border-top: 1px solid rgba(201, 168, 76, 0.18);
+}
+
+/* ---------- ظهور نرم کارت‌ها ----------
+   ------------------------------------------------------------
+   پیش‌تر انیمیشن روی خودِ `.pcard` بود با حالت `both` و
+   `transform` را حرکت می‌داد. یعنی `transform` آخرین فریم
+   برای همیشه روی کارت قفل می‌ماند و `transform` هاور را
+   خنثی می‌کرد — کارت‌ها با موش بالا نمی‌آمدند.
+
+   حالا انیمیشن ورود فقط `transform` را حرکت می‌دهد و هاور
+   از `translate` استفاده می‌کند. این دو خاصیت جدا از هم‌اند
+   و روی هم اثر نمی‌گذارند، پس هر دو با هم کار می‌کنند.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  .pcard { animation: rise 0.5s var(--ease) both; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+
+/* ============================================================
+   لوگو و سربرگ فروشگاه
+   ============================================================ */
+.hero-badge.has-img { padding: 0; overflow: hidden; }
+
+.hero-badge img { width: 100%; height: 100%; object-fit: cover; }
+
+/* وقتی فروشگاه تصویر سربرگ دارد */
+.hero.has-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--cover);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero.has-cover { position: relative; overflow: hidden; }
+.hero.has-cover .hero-in { position: relative; z-index: 1; }
+
+/* ============================================================
+   امتیاز فروشگاه و محصولات
+   ============================================================ */
+.hero-rating {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.hero-rating b { font-size: 16px; font-weight: 800; color: var(--bronze); }
+.hero-rating small { font-size: 12px; color: var(--gray); }
+.no-rate { color: var(--gray); font-size: 12.5px; }
+
+/* ستاره روی کارت محصول */
+.prate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  min-height: 18px;
+}
+
+.prate span { font-weight: 700; color: var(--bronze); }
+.prate small { color: var(--gray); font-size: 11px; }
+
+/* بخش نظر داخل پنجره‌ی محصول */
+.m-reviews { margin-top: 20px; }
+
+.reviews-sec { padding: 10px 0 60px; }
+
+/* رنگ‌های موجود در پنجره‌ی محصول */
+.m-colors {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.24);
+}
+
+.m-colors-t {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 13px;
+  color: var(--gray);
+}
+
+.m-colors-t b { color: var(--ink); font-weight: 700; margin-inline-start: 5px; }
+
+/* ============================================================
+   انتخاب سایز — حرفه‌ای
+   ------------------------------------------------------------
+   سایز مهم‌ترین تصمیم خرید پوشاک است و بیشترین علت مرجوعی.
+   پس مثل یک بخش مستقل رفتار می‌کند، نه چند دکمه‌ی ساده:
+   نام فارسی سایز، معادل اروپایی، اندازه‌ی واقعی و جدول کامل.
+   ============================================================ */
+.m-sizes {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(201, 168, 76, 0.055);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  /* محتوای درون جعبه هرگز از آن بیرون نمی‌زند */
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.sz-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 11px;
+  flex-wrap: wrap;
+}
+
+.sz-label {
+  font-size: 13px;
+  color: var(--gray);
+}
+
+.sz-label b {
+  color: var(--ink);
+  font-weight: 700;
+  margin-inline-start: 5px;
+}
+
+/* دکمه‌ی جدول اندازه */
+.sz-guide {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--bronze);
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.38);
+  transition: background 0.24s var(--ease), color 0.24s var(--ease);
+}
+
+.sz-guide svg { width: 15px; height: 15px; }
+
+.sz-guide:hover,
+.sz-guide.on {
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  border-color: transparent;
+}
+
+/* ---------- دکمه‌های سایز ---------- */
+.sz-pick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sz-btn {
+  position: relative;
+  min-width: 56px;
+  padding: 9px 12px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  border-radius: 12px;
+  font: inherit;
+  cursor: pointer;
+  color: var(--ink);
+  background: var(--off-white);
+  border: 1.5px solid rgba(201, 168, 76, 0.28);
+  transition: transform 0.22s var(--ease),
+              border-color 0.22s var(--ease),
+              box-shadow 0.22s var(--ease),
+              background 0.22s var(--ease);
+}
+
+.sz-btn b {
+  font-size: 14.5px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.sz-btn em {
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--gray);
+  line-height: 1.2;
+}
+
+.sz-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 10px 20px -12px rgba(201, 168, 76, 0.8);
+}
+
+.sz-btn.on {
+  color: var(--off-white);
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  box-shadow: 0 12px 24px -12px rgba(201, 168, 76, 0.95);
+}
+
+.sz-btn.on em { color: rgba(255, 255, 255, 0.8); }
+
+/* تیک روی سایز انتخاب‌شده */
+.sz-btn.on::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  inset-inline-end: -5px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--ink) url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' \
+stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'>\
+<path d='m5 12.5 4.5 4.5L19 7.5'/></svg>") center / 11px no-repeat;
+}
+
+/* سایز ناموجود */
+.sz-btn:disabled,
+.sz-btn.is-out {
+  opacity: 0.42;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.sz-btn:disabled:hover,
+.sz-btn.is-out:hover { transform: none; box-shadow: none; border-color: rgba(201, 168, 76, 0.28); }
+
+/* ---------- توضیح اندازه‌ی سایز انتخاب‌شده ----------
+   ------------------------------------------------------------
+   پیش‌تر یک ردیف `flex` بود که متنش می‌پیچید و از کادر
+   بیرون می‌زد. حالا یک جدول کوچک دو ستونی است: هر اندازه
+   یک ردیف مستقل با برچسب و عدد. خوانا و همیشه داخل کادر.
+   ------------------------------------------------------------ */
+.sz-fit {
+  margin: 11px 0 0;
+  padding: 11px 13px;
+  border-radius: 12px;
+  color: #3f7a5e;
+  background: rgba(74, 143, 107, 0.09);
+  border: 1px solid rgba(74, 143, 107, 0.22);
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* سرخط: تیک + نام سایز */
+.sz-fit-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed rgba(74, 143, 107, 0.28);
+  font-size: 12.5px;
+  font-weight: 700;
+  min-width: 0;
+}
+
+.sz-fit-head svg { width: 15px; height: 15px; flex: none; }
+
+.sz-fit-head span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* اندازه‌ها — دو ستون روی دسکتاپ، یک ستون روی موبایل */
+.sz-fit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(126px, 1fr));
+  gap: 6px 12px;
+}
+
+.sz-fit-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.75;
+  min-width: 0;
+}
+
+.sz-fit-item i {
+  font-style: normal;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.sz-fit-item b {
+  font-weight: 800;
+  white-space: nowrap;
+  font-variant-numeric: normal;
+}
+
+/* ---------- جدول اندازه ---------- */
+.sz-chart {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.3);
+}
+
+.sz-chart-scroll {
+  overflow-x: auto;
+  border-radius: 11px;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  /* اگر جدول جا نشد، خودش نوار پیمایش می‌گیرد —
+     نه اینکه کل کادر را پهن کند */
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sz-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  background: var(--off-white);
+  min-width: 380px;
+}
+
+.sz-table th {
+  padding: 9px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--bronze);
+  text-align: center;
+  white-space: nowrap;
+  background: rgba(201, 168, 76, 0.1);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+}
+
+.sz-table td {
+  padding: 8px;
+  text-align: center;
+  color: var(--ink);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+.sz-table tbody tr:last-child td { border-bottom: 0; }
+
+.sz-table td b { font-weight: 800; display: block; }
+
+.sz-table td small {
+  display: block;
+  font-size: 10px;
+  color: var(--gray);
+}
+
+/* ردیف سایز انتخاب‌شده */
+.sz-table tr.on td {
+  background: rgba(201, 168, 76, 0.14);
+  font-weight: 700;
+}
+
+.sz-table tr.on td:first-child {
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+.sz-unit {
+  margin: 7px 0 0;
+  font-size: 11px;
+  color: var(--gray);
+  text-align: center;
+}
+
+/* ---------- راهنمای اندازه‌گیری ---------- */
+.sz-how {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(245, 240, 232, 0.7);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+}
+
+.sz-how strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.sz-how ol {
+  margin: 0;
+  padding-inline-start: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sz-how li {
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--gray);
+}
+
+.sz-how li b { color: var(--bronze); font-weight: 700; }
+
+.sz-how p {
+  margin: 9px 0 0;
+  font-size: 11.5px;
+  line-height: 1.85;
+  color: var(--gray);
+  padding-top: 8px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.22);
+}
+
+/* ---------- هشدار «سایز را انتخاب کنید» ---------- */
+.m-hint {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 10px 0 0;
+  padding: 9px 13px;
+  border-radius: 11px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #b3504e;
+  background: rgba(208, 90, 90, 0.1);
+  border: 1px solid rgba(208, 90, 90, 0.28);
+}
+
+.m-hint svg { width: 16px; height: 16px; flex: none; }
+
+/* ---------- وقتی سایز انتخاب نشده و کاربر «افزودن» زد ---------- */
+.m-sizes.is-missing {
+  border-color: rgba(208, 90, 90, 0.55);
+  background: rgba(208, 90, 90, 0.06);
+  animation: szShake 0.42s ease;
+}
+
+@keyframes szShake {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m-sizes.is-missing { animation: none; }
+  .sz-btn, .sz-guide { transition-duration: 0.001ms; }
+}
+
+@media (max-width: 520px) {
+  .sz-btn { min-width: 50px; padding: 8px 10px 6px; }
+  .sz-guide { margin-inline-start: 0; }
+  .sz-how ol { padding-inline-start: 15px; }
+}
+
+/* ---------- تخفیف ---------- */
+.ptag--off {
+  inset-inline-start: auto;
+  inset-inline-end: 11px;
+  color: #fff;
+  background: linear-gradient(135deg, #d05a54, #b4544f);
+}
+
+.pprice s {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--gray);
+  text-decoration: line-through;
+  margin-inline-end: 4px;
+}
+
+.m-price.is-off {
+  background: linear-gradient(135deg, rgba(208, 90, 84, 0.14), rgba(180, 84, 79, 0.06));
+  border-color: rgba(180, 84, 79, 0.32);
+}
+
+.m-price.is-off span { color: var(--danger); font-weight: 700; }
+.m-price.is-off s { font-size: 14px; font-weight: 500; color: var(--gray); margin-inline-end: 6px; }
+
+/* ============================================================
+   کارت کالا → صفحه‌ی اختصاصی
+   ------------------------------------------------------------
+   هر کالا حالا صفحه‌ی خودش را دارد. کارت یک لینک واقعی است:
+   کلیک وسط موشواره تب تازه باز می‌کند، راست‌کلیک نشانی می‌دهد،
+   و موتور جست‌وجو کالاها را می‌بیند.
+
+   لینک به‌صورت لایه‌ی نامرئی روی کل کارت پهن می‌شود تا
+   دکمه‌های داخل کارت (نگاه سریع) همچنان کار کنند.
+   ============================================================ */
+.pcard { position: relative; }
+
+.pcard-go {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+.pcard-go:focus-visible {
+  outline: 2px solid #c9a84c;
+  outline-offset: 3px;
+}
+
+/* هر چیزی که باید کلیک‌پذیر بماند، بالای لینک می‌نشیند */
+.pcard .pquick,
+.pcard .pname a,
+.pcard .pcolors,
+.pcard .prate { position: relative; z-index: 2; }
+
+.pcard .pname a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.pcard .pname a:hover { color: #8a6d1f; }
+
+/* ---------- دکمه‌ی نگاه سریع ---------- */
+.pquick {
+  position: absolute;
+  bottom: 10px;
+  inset-inline: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #1a1a1a;
+  background: rgba(253, 251, 247, 0.95);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  translate: 0 8px;
+  transition: opacity 0.24s ease, translate 0.24s ease, background 0.2s ease;
+}
+.pquick svg { width: 16px; height: 16px; }
+
+.pcard:hover .pquick,
+.pcard:focus-within .pquick { opacity: 1; translate: 0 0; }
+
+.pquick:hover {
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+  border-color: transparent;
+}
+
+/* روی صفحه‌ی لمسی همیشه دیده شود — چون «هاور» وجود ندارد */
+@media (hover: none) {
+  .pquick { opacity: 1; translate: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pquick { transition: none; }
+}

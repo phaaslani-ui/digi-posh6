@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="robots" content="noindex" />
+  <title>استعلام‌ها | پنل عمده‌فروشی دیجی‌پوش</title>
+
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="./css/wholesale-panel.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-stock.css" />
+</head>
+<body data-dp-page="wholesale-panel">
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="wp-side" id="wpSide"></aside>
+
+<main class="wp-main" id="main">
+
+  <header class="wp-top">
+    <button class="wp-burger" type="button" id="wpBurger" aria-label="منو">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="wp-title">
+      <h1>استعلام‌ها</h1>
+      <span>درخواست‌های قیمت خریداران</span>
+    </div>
+    <div class="wp-top-acts"></div>
+  </header>
+
+  <div class="wp-content">
+    <div class="wp-note">
+      <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+      <div><b>استعلام قیمت قلب عمده‌فروشی است.</b>
+        خریدار تعداد و قیمت هدفش را می‌گوید، شما بهترین پیشنهادتان را می‌دهید.
+        هرچه زودتر پاسخ دهید، شانس بستن معامله بیشتر است.</div>
+    </div>
+
+    <div class="wp-toolbar">
+      <div class="wp-seg" id="filter" role="tablist">
+        <button class="on" type="button" data-f="">همه</button>
+        <button type="button" data-f="open">بی‌پاسخ</button>
+        <button type="button" data-f="answered">پاسخ داده‌شده</button>
+        <button type="button" data-f="accepted">پذیرفته‌شده</button>
+        <button type="button" data-f="rejected">ردشده</button>
+      </div>
+      <span class="sub spacer" id="count" style="color:var(--wp-gray);font-size:13px">—</span>
+    </div>
+
+    <div class="wp-card">
+      <div id="box"></div>
+    </div>
+  </div>
+
+</main>
+
+<div class="wp-modal" id="aModal" role="dialog" aria-modal="true" aria-label="پاسخ به استعلام">
+  <div class="wp-modal-card" style="width:min(560px,100%)">
+    <button class="wp-x" type="button" data-wp-close aria-label="بستن"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2>پاسخ به استعلام</h2>
+    <div id="aInfo"></div>
+
+    <form id="aForm" novalidate>
+      <input type="hidden" id="aId" />
+      <div class="wp-grid">
+        <div class="wp-field">
+          <label for="aPrice">قیمت پیشنهادی هر عدد (تومان) <span class="req">*</span></label>
+          <input class="wp-input" id="aPrice" inputmode="numeric" />
+        </div>
+        <div class="wp-field">
+          <label for="aLead">زمان آماده‌سازی (روز)</label>
+          <input class="wp-input" id="aLead" inputmode="numeric" value="۷" />
+        </div>
+        <div class="wp-field">
+          <label for="aValid">اعتبار پیشنهاد (روز)</label>
+          <input class="wp-input" id="aValid" inputmode="numeric" value="۷" />
+        </div>
+        <div class="wp-field full">
+          <label for="aNote">توضیح</label>
+          <textarea class="wp-input" id="aNote" rows="3"
+            placeholder="شرایط پرداخت، بسته‌بندی، هزینه‌ی ارسال…"></textarea>
+        </div>
+      </div>
+      <div class="wp-note ok" id="aCalc" style="margin-top:14px" hidden></div>
+      <div class="wp-modal-foot">
+        <button class="wp-btn wp-btn-gold" type="submit">ارسال پیشنهاد</button>
+        <button class="wp-btn wp-btn-ghost" type="button" data-wp-close>انصراف</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../../seller/js/dp-config.js"></script>
+<script src="../../seller/js/dp-store.js"></script>
+<script src="../../assets/js/dp-guard.js"></script>
+<script src="../../assets/js/dp-safe.js"></script>
+<script src="../../assets/js/dp-stock.js"></script>
+<script src="../../assets/js/dp-taxonomy.js"></script>
+<script src="../../assets/js/dp-moderation.js"></script>
+<script src="../../assets/js/dp-reviews.js"></script>
+<script src="../../assets/js/dp-user.js"></script>
+<script src="./js/dpw-store.js"></script>
+<script src="./js/dpw-boost.js"></script>
+<script src="./js/dpw-ui.js"></script>
+<script>
+
+requireWholesale(function () {
+  var S = DPWStore, U = DPWUi, esc = U.esc;
+  var fa = S.fa, money = S.money, toEn = S.toEn;
+  var $ = function (s) { return document.querySelector(s); };
+  var filter = '';
+
+  var C = { open: 'warn', answered: 'info', accepted: 'ok', rejected: 'bad', expired: 'mute' };
+
+  function paint() {
+    var list = S.rfq.list(filter);
+    $('#count').textContent = fa(list.length) + ' استعلام';
+
+    if (!list.length) {
+      $('#box').innerHTML = U.emptyBox('استعلامی نیست',
+        'وقتی خریداری از بازار عمده استعلام بفرستد، اینجا می‌بینید.');
+      return;
+    }
+
+    $('#box').innerHTML = list.map(function (r) {
+      var isOpen = r.status === 'open';
+      return '<div style="padding:15px;border-radius:13px;margin-bottom:11px;' +
+          'background:rgba(26,42,74,.42);border:1px solid var(--wp-line)' +
+          (isOpen ? ';border-inline-start:3px solid var(--wp-warn)' : '') + '">' +
+
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:baseline;margin-bottom:9px">' +
+          '<b style="font-size:14.5px">' + esc(r.productName) + '</b>' +
+          '<span class="wp-tag ' + (C[r.status] || 'mute') + '">' + S.rfq.STATUS_FA[r.status] + '</span>' +
+          '<span style="margin-inline-start:auto;font-size:12px;color:var(--wp-gray)">' + esc(r.date) + '</span>' +
+        '</div>' +
+
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:9px;' +
+            'font-size:12.5px;margin-bottom:10px">' +
+          '<span style="color:var(--wp-gray)">خریدار<b style="display:block;color:var(--wp-ink)">' +
+            esc(r.buyerName) + '</b></span>' +
+          (r.buyerCompany ? '<span style="color:var(--wp-gray)">شرکت<b style="display:block;color:var(--wp-ink)">' +
+            esc(r.buyerCompany) + '</b></span>' : '') +
+          '<span style="color:var(--wp-gray)">تعداد<b style="display:block;color:var(--wp-gold-l)">' +
+            fa(r.qty) + ' عدد</b></span>' +
+          (r.targetPrice ? '<span style="color:var(--wp-gray)">قیمت هدف<b style="display:block;color:var(--wp-ink)">' +
+            money(r.targetPrice) + '</b></span>' : '') +
+          (r.deadline ? '<span style="color:var(--wp-gray)">مهلت<b style="display:block;color:var(--wp-ink)">' +
+            esc(r.deadline) + '</b></span>' : '') +
+          (r.buyerPhone ? '<span style="color:var(--wp-gray)">تماس<b style="display:block;color:var(--wp-ink)">' +
+            esc(r.buyerPhone) + '</b></span>' : '') +
+        '</div>' +
+
+        (r.note ? '<div style="font-size:12.5px;color:var(--wp-gray);padding:9px 12px;' +
+          'border-radius:9px;background:rgba(10,10,10,.4);margin-bottom:10px">' +
+          esc(r.note) + '</div>' : '') +
+
+        (r.offer ? '<div class="wp-note ok" style="margin:0 0 10px">' +
+          '<div><b>پیشنهاد شما:</b> ' + money(r.offer.unitPrice) + ' تومان هر عدد — ' +
+          'جمع ' + money(r.offer.total) + ' تومان' +
+          (r.offer.leadTime ? ' · آماده‌سازی ' + fa(r.offer.leadTime) + ' روز' : '') +
+          (r.offer.note ? '<br>' + esc(r.offer.note) : '') + '</div></div>' : '') +
+
+        (r.reason ? '<div class="wp-note bad" style="margin:0 0 10px"><div>' +
+          esc(r.reason) + '</div></div>' : '') +
+
+        '<div class="wp-row-acts">' +
+          (isOpen
+            ? '<button class="wp-btn wp-btn-gold wp-btn-sm" type="button" data-ans="' + esc(r.id) + '">پاسخ بدهید</button>' +
+              '<button class="wp-btn wp-btn-bad wp-btn-sm" type="button" data-rej="' + esc(r.id) + '">رد کنید</button>'
+            : '') +
+          (r.status === 'answered'
+            ? '<button class="wp-btn wp-btn-ghost wp-btn-sm" type="button" data-toord="' + esc(r.id) + '">' +
+              'تبدیل به سفارش</button>' : '') +
+          (r.orderId ? '<span class="wp-tag gold">سفارش ' + esc(r.orderId) + '</span>' : '') +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  /* ---------- پاسخ ---------- */
+  function calc() {
+    var r = S.rfq.get($('#aId').value);
+    if (!r) return;
+    var u = Number(toEn($('#aPrice').value));
+    var box = $('#aCalc');
+    if (!u) { box.hidden = true; return; }
+    box.hidden = false;
+    var total = u * r.qty;
+    var vs = r.targetPrice
+      ? (u <= r.targetPrice
+          ? ' — <b style="color:var(--wp-ok)">زیر قیمت هدف خریدار</b>'
+          : ' — <b style="color:var(--wp-warn)">بالاتر از قیمت هدف (' + money(r.targetPrice) + ')</b>')
+      : '';
+    box.innerHTML = '<div>جمع کل: <b>' + money(total) + '</b> تومان برای ' +
+      fa(r.qty) + ' عدد' + vs + '</div>';
+  }
+
+  $('#aPrice').addEventListener('input', calc);
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-ans]');
+    if (a) {
+      var r = S.rfq.get(a.dataset.ans);
+      if (!r) return;
+      $('#aId').value = r.id;
+      $('#aPrice').value = '';
+      $('#aCalc').hidden = true;
+      $('#aInfo').innerHTML = '<div class="wp-note" style="margin-bottom:14px"><div>' +
+        '<b>' + esc(r.productName) + '</b><br>' +
+        esc(r.buyerName) + ' — ' + fa(r.qty) + ' عدد' +
+        (r.targetPrice ? ' · قیمت هدف ' + money(r.targetPrice) : '') + '</div></div>';
+      U.openModal('#aModal');
+      return;
+    }
+
+    var rj = e.target.closest('[data-rej]');
+    if (rj) {
+      var why = prompt('چرا این استعلام را رد می‌کنید؟');
+      if (why === null) return;
+      try { S.rfq.reject(rj.dataset.rej, why); U.toast('استعلام رد شد.', 'success'); paint(); }
+      catch (err) { U.toast(err.message, 'error'); }
+      return;
+    }
+
+    var to = e.target.closest('[data-toord]');
+    if (to) {
+      if (!confirm('این استعلام به سفارش تبدیل شود؟')) return;
+      try {
+        var o = S.rfq.toOrder(to.dataset.toord);
+        U.toast('سفارش ' + o.id + ' ساخته شد.', 'success');
+        paint();
+      } catch (err) { U.toast(err.message, 'error'); }
+    }
+  });
+
+  $('#aForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    try {
+      S.rfq.answer($('#aId').value, {
+        unitPrice: $('#aPrice').value,
+        leadTime: $('#aLead').value,
+        validDays: $('#aValid').value,
+        note: $('#aNote').value,
+      });
+      U.closeModal($('#aModal'));
+      U.toast('پیشنهاد شما ارسال شد.', 'success');
+      paint();
+    } catch (err) { U.toast(err.message, 'error'); }
+  });
+
+  $('#filter').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-f]');
+    if (!b) return;
+    [].slice.call(this.children).forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    filter = b.dataset.f;
+    paint();
+  });
+
+  document.addEventListener('dpw:change', paint);
+  paint();
+});
+</script>
+</body>
+</html>

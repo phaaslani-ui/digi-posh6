@@ -1,0 +1,13 @@
+[
+  {
+    "id": "CP-1789297749",
+    "userId": "u001",
+    "code": "DP0017749",
+    "discount": 10,
+    "points": 500,
+    "rewardType": "discount",
+    "expiresAt": "2026-10-13T11:09:09.553995",
+    "used": false,
+    "createdAt": "2026-09-13T11:09:09.554008"
+  }
+]

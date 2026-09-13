@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <title>بازار عمده | مدیریت دیجی‌پوش</title>
+  <meta name="description" content="پنل مدیریت دیجی‌پوش — نظارت بر فروشگاه‌ها، سفارش‌ها و کالاها." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+</head>
+<body data-dp-panel>
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a href="../index.html" title="بازگشت به سایت">
+      <div class="sb-logo">دیجی‌پوش</div>
+      <span class="sb-sub">پنل مدیریت</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="منوی مدیریت">
+    <div class="sb-label">مدیریت</div>
+      <a class="sb-link" href="admin-dashboard.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3" y="3" width="7.5" height="8.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="5" rx="2"/><rect x="13.5" y="11" width="7.5" height="10" rx="2"/><rect x="3" y="14.5" width="7.5" height="6.5" rx="2"/></svg><span>داشبورد</span></a>
+      <a class="sb-link" href="admin-sellers.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg><span>فروشگاه‌ها</span><span class="sb-badge" id="badgeAll" hidden></span></a>
+      <a class="sb-link" href="admin-pending.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg><span>در انتظار تأیید</span><span class="sb-badge" id="badgePending" hidden></span></a>
+      <a class="sb-link" href="admin-moderation.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15.5 4.5 19.5 8.5 9 19H5v-4z"/><path d="m14 6 4 4"/></svg><span>بازبینی پروفایل</span><span class="sb-badge" id="badgeMod" hidden></span></a>
+      <a class="sb-link" href="admin-boost.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13.5 3.5c3 0 6 3 6 6 0 4.5-5 8-5 8l-4-4s3.5-5 8-5"/><path d="M9.5 14.5 6 18l-1.5-1.5L8 13"/><path d="M5 19l-1.5 1.5"/></svg><span>نردبان و ارتقا</span><span class="sb-badge" id="badgeBoost" hidden></span></a>
+      <a class="sb-link active" href="admin-wholesale.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span>بازار عمده</span><span class="sb-badge" id="badgeWhole" hidden></span></a>
+      <a class="sb-link" href="admin-catalog.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg><span>همه‌ی محصولات</span></a>
+      <a class="sb-link" href="admin-orders.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><span>همه‌ی سفارش‌ها</span></a>
+      <a class="sb-link" href="admin-reviews.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg><span>نظرها</span><span class="sb-badge" id="badgeFlag" hidden></span></a>
+      <a class="sb-link" href="admin-policy.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m6 18 12-12"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg><span>سیاست کمیسیون</span></a>
+      <a class="sb-link" href="admin-settings.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg><span>تنظیمات</span></a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <a class="sb-link" href="../index.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7V20a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 20z"/><path d="M9.5 21.5v-7h5v7"/></svg><span>بازگشت به سایت</span></a>
+    <a class="sb-link logout" href="admin-login.html" data-logout><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15 4.5h3.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M10 8.5 6 12l4 3.5M6 12h9"/></svg><span>خروج</span></a>
+  </div>
+</aside>
+
+<div class="backdrop" id="backdrop"></div>
+
+<main class="main" id="main">
+  <header class="topbar">
+    <button class="burger" type="button" aria-label="منو"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div>
+      <h1 class="page-title">بازار عمده‌فروشان</h1>
+      <div class="page-sub">تأمین‌کننده‌ها، کالاها، استعلام‌ها و نردبان بازار عمده</div>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn btn-secondary" href="../wholesale/index.html" target="_blank" rel="noopener">
+        دیدن بازار
+      </a>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <div class="notice-soft" style="margin-bottom:18px">
+      <svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+      <div>
+        <strong>این بازار از ویترین اصلی سایت جداست.</strong>
+        کالاها، سفارش‌ها و نردبان عمده‌فروشان در حافظه‌ی مستقل خودشان نگه داشته
+        می‌شوند و هیچ اثری روی صفحه‌های زنانه، مردانه، بچگانه و نوجوان ندارند.
+      </div>
+    </div>
+
+    <div class="stats-grid" id="kpis"></div>
+
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>تأمین‌کننده‌های عمده</h2>
+        <span class="sub spacer" id="cSellers">—</span>
+      </div>
+      <div id="sellersBox"></div>
+    </div>
+
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>کالاهای عمده</h2>
+        <div class="seg spacer" id="pFilter" role="tablist">
+          <button class="seg-btn on" type="button" data-pf="">همه</button>
+          <button class="seg-btn" type="button" data-pf="active">فعال</button>
+          <button class="seg-btn" type="button" data-pf="draft">پیش‌نویس</button>
+          <button class="seg-btn" type="button" data-pf="out">ناموجود</button>
+        </div>
+      </div>
+      <div id="prodBox"></div>
+    </div>
+
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>استعلام‌های قیمت</h2>
+        <span class="sub spacer" id="cRfq">—</span>
+      </div>
+      <div id="rfqBox"></div>
+    </div>
+
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>سفارش‌های عمده</h2>
+        <span class="sub spacer" id="cOrders">—</span>
+      </div>
+      <div id="ordBox"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>نردبان بازار عمده</h2>
+        <span class="sub spacer" id="cBoost">—</span>
+      </div>
+      <div id="boostBox"></div>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast-wrap"></div>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="../assets/js/dp-taxonomy.js"></script>
+<script src="../assets/js/dp-promo.js"></script>
+<script src="../assets/js/dp-boost.js"></script>
+<script src="../assets/js/dp-moderation.js"></script>
+<script src="../assets/js/dp-returns.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="../seller/js/dp-config.js"></script>
+<script src="js/admin-store.js"></script>
+<script src="js/admin-script.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+
+requireAdmin(async function () {
+  var A = window.DPAdmin;
+  var $ = function (s) { return document.querySelector(s); };
+  var FA = '۰۱۲۳۴۵۶۷۸۹';
+  var fa = function (n) { return String(n == null ? 0 : n).replace(/\d/g, function (d) { return FA[+d]; }); };
+  var money = function (n) {
+    return fa(Math.round(Number(n) || 0).toLocaleString('en-US')).replace(/,/g, '٬');
+  };
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+
+  var SW = 'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  var IC = {
+    store: '<svg aria-hidden="true" class="ico" viewBox="0 0 24 24" ' + SW + '><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg>',
+    box:   '<svg aria-hidden="true" class="ico" viewBox="0 0 24 24" ' + SW + '><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg>',
+    quote: '<svg aria-hidden="true" class="ico" viewBox="0 0 24 24" ' + SW + '><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg>',
+    money: '<svg aria-hidden="true" class="ico" viewBox="0 0 24 24" ' + SW + '><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>',
+    truck: '<svg aria-hidden="true" class="ico" viewBox="0 0 24 24" ' + SW + '><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>',
+    warn:  '<svg aria-hidden="true" class="ico" viewBox="0 0 24 24" ' + SW + '><path d="M12 4.5 21 19H3z"/><path d="M12 10v4M12 16.5h.01"/></svg>',
+  };
+
+  var pFilter = '';
+
+  /* ---------- شاخص‌ها ---------- */
+  async function paintKpis() {
+    var st = await A.stats();
+    var W = st.wholesale || {};
+    var rows = [
+      { i: IC.store, t: 'تأمین‌کننده', v: fa(W.sellers),
+        s: fa(W.approved) + ' تأییدشده · ' + fa(W.pending) + ' در انتظار' },
+      { i: IC.box, t: 'کالای عمده', v: fa(W.activeProducts),
+        s: 'از ' + fa(W.products) + ' · ارزش ' + money(W.stockValue) },
+      { i: IC.quote, t: 'استعلام', v: fa(W.rfq),
+        s: W.rfqOpen ? fa(W.rfqOpen) + ' بی‌پاسخ' : 'همه پاسخ داده شده' },
+      { i: IC.money, t: 'گردش مالی', v: money(W.revenue),
+        s: fa(W.orders) + ' سفارش' },
+    ];
+    $('#kpis').innerHTML = rows.map(function (r) {
+      return '<div class="stat-card"><div class="stat-top">' + r.i +
+        '<span class="stat-label">' + r.t + '</span></div>' +
+        '<span class="stat-number num">' + r.v + '</span>' +
+        '<span class="stat-foot">' + r.s + '</span></div>';
+    }).join('');
+  }
+
+  /* ---------- تأمین‌کننده‌ها ---------- */
+  async function paintSellers() {
+    var all = await A.sellers.list();
+    var list = all.filter(function (s) { return s.sellerType === 'wholesale'; });
+    $('#cSellers').textContent = fa(list.length) + ' تأمین‌کننده';
+
+    if (!list.length) {
+      $('#sellersBox').innerHTML = '<div class="empty">' +
+        'هنوز عمده‌فروشی ثبت‌نام نکرده است. ' +
+        'در فرم ثبت‌نام، گزینه‌ی «عمده‌فروش» را انتخاب می‌کنند.</div>';
+      return;
+    }
+
+    var C = { approved: 'b-ok', pending: 'b-warn', rejected: 'b-bad', suspended: 'b-bad' };
+    var F = { approved: 'تأییدشده', pending: 'در انتظار', rejected: 'ردشده', suspended: 'معلق' };
+
+    $('#sellersBox').innerHTML = '<div class="table-wrap"><table class="tbl"><thead><tr>' +
+      '<th>تأمین‌کننده</th><th>شرکت</th><th>شهر</th><th>کالا</th>' +
+      '<th>حداقل سفارش</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody>' +
+      list.map(function (s) {
+        return '<tr>' +
+          '<td><div class="cell-store"><span class="avatar">' +
+            esc(String(s.storeName || '؟').trim()[0]) + '</span><div>' +
+            '<div class="cell-name">' + esc(s.storeName) + '</div>' +
+            '<div class="cell-meta">' + esc(s.email || '—') + '</div></div></div></td>' +
+          '<td>' + esc(s.companyName || '—') +
+            (s.economicCode ? '<div class="cell-meta">کد ' + esc(s.economicCode) + '</div>' : '') + '</td>' +
+          '<td>' + esc(s.city || '—') +
+            (s.warehouse ? '<div class="cell-meta">انبار: ' + esc(s.warehouse) + '</div>' : '') + '</td>' +
+          '<td class="num">' + fa(s.activeCount) + ' از ' + fa(s.productCount) + '</td>' +
+          '<td class="num">' + (s.minOrderValue ? money(s.minOrderValue) : '—') + '</td>' +
+          '<td><span class="badge ' + (C[s.status] || 'b-mute') + '">' +
+            (F[s.status] || s.status) + '</span></td>' +
+          '<td><div class="row-actions">' +
+            (s.status !== 'approved'
+              ? '<button class="btn btn-primary btn-sm" type="button" data-ok="' + esc(s.id) + '">تأیید</button>'
+              : '<button class="btn btn-ghost btn-sm" type="button" data-susp="' + esc(s.id) + '">تعلیق</button>') +
+            (s.status !== 'rejected'
+              ? '<button class="btn btn-ghost btn-sm" type="button" data-no="' + esc(s.id) + '">رد</button>' : '') +
+          '</div></td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- کالاها ---------- */
+  async function paintProducts() {
+    var list = await A.wholesale.products();
+    if (pFilter === 'active') list = list.filter(function (p) { return p.status === 'active' && p.stock > 0; });
+    else if (pFilter === 'draft') list = list.filter(function (p) { return p.status === 'draft'; });
+    else if (pFilter === 'out') list = list.filter(function (p) { return p.stock <= 0; });
+
+    if (!list.length) {
+      $('#prodBox').innerHTML = '<div class="empty">کالایی با این فیلتر نیست.</div>';
+      return;
+    }
+
+    $('#prodBox').innerHTML = '<div class="table-wrap"><table class="tbl"><thead><tr>' +
+      '<th>کالا</th><th>تأمین‌کننده</th><th>قیمت پایه</th><th>کمترین پله</th>' +
+      '<th>حداقل سفارش</th><th>موجودی</th><th>وضعیت</th><th></th></tr></thead><tbody>' +
+      list.map(function (p) {
+        var out = p.stock <= 0;
+        return '<tr>' +
+          '<td><b>' + esc(p.name) + '</b><div class="cell-meta">کد ' + esc(p.code || '—') + '</div></td>' +
+          '<td>' + esc(p.sellerName) +
+            (p.sellerStatus !== 'approved'
+              ? '<div class="cell-meta" style="color:#c08a3e">فروشگاه تأییدنشده</div>' : '') + '</td>' +
+          '<td class="num">' + money(p.price) + '</td>' +
+          '<td class="num">' + money(p.lowest) + '</td>' +
+          '<td class="num">' + fa(p.moq) + '</td>' +
+          '<td class="num">' + (out ? '<span class="badge b-bad">ناموجود</span>' : fa(p.stock)) + '</td>' +
+          '<td>' + (p.status === 'active'
+            ? '<span class="badge b-ok">در بازار</span>'
+            : ((p.wanted || 'active') === 'draft'
+                ? '<span class="badge b-mute">پیش‌نویس فروشنده</span>'
+                : '<span class="badge b-warning">در انتظار تأیید</span>')) + '</td>' +
+          '<td><button class="btn btn-ghost btn-sm" type="button" data-pdel="' +
+            esc(p.id) + '">حذف</button></td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- استعلام‌ها ---------- */
+  async function paintRfq() {
+    var list = await A.wholesale.rfq();
+    $('#cRfq').textContent = list.length ? fa(list.length) + ' استعلام' : '—';
+
+    if (!list.length) {
+      $('#rfqBox').innerHTML = '<div class="empty">هنوز استعلامی فرستاده نشده است.</div>';
+      return;
+    }
+
+    var C = { open: 'b-warn', answered: 'b-info', accepted: 'b-ok', rejected: 'b-bad', expired: 'b-mute' };
+    var F = { open: 'بی‌پاسخ', answered: 'پاسخ داده‌شده', accepted: 'پذیرفته‌شده',
+              rejected: 'ردشده', expired: 'منقضی' };
+
+    $('#rfqBox').innerHTML = '<div class="table-wrap"><table class="tbl"><thead><tr>' +
+      '<th>کالا</th><th>تأمین‌کننده</th><th>خریدار</th><th>تعداد</th>' +
+      '<th>پیشنهاد</th><th>وضعیت</th><th>تاریخ</th></tr></thead><tbody>' +
+      list.slice(0, 40).map(function (r) {
+        return '<tr>' +
+          '<td><b>' + esc(r.productName) + '</b></td>' +
+          '<td>' + esc(r.sellerName) + '</td>' +
+          '<td>' + esc(r.buyerName) +
+            (r.buyerCompany ? '<div class="cell-meta">' + esc(r.buyerCompany) + '</div>' : '') + '</td>' +
+          '<td class="num">' + fa(r.qty) + '</td>' +
+          '<td class="num">' + (r.offer ? money(r.offer.unitPrice) : '—') + '</td>' +
+          '<td><span class="badge ' + (C[r.status] || 'b-mute') + '">' +
+            (F[r.status] || r.status) + '</span></td>' +
+          '<td class="num">' + esc(r.date || '—') + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- سفارش‌ها ---------- */
+  async function paintOrders() {
+    var list = await A.wholesale.orders();
+    $('#cOrders').textContent = list.length ? fa(list.length) + ' سفارش' : '—';
+
+    if (!list.length) {
+      $('#ordBox').innerHTML = '<div class="empty">هنوز سفارش عمده‌ای ثبت نشده است.</div>';
+      return;
+    }
+
+    var C = { pending: 'b-warn', confirmed: 'b-info', preparing: 'b-info',
+              shipped: 'b-info', delivered: 'b-ok', canceled: 'b-bad' };
+    var F = { pending: 'در انتظار', confirmed: 'تأییدشده', preparing: 'آماده‌سازی',
+              shipped: 'ارسال‌شده', delivered: 'تحویل‌شده', canceled: 'لغو شد' };
+
+    $('#ordBox').innerHTML = '<div class="table-wrap"><table class="tbl"><thead><tr>' +
+      '<th>شماره</th><th>تأمین‌کننده</th><th>خریدار</th><th>اقلام</th>' +
+      '<th>مبلغ</th><th>پرداخت</th><th>وضعیت</th></tr></thead><tbody>' +
+      list.slice(0, 40).map(function (o) {
+        var pct = o.total ? Math.round((o.paid || 0) / o.total * 100) : 0;
+        return '<tr>' +
+          '<td><b>' + esc(o.id) + '</b><div class="cell-meta">' + esc(o.date || '') + '</div></td>' +
+          '<td>' + esc(o.sellerName) + '</td>' +
+          '<td>' + esc(o.buyerName) + '</td>' +
+          '<td class="num">' + fa((o.lines || []).length) + ' قلم' +
+            '<div class="cell-meta">' + fa(o.count) + ' عدد</div></td>' +
+          '<td class="num">' + money(o.total) + '</td>' +
+          '<td class="num">' + (pct >= 100
+            ? '<span class="badge b-ok">کامل</span>'
+            : (pct > 0 ? '<span class="badge b-warn">٪' + fa(pct) + '</span>'
+                       : '<span class="badge b-bad">صفر</span>')) + '</td>' +
+          '<td><span class="badge ' + (C[o.status] || 'b-mute') + '">' +
+            (F[o.status] || o.status) + '</span></td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- نردبان ---------- */
+  async function paintBoosts() {
+    var list = await A.wholesale.boosts();
+    var live = list.filter(function (b) { return b.isLive; });
+    $('#cBoost').textContent = list.length
+      ? fa(live.length) + ' فعال از ' + fa(list.length) : '—';
+
+    if (!list.length) {
+      $('#boostBox').innerHTML = '<div class="empty">' +
+        'هنوز تأمین‌کننده‌ای نردبان بازار عمده نخریده است. ' +
+        'این بسته‌ها فقط در بازار عمده اثر دارند.</div>';
+      return;
+    }
+
+    var PF = { ladder: 'نردبان بازار', highlight: 'کارت برجسته',
+               featured: 'تأمین‌کننده‌ی برگزیده', hero: 'بنر صدر بازار' };
+
+    $('#boostBox').innerHTML = '<div class="table-wrap"><table class="tbl"><thead><tr>' +
+      '<th>بسته</th><th>تأمین‌کننده</th><th>مدت</th><th>مبلغ</th>' +
+      '<th>بازدید</th><th>استعلام</th><th>وضعیت</th><th></th></tr></thead><tbody>' +
+      list.map(function (b) {
+        var left = b.isLive ? Math.ceil((b.endsAt - Date.now()) / 86400000) : 0;
+        return '<tr>' +
+          '<td><b>' + esc(PF[b.plan] || b.plan) + '</b></td>' +
+          '<td>' + esc(b.sellerName) + '</td>' +
+          '<td class="num">' + fa(b.days) + ' روز' +
+            (left ? '<div class="cell-meta">' + fa(left) + ' روز مانده</div>' : '') + '</td>' +
+          '<td class="num">' + (b.price ? money(b.price)
+            : (b.trial ? '<span class="badge b-ok">آزمایشی</span>' : 'رایگان')) + '</td>' +
+          '<td class="num">' + fa(b.views || 0) + '</td>' +
+          '<td class="num">' + fa(b.rfqs || 0) + '</td>' +
+          '<td><span class="badge ' + (b.isLive ? 'b-ok' : 'b-mute') + '">' +
+            (b.isLive ? 'فعال' : 'پایان‌یافته') + '</span></td>' +
+          '<td>' + (b.isLive
+            ? '<button class="btn btn-ghost btn-sm" type="button" data-bstop="' +
+              esc(b.id) + '">پایان</button>' : '') + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- رویدادها ---------- */
+  document.addEventListener('click', async function (e) {
+    var ok = e.target.closest('[data-ok]');
+    if (ok) {
+      try {
+        await A.sellers.setStatus(ok.dataset.ok, 'approved');
+        toast('تأمین‌کننده تأیید شد — کالاهایش در بازار عمده دیده می‌شوند.', 'success');
+        await all();
+      } catch (err) { toast(err.message, 'error'); }
+      return;
+    }
+
+    var no = e.target.closest('[data-no]');
+    if (no) {
+      var why = prompt('دلیل رد کردن؟');
+      if (why === null) return;
+      try {
+        await A.sellers.setStatus(no.dataset.no, 'rejected', why);
+        toast('درخواست رد شد.', 'success');
+        await all();
+      } catch (err) { toast(err.message, 'error'); }
+      return;
+    }
+
+    var sp = e.target.closest('[data-susp]');
+    if (sp) {
+      if (!confirm('این تأمین‌کننده معلق شود؟ کالاهایش از بازار برداشته می‌شوند.')) return;
+      try {
+        await A.sellers.setStatus(sp.dataset.susp, 'suspended');
+        var n = A.wholesale.hideProducts(sp.dataset.susp);
+        toast('معلق شد' + (n ? ' و ' + fa(n) + ' کالا پنهان شد.' : '.'), 'success');
+        await all();
+      } catch (err) { toast(err.message, 'error'); }
+      return;
+    }
+
+    var pd = e.target.closest('[data-pdel]');
+    if (pd) {
+      if (!confirm('این کالا حذف شود؟')) return;
+      A.wholesale.removeProduct(pd.dataset.pdel);
+      toast('کالا حذف شد.', 'success');
+      await all();
+      return;
+    }
+
+    var bs = e.target.closest('[data-bstop]');
+    if (bs) {
+      if (!confirm('این بسته همین حالا پایان یابد؟')) return;
+      try {
+        A.wholesale.stopBoost(bs.dataset.bstop);
+        toast('بسته پایان یافت.', 'success');
+        await all();
+      } catch (err) { toast(err.message, 'error'); }
+    }
+  });
+
+  $('#pFilter').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-pf]');
+    if (!b) return;
+    [].slice.call(this.children).forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    pFilter = b.dataset.pf;
+    paintProducts();
+  });
+
+  async function all() {
+    await paintKpis();
+    await paintSellers();
+    await paintProducts();
+    await paintRfq();
+    await paintOrders();
+    await paintBoosts();
+  }
+
+  await all();
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# دیجی‌پوش — راهنمای موتورهای جست‌وجو
+
+User-agent: *
+Allow: /
+
+# پنل‌ها نباید در نتایج جست‌وجو بیایند
+Disallow: /seller/
+Disallow: /admin/
+Disallow: /wholesale/panel/
+Disallow: /backend/
+Disallow: /uploads/
+Disallow: /supabase/
+
+# صفحه‌های شخصی
+Disallow: /account.html
+Disallow: /cart.html
+# صفحه‌ی نتایج جست‌وجو محتوای تکراری می‌سازد
+Disallow: /search.html
+
+Sitemap: https://digipoosh.ir/sitemap.xml

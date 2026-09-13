@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تست Real-time Feed | دیجی‌پوش</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background: #fafafa;
+      color: #1a1a1a;
+      padding: 24px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { color: #d4af37; margin-bottom: 16px; }
+    h2 { color: #1a1a1a; margin: 20px 0 10px; font-size: 16px; }
+    .box {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 12px 0;
+    }
+    .box.test { border-color: #d4af37; background: #fffbeb; }
+    input, button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    input {
+      border: 1px solid #ddd;
+      width: 200px;
+      margin: 4px;
+    }
+    input:focus { outline: 2px solid #d4af37; outline-offset: -1px; }
+    button {
+      background: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      margin: 4px;
+    }
+    button:hover { background: #b8941f; }
+    button.danger { background: #dc2626; color: #fff; }
+    .log {
+      background: #000;
+      color: #0f0;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 8px;
+    }
+    .stat {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 8px 0;
+    }
+    .stat div {
+      flex: 1;
+      min-width: 100px;
+      background: #f5f5f5;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat strong {
+      display: block;
+      color: #d4af37;
+      font-size: 24px;
+    }
+    .stat span { color: #666; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 تست Real-time Feed</h1>
+    <p>این صفحه رو در <strong>۲ tab</strong> باز کن. در یکی محصول اضافه کن، در دیگری feed باید real-time آپدیت بشه.</p>
+
+    <div class="box">
+      <h2>📊 وضعیت فعلی</h2>
+      <div id="stats"></div>
+    </div>
+
+    <div class="box test">
+      <h2>➕ افزودن محصول تست</h2>
+      <p>یه محصول به localStorage اضافه کن (شبیه‌سازی فروشنده):</p>
+      <input type="text" id="pName" placeholder="نام محصول" value="محصول تست real-time" />
+      <input type="number" id="pPrice" placeholder="قیمت" value="500000" />
+      <button onclick="addProduct()">➕ افزودن + sync</button>
+      <button class="danger" onclick="clearAll()">🗑️ پاک کردن همه</button>
+      <div id="log" class="log">لاگ رویدادها...</div>
+    </div>
+
+    <div class="box">
+      <h2>🛍️ Feed فعلی</h2>
+      <div data-products-feed></div>
+    </div>
+
+    <div class="box">
+      <h2>📜 محصولات در localStorage</h2>
+      <pre id="productsList"></pre>
+    </div>
+  </div>
+
+  <script src="./seller/js/dp-config.js"></script>
+  <script src="./dp-products.js"></script>
+  <script src="./dp-product-loader.js"></script>
+  <script src="./dp-products-feed.js"></script>
+
+  <script>
+    function log(msg, color = '#0f0') {
+      const logEl = document.getElementById('log');
+      const time = new Date().toLocaleTimeString('fa-IR');
+      logEl.innerHTML = `<span style="color:#888">[${time}]</span> <span style="color:${color}">${msg}</span><br>` + logEl.innerHTML;
+    }
+
+    async function addProduct() {
+      const name = document.getElementById('pName').value.trim() || 'محصول تست';
+      const price = parseInt(document.getElementById('pPrice').value) || 500000;
+      
+      log('➕ افزودن محصول...', '#0af');
+      
+      // دریافت محصولات فعلی
+      const local = localStorage.getItem('dp_products');
+      const products = local ? JSON.parse(local) : [];
+      
+      // ساخت محصول جدید
+      const newProduct = {
+        id: 'rt_' + Date.now().toString(36),
+        name: name,
+        price: price,
+        brand: 'تست Real-time',
+        seller: 'تست',
+        sellerId: 'test',
+        category: 'پیراهن',
+        subcategory: 'پیراهن',
+        section: 'woman',
+        color: 'قرمز',
+        colors: ['قرمز', 'آبی'],
+        sizes: ['M', 'L'],
+        image: 'https://images.pexels.com/photos/36168977/pexels-photo-36168977.jpeg?auto=compress&w=400',
+        stock: 10,
+        sold: 0,
+        rating: 4.5,
+        reviews: 0,
+        status: 'active',
+        approved: true,
+        createdAt: Date.now()
+      };
+      
+      products.push(newProduct);
+      localStorage.setItem('dp_products', JSON.stringify(products));
+      log(`محصول "${name}" به localStorage اضافه شد (تعداد: ${products.length})`, '#0f0');
+      
+      // push به سرور
+      try {
+        const res = await fetch('http://localhost:8001/api/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ products: products })
+        });
+        if (res.ok) {
+          log('✅ push به سرور موفق', '#0f0');
+        } else {
+          log('⚠️ push به سرور ناموفق', '#ff0');
+        }
+      } catch (e) {
+        log('❌ خطا در push: ' + e.message, '#f55');
+      }
+      
+      // شبیه‌سازی syncToSeller - broadcast و event
+      try {
+        const ch = new BroadcastChannel('dp_products_channel');
+        ch.postMessage({ type: 'products_updated', timestamp: Date.now(), count: products.length });
+        setTimeout(() => ch.close(), 100);
+        log('📡 BroadcastChannel پیام فرستاد', '#0af');
+      } catch (e) {
+        log('❌ BroadcastChannel: ' + e.message, '#f55');
+      }
+      
+      try {
+        window.dispatchEvent(new CustomEvent('dp:products-changed', {
+          detail: { products, count: products.length }
+        }));
+        log('🔔 Custom event dp:products-changed منتشر شد', '#0af');
+      } catch (e) {
+        log('❌ Event: ' + e.message, '#f55');
+      }
+      
+      // storage ping
+      try {
+        localStorage.setItem('dp_products_updated', Date.now().toString());
+        log('💾 storage ping', '#0af');
+      } catch (e) {}
+      
+      // اجبار به render فوری
+      setTimeout(() => {
+        if (window.DPProductsFeed && window.DPProductsFeed.refresh) {
+          window.DPProductsFeed.refresh();
+          log('🔄 DPProductsFeed.refresh() صدا زده شد', '#0f0');
+        }
+      }, 200);
+      
+      updateStats();
+    }
+
+    async function clearAll() {
+      if (!confirm('همه محصولات پاک بشن؟')) return;
+      localStorage.clear();
+      log('🗑️ همه localStorage پاک شد', '#ff0');
+      
+      // sync از سرور
+      try {
+        const res = await fetch('http://localhost:8001/api/products', { cache: 'no-store' });
+        const serverProducts = await res.json();
+        if (Array.isArray(serverProducts) && serverProducts.length > 0) {
+          localStorage.setItem('dp_products', JSON.stringify(serverProducts));
+          log(`✅ ${serverProducts.length} محصول از سرور sync شد`, '#0f0');
+        }
+      } catch (e) {}
+      
+      // re-render
+      if (window.DPProductsFeed && window.DPProductsFeed.refresh) {
+        window.DPProductsFeed.refresh();
+      }
+      
+      updateStats();
+    }
+
+    async function updateStats() {
+      const local = localStorage.getItem('dp_products');
+      const products = local ? JSON.parse(local) : [];
+      const ids = products.map(p => p.id);
+      const unique = new Set(ids);
+      
+      // شمارش سرور
+      let serverCount = 0;
+      try {
+        const res = await fetch('http://localhost:8001/api/products', { cache: 'no-store' });
+        const serverProducts = await res.json();
+        serverCount = serverProducts.length;
+      } catch (e) {}
+      
+      document.getElementById('stats').innerHTML = `
+        <div class="stat">
+          <div><strong>${products.length}</strong><span>محصول در local</span></div>
+          <div><strong>${unique.size}</strong><span>یونیک</span></div>
+          <div><strong>${ids.length - unique.size}</strong><span>تکراری</span></div>
+          <div><strong style="color:#3b82f6">${serverCount}</strong><span>در سرور</span></div>
+        </div>
+      `;
+      
+      // لیست محصولات
+      let listText = '';
+      products.slice(0, 10).forEach(p => {
+        listText += `${p.id}: ${p.name} (${p.price})\n`;
+      });
+      if (products.length > 10) listText += `... و ${products.length - 10} محصول دیگر`;
+      document.getElementById('productsList').textContent = listText;
+    }
+
+    // listener برای log رویدادهای feed
+    window.addEventListener('dp:products-changed', (e) => {
+      log('👂 رویداد dp:products-changed دریافت شد - count: ' + (e.detail?.count || '?'), '#ff0');
+      setTimeout(updateStats, 100);
+    });
+
+    if (window.BroadcastChannel) {
+      try {
+        const ch = new BroadcastChannel('dp_products_channel');
+        ch.addEventListener('message', (e) => {
+          if (e.data && e.data.type === 'products_updated') {
+            log('📡 BroadcastChannel دریافت: ' + JSON.stringify(e.data), '#ff0');
+            setTimeout(updateStats, 100);
+          }
+        });
+      } catch (e) {}
+    }
+
+    // بارگذاری اولیه
+    setTimeout(updateStats, 800);
+    setInterval(updateStats, 3000);
+  </script>
+</body>
+</html>

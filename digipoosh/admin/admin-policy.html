@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <title>مدیریت دیجی‌پوش | سیاست کمیسیون</title>
+  <meta name="description" content="پنل مدیریت دیجی‌پوش — نظارت بر فروشگاه‌ها، سفارش‌ها و کالاها." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+  <style>
+    /* آیکون‌های خطی به‌جای نویسه‌های متنی — همه‌جای سایت SVG است */
+    .act-i { width: 15px; height: 15px; display: block; }
+    .act { display: inline-grid; place-items: center; }
+  </style>
+</head>
+<body data-dp-panel>
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a href="../index.html" title="بازگشت به سایت">
+      <div class="sb-logo">دیجی‌پوش</div>
+      <span class="sb-sub">پنل مدیریت</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="منوی مدیریت">
+    <div class="sb-label">مدیریت</div>
+      <a class="sb-link" href="admin-dashboard.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3" y="3" width="7.5" height="8.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="5" rx="2"/><rect x="13.5" y="11" width="7.5" height="10" rx="2"/><rect x="3" y="14.5" width="7.5" height="6.5" rx="2"/></svg><span>داشبورد</span></a>
+      <a class="sb-link" href="admin-sellers.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg><span>فروشگاه‌ها</span><span class="sb-badge" id="badgeAll" hidden></span></a>
+      <a class="sb-link" href="admin-pending.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg><span>در انتظار تأیید</span><span class="sb-badge" id="badgePending" hidden></span></a>
+      <a class="sb-link" href="admin-moderation.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15.5 4.5 19.5 8.5 9 19H5v-4z"/><path d="m14 6 4 4"/></svg><span>بازبینی پروفایل</span><span class="sb-badge" id="badgeMod" hidden></span></a>
+      <a class="sb-link" href="admin-boost.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13.5 3.5c3 0 6 3 6 6 0 4.5-5 8-5 8l-4-4s3.5-5 8-5"/><path d="M9.5 14.5 6 18l-1.5-1.5L8 13"/><path d="M5 19l-1.5 1.5"/></svg><span>نردبان و ارتقا</span><span class="sb-badge" id="badgeBoost" hidden></span></a>
+      <a class="sb-link" href="admin-wholesale.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span>بازار عمده</span><span class="sb-badge" id="badgeWhole" hidden></span></a>
+      <a class="sb-link" href="admin-catalog.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg><span>همه‌ی محصولات</span></a>
+      <a class="sb-link" href="admin-orders.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><span>همه‌ی سفارش‌ها</span></a>
+      <a class="sb-link" href="admin-reviews.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg><span>نظرها</span><span class="sb-badge" id="badgeFlag" hidden></span></a>
+      <a class="sb-link active" href="admin-policy.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m6 18 12-12"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg><span>سیاست کمیسیون</span></a>
+      <a class="sb-link" href="admin-settings.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg><span>تنظیمات</span></a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <a class="sb-link" href="../index.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7V20a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 20z"/><path d="M9.5 21.5v-7h5v7"/></svg><span>بازگشت به سایت</span></a>
+    <a class="sb-link logout" href="admin-login.html" data-logout><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15 4.5h3.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M10 8.5 6 12l4 3.5M6 12h9"/></svg><span>خروج</span></a>
+  </div>
+</aside>
+
+<div class="backdrop" id="backdrop"></div>
+
+<main class="main" id="main">
+  <header class="topbar">
+    <button class="burger" type="button" aria-label="منو"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div>
+      <h1 class="page-title">سیاست کمیسیون</h1>
+      <div class="page-sub">نرخ ویژه برای فروشگاه یا محصول</div>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="notice">
+      <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16h.01"/></svg>
+      <span>می‌توانید برای یک فروشگاه — یا حتی یک محصول خاص — در بازه‌ی زمانی مشخص
+      نرخ کمیسیون را کم کنید. پس از پایان بازه، نرخ خودکار به حالت عادی برمی‌گردد.</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon si-gold"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m6 18 12-12"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg></span>
+          <span class="stat-label">سیاست‌های فعال</span>
+        </div>
+        <span class="stat-number num" id="pLive">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon si-blue"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg></span>
+          <span class="stat-label">در انتظار شروع</span>
+        </div>
+        <span class="stat-number num" id="pSoon">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon si-green"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg></span>
+          <span class="stat-label">فروشگاه‌های مشمول</span>
+        </div>
+        <span class="stat-number num" id="pShops">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon si-blue"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <span class="stat-label">کل سیاست‌ها</span>
+        </div>
+        <span class="stat-number num" id="pAll">۰</span>
+      </div>
+    </div>
+
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>سیاست تازه</h2>
+        <span class="sub spacer" style="font-size:12px;color:var(--gray)">نرخ ویژه برای بازه‌ی زمانی</span>
+      </div>
+
+      <form id="polForm" novalidate>
+        <div class="field">
+          <label for="cTitle">عنوان سیاست</label>
+          <input class="input" id="cTitle" placeholder="مثلاً: حمایت از فروشندگان تازه" />
+        </div>
+
+        <div class="field">
+          <label for="cShop">فروشگاه <span style="color:var(--danger)">*</span></label>
+          <select class="select" id="cShop"><option value="">انتخاب کنید</option></select>
+        </div>
+
+        <div class="field">
+          <label for="cProd">محصول <span class="hint">(اختیاری — خالی یعنی همه‌ی محصولات)</span></label>
+          <select class="select" id="cProd"><option value="">همه‌ی محصولات این فروشگاه</option></select>
+        </div>
+
+        <div class="field">
+          <label for="cRate">نرخ کمیسیون ویژه <span style="color:var(--danger)">*</span></label>
+          <input class="input num" id="cRate" inputmode="decimal" placeholder="۵" />
+          <span class="hint">درصدی بین ۰ تا ۱۰۰ — کمتر از نرخ عادی یعنی تخفیف برای فروشنده</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="field">
+            <label for="cFrom">تاریخ شروع <span style="color:var(--danger)">*</span></label>
+            <input class="input" id="cFrom" type="date" />
+          </div>
+          <div class="field">
+            <label for="cTo">تاریخ پایان <span style="color:var(--danger)">*</span></label>
+            <input class="input" id="cTo" type="date" />
+          </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit" id="polBtn">ثبت سیاست</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>سیاست‌های ثبت‌شده</h2></div>
+      <div id="polList"></div>
+    </div>
+  </div>
+</main>
+
+<div class="toast-wrap"></div>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="../assets/js/dp-taxonomy.js"></script>
+<script src="../assets/js/dp-promo.js"></script>
+<script src="../assets/js/dp-boost.js"></script>
+<script src="../assets/js/dp-boost-pro.js"></script>
+<script src="../assets/js/dp-moderation.js"></script>
+<script src="../assets/js/dp-returns.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="../assets/js/dp-rate-pop.js"></script>
+<script src="../seller/js/dp-config.js"></script>
+<script src="js/admin-store.js"></script>
+<script src="js/admin-script.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+requireAdmin(async () => {
+  const P = window.DPPromo;
+  const el = (i) => document.getElementById(i);
+
+  const today = P.todayISO();
+  const m = new Date(); m.setMonth(m.getMonth() + 1);
+  el('cFrom').value = today;
+  el('cTo').value = m.toISOString().slice(0, 10);
+
+  const shops = await DPAdmin.sellers.list();
+  el('cShop').innerHTML = '<option value="">انتخاب کنید</option>' +
+    shops.map(s => `<option value="${esc(s.id)}">${esc(s.storeName)}</option>`).join('');
+
+  const allProds = (() => {
+    try { return JSON.parse(localStorage.getItem('dp_products')) || []; } catch { return []; }
+  })();
+
+  /* با انتخاب فروشگاه، فهرست محصولاتش پر می‌شود */
+  el('cShop').addEventListener('change', () => {
+    const id = el('cShop').value;
+    const mine = allProds.filter(p => p.sellerId === id);
+    el('cProd').innerHTML = '<option value="">همه‌ی محصولات این فروشگاه</option>' +
+      mine.map(p => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
+  });
+
+  el('polForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    try {
+      P.commissions.add({
+        title: el('cTitle').value,
+        sellerId: el('cShop').value,
+        productId: el('cProd').value,
+        rate: el('cRate').value,
+        from: el('cFrom').value,
+        to: el('cTo').value,
+      });
+      toast('سیاست کمیسیون ثبت شد.', 'success');
+      el('polForm').reset();
+      el('cFrom').value = today;
+      el('cTo').value = m.toISOString().slice(0, 10);
+      draw();
+    } catch (err) { toast(err.message, 'error'); }
+  });
+
+  function draw() {
+    const rows = P.commissions.list();
+    const n = { live: 0, soon: 0, ended: 0, paused: 0 };
+    const shopSet = new Set();
+
+    rows.forEach(r => {
+      const s = P.statusOf(r);
+      n[s]++;
+      if (s === 'live') shopSet.add(r.sellerId);
+    });
+
+    setNum('pLive', n.live);
+    setNum('pSoon', n.soon);
+    setNum('pShops', shopSet.size);
+    setNum('pAll', rows.length);
+
+    el('polList').innerHTML = rows.length ? rows.map(r => {
+      const st = P.statusOf(r);
+      const b = P.STATUS_FA[st];
+      const shop = shops.find(s => s.id === r.sellerId);
+      const prod = r.productId ? allProds.find(p => String(p.id) === String(r.productId)) : null;
+
+      return `
+        <div class="pol-row">
+          <div class="pol-rate">${fa(r.rate)}<small>٪</small></div>
+          <div class="pol-info">
+            <div class="pol-top">
+              <strong>${esc(r.title)}</strong>
+              <span class="badge ${b.cls}">${b.label}</span>
+            </div>
+            <span class="pol-sub">${esc(shop ? shop.storeName : '—')}
+              ${prod ? ' › ' + esc(prod.name) : ' › همه‌ی محصولات'}</span>
+            <span class="pol-sub">${P.faDate(r.from)} تا ${P.faDate(r.to)}</span>
+          </div>
+          <div class="row-actions">
+            <button class="act" type="button" data-t="${esc(r.id)}"
+                    aria-label="${r.off ? 'فعال کردن' : 'متوقف کردن'}"
+                    title="${r.off ? 'فعال کردن' : 'متوقف کردن'}">${r.off ? `<svg class="act-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg>` : `<svg class="act-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 5.5v13M14.5 5.5v13"/></svg>`}</button>
+            <button class="act no" type="button" data-d="${esc(r.id)}"
+                    aria-label="حذف" title="حذف"><svg class="act-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+        </div>`;
+    }).join('') : '<div class="empty">هنوز سیاستی ثبت نشده است.</div>';
+  }
+
+  el('polList').addEventListener('click', (e) => {
+    const t = e.target.closest('[data-t]');
+    const d = e.target.closest('[data-d]');
+    if (t) { P.commissions.toggle(t.dataset.t); draw(); toast('وضعیت عوض شد.', 'success'); }
+    /* حذف بازگشت‌ناپذیر است — یک بار پرسیده می‌شود */
+    if (d) {
+      if (!confirm('این سیاست کمیسیون برای همیشه حذف شود؟')) return;
+      P.commissions.remove(d.dataset.d); draw(); toast('سیاست حذف شد.', 'success');
+    }
+  });
+
+  draw();
+});
+</script>
+</body>
+</html>

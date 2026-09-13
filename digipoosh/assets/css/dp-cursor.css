@@ -1,0 +1,229 @@
+/* ============================================================
+   دیجی‌پوش — کرسور عادی سیستم
+   ------------------------------------------------------------
+   لایه‌ی حلقه و نقطه‌ی سفارشی برداشته شد.
+
+   حالا کاربر همان کرسور آشنای سیستم‌عامل خودش را می‌بیند:
+   فلش روی متن، دست روی چیزهای قابل کلیک، میله روی
+   فیلدهای نوشتن. همان چیزی که در همه‌ی سایت‌ها می‌بیند
+   و انتظارش را دارد.
+
+   این فایل عمداً نگه داشته شده تا:
+     ۱. لینک‌های موجود در ۳۱ صفحه نشکنند.
+     ۲. اگر جایی از کد قدیمی هنوز حلقه بسازد، پنهان بماند.
+     ۳. قانون‌های کرسور استاندارد یک‌جا جمع باشند.
+   ============================================================ */
+
+/* ============================================================
+   کرسور سیستم همیشه دیده می‌شود
+   ------------------------------------------------------------
+   محض احتیاط، اگر جایی کرسور پنهان‌شده مانده باشد، خنثی می‌شود.
+   ============================================================ */
+html,
+body,
+body * {
+  cursor: auto;
+}
+
+/* ---------- چیزهای قابل کلیک: دست ---------- */
+a[href],
+button:not(:disabled),
+label[for],
+summary,
+select,
+[role="button"]:not([aria-disabled="true"]),
+[role="tab"],
+[role="link"],
+[onclick],
+.pcard,
+.plan-card:not(.is-busy),
+.sz-btn:not(:disabled),
+.dp-sw,
+.sp-prod,
+.sp-shot-dot,
+.acc-tab,
+.seg-btn,
+.chip,
+.dot {
+  cursor: pointer;
+}
+
+/* ---------- فیلدهای نوشتن: میله ---------- */
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]),
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+}
+
+/* ---------- چک‌باکس و رادیو: دست ---------- */
+input[type="checkbox"],
+input[type="radio"],
+input[type="file"],
+input[type="color"],
+input[type="range"] {
+  cursor: pointer;
+}
+
+/* ---------- غیرفعال: ممنوع ---------- */
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled,
+[aria-disabled="true"],
+.is-busy,
+.plan-card.is-busy,
+.sz-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* ---------- متن‌های ساده: عادی ----------
+   این قانون پیش از قانون «راهنما» می‌آید تا بر آن غلبه نکند. */
+p,
+h1, h2, h3, h4, h5, h6,
+li:not([role]) {
+  cursor: auto;
+}
+
+/* ---------- راهنما: علامت پرسش ----------
+   ستاره‌های امتیاز پنجره‌ی رضایت باز می‌کنند، پس باید
+   نشان بدهند که «چیزی برای دیدن هست». */
+.dp-stars,
+.dp-rate-row,
+.dp-rate,
+.sp-rate,
+.sp-stars,
+[data-sat],
+abbr[title] {
+  cursor: help;
+}
+
+/* ============================================================
+   لایه‌ی سفارشی قدیمی — همیشه پنهان
+   ------------------------------------------------------------
+   اگر نسخه‌ی کش‌شده‌ی مرورگر هنوز حلقه بسازد، دیده نمی‌شود.
+   ============================================================ */
+.custom-cursor,
+.custom-cursor-dot,
+.cursor-ring,
+.cursor-dot {
+  display: none !important;
+}
+
+/* ============================================================
+   تکمیل دور پانزدهم — پوشش کامل «هر چیزی که کلیک می‌شود»
+   ------------------------------------------------------------
+   فهرست زیر از دل خود کدهای سایت بیرون کشیده شد: هر جایی که
+   جاوااسکریپت روی کلیک واکنش نشان می‌دهد، اینجا هم دست
+   (نشانگر انگشت) می‌گیرد. اینطور کاربر پیش از کلیک می‌فهمد
+   که آن قسمت قابل کلیک است.
+   ============================================================ */
+
+/* ---------- عنصرهای دارای نشان کلیک در جاوااسکریپت ---------- */
+[data-abstart], [data-abstop], [data-add], [data-adj], [data-ans],
+[data-auto], [data-back], [data-brand], [data-cancel], [data-cd],
+[data-clear], [data-close], [data-cname], [data-color], [data-color-key],
+[data-confirm], [data-copy], [data-ct], [data-d], [data-ddel],
+[data-dec], [data-del], [data-deltier], [data-ds], [data-edit],
+[data-f], [data-flag], [data-g], [data-go], [data-grp],
+[data-hd], [data-inc], [data-item], [data-join], [data-logout],
+[data-look], [data-mod-seen], [data-mod-undo], [data-mode], [data-next],
+[data-no], [data-note], [data-ok], [data-open], [data-order],
+[data-p], [data-pause], [data-pay], [data-pf], [data-pick],
+[data-pick-close], [data-pick-done], [data-q], [data-qdel], [data-qm],
+[data-qmin], [data-qmax], [data-qp], [data-rating], [data-rej],
+[data-renew], [data-rep], [data-reply], [data-rm], [data-saved-del],
+[data-saved-go], [data-scroll], [data-sec], [data-shot], [data-size],
+[data-sp-dot], [data-sp-go], [data-stop], [data-susp], [data-t],
+[data-th], [data-th-reset], [data-toggle], [data-toord], [data-ts],
+[data-un], [data-uncmp], [data-unreply], [data-vibe], [data-view],
+[data-withdraw], [data-wp-close], [data-dp-cart-open], [data-tilt],
+[data-seller], [data-store], [data-page] {
+  cursor: pointer;
+}
+
+/* ---------- کارت‌ها و بخش‌هایی که با کلاس شناخته می‌شوند ---------- */
+.acc-tab,
+.btn-cta, .btn-featured, .btn-store,
+.card, .dpp-card, .pcard, .plan-card, .store-card, .store-card--real,
+.why-card, .review-card, .w-card,
+.chip, .chips .chip, .dpp-chip, .dpp-dot, .dpp-fchip, .dpp-pick,
+.dcd-q, .dcd-row, .dcd-x, .dnv-x,
+.mod-banner, .mod-req,
+.nav-icon, .nav-icons a, .icons-m a,
+.ol-ret, .page-btn, .pick, .sb-link, .seg-btn,
+.submenu a, .has-sub > a,
+.wp-plan, .wp-tier-row, .sp-prod, .sp-shot-dot,
+.m-thumbs img,
+.th-look, .th-shape, .th-vibe, .th-move,
+.sz-btn, .dp-sw, .dot,
+th.sortable,
+.toast-wrap [data-close],
+.modal-overlay [data-close] {
+  cursor: pointer;
+}
+
+/* ---------- بستن پنجره با کلیک روی زمینه ---------- */
+.modal-overlay,
+.w-modal,
+.wp-modal,
+.dp-pop {
+  cursor: pointer;
+}
+.modal-overlay > *,
+.w-modal > *,
+.wp-modal > *,
+.dp-pop > * {
+  cursor: auto;
+}
+
+/* ---------- درون پنجره‌ها، دوباره قانون‌های عادی ---------- */
+.modal-overlay a[href], .modal-overlay button:not(:disabled),
+.w-modal a[href], .w-modal button:not(:disabled),
+.wp-modal a[href], .wp-modal button:not(:disabled),
+.dp-pop a[href], .dp-pop button:not(:disabled) {
+  cursor: pointer;
+}
+.modal-overlay input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.modal-overlay textarea,
+.w-modal input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.w-modal textarea,
+.wp-modal input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.wp-modal textarea,
+.dp-pop input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.dp-pop textarea {
+  cursor: text;
+}
+
+/* ---------- تب‌ها و گزینه‌های دسترس‌پذیر ---------- */
+[role="option"],
+[role="menuitem"],
+[role="switch"],
+[role="checkbox"],
+[role="radio"],
+[tabindex="0"]:not(input):not(textarea):not([contenteditable]),
+details > summary {
+  cursor: pointer;
+}
+
+/* ---------- سربرگ جدول‌های قابل مرتب‌سازی ---------- */
+thead th[data-sort],
+th[aria-sort] {
+  cursor: pointer;
+}
+
+/* ---------- غیرفعال‌ها همیشه برنده‌اند ---------- */
+[disabled],
+[aria-disabled="true"],
+.is-disabled,
+.is-busy,
+.page-btn:disabled,
+.page-btn[disabled] {
+  cursor: not-allowed !important;
+}
+
+/* ---------- متن قابل انتخاب داخل کارت‌های کلیک‌شدنی ---------- */
+.card input, .card textarea, .card select,
+.pcard input, .dpp-card input, .dpp-card textarea, .dpp-card select {
+  cursor: auto;
+}
+.card select, .pcard select, .dpp-card select { cursor: pointer; }

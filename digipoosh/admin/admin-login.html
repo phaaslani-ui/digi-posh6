@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#f5f0e8" />
+  <title>ورود مدیریت | دیجی‌پوش</title>
+  <meta name="description" content="پنل مدیریت دیجی‌پوش — نظارت بر فروشگاه‌ها، سفارش‌ها و کالاها." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+</head>
+<body data-dp-panel>
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<main class="login-wrap">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="mark"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M12 3 5 6v5.5c0 4.2 2.9 8.1 7 9.5 4.1-1.4 7-5.3 7-9.5V6z"/><path d="m9.2 12 1.9 1.9 3.7-3.8"/></svg></span>
+      <h1>پنل مدیریت</h1>
+      <p>ورود مخصوص مدیر دیجی‌پوش</p>
+    </div>
+
+    <div class="notice" id="firstHint" hidden>
+      <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16h.01"/></svg>
+      <span>نخستین ورود؟ رمز پیش‌فرض <strong id="defPass"></strong> است.
+      بعد از ورود، حتماً از بخش تنظیمات آن را عوض کنید.</span>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="pass">رمز مدیریت</label>
+        <input class="input" type="password" id="pass" placeholder="••••••••"
+               autocomplete="current-password" data-rules="required" />
+        <span class="err-msg"></span>
+      </div>
+
+      <button class="btn btn-primary btn-block" type="submit" id="btn">ورود به پنل</button>
+    </form>
+
+    <p style="text-align:center;margin:18px 0 0;font-size:13px">
+      <a href="../index.html" style="color:var(--bronze)">&larr; بازگشت به سایت</a>
+    </p>
+  </div>
+</main>
+
+<div class="toast-wrap"></div>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="../assets/js/dp-taxonomy.js"></script>
+<script src="../assets/js/dp-promo.js"></script>
+<script src="../assets/js/dp-returns.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="../seller/js/dp-config.js"></script>
+<script src="js/admin-store.js"></script>
+<script src="js/admin-script.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+(function () {
+  if (DPAdmin.auth.isLoggedIn()) location.replace('admin-dashboard.html');
+
+  if (DPAdmin.auth.isDefaultPass()) {
+    document.getElementById('defPass').textContent = DPAdmin.DEFAULT_PASS;
+    document.getElementById('firstHint').hidden = false;
+  }
+
+  const form = document.getElementById('loginForm');
+  const btn = document.getElementById('btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const v = document.getElementById('pass').value;
+    if (!v) { toast('رمز را وارد کنید.', 'error'); return; }
+
+    btn.disabled = true;
+    try {
+      await DPAdmin.auth.login(v);
+      toast('خوش آمدید.', 'success');
+      setTimeout(() => (location.href = 'admin-dashboard.html'), 500);
+    } catch (err) {
+      toast(err.message, 'error');
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>

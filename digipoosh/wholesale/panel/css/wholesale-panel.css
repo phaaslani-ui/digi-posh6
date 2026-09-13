@@ -1,0 +1,1393 @@
+/* ============================================================
+   دیجی‌پوش — پنل عمده‌فروشی
+   ------------------------------------------------------------
+   چرا تم عوض شد؟
+
+   طلای پررنگ روی مشکی مطلق، تضاد را به بیشترین حد می‌رساند.
+   برای یک بنر یا صفحه‌ی معرفی زیباست، ولی اینجا جایی است که
+   فروشنده ساعت‌ها کار می‌کند — چشم خسته می‌شود و نگاه جایی
+   برای استراحت ندارد.
+
+   تم تازه:
+     • زمینه: لاجوردی-دودی عمیق به‌جای مشکی مطلق. رنگ دارد،
+       پس چشم را نمی‌زند، ولی همچنان تیره و جدی است.
+     • تأکید: کهربای گرم به‌جای طلای براق. کمی نرم‌تر، ولی
+       روی زمینه‌ی تیره خواناتر و گران‌تر به نظر می‌رسد.
+     • مرزها: خاکستری سرد بسیار کم‌رنگ، نه طلایی. طلا فقط
+       جایی می‌آید که واقعاً باید توجه جلب کند.
+
+   منو سمت راست می‌نشیند — مثل بقیه‌ی پنل‌های سایت.
+   ============================================================ */
+
+/* ============================================================
+   پالت — سرمه‌ای و طلایی، هم‌خانواده با سایت اصلی
+   ============================================================ */
+:root {
+  /* ---------- طلای برند ---------- */
+  --wp-gold: #c9a84c;
+  --wp-gold-l: #d4b85a;
+  --wp-bronze: #b8943c;
+  --wp-silver: #c0c0c0;
+
+  /* ---------- سرمه‌ای ---------- */
+  --wp-bg: #0b1220;
+  --wp-navy: #14203a;
+  --wp-blue: #1e2d4d;
+  --wp-card: rgba(20, 32, 58, 0.86);
+  --wp-side-bg: rgba(11, 18, 32, 0.97);
+  --wp-line-n: #2a3c62;
+
+  /* ---------- متن ---------- */
+  --wp-ink: #f2eee6;
+  --wp-gray: #9aa6bb;
+  --wp-dim: #6b7893;
+
+  /* ---------- وضعیت ---------- */
+  --wp-ok: #4caf50;
+  --wp-warn: #e8b552;
+  --wp-bad: #e57373;
+  --wp-info: #7a96c8;
+
+  --wp-line: rgba(201, 168, 76, 0.16);
+  --wp-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --wp-side: 248px;
+}
+
+* { box-sizing: border-box; }
+
+html { overflow-x: hidden; }
+html:has(body.wp-lock) { overflow: hidden; }
+
+body {
+  margin: 0;
+  font-family: Vazirmatn, system-ui, sans-serif;
+  color: var(--wp-ink);
+  background:
+    radial-gradient(ellipse 55% 45% at 92% 0%, rgba(201, 168, 76, 0.1), transparent 58%),
+    radial-gradient(ellipse 60% 55% at 2% 96%, rgba(30, 45, 77, 0.5), transparent 62%),
+    var(--wp-bg);
+  background-attachment: fixed;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+img { max-width: 100%; display: block; }
+
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: var(--wp-navy); }
+::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: linear-gradient(var(--wp-gold), var(--wp-bronze));
+}
+
+/* ============================================================
+   چیدمان — منو راست، محتوا چپ
+   ============================================================ */
+/*
+ * چرا اینجا `right` نوشته شده، نه `inline-end`؟
+ *
+ * صفحه راست‌به‌چپ است. در چنین صفحه‌ای «آغازِ خط» سمت راست
+ * است و «پایانِ خط» سمت چپ. پس `inset-inline-end` یعنی چپ —
+ * درست برعکس چیزی که می‌خواهیم. منو به همین دلیل چپ می‌افتاد.
+ *
+ * منو باید همیشه راست باشد، فارغ از جهت متن. پس از واحد
+ * فیزیکی `right` استفاده می‌کنیم.
+ */
+.wp-side {
+  position: fixed;
+  inset-block: 0;
+  right: 0;
+  left: auto;
+  width: var(--wp-side);
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  overflow-y: auto;
+  background:
+    radial-gradient(ellipse 80% 32% at 50% 0%, rgba(201, 168, 76, 0.12), transparent 66%),
+    linear-gradient(180deg, var(--wp-navy) 0%, var(--wp-bg) 100%);
+  border-left: 1px solid rgba(201, 168, 76, 0.28);
+}
+
+.wp-main {
+  margin-right: var(--wp-side);
+  margin-left: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- نشان ---------- */
+.wp-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+
+.wp-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--wp-bg);
+  background: linear-gradient(135deg, var(--wp-gold-l), var(--wp-bronze));
+}
+
+.wp-brand-txt { display: flex; flex-direction: column; line-height: 1.3; }
+.wp-brand-txt strong { font-size: 14.5px; color: var(--wp-gold); }
+.wp-brand-txt small { font-size: 10.5px; color: var(--wp-gray); }
+
+/* ---------- کارت فروشنده ---------- */
+.wp-who {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  background: rgba(30, 45, 77, 0.55);
+  border: 1px solid var(--wp-line);
+  min-width: 0;
+}
+
+.wp-who-logo {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--wp-bg);
+  background: linear-gradient(135deg, var(--wp-silver), #9c9c9c);
+}
+
+.wp-who-txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.4; }
+
+.wp-who-txt strong {
+  font-size: 12.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wp-st { font-style: normal; font-size: 10.5px; font-weight: 700; }
+.wp-st.ok { color: var(--wp-ok); }
+.wp-st.wait { color: var(--wp-warn); }
+.wp-st.bad { color: var(--wp-bad); }
+
+/* ---------- منو ---------- */
+.wp-menu { display: flex; flex-direction: column; gap: 3px; }
+
+.wp-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  width: 100%;
+  border-radius: 10px;
+  font-size: 13.5px;
+  text-align: start;
+  cursor: pointer;
+  color: var(--wp-gray);
+  background: transparent;
+  transition: color 0.2s var(--wp-ease), background 0.2s var(--wp-ease);
+}
+
+.wp-link:hover { color: var(--wp-ink); background: rgba(201, 168, 76, 0.07); }
+
+.wp-link.is-on {
+  color: var(--wp-gold-l);
+  background: rgba(201, 168, 76, 0.13);
+  font-weight: 600;
+}
+
+.wp-link.is-on::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 22%;
+  height: 56%;
+  width: 3px;
+  border-radius: 99px;
+  background: var(--wp-gold);
+}
+
+.wp-i { width: 18px; height: 18px; flex: none; }
+
+.wp-badge {
+  margin-inline-start: auto;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 800;
+  font-style: normal;
+  color: var(--wp-bg);
+  background: var(--wp-gold);
+}
+
+.wp-side-foot {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--wp-line);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.wp-out { color: #d98a84; }
+.wp-out:hover { color: var(--wp-bad); background: rgba(229, 115, 115, 0.09); }
+
+.wp-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(10, 13, 18, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.26s var(--wp-ease), visibility 0.26s;
+}
+
+/* ============================================================
+   نوار بالا
+   ============================================================ */
+.wp-top {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 22px;
+  background: rgba(11, 18, 32, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--wp-line);
+}
+
+.wp-title { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; }
+/* عنوان صفحه حالا h1 است — گزینشگر دوگانه تا نسخه‌ی قدیمی هم نشکند */
+.wp-title strong,
+.wp-title h1 { margin: 0; font-size: 17px; font-weight: 800; }
+.wp-title span { font-size: 12.5px; color: var(--wp-gray); }
+
+.wp-top-acts { margin-inline-start: auto; display: flex; gap: 8px; align-items: center; }
+
+.wp-burger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--wp-ink);
+  background: rgba(30, 45, 77, 0.6);
+  border: 1px solid var(--wp-line);
+}
+
+.wp-burger svg { width: 18px; height: 18px; }
+
+.wp-content { flex: 1; padding: 22px; }
+
+/* ============================================================
+   کارت‌ها
+   ============================================================ */
+.wp-card {
+  padding: 18px;
+  border-radius: 15px;
+  background: var(--wp-card);
+  border: 1px solid var(--wp-line);
+  margin-bottom: 16px;
+}
+
+.wp-card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 11px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.wp-card-head h2 { margin: 0; font-size: 15.5px; font-weight: 800; }
+.wp-card-head .sub { font-size: 12.5px; color: var(--wp-gray); }
+.wp-card-head .spacer { margin-inline-start: auto; }
+
+/* ---------- آمار ---------- */
+.wp-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.wp-kpi {
+  padding: 15px 16px;
+  border-radius: 14px;
+  background: var(--wp-card);
+  border: 1px solid var(--wp-line);
+  border-top: 3px solid var(--kc, var(--wp-gold));
+}
+
+.wp-kpi-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 7px;
+}
+
+.wp-kpi-top svg { width: 16px; height: 16px; color: var(--kc, var(--wp-gold)); }
+.wp-kpi-top span { font-size: 12px; color: var(--wp-gray); }
+
+.wp-kpi b {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--wp-ink);
+}
+
+.wp-kpi small { font-size: 11.5px; color: var(--wp-dim); }
+
+/* ============================================================
+   جدول
+   ============================================================ */
+.wp-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--wp-line);
+  max-width: 100%;
+}
+
+.wp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 620px;
+}
+
+.wp-table th {
+  padding: 11px 12px;
+  text-align: start;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--wp-gold-l);
+  white-space: nowrap;
+  background: rgba(201, 168, 76, 0.08);
+  border-bottom: 1px solid var(--wp-line);
+}
+
+.wp-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+  vertical-align: middle;
+}
+
+.wp-table tbody tr:last-child td { border-bottom: 0; }
+.wp-table tbody tr:hover { background: rgba(201, 168, 76, 0.045); }
+
+.wp-table b { font-weight: 700; }
+.wp-table .num { font-weight: 600; }
+.wp-table .muted { color: var(--wp-gray); font-size: 12px; }
+
+.wp-tiny {
+  display: block;
+  font-size: 11px;
+  color: var(--wp-gray);
+  margin-top: 2px;
+}
+
+/* ---------- نشان وضعیت ---------- */
+.wp-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.wp-tag.ok    { color: var(--wp-ok);   background: rgba(76, 175, 80, 0.14); }
+.wp-tag.warn  { color: var(--wp-warn); background: rgba(232, 181, 82, 0.14); }
+.wp-tag.bad   { color: var(--wp-bad);  background: rgba(229, 115, 115, 0.14); }
+.wp-tag.info  { color: var(--wp-info); background: rgba(122, 150, 200, 0.14); }
+.wp-tag.mute  { color: var(--wp-gray); background: rgba(154, 166, 187, 0.14); }
+.wp-tag.gold  { color: var(--wp-gold-l); background: rgba(201, 168, 76, 0.16); }
+
+/* ============================================================
+   فرم
+   ============================================================ */
+.wp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 13px;
+}
+
+.wp-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.wp-field.full { grid-column: 1 / -1; }
+
+.wp-field label { font-size: 12.5px; font-weight: 600; color: var(--wp-gray); }
+.wp-field .req { color: var(--wp-bad); }
+
+.wp-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--wp-ink);
+  background: rgba(11, 18, 32, 0.55);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  font-size: 13.5px;
+  transition: border-color 0.2s var(--wp-ease);
+}
+
+.wp-input:focus { outline: none; border-color: var(--wp-gold); }
+.wp-input::placeholder { color: var(--wp-dim); }
+.wp-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+textarea.wp-input { resize: vertical; min-height: 78px; line-height: 1.85; }
+select.wp-input { cursor: pointer; }
+select.wp-input option { background: var(--wp-navy); color: var(--wp-ink); }
+
+.wp-hint { font-size: 11.5px; color: var(--wp-dim); }
+
+/* ---------- دکمه ---------- */
+.wp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: translate 0.22s var(--wp-ease), box-shadow 0.22s var(--wp-ease),
+              background 0.22s var(--wp-ease);
+}
+
+.wp-btn svg { width: 16px; height: 16px; }
+
+.wp-btn-gold {
+  color: var(--wp-bg);
+  background: linear-gradient(135deg, var(--wp-gold-l), var(--wp-bronze));
+}
+
+.wp-btn-gold:hover { translate: 0 -2px; box-shadow: 0 10px 22px -12px rgba(201, 168, 76, 0.95); }
+
+.wp-btn-ghost {
+  color: var(--wp-silver);
+  background: transparent;
+  border: 1px solid rgba(192, 192, 192, 0.3);
+}
+
+.wp-btn-ghost:hover { color: var(--wp-gold-l); border-color: var(--wp-gold); }
+
+.wp-btn-bad { color: #d98a84; background: transparent; border: 1px solid rgba(229, 115, 115, 0.32); }
+.wp-btn-bad:hover { color: #fff; background: rgba(229, 115, 115, 0.75); border-color: transparent; }
+
+.wp-btn-sm { padding: 6px 12px; font-size: 12px; border-radius: 8px; }
+.wp-btn:disabled { opacity: 0.42; cursor: not-allowed; translate: 0; box-shadow: none; }
+
+.wp-row-acts { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* ---------- نوار ابزار ---------- */
+.wp-toolbar {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.wp-toolbar .wp-input { max-width: 230px; }
+.wp-toolbar .spacer { margin-inline-start: auto; }
+
+.wp-seg {
+  display: flex;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(30, 45, 77, 0.6);
+  border: 1px solid var(--wp-line);
+  flex-wrap: wrap;
+}
+
+.wp-seg button {
+  padding: 6px 13px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--wp-gray);
+  background: transparent;
+  transition: color 0.2s var(--wp-ease), background 0.2s var(--wp-ease);
+  white-space: nowrap;
+}
+
+.wp-seg button.on { color: var(--wp-bg); background: linear-gradient(135deg, var(--wp-gold-l), var(--wp-bronze)); }
+
+/* ============================================================
+   پله‌های قیمت
+   ============================================================ */
+.wp-tiers { display: flex; flex-direction: column; gap: 8px; }
+
+.wp-tier-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.wp-tier-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 8px;
+}
+
+.wp-tier-cell {
+  padding: 11px 9px;
+  text-align: center;
+  border-radius: 11px;
+  background: rgba(30, 45, 77, 0.55);
+  border: 1px solid var(--wp-line);
+}
+
+.wp-tier-cell.best { border-color: rgba(201, 168, 76, 0.5); background: rgba(201, 168, 76, 0.1); }
+.wp-tier-cell span { display: block; font-size: 11px; color: var(--wp-gray); }
+.wp-tier-cell b { font-size: 14.5px; color: var(--wp-gold-l); font-weight: 800; }
+.wp-tier-cell small { display: block; font-size: 10px; color: var(--wp-dim); }
+
+/* ============================================================
+   نمودار
+   ============================================================ */
+.wp-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 168px;
+  padding: 10px 6px 0;
+}
+
+.wp-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.wp-bar {
+  width: 100%;
+  max-width: 42px;
+  height: var(--h, 4%);
+  min-height: 4px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg, var(--wp-gold-l), rgba(184, 148, 60, 0.35));
+  transition: height 0.5s var(--wp-ease);
+}
+
+.wp-bar.peak { background: linear-gradient(180deg, var(--wp-gold), var(--wp-bronze)); }
+
+.wp-bar-lbl {
+  font-size: 10.5px;
+  color: var(--wp-gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ============================================================
+   یادداشت
+   ============================================================ */
+.wp-note {
+  display: flex;
+  gap: 9px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border-radius: 11px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--wp-gray);
+  background: rgba(30, 45, 77, 0.5);
+  border-inline-start: 3px solid var(--wp-gold);
+}
+
+.wp-note svg { width: 17px; height: 17px; flex: none; color: var(--wp-gold); margin-top: 3px; }
+.wp-note b { color: var(--wp-ink); }
+.wp-note.ok  { border-inline-start-color: var(--wp-ok); }
+.wp-note.ok svg { color: var(--wp-ok); }
+.wp-note.warn { border-inline-start-color: var(--wp-warn); }
+.wp-note.warn svg { color: var(--wp-warn); }
+.wp-note.bad { border-inline-start-color: var(--wp-bad); }
+.wp-note.bad svg { color: var(--wp-bad); }
+
+/* ---------- خالی ---------- */
+.wp-empty {
+  padding: 44px 20px;
+  text-align: center;
+  color: var(--wp-gray);
+  border-radius: 13px;
+  border: 1px dashed rgba(201, 168, 76, 0.22);
+}
+
+.wp-empty svg { width: 38px; height: 38px; color: var(--wp-dim); margin-bottom: 11px; }
+.wp-empty b { display: block; color: var(--wp-ink); margin-bottom: 4px; font-size: 14px; }
+.wp-empty span { font-size: 12.5px; }
+
+/* ============================================================
+   پنجره
+   ============================================================ */
+.wp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(10, 13, 18, 0.82);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.24s var(--wp-ease), visibility 0.24s;
+}
+
+.wp-modal.open { opacity: 1; visibility: visible; }
+
+.wp-modal-card {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 24px;
+  border-radius: 18px;
+  background: #101a2a;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  translate: 0 12px;
+  transition: translate 0.28s var(--wp-ease);
+}
+
+.wp-modal.open .wp-modal-card { translate: 0 0; }
+
+.wp-modal-card h2 { margin: 0 0 6px; font-size: 18px; }
+.wp-modal-card > p { margin: 0 0 16px; font-size: 13px; color: var(--wp-gray); }
+
+.wp-x {
+  position: absolute;
+  top: 14px;
+  inset-inline-start: 14px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  cursor: pointer;
+  color: var(--wp-ink);
+  background: rgba(30, 45, 77, 0.8);
+  border: 1px solid var(--wp-line);
+}
+
+.wp-x:hover { color: var(--wp-bad); border-color: var(--wp-bad); }
+.wp-x svg { width: 16px; height: 16px; }
+
+.wp-modal-foot {
+  display: flex;
+  gap: 9px;
+  justify-content: flex-start;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--wp-line);
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   پیام
+   ============================================================ */
+.wp-toasts {
+  position: fixed;
+  inset-block-start: 76px;
+  inset-inline-start: 18px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  pointer-events: none;
+}
+
+.wp-toast {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 16px;
+  border-radius: 11px;
+  font-size: 13px;
+  color: var(--wp-ink);
+  background: rgba(20, 32, 58, 0.97);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+  animation: wpToast 0.3s var(--wp-ease);
+  max-width: 340px;
+  transition: opacity 0.3s ease;
+}
+
+.wp-toast svg { width: 17px; height: 17px; flex: none; color: var(--wp-gold); }
+.wp-toast.success { border-color: rgba(76, 175, 80, 0.5); }
+.wp-toast.success svg { color: var(--wp-ok); }
+.wp-toast.error { border-color: rgba(229, 115, 115, 0.5); }
+.wp-toast.error svg { color: var(--wp-bad); }
+
+.wp-toast.warn { border-color: rgba(232, 181, 82, 0.5); }
+.wp-toast.warn svg { color: var(--wp-warn); }
+
+@keyframes wpToast {
+  from { opacity: 0; translate: -10px 0; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+/* ============================================================
+   واکنش‌گرایی
+   ============================================================ */
+@media (max-width: 1000px) {
+  /* روی موبایل منو از سمت راست بیرون می‌رود و با دکمه برمی‌گردد */
+  .wp-side {
+    translate: 100% 0;
+    transition: translate 0.3s var(--wp-ease);
+    box-shadow: -14px 0 40px rgba(0, 0, 0, 0.5);
+  }
+  .wp-main { margin-right: 0; margin-left: 0; }
+  .wp-burger { display: grid; }
+
+  body.wp-open .wp-side { translate: 0 0; }
+  body.wp-open .wp-veil { opacity: 1; visibility: visible; }
+}
+
+@media (max-width: 620px) {
+  .wp-content { padding: 14px; }
+  .wp-top { padding: 12px 14px; }
+  .wp-card { padding: 14px; }
+  .wp-kpis { grid-template-columns: repeat(auto-fit, minmax(142px, 1fr)); gap: 9px; }
+  .wp-kpi b { font-size: 19px; }
+  .wp-toasts { inset-inline: 12px; }
+  .wp-toast { max-width: none; }
+  .wp-modal-card { padding: 18px; }
+  .wp-tier-row { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   نردبان بازار عمده
+   ------------------------------------------------------------
+   کارت هر بسته باید در یک نگاه بگوید «چه می‌خری و چه می‌گیری».
+   نوار قدرت، وزن بسته را چشمی نشان می‌دهد.
+   ============================================================ */
+.wp-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+  gap: 13px;
+}
+
+.wp-plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 17px 16px 15px;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 16px;
+  background: rgba(20, 32, 58, 0.65);
+  border: 1.5px solid rgba(201, 168, 76, 0.16);
+  transition: translate 0.28s var(--wp-ease),
+              border-color 0.28s var(--wp-ease),
+              box-shadow 0.28s var(--wp-ease);
+}
+
+/* هاله‌ی رنگی بسته */
+.wp-plan::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 88px;
+  z-index: -1;
+  opacity: 0;
+  background: radial-gradient(120% 100% at 50% 0%, var(--pc, var(--wp-gold)) 0%, transparent 72%);
+  transition: opacity 0.3s var(--wp-ease);
+}
+
+.wp-plan::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--pc, var(--wp-gold));
+  opacity: 0.5;
+  transition: opacity 0.28s var(--wp-ease), height 0.28s var(--wp-ease);
+}
+
+.wp-plan:hover {
+  translate: 0 -4px;
+  border-color: var(--pc, var(--wp-gold));
+  box-shadow: 0 18px 36px -22px var(--pc, var(--wp-gold));
+}
+
+.wp-plan:hover::before { opacity: 0.14; }
+.wp-plan:hover::after { height: 4px; opacity: 1; }
+
+.wp-plan.on {
+  border-color: var(--pc, var(--wp-gold));
+  box-shadow: 0 0 0 1.5px var(--pc, var(--wp-gold)) inset,
+              0 18px 36px -22px var(--pc, var(--wp-gold));
+}
+
+.wp-plan.on::before { opacity: 0.17; }
+.wp-plan.on::after { height: 4px; opacity: 1; }
+
+.wp-plan.is-busy { opacity: 0.6; cursor: not-allowed; }
+.wp-plan.is-busy:hover { translate: 0; box-shadow: none; }
+.wp-plan.is-busy:hover::before { opacity: 0; }
+
+.wp-plan.is-owned { border-color: rgba(76, 175, 80, 0.45); }
+.wp-plan.is-owned::after { background: var(--wp-ok); opacity: 0.75; }
+
+/* ---------- سر کارت ---------- */
+.wp-plan-head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+
+.wp-plan-ico {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  color: var(--pc, var(--wp-gold));
+  background: color-mix(in srgb, var(--pc, var(--wp-gold)) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pc, var(--wp-gold)) 34%, transparent);
+  transition: transform 0.3s var(--wp-ease);
+}
+
+.wp-plan-ico svg { width: 21px; height: 21px; }
+.wp-plan:hover .wp-plan-ico { transform: scale(1.08) rotate(-4deg); }
+
+.wp-plan-name { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.wp-plan-name strong { font-size: 14.5px; font-weight: 800; }
+.wp-plan-name em {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pc, var(--wp-gold));
+  opacity: 0.9;
+}
+
+/* ---------- نوار قدرت ---------- */
+.wp-plan-power { display: flex; align-items: center; gap: 8px; }
+
+.wp-plan-track {
+  flex: 1;
+  height: 5px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: rgba(154, 166, 187, 0.2);
+}
+
+.wp-plan-track i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--pc, var(--wp-gold)) 55%, transparent), var(--pc, var(--wp-gold)));
+}
+
+.wp-plan-power b {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--pc, var(--wp-gold));
+  min-width: 22px;
+  text-align: left;
+}
+
+/* ---------- مزایا ---------- */
+.wp-plan-perks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.wp-plan-perks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--wp-gray);
+}
+
+.wp-plan-perks svg {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  margin-top: 3px;
+  color: var(--pc, var(--wp-gold));
+}
+
+/* ---------- نشان گوشه ---------- */
+.wp-plan-flag {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  z-index: 2;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.wp-plan-flag.own { color: #fff; background: var(--wp-ok); }
+.wp-plan-flag.busy { color: #fff; background: rgba(176, 106, 106, 0.9); }
+
+/* ---------- قیمت ---------- */
+.wp-plan-price {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.2);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wp-plan-price b { font-size: 14.5px; font-weight: 800; color: var(--pc, var(--wp-gold)); }
+.wp-plan-price b.free { color: var(--wp-ok); }
+.wp-plan-price small { font-size: 11px; color: var(--wp-dim); }
+.wp-plan-price .strike { text-decoration: line-through; opacity: 0.65; }
+
+.wp-plan-busy {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(176, 106, 106, 0.3);
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: #d98a84;
+}
+
+@supports not (background: color-mix(in srgb, red 10%, transparent)) {
+  .wp-plan-ico { background: rgba(201, 168, 76, 0.14); border-color: rgba(201, 168, 76, 0.32); }
+  .wp-plan-track i { background: var(--pc, var(--wp-gold)); }
+}
+
+/* ============================================================
+   ماشین‌حساب
+   ============================================================ */
+.wp-calc {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 13px;
+  background: rgba(30, 45, 77, 0.5);
+  border: 1px solid var(--wp-line);
+}
+
+.wp-calc:empty { display: none; }
+
+.wp-calc-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 13px;
+  color: var(--wp-gray);
+}
+
+.wp-calc-row b { margin-inline-start: auto; color: var(--wp-ink); font-weight: 700; }
+.wp-calc-row b.minus { color: var(--wp-ok); }
+.wp-calc-row b.free { color: var(--wp-ok); font-size: 15px; }
+.wp-calc-row b.strike { text-decoration: line-through; color: var(--wp-dim); font-weight: 500; }
+
+.wp-calc-row.total {
+  margin-top: 6px;
+  padding-top: 11px;
+  border-top: 1px solid var(--wp-line);
+  font-size: 14px;
+  color: var(--wp-ink);
+}
+
+.wp-calc-row.total b { font-size: 16px; color: var(--wp-gold-l); font-weight: 800; }
+
+/* ============================================================
+   بسته‌ی فعال
+   ============================================================ */
+.wp-live {
+  padding: 14px 15px;
+  margin-bottom: 11px;
+  border-radius: 13px;
+  background: rgba(30, 45, 77, 0.45);
+  border: 1px solid var(--wp-line);
+  border-inline-start: 3px solid var(--pc, var(--wp-gold));
+}
+
+.wp-live:last-child { margin-bottom: 0; }
+
+.wp-live-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 9px;
+  flex-wrap: wrap;
+}
+
+.wp-live-head strong { font-size: 14px; }
+.wp-live-head > :last-child { margin-inline-start: auto; }
+
+.wp-live-bar {
+  height: 6px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: rgba(154, 166, 187, 0.2);
+  margin-bottom: 9px;
+}
+
+.wp-live-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--pc, var(--wp-gold)), var(--wp-gold-l));
+  transition: width 0.5s var(--wp-ease);
+}
+
+.wp-live-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--wp-gray);
+}
+
+.wp-live-foot > :last-child { margin-inline-start: auto; }
+
+/* نمودار کوچک */
+.wp-sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 54px;
+  padding: 6px 4px;
+  margin-bottom: 9px;
+  border-radius: 9px;
+  background: rgba(11, 18, 32, 0.35);
+}
+
+.wp-spark {
+  flex: 1;
+  min-width: 3px;
+  height: var(--h, 4%);
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(180deg, var(--pc, var(--wp-gold)), rgba(184, 148, 60, 0.35));
+}
+
+/* ============================================================
+   نظارت مدیر بر پروفایل
+   ------------------------------------------------------------
+   عمده‌فروش باید بداند کدام تغییرش منتظر تأیید مانده و
+   مدیر قبلاً چه تصمیمی گرفته است.
+   ============================================================ */
+.mod-pend-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.mod-pill {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--wp-gold-l);
+  background: rgba(201, 168, 76, 0.14);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+}
+
+.mod-hist {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 11px 13px;
+  margin-bottom: 8px;
+  border-radius: 11px;
+  background: rgba(30, 45, 77, 0.42);
+  border: 1px solid var(--wp-line);
+}
+
+.mod-hist:last-child { margin-bottom: 0; }
+
+.mod-hist-fields {
+  font-size: 12.5px;
+  color: var(--wp-ink);
+  min-width: 0;
+  flex: 1;
+}
+
+.mod-hist-date {
+  font-size: 11.5px;
+  color: var(--wp-gray);
+  white-space: nowrap;
+}
+
+.mod-hist-why {
+  width: 100%;
+  padding-top: 8px;
+  margin-top: 2px;
+  border-top: 1px dashed rgba(229, 115, 115, 0.24);
+  font-size: 12px;
+  line-height: 1.8;
+  color: #d98a84;
+}
+
+/* ============================================================
+   نظرهای خریداران
+   ============================================================ */
+.wp-rev {
+  padding: 15px;
+  margin-bottom: 11px;
+  border-radius: 13px;
+  background: rgba(30, 45, 77, 0.42);
+  border: 1px solid var(--wp-line);
+}
+
+.wp-rev:last-child { margin-bottom: 0; }
+.wp-rev.is-low { border-inline-start: 3px solid var(--wp-bad); }
+
+.wp-rev-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 9px;
+}
+
+.wp-rev-top strong { font-size: 13.5px; }
+.wp-rev-about { font-size: 11.5px; color: var(--wp-gray); }
+.wp-rev-top time { margin-inline-start: auto; font-size: 11.5px; color: var(--wp-dim); }
+
+.wp-stars { display: inline-flex; gap: 1.5px; }
+.wp-star { width: 13px; height: 13px; fill: rgba(154, 166, 187, 0.3); }
+.wp-star.on { fill: var(--wp-gold-l); }
+
+.wp-rev-txt {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--wp-ink);
+}
+
+.wp-rev-txt.dim { color: var(--wp-dim); font-style: italic; }
+
+.wp-rev-reply {
+  margin-top: 10px;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  line-height: 1.85;
+  color: var(--wp-gray);
+  background: rgba(11, 18, 32, 0.35);
+  border-inline-start: 3px solid var(--wp-gold);
+}
+
+.wp-rev-reply b { color: var(--wp-gold-l); }
+
+/* تاریخ دقیق پایان بسته */
+.wp-live-until {
+  margin: -3px 0 9px;
+  font-size: 11.5px;
+  color: var(--wp-gray);
+}
+
+.wp-live-until b { color: var(--pc, var(--wp-gold-l)); font-weight: 700; }
+
+/* ============================================================
+   کادر افزودن عکس کالا
+   ============================================================ */
+.wp-drop {
+  display: grid;
+  place-items: center;
+  gap: 5px;
+  padding: 24px 16px;
+  border-radius: 12px;
+  border: 1.5px dashed rgba(160, 172, 190, 0.3);
+  background: rgba(20, 32, 58, 0.5);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.22s var(--wp-ease),
+              background 0.22s var(--wp-ease);
+}
+
+.wp-drop:hover,
+.wp-drop:focus-visible,
+.wp-drop.over {
+  border-color: var(--wp-gold);
+  background: rgba(201, 168, 76, 0.07);
+  outline: none;
+}
+
+.wp-drop svg { width: 26px; height: 26px; color: var(--wp-gold); }
+.wp-drop b { font-size: 13px; font-weight: 600; }
+.wp-drop span { font-size: 11.5px; color: var(--wp-gray); }
+
+/* ---------- عکس‌های افزوده‌شده ---------- */
+.wp-shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 9px;
+  margin-top: 11px;
+}
+
+.wp-shots:empty { display: none; }
+
+.wp-shot {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--wp-line);
+  background: var(--wp-navy);
+}
+
+.wp-shot.is-main { border-color: rgba(201, 168, 76, 0.55); }
+
+.wp-shot img { width: 100%; height: 100%; object-fit: cover; }
+
+.wp-shot-main {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 2px 7px;
+  border-radius: 99px;
+  font-size: 9.5px;
+  font-weight: 800;
+  font-style: normal;
+  color: var(--wp-bg);
+  background: var(--wp-gold);
+}
+
+.wp-shot-x {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(11, 18, 32, 0.82);
+  transition: background 0.2s var(--wp-ease);
+}
+
+.wp-shot-x:hover { background: var(--wp-bad); }
+.wp-shot-x svg { width: 13px; height: 13px; }
+
+/* ============================================================
+   مسیر دسته‌بندی — «پوشاک مردانه › رسمی › پیراهن»
+   ============================================================ */
+.wp-trail {
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  color: var(--wp-gold-l);
+  background: rgba(201, 168, 76, 0.09);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+/* ============================================================
+   راست‌چینی منوی پنل عمده — صریح و مقاوم
+   ------------------------------------------------------------
+   همان کاری که در پنل تک‌فروشی شد: جهت و تراز به ارث واگذار
+   نمی‌شود، صریح نوشته می‌شود.
+   ============================================================ */
+.wp-side,
+.wp-side * { direction: rtl; }
+
+.wp-link {
+  text-align: right;
+  justify-content: flex-start;
+}
+
+.wp-link svg { order: 0; flex: none; }
+.wp-link > span:not(.wp-badge) { order: 1; flex: 1; min-width: 0; }
+.wp-badge { order: 2; margin-inline-start: auto; }
+
+/* نشانگر گزینه‌ی فعال، سمت راست */
+.wp-link.is-on::before {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+.wp-brand,
+.wp-side-foot,
+.wp-side-title { text-align: right; }
+
+/* عدد و شمارنده چپ‌به‌راست */
+.wp-side .num,
+.wp-badge { direction: ltr; }
+
+/* ============================================================
+   لینک «پرش به محتوای اصلی»
+   ------------------------------------------------------------
+   برای کسی که با صفحه‌کلید کار می‌کند. تا فشرده‌نشدن Tab
+   دیده نمی‌شود، ولی وجود دارد و صفحه‌خوان می‌خواندش.
+   ============================================================ */
+.dp-skip {
+  position: absolute;
+  inset-inline-start: 16px;
+  top: -100px;
+  z-index: 9999;
+  padding: 11px 20px;
+  border-radius: 0 0 10px 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #14203a;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.3);
+  transition: top 0.2s ease;
+}
+
+.dp-skip:focus,
+.dp-skip:focus-visible {
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-skip { transition: none; }
+}

@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════════════════════
+   club-toast.css — Toast ویژه ماموریت
+   ═══════════════════════════════════════════════════════════════ */
+
+.club-mission-toast {
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-width: 280px;
+  max-width: 90vw;
+}
+
+.club-mission-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.club-mission-toast-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+  animation: club-toast-bounce 0.6s ease-out;
+}
+
+@keyframes club-toast-bounce {
+  0% { transform: scale(0) rotate(0); }
+  50% { transform: scale(1.3) rotate(20deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.club-mission-toast-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.club-mission-toast-body strong {
+  font-size: 14px;
+  font-weight: 800;
+  color: #f0d97b;
+}
+
+.club-mission-toast-body span {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ═══ دکمه دریافت جایزه ═══ */
+.club-reward-claimed {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05)) !important;
+  border: 1.5px solid #10b981 !important;
+  color: #10b981 !important;
+  cursor: default !important;
+  font-weight: 700;
+}
+
+/* ═══ Badge تکمیل ماموریت ═══ */
+.club-mission.is-completed {
+  position: relative;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02)) !important;
+}
+
+.club-mission.is-completed::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  background: #10b981;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+.club-mission.is-completed .club-mission-progress-fill {
+  background: linear-gradient(90deg, #10b981, #34d399) !important;
+}

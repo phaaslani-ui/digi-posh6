@@ -1,0 +1,50 @@
+[
+  {
+    "id": "C001",
+    "title": "🎯 کمپین هفتگی: ۲ برابر امتیاز",
+    "description": "در خریدهای این هفته ۲ برابر امتیاز دریافت کنید",
+    "type": "weekly",
+    "rewardType": "double_points",
+    "rewardValue": 2,
+    "minPurchase": 500000,
+    "startDate": "2026-09-09T10:42:25.205928",
+    "endDate": "2026-09-16T10:42:25.205939",
+    "isActive": true
+  },
+  {
+    "id": "C002",
+    "title": "🏆 کمپین ماهانه: مشتری برتر",
+    "description": "بیشترین خرید این ماه ۵۰۰۰۰۰ تومان تخفیف نقدی برنده می‌شود",
+    "type": "monthly",
+    "rewardType": "discount",
+    "rewardValue": 500000,
+    "minPurchase": 1000000,
+    "startDate": "2026-09-01T10:42:25.205951",
+    "endDate": "2026-10-01T10:42:25.205954",
+    "isActive": true
+  },
+  {
+    "id": "C003",
+    "title": "🎁 هدیه ویژه: ارسال رایگان",
+    "description": "برای خریدهای بالای ۲ میلیون تومان، ارسال رایگان",
+    "type": "special",
+    "rewardType": "free_shipping",
+    "rewardValue": 0,
+    "minPurchase": 2000000,
+    "startDate": "2026-08-14T10:42:25.205957",
+    "endDate": "2026-11-12T10:42:25.205959",
+    "isActive": true
+  },
+  {
+    "id": "C004",
+    "title": "👥 معرفی دوستان",
+    "description": "هر دوست معرفی شده = ۲۰۰ امتیاز + ۱۰٪ تخفیف اولین خرید",
+    "type": "special",
+    "rewardType": "points",
+    "rewardValue": 200,
+    "minPurchase": 0,
+    "startDate": "2026-07-15T10:42:25.205961",
+    "endDate": "2027-07-10T10:42:25.205963",
+    "isActive": true
+  }
+]

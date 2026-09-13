@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>دیجی‌پوش | نمونه اتصال به API</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Vazirmatn',sans-serif; background:#f5f0e8; color:#1a1a1a;
+           direction:rtl; padding:32px; line-height:1.9; }
+    .wrap { max-width:900px; margin:0 auto; }
+    h1 { color:#c9a84c; font-weight:700; margin-bottom:6px; }
+    .sub { color:#8a7e72; margin-bottom:28px; font-size:14px; }
+    .card { background:rgba(250,248,245,.7); border:1px solid rgba(201,168,76,.3);
+            border-radius:14px; padding:22px; margin-bottom:18px; }
+    .card h2 { color:#c9a84c; font-size:17px; margin-bottom:12px; }
+    input { width:100%; padding:11px 14px; margin-bottom:9px; border-radius:9px;
+            border:1px solid rgba(201,168,76,.35); background:#fff; font-family:inherit; font-size:14px; }
+    button { background:linear-gradient(135deg,#c9a84c,#d4b85a); color:#1a1a1a; border:none;
+             padding:11px 26px; border-radius:9px; font-family:inherit; font-weight:700;
+             font-size:14px; cursor:pointer; margin-left:8px; }
+    button:hover { filter:brightness(1.06); }
+    pre { background:#1a1a1a; color:#d4b85a; padding:16px; border-radius:10px;
+          overflow:auto; font-size:12.5px; max-height:280px; direction:ltr; text-align:left; }
+    .status { padding:10px 14px; border-radius:9px; margin-bottom:14px; font-size:13.5px; }
+    .ok  { background:rgba(139,201,168,.2); border:1px solid #8bc9a8; }
+    .err { background:rgba(245,160,160,.2); border:1px solid #f5a0a0; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>نمونه‌ی اتصال فرانت‌اند به بک‌اند</h1>
+  <p class="sub">این صفحه فقط برای تست است. کدهایش را می‌توانید در صفحات واقعی استفاده کنید.</p>
+
+  <div id="status" class="status">در حال بررسی سرویس…</div>
+
+  <div class="card">
+    <h2>۱. ثبت‌نام</h2>
+    <input id="rName" placeholder="نام و نام خانوادگی" value="مریم رضایی" / aria-label="نام و نام خانوادگی">
+    <input id="rEmail" placeholder="ایمیل" value="test@digipoosh.ir" / aria-label="ایمیل">
+    <input id="rPass" type="password" placeholder="رمز عبور" value="123456" / aria-label="رمز عبور">
+    <button onclick="doRegister()">ثبت‌نام مشتری</button>
+    <button onclick="doRegisterSeller()">ثبت‌نام فروشنده</button>
+  </div>
+
+  <div class="card">
+    <h2>۲. ورود</h2>
+    <input id="lEmail" placeholder="ایمیل" value="test@digipoosh.ir" / aria-label="ایمیل">
+    <input id="lPass" type="password" placeholder="رمز عبور" value="123456" / aria-label="رمز عبور">
+    <button onclick="doLogin()">ورود</button>
+    <button onclick="doMe()">اطلاعات من</button>
+    <button onclick="DP.auth.logout().then(()=>show({پیام:'خارج شدید'}))">خروج</button>
+  </div>
+
+  <div class="card">
+    <h2>۳. محصولات و سبد</h2>
+    <button onclick="loadProducts()">فهرست محصولات</button>
+    <button onclick="loadCategories()">دسته‌بندی‌ها</button>
+    <button onclick="DP.cart.get().then(show).catch(showErr)">سبد خرید من</button>
+  </div>
+
+  <div class="card">
+    <h2>۴. پنل‌ها</h2>
+    <button onclick="DP.seller.stats().then(show).catch(showErr)">آمار فروشنده</button>
+    <button onclick="DP.admin.stats().then(show).catch(showErr)">داشبورد ادمین</button>
+    <button onclick="DP.admin.sellers({status:'pending'}).then(show).catch(showErr)">فروشندگان در انتظار</button>
+  </div>
+
+  <div class="card">
+    <h2>خروجی</h2>
+    <pre id="out">…</pre>
+  </div>
+</div>
+
+<!-- آدرس بک‌اند را اینجا تنظیم کنید -->
+<script>window.DIGIPOOSH_API_URL = 'http://localhost:3000';</script>
+<script src="./digipoosh-api.js"></script>
+<script>
+  const out = document.getElementById('out');
+  const st  = document.getElementById('status');
+
+  const show    = (d) => out.textContent = JSON.stringify(d, null, 2);
+  const showErr = (e) => out.textContent = '❌ ' + e.message +
+                          (e.status ? `  (کد ${e.status})` : '');
+
+  // بررسی سلامت سرویس
+  DP.health()
+    .then(d => { st.className = 'status ok';
+                 st.textContent = `✅ سرویس فعال است — نرخ کمیسیون: ${d.commission_rate}٪`; })
+    .catch(e => { st.className = 'status err';
+                  st.textContent = `❌ ${e.message} — آیا بک‌اند اجرا شده؟`; });
+
+  async function doRegister() {
+    try {
+      show(await DP.auth.register({
+        full_name: rName.value, email: rEmail.value,
+        password: rPass.value, role: 'customer',
+      }));
+    } catch (e) { showErr(e); }
+  }
+
+  async function doRegisterSeller() {
+    try {
+      show(await DP.auth.register({
+        full_name: rName.value, email: 'seller_' + rEmail.value,
+        password: rPass.value, role: 'seller',
+        shop_name: 'بوتیک نمونه', category: 'women',
+      }));
+    } catch (e) { showErr(e); }
+  }
+
+  async function doLogin() {
+    try {
+      const d = await DP.auth.login(lEmail.value, lPass.value);
+      show({ پیام: 'ورود موفق', نقش: d.user.role, نام: d.user.full_name });
+    } catch (e) { showErr(e); }
+  }
+
+  async function doMe()          { try { show(await DP.auth.me()); }        catch(e){ showErr(e);} }
+  async function loadProducts()  { try { show(await DP.products.list({limit:5})); } catch(e){ showErr(e);} }
+  async function loadCategories(){ try { show(await DP.products.categories()); }    catch(e){ showErr(e);} }
+</script>
+</body>
+</html>

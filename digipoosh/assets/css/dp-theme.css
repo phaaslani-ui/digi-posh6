@@ -1,0 +1,1487 @@
+/* ============================================================
+   دیجی‌پوش — تم بخشی فروشگاه
+   ------------------------------------------------------------
+   هر فروشگاه حال‌وهوای بخشی را می‌گیرد که مشتری از آن آمده.
+
+   نکته‌ی معماری: هیچ گزینشگری برای هر تم تکرار نشده. همه‌ی
+   قاعده‌ها یک بار نوشته شده‌اند و از متغیرهای `--st-*` تغذیه
+   می‌کنند. جاوااسکریپت فقط همان متغیرها را عوض می‌کند.
+
+   نتیجه: افزودن تم پنجم یعنی افزودن یک شیء در JS — نه یک خط CSS.
+   ============================================================ */
+
+/* ============================================================
+   ۱. پایه — وقتی تمی فعال است
+   ============================================================ */
+/* متغیرهای پایه‌ی صفحه هم از تم تغذیه می‌شوند.
+   ------------------------------------------------------------
+   باگی که این چند خط بست: نوار منو رنگش را از `var(--ink)`
+   می‌گرفت — یک متغیر ثابت که تم عوضش نمی‌کرد. در تم نوجوان
+   زمینه مشکی می‌شد ولی متن منو مشکی می‌ماند، پس منو کاملاً
+   محو می‌شد.
+
+   حالا هر گزینشگری که از متغیرهای قدیمی استفاده می‌کند
+   (منو، پابرگ، مسیر صفحه و ده‌ها جای دیگر) خودکار با تم
+   هماهنگ می‌شود — بدون اینکه لازم باشد تک‌تک بازنویسی شوند. */
+html[data-store-theme] {
+  --ink: var(--st-ink);
+  --gray: var(--st-mute);
+  --cream: var(--st-bg);
+  --off-white: var(--st-surface);
+  --beige: var(--st-surface);
+  --gold: var(--st-primary);
+  --gold-bright: var(--st-primary);
+  --bronze: var(--st-second);
+}
+
+html[data-store-theme] body {
+  background: var(--st-bg);
+  color: var(--st-ink);
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* ---------- نوار ناوبری و پابرگ ----------
+   این‌ها بیرون از <main> هستند، پس قاعده‌های بخش ۵ به آن‌ها
+   نمی‌رسید. اینجا صریح رنگ می‌گیرند. */
+html[data-store-theme] .sh-bar,
+html[data-store-theme] .sh-head,
+html[data-store-theme] .crumbs,
+html[data-store-theme] .footer,
+html[data-store-theme] .sf-links { color: var(--st-ink); }
+
+html[data-store-theme] .sh-menu a,
+html[data-store-theme] .crumbs a,
+html[data-store-theme] .sf-links a { color: var(--st-ink); }
+
+html[data-store-theme] .sh-menu a:hover,
+html[data-store-theme] .crumbs a:hover,
+html[data-store-theme] .sf-links a:hover { color: var(--st-second); }
+
+/* نشان و لوگو */
+html[data-store-theme] .sh-mark,
+html[data-store-theme] .sh-name { color: var(--st-ink); }
+
+html[data-store-theme] .sh-tag,
+html[data-store-theme] .crumbs { color: var(--st-mute); }
+
+/* در تم‌های تیره، نوار شیشه‌ای باید تیره باشد نه روشن */
+html[data-store-dark="1"] .sh-head,
+html[data-store-dark="1"] .sh-bar {
+  background: color-mix(in srgb, var(--st-bg) 82%, transparent);
+}
+
+/* زیرمنو — به body منتقل می‌شود، پس گزینشگر جدا لازم دارد */
+html[data-store-theme] .submenu,
+html[data-store-theme] .dp-pop {
+  color: var(--st-ink);
+  background: var(--st-surface);
+  border-color: var(--st-line);
+}
+
+html[data-store-theme] .submenu a,
+html[data-store-theme] .dp-pop a { color: var(--st-ink); }
+
+html[data-store-theme] .submenu a:hover,
+html[data-store-theme] .dp-pop a:hover {
+  color: var(--st-second);
+  background: color-mix(in srgb, var(--st-second) 12%, transparent);
+}
+
+/* بافت پس‌زمینه‌ی نرم — هر تم رنگ خودش را می‌دهد */
+html[data-store-theme] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 62% 46% at 88% 0%, var(--st-glow), transparent 60%),
+    radial-gradient(ellipse 54% 48% at 6% 94%, var(--st-glow), transparent 62%);
+  opacity: 0.55;
+}
+
+/* ============================================================
+   ۲. لایه‌ی تزئینی — شکل‌های شناور
+   ------------------------------------------------------------
+   حرکت با CSS انجام می‌شود نه JS، پس روی ۶۰ فریم می‌ماند.
+   ============================================================ */
+.st-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.st-shape {
+  position: absolute;
+  width: var(--sz, 44px);
+  height: var(--sz, 44px);
+  opacity: 0.16;
+  will-change: transform;
+  animation: stDrift var(--dur, 18s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.st-shape svg { width: 100%; height: 100%; }
+
+/* چهار رنگ چرخشی، از خود تم */
+.st-s0 { color: var(--st-primary); }
+.st-s1 { color: var(--st-second); }
+.st-s2 { color: var(--st-accent); }
+.st-s3 { color: var(--st-primary); opacity: 0.11; }
+
+@keyframes stDrift {
+  0%,
+  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  25%  { transform: translate3d(18px, -26px, 0) rotate(9deg); }
+  50%  { transform: translate3d(-14px, -42px, 0) rotate(-7deg); }
+  75%  { transform: translate3d(-22px, -18px, 0) rotate(5deg); }
+}
+
+/* در تم‌های تیره، شکل‌ها کمی پررنگ‌تر دیده می‌شوند */
+html[data-store-dark="1"] .st-shape { opacity: 0.22; }
+html[data-store-dark="1"] .st-s3 { opacity: 0.15; }
+
+/* تم نوجوان: شکل‌ها نبض می‌گیرند */
+html[data-store-theme="teen"] .st-shape {
+  filter: drop-shadow(0 0 7px currentColor);
+  animation: stDrift var(--dur, 18s) ease-in-out infinite,
+             stPulse 3.2s ease-in-out infinite;
+}
+
+@keyframes stPulse {
+  0%, 100% { opacity: 0.16; }
+  50%      { opacity: 0.34; }
+}
+
+/* تم بچگانه: شکل‌ها بالا و پایین می‌پرند */
+html[data-store-theme="kids"] .st-shape {
+  animation: stBounce var(--dur, 18s) ease-in-out infinite;
+}
+
+@keyframes stBounce {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(12px, -34px, 0) scale(1.14); }
+}
+
+/* تم مردانه: شکل‌ها آرام می‌چرخند */
+html[data-store-theme="men"] .st-shape {
+  animation: stSpin var(--dur, 18s) linear infinite;
+}
+
+@keyframes stSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   ۳. قاب متحرک — امضای بصری هر تم
+   ------------------------------------------------------------
+   نوار گرادیانی که دور کارت می‌چرخد. با ماسک ساخته می‌شود تا
+   فقط لبه رنگ بگیرد، نه کل کارت.
+   ============================================================ */
+.st-frame {
+  position: relative;
+  border-radius: var(--st-radius);
+  background: var(--st-surface);
+  isolation: isolate;
+}
+
+.st-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 2.5px;
+  border-radius: inherit;
+  background: var(--st-flow);
+  background-size: 320% 320%;
+  animation: stFlow 9s linear infinite;
+
+  /* فقط حاشیه رنگ می‌گیرد */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@keyframes stFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* در تم نوجوان، قاب می‌درخشد */
+html[data-store-theme="teen"] .st-frame {
+  box-shadow: 0 0 22px -8px var(--st-glow);
+}
+
+/* ============================================================
+   ۴. نوار معرفی تم — بالای صفحه‌ی فروشگاه
+   ============================================================ */
+.st-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--st-ink);
+  background: color-mix(in srgb, var(--st-second) 16%, transparent);
+  border: 1px solid var(--st-line);
+}
+
+.st-badge svg { width: 14px; height: 14px; color: var(--st-second); }
+.st-badge b { color: var(--st-second); }
+
+/* ============================================================
+   ۵. اجزای صفحه‌ی فروشگاه، تحت تم
+   ------------------------------------------------------------
+   گزینشگرهای موجود صفحه‌ی فروشگاه بازنویسی می‌شوند — یک بار،
+   برای همه‌ی تم‌ها.
+   ============================================================ */
+html[data-store-theme] .hero,
+html[data-store-theme] .pcard,
+html[data-store-theme] .filters,
+html[data-store-theme] .sum-card,
+html[data-store-theme] .dp-filters {
+  background: var(--st-surface);
+  border-color: var(--st-line);
+  border-radius: var(--st-radius);
+  color: var(--st-ink);
+}
+
+html[data-store-theme] .pcard {
+  border-radius: var(--st-radius-sm);
+  transition: translate 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.32s ease,
+              border-color 0.32s ease;
+}
+
+html[data-store-theme] .pcard:hover {
+  translate: 0 -5px;
+  border-color: var(--st-second);
+  box-shadow: 0 14px 32px -14px var(--st-shadow);
+}
+
+/* عنوان‌ها */
+html[data-store-theme] h1,
+html[data-store-theme] h2,
+html[data-store-theme] h3 { color: var(--st-ink); }
+
+/* متن‌های فرعی */
+html[data-store-theme] .hero-desc,
+html[data-store-theme] .pcat,
+html[data-store-theme] .result-line,
+html[data-store-theme] .hint { color: var(--st-mute); }
+
+/* قیمت با رنگ اصلی تم */
+html[data-store-theme] .pprice { color: var(--st-second); }
+
+/* ---------- دکمه‌ها ---------- */
+html[data-store-theme] .btn-gold,
+html[data-store-theme] .btn-store,
+html[data-store-theme] .padd {
+  color: var(--st-on-primary);
+  background: linear-gradient(135deg,
+              var(--st-primary), var(--st-second));
+  border: 0;
+  border-radius: var(--st-radius-sm);
+  transition: filter 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+html[data-store-theme] .btn-gold:hover,
+html[data-store-theme] .btn-store:hover,
+html[data-store-theme] .padd:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px -8px var(--st-glow);
+}
+
+/* دکمه‌ی فرعی */
+html[data-store-theme] .btn-ghost,
+html[data-store-theme] .chip {
+  color: var(--st-second);
+  background: transparent;
+  border: 1px solid var(--st-line);
+  border-radius: var(--st-radius-sm);
+}
+
+html[data-store-theme] .chip.on {
+  color: var(--st-on-primary);
+  background: var(--st-second);
+  border-color: transparent;
+}
+
+/* ---------- ورودی‌ها ---------- */
+html[data-store-theme] input,
+html[data-store-theme] select,
+html[data-store-theme] textarea {
+  color: var(--st-ink);
+  background: color-mix(in srgb, var(--st-surface) 92%, var(--st-ink) 4%);
+  border-color: var(--st-line);
+  border-radius: var(--st-radius-sm);
+}
+
+html[data-store-theme] input:focus,
+html[data-store-theme] select:focus {
+  outline: none;
+  border-color: var(--st-second);
+  box-shadow: 0 0 0 3px var(--st-glow);
+}
+
+/* ============================================================
+   ۶. اثر گلیچ — فقط تم نوجوان
+   ------------------------------------------------------------
+   نام فروشگاه لرزش خفیف دیجیتال می‌گیرد. «خفیف» عمدی است؛
+   گلیچ شدید متن فارسی را ناخوانا می‌کند.
+   ============================================================ */
+html[data-store-theme="teen"] .st-glitch {
+  position: relative;
+  /* درخشش طلایی به‌جای نئون بنفش — هم‌خانواده‌ی برند */
+  text-shadow:
+     1px 0 0 color-mix(in srgb, var(--st-second) 60%, transparent),
+    -1px 0 0 color-mix(in srgb, var(--st-primary) 60%, transparent);
+  animation: stGlitch 4.5s steps(1) infinite;
+}
+
+@keyframes stGlitch {
+  0%, 92%, 100% { text-shadow:
+     1px 0 0 color-mix(in srgb, var(--st-second) 60%, transparent),
+    -1px 0 0 color-mix(in srgb, var(--st-primary) 60%, transparent); }
+  94% { text-shadow:
+     3px 0 0 color-mix(in srgb, var(--st-second) 80%, transparent),
+    -3px 0 0 color-mix(in srgb, var(--st-primary) 80%, transparent); }
+  96% { text-shadow:
+    -2px 0 0 color-mix(in srgb, var(--st-second) 75%, transparent),
+     2px 0 0 color-mix(in srgb, var(--st-primary) 75%, transparent); }
+}
+
+/* ============================================================
+   ۷. پیش‌نمایش تم — در پنل فروشنده
+   ============================================================ */
+.st-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: 14px;
+}
+
+.st-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: start;
+  overflow: hidden;
+  background: var(--pv-surface, #faf8f5);
+  border: 2px solid var(--pv-line, rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.st-card:hover { transform: translateY(-3px); }
+
+.st-card.on {
+  border-color: var(--pv-second, #c9a84c);
+  box-shadow: 0 10px 28px -12px var(--pv-glow, rgba(0, 0, 0, 0.2));
+}
+
+/* تیک گزینه‌ی انتخاب‌شده */
+.st-card.on::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  width: 9px;
+  height: 16px;
+  border: 2.5px solid var(--pv-second, #c9a84c);
+  border-top: 0;
+  border-inline-start: 0;
+  rotate: 45deg;
+}
+
+.st-card-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.st-swatches { display: flex; gap: 5px; }
+
+.st-sw-dot {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14);
+}
+
+.st-card strong { font-size: 14px; color: var(--pv-ink, #1a1a1a); }
+.st-card span { font-size: 11.5px; color: var(--pv-mute, #75695f); }
+
+/* نوار نمونه — نشان می‌دهد قاب متحرک چه شکلی است */
+.st-card-bar {
+  height: 5px;
+  border-radius: 99px;
+  background: var(--pv-flow, #c9a84c);
+  background-size: 320% 320%;
+  animation: stFlow 9s linear infinite;
+}
+
+/* دکمه‌ی نمونه داخل کارت پیش‌نمایش */
+.st-card-btn {
+  align-self: flex-start;
+  padding: 5px 13px;
+  border-radius: var(--pv-radius, 12px);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--pv-on, #1a1a1a);
+  background: linear-gradient(135deg, var(--pv-primary, #c9a84c), var(--pv-second, #b8943c));
+}
+
+/* ============================================================
+   ۸. احترام به «کاهش حرکت»
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .st-shape,
+  .st-frame::before,
+  .st-card-bar,
+  html[data-store-theme="teen"] .st-glitch,
+  html[data-store-theme="teen"] .st-shape,
+  html[data-store-theme="kids"] .st-shape,
+  html[data-store-theme="men"] .st-shape { animation: none; }
+
+  html[data-store-theme] body,
+  html[data-store-theme] .pcard,
+  .st-card { transition: none; }
+
+  .st-card:hover,
+  html[data-store-theme] .pcard:hover { transform: none; translate: none; }
+}
+
+/* ============================================================
+   ۹. موبایل — لایه‌ی تزئینی سبک‌تر
+   ============================================================ */
+@media (max-width: 640px) {
+  /* روی گوشی نیمی از شکل‌ها بس است؛ باتری مهم‌تر از تزئین */
+  .st-shape:nth-child(n + 5) { display: none; }
+  .st-shape { opacity: 0.12; }
+  .st-picker { grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 10px; }
+}
+
+/* دستگاه‌های کم‌توان — لایه به‌کلی خاموش */
+@media (max-width: 400px) {
+  .st-ambient { display: none; }
+}
+
+/* ============================================================
+   ۱۰. پیش‌نمایش تم در پنل فروشنده
+   ------------------------------------------------------------
+   یک ویترین کوچک که همان‌طور رنگ می‌گیرد که صفحه‌ی واقعی
+   فروشگاه. فروشنده پیش از ذخیره می‌بیند نتیجه چه شکلی است.
+   ============================================================ */
+.th-preview { margin-top: 18px; }
+
+.th-pv-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gray, #75695f);
+}
+
+.th-pv-stage {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 20px;
+  min-height: 168px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+
+  /* رنگ‌ها از متغیرهایی می‌آید که JS روی همین عنصر می‌گذارد */
+  background: var(--st-bg, #f5f0e8);
+  border: 1px solid var(--st-line, rgba(0, 0, 0, 0.1));
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+/* هاله‌ی نرم، مثل صفحه‌ی واقعی */
+.th-pv-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 85% 5%, var(--st-glow, transparent), transparent 62%),
+    radial-gradient(ellipse 55% 50% at 8% 95%, var(--st-glow, transparent), transparent 64%);
+  opacity: 0.6;
+}
+
+/* لایه‌ی شکل‌ها داخل پیش‌نمایش */
+.th-pv-shapes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.th-pv-shapes .st-shape { opacity: 0.2; }
+.th-pv-stage[data-theme="men"] .st-shape,
+.th-pv-stage[data-theme="teen"] .st-shape { opacity: 0.26; }
+
+/* کارت نمونه */
+.th-pv-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: min(320px, 100%);
+  padding: 16px 18px;
+  border-radius: var(--st-radius, 16px);
+  background: var(--st-surface, #fff);
+  border: 1px solid var(--st-line, rgba(0, 0, 0, 0.1));
+  box-shadow: 0 10px 28px -14px var(--st-shadow, rgba(0, 0, 0, 0.2));
+  transition: border-radius 0.3s ease, background 0.4s ease;
+}
+
+.th-pv-card strong {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--st-ink, #1a1a1a);
+}
+
+.th-pv-card > span {
+  font-size: 11.5px;
+  color: var(--st-mute, #75695f);
+}
+
+.th-pv-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.th-pv-price {
+  font-size: 13.5px;
+  font-weight: 800;
+  font-style: normal;
+  color: var(--st-second, #c9a84c);
+}
+
+.th-pv-btn {
+  padding: 7px 15px;
+  border: 0;
+  border-radius: var(--st-radius-sm, 10px);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: default;
+  color: var(--st-on-primary, #1a1a1a);
+  background: linear-gradient(135deg, var(--st-primary, #c9a84c), var(--st-second, #b8943c));
+  transition: border-radius 0.3s ease;
+}
+
+/* ---------- انتخابگر رنگ ---------- */
+.th-color {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.th-color input[type="color"] {
+  width: 46px;
+  height: 38px;
+  padding: 3px;
+  flex: none;
+  cursor: pointer;
+  border-radius: 9px;
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.34);
+}
+
+.th-color .chip { white-space: nowrap; }
+
+/* ---------- لغزنده‌ی گردی ---------- */
+#thRadius {
+  width: 100%;
+  accent-color: var(--gold, #c9a84c);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .th-pv-stage,
+  .th-pv-card,
+  .th-pv-btn { transition: none; }
+}
+
+/* ============================================================
+   ۱۱. حرکت دلخواه فروشنده
+   ------------------------------------------------------------
+   فروشنده می‌تواند حرکت شکل‌ها را جدا از تم پایه انتخاب کند.
+   این قاعده‌ها بر حرکت پیش‌فرض تم غلبه می‌کنند.
+   ============================================================ */
+[data-motion="drift"]  .st-shape { animation-name: stDrift; }
+[data-motion="spin"]   .st-shape { animation-name: stSpin; }
+[data-motion="bounce"] .st-shape { animation-name: stBounce; }
+
+[data-motion="pulse"] .st-shape {
+  animation-name: stDrift, stPulse;
+  animation-duration: var(--dur, 18s), 3.2s;
+  animation-timing-function: ease-in-out, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+[data-motion="none"] .st-shape {
+  animation: none;
+  /* بدون حرکت، شکل‌ها کمی محوترند تا حواس را پرت نکنند */
+  opacity: 0.1;
+}
+
+/* ضخامت قاب، اگر فروشنده تغییرش داده باشد */
+html[data-store-theme] .st-frame::before { padding: var(--st-bw, 2.5px); }
+
+/* قاب صفر یعنی بدون نوار متحرک */
+html[data-store-theme] .st-frame[style*="--st-bw: 0"]::before,
+.st-frame::before { transition: padding 0.3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion] .st-shape { animation: none; }
+}
+
+/* ============================================================
+   ۱۲. تم‌ساز فروشنده
+   ============================================================ */
+.th-step {
+  margin: 0 0 11px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gold-text, #8a6d1f);
+}
+
+.th-sec {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.28);
+}
+
+.th-sec-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.th-sec-head .th-step { margin-bottom: 0; }
+
+/* ---------- شبکه‌ی ردیف‌های رنگ ---------- */
+.th-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.th-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 11px;
+  cursor: pointer;
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  transition: border-color 0.24s ease, background 0.24s ease;
+}
+
+.th-row:hover { border-color: rgba(201, 168, 76, 0.46); }
+
+/* ردیفی که فروشنده عوضش کرده */
+.th-row.is-set {
+  background: rgba(201, 168, 76, 0.11);
+  border-color: rgba(201, 168, 76, 0.5);
+}
+
+.th-row input[type="color"] {
+  width: 38px;
+  height: 34px;
+  flex: none;
+  padding: 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.th-row-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.th-row-txt b {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink, #1a1a1a);
+}
+
+.th-row-txt em {
+  font-size: 10.5px;
+  font-style: normal;
+  direction: ltr;
+  text-align: start;
+  color: var(--gray, #75695f);
+}
+
+.th-row-x {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--gray, #75695f);
+  background: transparent;
+  transition: color 0.22s ease, background 0.22s ease;
+}
+
+.th-row-x:hover { color: #fff; background: var(--danger, #c0453f); }
+.th-row-x svg { width: 11px; height: 11px; }
+
+/* ---------- هشدار خوانایی ---------- */
+.th-warn {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(201, 168, 76, 0.09);
+  border: 1px solid rgba(201, 168, 76, 0.42);
+}
+
+.th-warn-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.th-warn-head svg { width: 18px; height: 18px; flex: none; color: #8f6a00; }
+.th-warn-head strong { font-size: 13px; color: var(--ink, #1a1a1a); }
+
+.th-warn ul {
+  margin: 0 0 11px;
+  padding-inline-start: 18px;
+  font-size: 12px;
+  line-height: 1.95;
+  color: var(--gray, #75695f);
+}
+
+.th-warn ul b { color: #8f6a00; }
+
+.th-warn-fix {
+  padding-top: 10px;
+  border-top: 1px solid rgba(201, 168, 76, 0.24);
+}
+
+@media (max-width: 560px) {
+  .th-grid { grid-template-columns: minmax(0, 1fr); }
+  .th-sec-head { flex-direction: column; align-items: stretch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .th-row, .th-row-x { transition: none; }
+}
+
+/* ============================================================
+   ۱۳. صفحه‌ی تم‌ساز و کارت میان‌بر
+   ============================================================ */
+
+/* ---------- سربرگ صفحه‌ی تم‌ساز ---------- */
+.th-intro-in {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.th-intro-ico {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 14px;
+  color: var(--gold-text, #8a6d1f);
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+}
+
+.th-intro-ico svg { width: 26px; height: 26px; }
+
+.th-intro h2 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink, #1a1a1a);
+}
+
+.th-intro p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--gray, #75695f);
+}
+
+/* ---------- کارت میان‌بر در پروفایل ---------- */
+.th-link-in {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.th-link-ico {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 13px;
+  color: var(--gold-text, #8a6d1f);
+  background: rgba(201, 168, 76, 0.11);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+}
+
+.th-link-ico svg { width: 23px; height: 23px; }
+
+.th-link-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 140px;
+}
+
+.th-link-txt strong {
+  font-size: 14px;
+  color: var(--gold-text, #8a6d1f);
+}
+
+.th-link-txt span {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--gray, #75695f);
+}
+
+.th-link-in .btn { flex: none; }
+
+/* دکمه‌ی «ساخت و ویرایش» — پیکان به سمت راست در صفحه‌ی راست‌به‌چپ */
+.th-link-in .btn svg { rotate: 180deg; }
+
+@media (max-width: 560px) {
+  .th-intro-in { flex-direction: column; gap: 12px; }
+  .th-link-in .btn { width: 100%; justify-content: center; }
+}
+
+/* ============================================================
+   ۱۴. ظاهرهای آماده — انتخاب یک‌کلیکی
+   ------------------------------------------------------------
+   هر کارت یک ویترین کوچک است که همان رنگ‌ها را نشان می‌دهد.
+   فروشنده به‌جای خواندن کد رنگ، نتیجه را می‌بیند.
+   ============================================================ */
+.th-looks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(148px, 100%), 1fr));
+  gap: 11px;
+}
+
+.th-look {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 9px;
+  border-radius: 13px;
+  cursor: pointer;
+  text-align: start;
+  background: transparent;
+  border: 2px solid rgba(201, 168, 76, 0.18);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.th-look:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 168, 76, 0.5);
+}
+
+.th-look.on {
+  border-color: var(--gold, #c9a84c);
+  box-shadow: 0 8px 22px -10px rgba(201, 168, 76, 0.55);
+}
+
+/* ---------- ویترین کوچک داخل کارت ---------- */
+.th-look-pv {
+  display: grid;
+  place-items: center;
+  height: 66px;
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--lk-bg);
+}
+
+.th-look-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 72%;
+  padding: 9px;
+  border-radius: 7px;
+  background: var(--lk-sf);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.14);
+}
+
+.th-look-line {
+  display: block;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--lk-ink);
+  opacity: 0.85;
+}
+
+.th-look-line.short { width: 58%; background: var(--lk-mute); opacity: 0.7; }
+
+.th-look-btn {
+  display: block;
+  width: 44%;
+  height: 8px;
+  margin-top: 2px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, var(--lk-pri), var(--lk-sec));
+}
+
+/* ---------- برچسب ---------- */
+.th-look-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-inline: 3px;
+}
+
+.th-look-txt b {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink, #1a1a1a);
+}
+
+.th-look-txt em {
+  font-size: 10.5px;
+  font-style: normal;
+  color: var(--gray, #75695f);
+}
+
+/* تیک روی ظاهر انتخاب‌شده */
+.th-look.on .th-look-txt b::after {
+  content: " ✓";
+  color: var(--gold-text, #8a6d1f);
+}
+
+/* ============================================================
+   ۱۵. حال‌وهوا — چهار دکمه‌ی ساده
+   ============================================================ */
+.th-vibes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(112px, 100%), 1fr));
+  gap: 9px;
+}
+
+.th-vibe {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 11px 13px;
+  border-radius: 11px;
+  cursor: pointer;
+  text-align: start;
+  background: rgba(201, 168, 76, 0.05);
+  border: 1.5px solid rgba(201, 168, 76, 0.2);
+  transition: background 0.26s ease, border-color 0.26s ease;
+}
+
+.th-vibe:hover { border-color: rgba(201, 168, 76, 0.48); }
+
+.th-vibe.on {
+  background: rgba(201, 168, 76, 0.14);
+  border-color: var(--gold, #c9a84c);
+}
+
+.th-vibe b { font-size: 13px; font-weight: 700; color: var(--ink, #1a1a1a); }
+.th-vibe em { font-size: 11px; font-style: normal; color: var(--gray, #75695f); }
+
+/* ============================================================
+   ۱۶. تنظیم پیشرفته — تاشو
+   ============================================================ */
+.th-adv {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.3);
+}
+
+.th-adv summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 11px;
+  cursor: pointer;
+  list-style: none;
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.24);
+  transition: background 0.24s ease, border-color 0.24s ease;
+}
+
+.th-adv summary::-webkit-details-marker { display: none; }
+.th-adv summary::marker { content: ""; }
+
+.th-adv summary:hover { border-color: rgba(201, 168, 76, 0.5); }
+
+.th-adv summary > span {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--gold-text, #8a6d1f);
+}
+
+.th-adv summary > em {
+  flex: 1;
+  min-width: 0;
+  font-size: 11.5px;
+  font-style: normal;
+  color: var(--gray, #75695f);
+}
+
+.th-adv-caret {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  color: var(--gold-text, #8a6d1f);
+  transition: rotate 0.26s ease;
+}
+
+.th-adv[open] > summary .th-adv-caret { rotate: 180deg; }
+
+.th-adv-body { padding-top: 18px; }
+
+.th-adv summary:focus-visible {
+  outline: 2px solid var(--gold, #c9a84c);
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .th-looks { grid-template-columns: repeat(auto-fill, minmax(min(128px, 100%), 1fr)); gap: 9px; }
+  .th-look-pv { height: 56px; }
+  .th-adv summary { flex-wrap: wrap; }
+  .th-adv summary > em { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .th-look, .th-vibe, .th-adv summary, .th-adv-caret { transition: none; }
+  .th-look:hover { transform: none; }
+}
+
+/* ============================================================
+   ۱۷. حرکت‌های تازه
+   ------------------------------------------------------------
+   هرکدام شخصیت خودش را دارد. همه با `transform` کار می‌کنند —
+   نه با `top` و `left` — چون مرورگر آن‌ها را روی کارت گرافیک
+   اجرا می‌کند و ۶۰ فریم حفظ می‌شود.
+   ============================================================ */
+
+/* ---------- بالا و پایین، مثل شناور روی آب ---------- */
+@keyframes stFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -26px, 0); }
+}
+
+/* ---------- تاب خوردن، مثل برگ در باد ---------- */
+@keyframes stSway {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+  50%      { transform: translate3d(22px, -10px, 0) rotate(8deg); }
+}
+
+/* ---------- مدار، چرخش دور یک نقطه‌ی نامرئی ---------- */
+@keyframes stOrbit {
+  0%   { transform: rotate(0deg) translateX(26px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(26px) rotate(-360deg); }
+}
+
+/* ---------- نفس کشیدن، بزرگ و کوچک شدن آرام ---------- */
+@keyframes stBreathe {
+  0%, 100% { transform: scale(0.82); opacity: 0.12; }
+  50%      { transform: scale(1.18); opacity: 0.26; }
+}
+
+/* ---------- بارش، از بالا به پایین ---------- */
+@keyframes stFall {
+  0%   { transform: translate3d(0, -70px, 0) rotate(0deg); opacity: 0; }
+  12%  { opacity: 0.2; }
+  88%  { opacity: 0.2; }
+  100% { transform: translate3d(26px, 80px, 0) rotate(200deg); opacity: 0; }
+}
+
+/* ---------- صعود، از پایین به بالا مثل حباب ---------- */
+@keyframes stRise {
+  0%   { transform: translate3d(0, 70px, 0) scale(0.7); opacity: 0; }
+  15%  { opacity: 0.22; }
+  85%  { opacity: 0.22; }
+  100% { transform: translate3d(-18px, -80px, 0) scale(1.1); opacity: 0; }
+}
+
+/* ---------- اتصال به کلید حرکت ---------- */
+[data-motion="float"]   .st-shape { animation-name: stFloat; }
+[data-motion="sway"]    .st-shape { animation-name: stSway; }
+[data-motion="orbit"]   .st-shape { animation-name: stOrbit; }
+[data-motion="breathe"] .st-shape { animation-name: stBreathe; }
+[data-motion="fall"]    .st-shape { animation-name: stFall; }
+[data-motion="rise"]    .st-shape { animation-name: stRise; }
+
+/* بارش و صعود باید یکنواخت باشند، نه شتاب‌دار */
+[data-motion="fall"]  .st-shape,
+[data-motion="rise"]  .st-shape,
+[data-motion="orbit"] .st-shape { animation-timing-function: linear; }
+
+/* نفس کشیدن شفافیت خودش را می‌سازد، پس پایه را کنار می‌گذاریم */
+[data-motion="breathe"] .st-shape { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion="float"]   .st-shape,
+  [data-motion="sway"]    .st-shape,
+  [data-motion="orbit"]   .st-shape,
+  [data-motion="breathe"] .st-shape,
+  [data-motion="fall"]    .st-shape,
+  [data-motion="rise"]    .st-shape { animation: none; opacity: 0.14; }
+}
+
+/* ============================================================
+   ۱۸. چیدمان تم‌ساز — پیش‌نمایش همیشه در دید
+   ------------------------------------------------------------
+   مشکلی که این چند خط حل می‌کند:
+
+   پیش‌نمایش ته صفحه بود. فروشنده رنگی را عوض می‌کرد، اسکرول
+   می‌کرد پایین تا نتیجه را ببیند، دوباره بالا می‌آمد تا رنگ
+   بعدی را بزند. برای هر تغییر یک رفت‌وبرگشت.
+
+   حالا ستون چپ همراه صفحه می‌آید و نتیجه همیشه جلوی چشم است.
+   ============================================================ */
+.th-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 22px;
+  align-items: start;
+}
+
+.th-tools { min-width: 0; }
+
+.th-side {
+  position: sticky;
+  /* زیر نوار بالای پنل می‌نشیند */
+  top: 84px;
+  align-self: start;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--card, #fff);
+  border: 1px solid var(--line, rgba(0, 0, 0, 0.08));
+  box-shadow: 0 6px 26px -14px rgba(0, 0, 0, 0.2);
+}
+
+.th-side::-webkit-scrollbar { width: 6px; }
+.th-side::-webkit-scrollbar-track { background: transparent; }
+.th-side::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: rgba(201, 168, 76, 0.34);
+}
+
+.th-side .th-preview { margin-top: 0; }
+
+/* پیش‌نمایش در ستون باریک، بلندتر و کشیده‌تر می‌شود */
+.th-side .th-pv-stage { min-height: 200px; }
+
+.th-side-acts {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.3);
+}
+
+.th-side-note {
+  margin: 9px 0 0;
+  font-size: 11.5px;
+  line-height: 1.85;
+  text-align: center;
+  color: var(--gray, #75695f);
+}
+
+.th-side-note b { color: var(--gold-text, #8a6d1f); }
+
+/* ============================================================
+   موبایل و تبلت — پیش‌نمایش به بالای صفحه می‌چسبد
+   ------------------------------------------------------------
+   در عرض کم، ستون کناری جا نمی‌شود. پس پیش‌نمایش به شکل یک
+   نوار فشرده بالای صفحه می‌چسبد — باز هم بدون نیاز به اسکرول.
+   ============================================================ */
+@media (max-width: 1080px) {
+  .th-layout { grid-template-columns: minmax(0, 1fr); }
+
+  .th-side {
+    position: sticky;
+    top: 64px;
+    z-index: 20;
+    order: -1;               /* پیش از ابزار می‌آید */
+    max-height: none;
+    overflow: visible;
+    padding: 12px;
+    /* پس‌زمینه‌ی مات تا محتوای زیرش دیده نشود */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* در حالت فشرده، ویترین کوتاه‌تر می‌شود */
+  .th-side .th-pv-stage { min-height: 132px; padding: 16px 14px; }
+  .th-side .th-pv-label { margin-bottom: 5px; }
+  .th-side .th-pv-card { width: min(260px, 100%); padding: 12px 14px; }
+
+  .th-side-acts { margin-top: 10px; padding-top: 10px; }
+  .th-side-note { display: none; }
+}
+
+@media (max-width: 560px) {
+  .th-side .th-pv-stage { min-height: 112px; }
+  .th-side .th-pv-card > span { display: none; }
+}
+
+/* ============================================================
+   دکمه‌ی «دیدن نتیجه» — میان‌بر روی موبایل
+   ------------------------------------------------------------
+   اگر کاربر پایین صفحه باشد و نوار چسبان از دید خارج شود،
+   این دکمه او را برمی‌گرداند.
+   ============================================================ */
+.th-jump {
+  position: fixed;
+  inset-block-end: 18px;
+  inset-inline-start: 18px;
+  z-index: 60;
+  display: none;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 99px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #14203a;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+  box-shadow: 0 8px 24px -8px rgba(201, 168, 76, 0.7);
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.26s ease;
+}
+
+.th-jump svg { width: 15px; height: 15px; }
+.th-jump:hover { transform: translateY(-2px); }
+.th-jump.show { display: inline-flex; }
+
+@media (prefers-reduced-motion: reduce) {
+  .th-jump { transition: none; }
+  .th-jump:hover { transform: none; }
+}
+
+/* ============================================================
+   ۱۹. انتخاب حالت ویترین — خودکار یا دلخواه
+   ------------------------------------------------------------
+   جای یک کلید کوچک که معنایش روشن نبود، دو کارت با توضیح.
+   فروشنده در یک نگاه می‌فهمد هر کدام چه می‌کند.
+   ============================================================ */
+.th-mode {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 11px;
+  margin-bottom: 16px;
+}
+
+.th-mode-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 13px;
+  cursor: pointer;
+  text-align: start;
+  background: transparent;
+  border: 2px solid rgba(201, 168, 76, 0.2);
+  transition: border-color 0.26s ease, background 0.26s ease, transform 0.26s ease;
+}
+
+.th-mode-opt:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 168, 76, 0.5);
+}
+
+.th-mode-opt.on {
+  border-color: var(--gold, #c9a84c);
+  background: rgba(201, 168, 76, 0.09);
+}
+
+.th-mode-ico {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 11px;
+  color: var(--gray, #75695f);
+  background: rgba(201, 168, 76, 0.09);
+  transition: color 0.26s ease, background 0.26s ease;
+}
+
+.th-mode-opt.on .th-mode-ico {
+  color: var(--gold-text, #8a6d1f);
+  background: rgba(201, 168, 76, 0.2);
+}
+
+.th-mode-ico svg { width: 21px; height: 21px; }
+
+.th-mode-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+
+.th-mode-txt b {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink, #1a1a1a);
+}
+
+/* تیک روی حالت فعال */
+.th-mode-opt.on .th-mode-txt b::after {
+  content: "";
+  width: 7px;
+  height: 12px;
+  border: 2.2px solid var(--gold-text, #8a6d1f);
+  border-top: 0;
+  border-inline-start: 0;
+  rotate: 45deg;
+  translate: 0 -2px;
+}
+
+.th-mode-txt em {
+  font-size: 11.5px;
+  font-style: normal;
+  line-height: 1.8;
+  color: var(--gray, #75695f);
+}
+
+/* ============================================================
+   ۲۰. نمای حالت خودکار — چهار نمونه‌ی کوچک
+   ------------------------------------------------------------
+   نشان می‌دهد مشتریِ آمده از هر بخش، چه ویترینی می‌بیند.
+   ============================================================ */
+.th-auto-note {
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px dashed rgba(201, 168, 76, 0.34);
+}
+
+.th-auto-note .hint { margin: 0; line-height: 1.95; }
+
+.th-auto-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 11px;
+}
+
+.th-auto-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 99px;
+  background: var(--card, #fff);
+  border: 1px solid rgba(201, 168, 76, 0.24);
+}
+
+/* نمونه‌ی رنگ هر بخش */
+.th-auto-pv {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--ac-bg);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.th-auto-pv b {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ac-pri), var(--ac-sec));
+}
+
+.th-auto-chip em {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ink, #1a1a1a);
+}
+
+/* ---------- ابزار کم‌رنگ در حالت خودکار ---------- */
+.is-dim { opacity: 0.55; transition: opacity 0.3s ease; }
+.is-dim:focus-within { opacity: 1; }
+
+/* برچسب «فقط پیش‌نمایش» روی کارت ساخت */
+.card.has-auto { position: relative; }
+
+.card.has-auto::after {
+  content: "پیش‌نمایش — برای اعمال، «ظاهر دلخواه من» را بزنید";
+  position: absolute;
+  top: 14px;
+  inset-inline-end: 16px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--gold-text, #8a6d1f);
+  background: rgba(201, 168, 76, 0.16);
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .card.has-auto::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .th-mode-opt, .th-mode-ico, .is-dim { transition: none; }
+  .th-mode-opt:hover { transform: none; }
+}

@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="دیجی AI — دستیار هوشمند پیشرفته مد. تحلیل رنگ پوست، فرم بدن، پیشنهاد ست کامل." />
+  <meta name="theme-color" content="#f5f0e8" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <title>دیجی AI — دستیار هوشمند ست لباس | دیجی‌پوش</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style-clean.css" />
+  <link rel="stylesheet" href="./dp-navbar.css" />
+  <link rel="stylesheet" href="./club-toast.css" />
+  <link rel="stylesheet" href="./assets/css/dp-cart-drawer.css" />
+  <style>
+    /* ===== DigiAI Advanced Engine ===== */
+    .dai-page { background: var(--bg-soft); min-height: 100vh; }
+
+    .dai-hero {
+      padding: 60px 0 30px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 800px 400px at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 70%),
+        linear-gradient(180deg, var(--bg-soft) 0%, #fff 100%);
+    }
+    .dai-hero-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+    }
+    .dai-hero-mark svg { width: 20px; height: 20px; }
+    .dai-hero h1 {
+      font-size: 44px;
+      font-weight: 800;
+      margin: 0 0 14px;
+      background: linear-gradient(135deg, #1a1a1a 0%, var(--gold-dark) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+    .dai-hero p {
+      font-size: 17px;
+      color: var(--text-soft);
+      max-width: 680px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .dai-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .dai-stat {
+      text-align: center;
+    }
+    .dai-stat strong {
+      display: block;
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .dai-stat span {
+      display: block;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    /* مود سوالات */
+    .dai-mode-bar {
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      background: var(--bg-card);
+      border-radius: 18px;
+      max-width: 720px;
+      margin: 40px auto 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-soft);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .dai-mode-bar::-webkit-scrollbar { display: none; }
+    .dai-mode {
+      flex: 1;
+      min-width: max-content;
+      padding: 10px 16px;
+      background: transparent;
+      border: none;
+      border-radius: 12px;
+      color: var(--text-soft);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .dai-mode:hover { background: var(--bg-soft); color: var(--text); }
+    .dai-mode.is-on {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+    .dai-mode svg { width: 16px; height: 16px; }
+
+    /* Container */
+    .dai-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* گرید اصلی */
+    .dai-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    /* پنل‌های عمومی */
+    .dai-panel {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-soft);
+    }
+    .dai-panel-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .dai-panel-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+    .dai-panel-icon svg { width: 22px; height: 22px; }
+    .dai-panel-head h2 { font-size: 18px; font-weight: 800; margin: 0 0 2px; }
+    .dai-panel-head p { font-size: 13px; color: var(--text-soft); margin: 0; }
+
+    /* آپلود عکس */
+    .dai-upload {
+      border: 2px dashed var(--border);
+      border-radius: 16px;
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg-soft);
+    }
+    .dai-upload:hover {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.04);
+    }
+    .dai-upload.dai-has-file {
+      padding: 0;
+      border: 2px solid var(--gold);
+      overflow: hidden;
+    }
+    .dai-upload-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a1a;
+    }
+    .dai-upload-icon svg { width: 32px; height: 32px; }
+    .dai-upload strong { display: block; font-size: 15px; margin-bottom: 4px; }
+    .dai-upload span { display: block; font-size: 13px; color: var(--text-soft); }
+    .dai-upload input { display: none; }
+    .dai-upload img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* چیپ‌ها */
+    .dai-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .dai-chip {
+      padding: 7px 14px;
+      background: var(--bg-soft);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 20px;
+      color: var(--text-soft);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dai-chip:hover { border-color: var(--gold); color: var(--text); }
+    .dai-chip.is-on {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-color: var(--gold);
+      color: #1a1a1a;
+      font-weight: 700;
+    }
+
+    /* تحلیل نتیجه */
+    .dai-analysis {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .dai-result {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(244, 229, 177, 0.04));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .dai-result-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      color: #1a1a1a;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .dai-result-icon svg { width: 18px; height: 18px; }
+    .dai-result-info { flex: 1; min-width: 0; }
+    .dai-result-info strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .dai-result-info span { display: block; font-size: 12px; color: var(--text-soft); }
+    .dai-result-score {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--gold-dark);
+    }
+
+    /* چت */
+    .dai-chat-wrap {
+      background: var(--bg-card);
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 600px;
+    }
+    .dai-chat-head {
+      padding: 18px 22px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(244, 229, 177, 0.05));
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .dai-chat-avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a1a;
+      font-weight: 800;
+      font-size: 15px;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+      position: relative;
+    }
+    .dai-chat-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      background: #10b981;
+      border: 2px solid var(--bg-card);
+      border-radius: 50%;
+    }
+    .dai-chat-head h3 { font-size: 15px; font-weight: 700; margin: 0; }
+    .dai-chat-head p { font-size: 12px; color: var(--text-soft); margin: 0; }
+
+    .dai-chat-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background: var(--bg-soft);
+    }
+    .dai-msg {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      animation: daiFade 0.3s ease-out;
+    }
+    .dai-msg--user { flex-direction: row-reverse; }
+    @keyframes daiFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .dai-msg-av {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .dai-msg--ai .dai-msg-av { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #1a1a1a; }
+    .dai-msg--user .dai-msg-av { background: #1a1a1a; color: var(--gold); }
+    .dai-msg-bub {
+      max-width: 75%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+    .dai-msg--ai .dai-msg-bub {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border-soft);
+      border-top-right-radius: 4px;
+    }
+    .dai-msg--user .dai-msg-bub {
+      background: #1a1a1a;
+      color: #fff;
+      border-top-left-radius: 4px;
+    }
+    .dai-msg-bub strong { color: var(--gold-dark); }
+    .dai-msg--user .dai-msg-bub strong { color: var(--gold-light); }
+
+    .dai-typing {
+      display: flex;
+      gap: 4px;
+      padding: 4px 0;
+    }
+    .dai-typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: daiTyping 1.4s infinite;
+    }
+    .dai-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .dai-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes daiTyping {
+      0%, 60%, 100% { transform: scale(0.8); opacity: 0.5; }
+      30% { transform: scale(1.2); opacity: 1; }
+    }
+
+    .dai-quick {
+      padding: 10px 16px;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-soft);
+    }
+    .dai-quick::-webkit-scrollbar { display: none; }
+    .dai-quick button {
+      flex-shrink: 0;
+      padding: 6px 12px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: var(--gold-dark);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .dai-quick button:hover { background: var(--gold); color: #1a1a1a; }
+
+    .dai-input-wrap {
+      display: flex;
+      gap: 8px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-soft);
+      align-items: flex-end;
+    }
+    .dai-input {
+      flex: 1;
+      padding: 11px 14px;
+      background: var(--bg-soft);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 11px;
+      font-size: 13.5px;
+      font-family: inherit;
+      resize: none;
+      max-height: 100px;
+      min-height: 42px;
+      direction: rtl;
+      text-align: right;
+      transition: all 0.2s;
+      line-height: 1.5;
+    }
+    .dai-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: #fff;
+    }
+    .dai-send {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a;
+      border: none;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .dai-send:hover { transform: scale(1.05); }
+    .dai-send:disabled { opacity: 0.5; cursor: not-allowed; }
+    .dai-send svg { width: 18px; height: 18px; }
+
+    /* ست لباس */
+    .dai-outfit {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .dai-outfit-item {
+      background: var(--bg-soft);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .dai-outfit-item:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .dai-outfit-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 8px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-dark);
+    }
+    .dai-outfit-icon svg { width: 24px; height: 24px; }
+    .dai-outfit-item h4 { font-size: 13px; font-weight: 700; margin: 0 0 4px; }
+    .dai-outfit-item p { font-size: 11px; color: var(--text-soft); margin: 0; line-height: 1.5; }
+
+    /* رنگ‌ها */
+    .dai-colors {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .dai-color {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .dai-color-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,0.1);
+    }
+
+    /* ترند */
+    .dai-trend-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .dai-trend {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--bg-soft);
+      border-radius: 12px;
+    }
+    .dai-trend-rank {
+      width: 28px;
+      height: 28px;
+      background: var(--gold);
+      color: #1a1a1a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .dai-trend-info { flex: 1; }
+    .dai-trend-info strong { display: block; font-size: 14px; }
+    .dai-trend-info span { font-size: 12px; color: var(--text-soft); }
+    .dai-trend-score {
+      font-size: 12px;
+      color: var(--gold-dark);
+      font-weight: 700;
+    }
+
+    /* دکمه بازخورد */
+    .dai-feedback {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .dai-fb {
+      padding: 5px 10px;
+      background: transparent;
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .dai-fb:hover { border-color: var(--gold); color: var(--text); }
+    .dai-fb.is-on { background: var(--gold); border-color: var(--gold); color: #1a1a1a; }
+    .dai-fb svg { width: 12px; height: 12px; }
+
+    @media (max-width: 968px) {
+      .dai-grid { grid-template-columns: 1fr; }
+      .dai-hero h1 { font-size: 32px; }
+      .dai-stats { gap: 24px; }
+      .dai-chat-wrap { height: 500px; }
+    }
+  </style>
+</head>
+<body class="dai-page">
+
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- Navbar -->
+
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="dai-hero">
+    <div style="max-width:680px;margin:0 auto;padding:0 24px">
+      <span class="dai-hero-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 13.6 9 19 10.6 13.6 12.2 12 17.6 10.4 12.2 5 10.6 10.4 9z"/><path d="M18.5 15.5l.7 2.3 2.3.7-2.3.7-.7 2.3-.7-2.3-2.3-.7 2.3-.7z"/></svg>
+        دیجی AI v2.0 — موتور پیشنهاد هوشمند
+      </span>
+      <h1>دستیار شخصی استایل شما</h1>
+      <p>با تحلیل رنگ پوست، فرم بدن و سلیقه‌ی شما، بهترین ست‌های لباس را پیشنهاد می‌دهد. هرچه بیشتر استفاده کنید، بیشتر یاد می‌گیرد.</p>
+      <div class="dai-stats">
+        <div class="dai-stat"><strong>۹۶٪</strong><span>دقت پیشنهاد</span></div>
+        <div class="dai-stat"><strong>۵+</strong><span>مدل هوش مصنوعی</span></div>
+        <div class="dai-stat"><strong>۲۴/۷</strong><span>دسترسی آنلاین</span></div>
+      </div>
+    </div>
+
+    <!-- مود سوالات -->
+    <div class="dai-mode-bar" role="tablist">
+      <button class="dai-mode is-on" type="button" data-mode="chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v9Z"/></svg>
+        گفت‌وگو
+      </button>
+      <button class="dai-mode" type="button" data-mode="analyze">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5-9 9"/></svg>
+        تحلیل عکس
+      </button>
+      <button class="dai-mode" type="button" data-mode="outfit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l3 4.5-3 1.5-3-1.5z"/><path d="M8 8h8l-1.5 13h-5z"/></svg>
+        ساخت ست
+      </button>
+      <button class="dai-mode" type="button" data-mode="trends">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
+        ترندها
+      </button>
+    </div>
+  </section>
+
+  <div class="dai-container">
+
+    <!-- پنل گفت‌وگو -->
+    <div id="panelChat" class="dai-grid">
+      <div>
+        <div class="dai-panel">
+          <div class="dai-panel-head">
+            <div class="dai-panel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 13.6 9 19 10.6 13.6 12.2 12 17.6 10.4 12.2 5 10.6 10.4 9z"/></svg>
+            </div>
+            <div>
+              <h2>تحلیل هوشمند</h2>
+              <p>سیستم پیشرفته‌ی پیشنهاد</p>
+            </div>
+          </div>
+
+          <!-- آپلود عکس -->
+          <label class="dai-upload" id="daiUpload">
+            <div id="daiUploadEmpty">
+              <div class="dai-upload-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5-5 5 5"/><path d="M12 5v12"/></svg>
+              </div>
+              <strong>عکس خودت رو آپلود کن</strong>
+              <span>JPG، PNG یا WebP — حداکثر ۸ مگابایت</span>
+            </div>
+            <input type="file" id="daiFile" accept="image/*" />
+          </label>
+
+          <div id="daiAnalysis" class="dai-analysis" style="display:none"></div>
+        </div>
+
+        <div class="dai-panel" style="margin-top:16px">
+          <div class="dai-panel-head">
+            <div class="dai-panel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+            </div>
+            <div>
+              <h2>سلیقه‌ی شما</h2>
+              <p>۲ تا ۳ مورد انتخاب کنید</p>
+            </div>
+          </div>
+          <div class="dai-chips" id="daiStyleChips">
+            <button class="dai-chip" data-cat="style" data-v="classic">کلاسیک</button>
+            <button class="dai-chip" data-cat="style" data-v="modern">مدرن</button>
+            <button class="dai-chip" data-cat="style" data-v="elegant">شیک</button>
+            <button class="dai-chip" data-cat="style" data-v="sporty">اسپرت</button>
+            <button class="dai-chip" data-cat="style" data-v="bohemian">بهمنی</button>
+            <button class="dai-chip" data-cat="style" data-v="minimal">مینیمال</button>
+            <button class="dai-chip" data-cat="style" data-v="vintage">وینتیج</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="dai-chat-wrap">
+          <div class="dai-chat-head">
+            <div class="dai-chat-avatar">د</div>
+            <div>
+              <h3>دیجی AI</h3>
+              <p>پاسخگوی شما در چند ثانیه</p>
+            </div>
+          </div>
+          <div class="dai-chat-body" id="daiChatBody">
+            <div class="dai-msg dai-msg--ai">
+              <div class="dai-msg-av">🤖</div>
+              <div class="dai-msg-bub">
+                سلام! 👋 من <strong>دیجی AI</strong> هستم.<br>
+                می‌تونم در مورد مد، رنگ، استایل و ست لباس کمکت کنم. ✨
+              </div>
+            </div>
+          </div>
+          <div class="dai-quick" id="daiQuick">
+            <button data-q="یه ست برای عید پیشنهاد بده">🎉 ست عید</button>
+            <button data-q="چه رنگی به من میاد؟">🎨 مشاوره رنگ</button>
+            <button data-q="ترندهای روز مد چیه؟">📰 ترندها</button>
+            <button data-q="چطور سایز لباس رو انتخاب کنم؟">📏 سایز</button>
+          </div>
+          <form class="dai-input-wrap" id="daiForm">
+            <textarea class="dai-input" id="daiInput" rows="1" placeholder="سوالت رو بنویس..."></textarea>
+            <button class="dai-send" type="submit" id="daiSend">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9z"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- پنل تحلیل عکس -->
+    <div id="panelAnalyze" style="display:none">
+      <div class="dai-panel">
+        <div class="dai-panel-head">
+          <div class="dai-panel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5-9 9"/></svg>
+          </div>
+          <div>
+            <h2>تحلیل پیشرفته‌ی عکس</h2>
+            <p>رنگ پوست، فرم بدن، و پیشنهاد رنگ‌های مناسب</p>
+          </div>
+        </div>
+        <div style="text-align:center;padding:40px 20px;color:var(--text-soft)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:64px;height:64px;opacity:0.4;margin-bottom:16px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5-9 9"/></svg>
+          <h3 style="color:var(--text);margin:0 0 8px">برای شروع، عکست رو از پنل گفت‌وگو آپلود کن</h3>
+          <p style="margin:0;font-size:13px">بعد از آپلود، تحلیل خودکار انجام میشه و نتیجه اینجا نمایش داده میشه</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- پنل ساخت ست -->
+    <div id="panelOutfit" style="display:none">
+      <div class="dai-panel">
+        <div class="dai-panel-head">
+          <div class="dai-panel-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l3 4.5-3 1.5-3-1.5z"/><path d="M8 8h8l-1.5 13h-5z"/></svg>
+          </div>
+          <div>
+            <h2>ساخت ست کامل</h2>
+            <p>۳ پیشنهاد ست برای هر موقعیت</p>
+          </div>
+        </div>
+
+        <div style="margin:16px 0">
+          <strong style="font-size:14px;display:block;margin-bottom:10px">موقعیت را انتخاب کنید:</strong>
+          <div class="dai-chips" id="daiOccasionChips">
+            <button class="dai-chip" data-occ="casual">روزمره</button>
+            <button class="dai-chip" data-occ="formal">رسمی</button>
+            <button class="dai-chip" data-occ="party">مهمانی</button>
+            <button class="dai-chip" data-occ="wedding">عروسی</button>
+            <button class="dai-chip" data-occ="business">اداری</button>
+            <button class="dai-chip" data-occ="sport">ورزشی</button>
+          </div>
+        </div>
+
+        <!-- 🆕 v18.1 — افزودن آیتم سفارشی -->
+        <div style="display:flex;align-items:center;gap:8px;margin:12px 0;padding:10px;background:var(--bg-soft);border-radius:10px">
+          <button id="daiAddCustomItem" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1a1a;border:none;padding:8px 14px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:4px">
+            ➕ افزودن آیتم سفارشی
+          </button>
+          <small style="color:var(--text-soft);font-size:11px">
+            آیتم‌های شخصی شما به ست‌ها اضافه میشن
+          </small>
+          <span id="daiCustomCount" style="background:var(--gold);color:#1a1a1a;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:800;margin-right:auto;display:none">۰</span>
+        </div>
+
+        <!-- 🆕 v18.1 — Modal افزودن آیتم سفارشی -->
+<div id="daiCustomModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--bg-card);border-radius:16px;padding:24px;max-width:440px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h3 style="margin:0;font-size:18px;color:var(--gold)">➕ افزودن آیتم سفارشی</h3>
+      <button id="daiCustomClose" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft)">✕</button>
+    </div>
+    <p style="color:var(--text-soft);font-size:12px;margin:0 0 16px">این آیتم فقط در ست‌های پیشنهادی شما نمایش داده میشه</p>
+    
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">نام آیتم *</label>
+      <input type="text" id="daiCustomName" placeholder="مثلاً: پیراهن سفید دکمه‌دار" 
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft);color:var(--text)"/>
+    </div>
+    
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">دسته *</label>
+      <select id="daiCustomCategory" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft);color:var(--text)">
+        <option value="پیراهن">👕 پیراهن (بالا تنه)</option>
+        <option value="تیشرت">👕 تیشرت (بالا تنه)</option>
+        <option value="بلوز">👚 بلوز (بالا تنه)</option>
+        <option value="کت">🧥 کت (رویه)</option>
+        <option value="پالتو">🧥 پالتو (رویه)</option>
+        <option value="شلوار">👖 شلوار (پایین تنه)</option>
+        <option value="دامن">👗 دامن (پایین تنه)</option>
+        <option value="کفش">👟 کفش</option>
+        <option value="اکسسوری">💎 اکسسوری</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">رنگ</label>
+      <input type="text" id="daiCustomColor" placeholder="مثلاً: مشکی، آبی، طلایی" 
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft);color:var(--text)"/>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">قیمت (تومان)</label>
+      <input type="number" id="daiCustomPrice" placeholder="مثلاً: 850000" 
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft);color:var(--text)"/>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">توضیح کوتاه (اختیاری)</label>
+      <input type="text" id="daiCustomDesc" placeholder="مثلاً: پنبه‌ای، راحت، مناسب بهار" 
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft);color:var(--text)"/>
+    </div>
+
+    <div id="daiCustomList" style="margin-bottom:16px"></div>
+
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button id="daiCustomCancel" style="padding:10px 20px;background:var(--bg-soft);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-family:inherit;font-weight:700">انصراف</button>
+      <button id="daiCustomSave" style="padding:10px 20px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1a1a;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:800">➕ افزودن به ست</button>
+    </div>
+  </div>
+</div>
+
+
+        <div id="daiOutfitList">
+          <div style="text-align:center;padding:40px 20px;color:var(--text-soft);background:var(--bg-soft);border-radius:14px;margin-top:16px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;opacity:0.3;margin-bottom:12px"><path d="M12 2.5l3 4.5-3 1.5-3-1.5z"/><path d="M8 8h8l-1.5 13h-5z"/></svg>
+            <p style="margin:0">یک موقعیت انتخاب کنید تا ست‌ها نمایش داده شوند</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- پنل ترندها -->
+    <div id="panelTrends" style="display:none">
+      <div class="dai-grid" style="grid-template-columns:1fr 1fr">
+        <div class="dai-panel">
+          <div class="dai-panel-head">
+            <div class="dai-panel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+            </div>
+            <div>
+              <h2>رنگ‌های ترند فصل</h2>
+              <p>پاییز و زمستان ۱۴۰۴</p>
+            </div>
+          </div>
+          <div class="dai-colors" id="daiTrendColors">
+            <div class="dai-color"><span class="dai-color-dot" style="background:#d4af37"></span>طلایی</div>
+            <div class="dai-color"><span class="dai-color-dot" style="background:#1a1a1a"></span>مشکی</div>
+            <div class="dai-color"><span class="dai-color-dot" style="background:#f4e5b1"></span>کرم</div>
+            <div class="dai-color"><span class="dai-color-dot" style="background:#7a1e3c"></span>زرشکی</div>
+            <div class="dai-color"><span class="dai-color-dot" style="background:#2d5a3d"></span>سبز زمردی</div>
+            <div class="dai-color"><span class="dai-color-dot" style="background:#1e3a5f"></span>سرمه‌ای</div>
+            <div class="dai-color"><span class="dai-color-dot" style="background:#c44569"></span>صورتی قدیمی</div>
+            <div class="dai-color"><span class="dai-color-dot" style="background:#8b4513"></span>مسی</div>
+          </div>
+        </div>
+
+        <div class="dai-panel">
+          <div class="dai-panel-head">
+            <div class="dai-panel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
+            </div>
+            <div>
+              <h2>محبوب‌ترین استایل‌ها</h2>
+              <p>بر اساس بازدید کاربران</p>
+            </div>
+          </div>
+          <div class="dai-trend-list">
+            <div class="dai-trend">
+              <div class="dai-trend-rank">۱</div>
+              <div class="dai-trend-info">
+                <strong>مینیمال لوکس</strong>
+                <span>سادگی با کیفیت بالا</span>
+              </div>
+              <div class="dai-trend-score">↑ ۴۵٪</div>
+            </div>
+            <div class="dai-trend">
+              <div class="dai-trend-rank">۲</div>
+              <div class="dai-trend-info">
+                <strong>اُورسایز</strong>
+                <span>راحت و مدرن</span>
+              </div>
+              <div class="dai-trend-score">↑ ۳۸٪</div>
+            </div>
+            <div class="dai-trend">
+              <div class="dai-trend-rank">۳</div>
+              <div class="dai-trend-info">
+                <strong>Y2K</strong>
+                <span>بازگشت به دهه ۲۰۰۰</span>
+              </div>
+              <div class="dai-trend-score">↑ ۲۹٪</div>
+            </div>
+            <div class="dai-trend">
+              <div class="dai-trend-rank">۴</div>
+              <div class="dai-trend-info">
+                <strong>بوهمی</strong>
+                <span>آزاد و هنرمندانه</span>
+              </div>
+              <div class="dai-trend-score">↑ ۲۲٪</div>
+            </div>
+            <div class="dai-trend">
+              <div class="dai-trend-rank">۵</div>
+              <div class="dai-trend-info">
+                <strong>شیک کلاسیک</strong>
+                <span>همیشه محبوب</span>
+              </div>
+              <div class="dai-trend-score">→ ۱۵٪</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer" id="footer">
+  <div class="footer__grid">
+    <div class="footer__story">
+      <div class="footer__logo">
+        <span class="nav-logo__mark">د</span>
+        <span><strong>دیجی‌پوش</strong><small>بازارگاه ممتاز فروشندگان مد</small></span>
+      </div>
+      <p>دیجی‌پوش، بازارگاه لوکس مد ایران با دستیار هوشمند دیجی AI.</p>
+    </div>
+    <div class="footer__col">
+      <h3>بخش‌ها</h3>
+      <a href="./woman/index.html">زنانه</a>
+      <a href="./man/index.html">مردانه</a>
+      <a href="./kids/index.html">بچگانه</a>
+      <a href="./teen/index.html">تینیجر</a>
+    </div>
+    <div class="footer__col">
+      <h3>حساب</h3>
+      <a href="./auth.html">ورود / ثبت‌نام</a>
+      <a href="./account.html">حساب کاربری</a>
+      <a href="./seller/seller-signup.html">فروشنده شوید</a>
+    </div>
+    <div class="footer__col">
+      <h3>پشتیبانی</h3>
+      <a href="./index.html#why">راهنما</a>
+      <a href="./index.html#footer">تماس</a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© ۱۴۰۵ دیجی‌پوش — تمامی حقوق محفوظ است.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span class="toast__icon">✨</span>
+  <span class="toast__text" id="toastText">عملیات موفق</span>
+</div>
+
+<script src="./dp-products-hub.js"></script>
+  <script src="./dp-products-feed-v2.js"></script>
+  <script src="./dp-auth.js"></script>
+<!-- 🧠 موتورهای AI + حافظه بی‌نهایت + چت آفلاین -->
+<script src="./dp-ai-engine.js"></script>
+<script src="./dp-taste-engine.js"></script>
+<script src="./dp-wardrobe.js"></script>
+  <script src="./dp-stylist-engine.js"></script>
+<script src="./dp-memory.js"></script>
+<script src="./dp-chat-ai.js"></script>
+<script>
+(function(){
+  // ورود کاربر
+  const user = window.DPAuth.currentUser();
+  const navAuthArea = document.getElementById('navAuthArea');
+  if(user && navAuthArea){
+    const firstName = user.name.split(' ')[0] || 'کاربر';
+    navAuthArea.innerHTML = `<a class="seller-entry" href="./account.html" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1a1a;font-weight:700"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span>${firstName}</span></a>`;
+  }
+
+  // تب‌ها
+  const modes = document.querySelectorAll('.dai-mode');
+  const panels = {
+    chat: document.getElementById('panelChat'),
+    analyze: document.getElementById('panelAnalyze'),
+    outfit: document.getElementById('panelOutfit'),
+    trends: document.getElementById('panelTrends')
+  };
+  modes.forEach(m => m.addEventListener('click', () => {
+    modes.forEach(x => x.classList.toggle('is-on', x === m));
+    Object.values(panels).forEach(p => p.style.display = 'none');
+    if(panels[m.dataset.mode]) panels[m.dataset.mode].style.display = 'block';
+  }));
+
+  // چیپ‌ها
+  document.querySelectorAll('.dai-chip').forEach(c => {
+    c.addEventListener('click', () => c.classList.toggle('is-on'));
+  });
+
+  // تحلیل عکس (شبیه‌سازی)
+  const fileInput = document.getElementById('daiFile');
+  const uploadLabel = document.getElementById('daiUpload');
+  const uploadEmpty = document.getElementById('daiUploadEmpty');
+  const analysisEl = document.getElementById('daiAnalysis');
+
+  fileInput.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      uploadEmpty.innerHTML = `<img src="${ev.target.result}" alt="عکس آپلود شده" />`;
+      uploadLabel.classList.add('dai-has-file');
+      // تحلیل شبیه‌سازی
+      setTimeout(() => {
+        const skinTones = [
+          {tone: 'گرم', undertone: 'طلایی', icon: '☀️'},
+          {tone: 'سرد', undertone: 'صورتی', icon: '❄️'},
+          {tone: 'خنثی', undertone: 'زیتونی', icon: '✨'}
+        ];
+        const bodyTypes = [
+          {type: 'ساعت شنی', icon: '⏳'},
+          {type: 'گلابی', icon: '🍐'},
+          {type: 'مستطیل', icon: '▮'},
+          {type: 'مثلث معکوس', icon: '🔻'}
+        ];
+        const sk = skinTones[Math.floor(Math.random() * 3)];
+        const bd = bodyTypes[Math.floor(Math.random() * 4)];
+
+        analysisEl.innerHTML = `
+          <div class="dai-result">
+            <div class="dai-result-icon">${sk.icon}</div>
+            <div class="dai-result-info">
+              <strong>رنگ پوست: ${sk.tone} (${sk.undertone})</strong>
+              <span>بهترین رنگ‌ها: طلایی، کرم، سبز زمردی، زرشکی</span>
+            </div>
+            <div class="dai-result-score">۹۴٪</div>
+          </div>
+          <div class="dai-result">
+            <div class="dai-result-icon">${bd.icon}</div>
+            <div class="dai-result-info">
+              <strong>فرم بدن: ${bd.type}</strong>
+              <span>پیشنهاد: کمربند، یقه هفت، دامن مدادی</span>
+            </div>
+            <div class="dai-result-score">۸۹٪</div>
+          </div>
+        `;
+        analysisEl.style.display = 'grid';
+
+        // ارسال پیام خودکار
+        addMsg(`📸 عکس شما تحلیل شد!\n\n✨ رنگ پوست شما **${sk.tone}** با ته‌رنگ **${sk.undertone}** تشخیص داده شد.\n✨ فرم بدن شما **${bd.type}** است.\n\nبر اساس این تحلیل، رنگ‌های طلایی، کرم و سبز زمردی برای شما فوق‌العاده خواهند بود! می‌خواهید یک ست کامل پیشنهاد بدهم؟`, 'ai');
+        saveFeedback('image_analyzed');
+      }, 1200);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // چت
+  const chatBody = document.getElementById('daiChatBody');
+  const chatForm = document.getElementById('daiForm');
+  const chatInput = document.getElementById('daiInput');
+  const chatSend = document.getElementById('daiSend');
+  const history = [];
+
+  function addMsg(text, role){
+    const wrap = document.createElement('div');
+    wrap.className = 'dai-msg dai-msg--' + role;
+    const av = document.createElement('div');
+    av.className = 'dai-msg-av';
+    av.textContent = role === 'user' ? '👤' : '🤖';
+    const bub = document.createElement('div');
+    bub.className = 'dai-msg-bub';
+    bub.innerHTML = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    wrap.appendChild(av);
+    wrap.appendChild(bub);
+    chatBody.appendChild(wrap);
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // بازخورد برای پیام‌های AI
+    if(role === 'ai' && !wrap.dataset.noFb){
+      const fb = document.createElement('div');
+      fb.className = 'dai-feedback';
+      fb.innerHTML = `
+        <button class="dai-fb" data-fb="like" title="پسندیدم">👍</button>
+        <button class="dai-fb" data-fb="save" title="ذخیره">🔖</button>
+        <button class="dai-fb" data-fb="dislike" title="نپسندیدم">👎</button>
+      `;
+      wrap.appendChild(fb);
+      fb.querySelectorAll('.dai-fb').forEach(b => {
+        b.addEventListener('click', () => {
+          fb.querySelectorAll('.dai-fb').forEach(x => x.classList.remove('is-on'));
+          b.classList.add('is-on');
+          saveFeedback(b.dataset.fb, text);
+        });
+      });
+    }
+  }
+
+  function addTyping(){
+    const wrap = document.createElement('div');
+    wrap.className = 'dai-msg dai-msg--ai';
+    wrap.id = 'daiTyping';
+    const av = document.createElement('div');
+    av.className = 'dai-msg-av';
+    av.textContent = '🤖';
+    const bub = document.createElement('div');
+    bub.className = 'dai-msg-bub';
+    bub.innerHTML = '<div class="dai-typing"><span></span><span></span><span></span></div>';
+    wrap.appendChild(av);
+    wrap.appendChild(bub);
+    chatBody.appendChild(wrap);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function rmTyping(){
+    const t = document.getElementById('daiTyping');
+    if(t) t.remove();
+  }
+
+  function saveFeedback(type, content){
+    try{
+      const fb = JSON.parse(localStorage.getItem('dp_ai_feedback') || '[]');
+      fb.push({type, content, ts: Date.now()});
+      localStorage.setItem('dp_ai_feedback', JSON.stringify(fb.slice(-100)));
+    } catch(e){}
+  }
+
+  // Auto-resize
+  chatInput.addEventListener('input', () => {
+    chatInput.style.height = 'auto';
+    chatInput.style.height = Math.min(chatInput.scrollHeight, 100) + 'px';
+  });
+  chatInput.addEventListener('keydown', e => {
+    if(e.key === 'Enter' && !e.shiftKey){
+      e.preventDefault();
+      chatForm.requestSubmit();
+    }
+  });
+
+  // 🆕 v17.3 — رندر محصولات واقعی فروشنده‌ها در چت
+  function renderChatProducts(products) {
+    const wrap = document.createElement('div');
+    wrap.className = 'dai-msg dai-msg--products';
+    
+    const grid = document.createElement('div');
+    grid.className = 'dai-products-grid';
+    grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:10px';
+    
+    products.slice(0, 8).forEach(p => {
+      const card = document.createElement('a');
+      card.href = './product.html?id=' + encodeURIComponent(p.id);
+      card.className = 'dai-prod-card';
+      card.style.cssText = 'background:var(--bg-card);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s';
+      
+      const img = p.image || (p.images && p.images[0]) || '';
+      const colors = (p.colors || []).slice(0, 3).join(' · ');
+      const matchBadge = p.matchPercent ? `<div style="position:absolute;top:6px;right:6px;background:${p.matchLevelColor || '#3b82f6'};color:#fff;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700">${p.matchPercent}٪</div>` : '';
+      const reason = (p.matchReasons && p.matchReasons[0]) ? p.matchReasons[0].text : '';
+      
+      card.innerHTML = `
+        <div style="position:relative;width:100%;aspect-ratio:1;background:#f5f5f5;overflow:hidden">
+          ${img ? `<img src="${img}" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'"/>` : '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:36px;opacity:.3">🛍️</div>'}
+          ${matchBadge}
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:12px;font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(p.name || 'محصول')}</div>
+          <div style="font-size:11px;color:var(--text-soft);margin-top:2px">${colors || reason || (p.brand || '')}</div>
+          <div style="font-size:13px;font-weight:800;color:var(--gold);margin-top:4px">${formatPrice(p.price)} <span style="font-size:10px;font-weight:400">تومان</span></div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    
+    wrap.appendChild(grid);
+    chatBody.appendChild(wrap);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+  
+  function formatPrice(n) {
+    if (!n) return '۰';
+    return Number(n).toLocaleString('fa-IR');
+  }
+  
+  function esc(s) {
+    if (!s) return '';
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+  
+  // 🆕 v17.3 — quick replies هوشمند بعد از پاسخ AI
+  function renderQuickReplies(replies) {
+    const wrap = document.createElement('div');
+    wrap.className = 'dai-quick-replies';
+    wrap.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px 50px';
+    
+    replies.slice(0, 4).forEach(reply => {
+      const btn = document.createElement('button');
+      btn.className = 'dai-qr-btn';
+      btn.textContent = reply;
+      btn.style.cssText = 'background:var(--bg-soft);border:1px solid var(--border);border-radius:14px;padding:5px 12px;font-size:12px;cursor:pointer;transition:all .2s';
+      btn.onmouseover = () => { btn.style.background = 'var(--gold)'; btn.style.color = '#1a1a1a'; };
+      btn.onmouseout = () => { btn.style.background = 'var(--bg-soft)'; btn.style.color = 'inherit'; };
+      btn.onclick = () => sendMsg(reply.replace(/^[^\s]+\s/, '')); // حذف ایموجی اول
+      wrap.appendChild(btn);
+    });
+    
+    chatBody.appendChild(wrap);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+  
+    async function sendMsg(msg){
+    if(!msg.trim()) return;
+    addMsg(msg, 'user');
+    chatInput.value = '';
+    chatInput.style.height = 'auto';
+    chatSend.disabled = true;
+    history.push({role:'user', content: msg});
+    addTyping();
+
+    // انتخاب‌های کاربر
+    const selectedStyles = Array.from(document.querySelectorAll('.dai-chip[data-cat="style"].is-on')).map(c => c.dataset.v);
+
+    // استفاده از DPChatAI v2.0 آفلاین
+    setTimeout(() => {
+      try {
+        if (window.DPChatAI && window.DPChatAI.generateResponse) {
+          const response = window.DPChatAI.generateResponse(msg, { styles: selectedStyles });
+          rmTyping();
+          if (response && response.text) {
+            addMsg(response.text, 'ai');
+            history.push({ role: 'assistant', content: response.text });
+            
+            // 🆕 v17.3 — رندر محصولات واقعی
+            if (response.products && response.products.length > 0) {
+              renderChatProducts(response.products);
+            }
+            
+            // 🆕 v17.3 — quick replies هوشمند
+            if (response.quickReplies && response.quickReplies.length > 0) {
+              renderQuickReplies(response.quickReplies);
+            }
+          } else {
+            addMsg('😊 بگو، گوش میدم!', 'ai');
+          }
+        } else {
+          rmTyping();
+          addMsg('🤖 در حال بارگذاری... دوباره تلاش کن.', 'ai');
+        }
+      } catch (err) {
+        rmTyping();
+        console.error('DPChat error:', err);
+        addMsg('😊 یه لحظه دیگه بپرس...', 'ai');
+      }
+      chatSend.disabled = false;
+      chatInput.focus();
+    }, 400 + Math.random() * 400);
+  }
+
+  chatForm.addEventListener('submit', e => { e.preventDefault(); sendMsg(chatInput.value); });
+  document.querySelectorAll('.dai-quick button').forEach(b => {
+    b.addEventListener('click', () => sendMsg(b.dataset.q));
+  });
+
+  // 🆕 v18.1 — آیتم‌های سفارشی کاربر (session-based)
+  const CUSTOM_ITEMS_KEY = 'dai_custom_outfit_items';
+  
+  function getCustomItems() {
+    try {
+      const raw = sessionStorage.getItem(CUSTOM_ITEMS_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) { return []; }
+  }
+  
+  function saveCustomItems(items) {
+    try {
+      sessionStorage.setItem(CUSTOM_ITEMS_KEY, JSON.stringify(items));
+      updateCustomCount();
+    } catch (e) {}
+  }
+  
+  function updateCustomCount() {
+    const count = getCustomItems().length;
+    const badge = document.getElementById('daiCustomCount');
+    if (badge) {
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'inline-block' : 'none';
+    }
+  }
+  
+  function renderCustomItemsList() {
+    const container = document.getElementById('daiCustomList');
+    if (!container) return;
+    const items = getCustomItems();
+    if (items.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+    container.innerHTML = `
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text-soft)">آیتم‌های شما (${items.length}):</div>
+      ${items.map((it, idx) => `
+        <div class="dai-custom-item">
+          <div style="font-size:18px">${getCategoryEmoji(it.category)}</div>
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:13px">${escAttr(it.name)}</div>
+            <div style="font-size:11px;color:var(--text-soft)">${it.category}${it.color ? ' • ' + escAttr(it.color) : ''}${it.price ? ' • ' + Number(it.price).toLocaleString('fa-IR') + ' تومان' : ''}</div>
+          </div>
+          <button class="dai-custom-remove" data-idx="${idx}" title="حذف">✕</button>
+        </div>
+      `).join('')}
+    `;
+    
+    container.querySelectorAll('.dai-custom-remove').forEach(btn => {
+      btn.onclick = () => {
+        const idx = parseInt(btn.dataset.idx);
+        const items = getCustomItems();
+        items.splice(idx, 1);
+        saveCustomItems(items);
+        renderCustomItemsList();
+        // re-render outfits
+        const activeChip = document.querySelector('#daiOccasionChips .dai-chip.is-on');
+        if (activeChip) activeChip.click();
+      };
+    });
+  }
+  
+  function getCategoryEmoji(cat) {
+    const map = {
+      'پیراهن': '👕', 'تیشرت': '👕', 'بلوز': '👚',
+      'کت': '🧥', 'پالتو': '🧥',
+      'شلوار': '👖', 'دامن': '👗',
+      'کفش': '👟', 'اکسسوری': '💎'
+    };
+    return map[cat] || '👕';
+  }
+  
+  function escAttr(s) {
+    if (!s) return '';
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+  
+  // باز کردن modal
+  setTimeout(() => {
+    const btn = document.getElementById('daiAddCustomItem');
+    const modal = document.getElementById('daiCustomModal');
+    const close = document.getElementById('daiCustomClose');
+    const cancel = document.getElementById('daiCustomCancel');
+    const save = document.getElementById('daiCustomSave');
+    
+    if (btn && modal) {
+      btn.onclick = () => {
+        renderCustomItemsList();
+        modal.style.display = 'flex';
+        setTimeout(() => document.getElementById('daiCustomName')?.focus(), 100);
+      };
+      close.onclick = cancel.onclick = () => { modal.style.display = 'none'; };
+      modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+      
+      save.onclick = () => {
+        const name = document.getElementById('daiCustomName').value.trim();
+        const category = document.getElementById('daiCustomCategory').value;
+        const color = document.getElementById('daiCustomColor').value.trim();
+        const price = parseInt(document.getElementById('daiCustomPrice').value) || 0;
+        const desc = document.getElementById('daiCustomDesc').value.trim();
+        
+        if (!name) {
+          alert('لطفاً نام آیتم را وارد کنید');
+          return;
+        }
+        
+        const items = getCustomItems();
+        items.push({
+          id: 'custom_' + Date.now().toString(36),
+          name: name,
+          category: category,
+          color: color,
+          colors: color ? [color] : [],
+          price: price,
+          description: desc,
+          isCustom: true,
+          createdAt: Date.now()
+        });
+        saveCustomItems(items);
+        
+        // reset form
+        document.getElementById('daiCustomName').value = '';
+        document.getElementById('daiCustomColor').value = '';
+        document.getElementById('daiCustomPrice').value = '';
+        document.getElementById('daiCustomDesc').value = '';
+        
+        renderCustomItemsList();
+        
+        // re-render outfits
+        const activeChip = document.querySelector('#daiOccasionChips .dai-chip.is-on');
+        if (activeChip) activeChip.click();
+        else {
+          // اگه موقعیتی انتخاب نشده، اولی رو فعال کن
+          const firstChip = document.querySelector('#daiOccasionChips .dai-chip');
+          if (firstChip) firstChip.click();
+        }
+        
+        // toast
+        const tx = document.getElementById('toastText');
+        if (tx) {
+          tx.textContent = '✅ آیتم "' + name + '" به ست‌های شما اضافه شد';
+          document.getElementById('toast')?.classList.add('show');
+          setTimeout(() => document.getElementById('toast')?.classList.remove('show'), 2500);
+        }
+      };
+    }
+    
+    updateCustomCount();
+  }, 500);
+
+
+    // ساخت ست
+  // 🆕 v17.2 — Outfit از محصولات واقعی فروشنده‌ها
+  // دیگه هیچ محصول hardcode در outfit templates نیست
+  function getOutfitsForOccasion(occasion) {
+    // 🆕 v18.1 — ترکیب محصولات واقعی + آیتم‌های سفارشی کاربر
+    const realProducts = (window.DPProductsHub && window.DPProductsHub.all) 
+      ? window.DPProductsHub.all() 
+      : ((window.DPProducts && window.DPProducts.all) ? window.DPProducts.all() : []);
+    const customItems = getCustomItems();
+    const products = [...realProducts, ...customItems];
+    
+    if (products.length === 0) {
+      return { empty: true, message: 'برای دیدن پیشنهاد استایل، ابتدا محصولاتی توسط فروشنده‌ها اضافه شود.' };
+    }
+
+    // گروه‌بندی محصولات بر اساس دسته
+    const byCategory = {};
+    products.forEach(p => {
+      const cat = p.category || 'سایر';
+      if (!byCategory[cat]) byCategory[cat] = [];
+      byCategory[cat].push(p);
+    });
+
+    // ساخت outfit بر اساس occasion
+    const outfits = [];
+    const categories = {
+      casual: { top: ['تیشرت', 'بلوز', 'پیراهن'], bottom: ['شلوار', 'دامن'], shoe: ['کفش'], acc: ['اکسسوری'] },
+      formal: { top: ['پیراهن', 'بلوز'], bottom: ['شلوار', 'دامن'], outer: ['کت'], shoe: ['کفش'], acc: ['اکسسوری'] },
+      party: { top: ['پیراهن', 'بلوز'], bottom: ['شلوار', 'دامن'], outer: ['کت', 'پالتو'], acc: ['اکسسوری'] },
+      wedding: { top: ['پیراهن'], bottom: ['دامن', 'شلوار'], outer: ['کت', 'پالتو'], acc: ['اکسسوری'] },
+      business: { top: ['پیراهن', 'بلوز'], bottom: ['شلوار'], outer: ['کت'], acc: ['اکسسوری'] },
+      sport: { top: ['تیشرت'], bottom: ['شلوار'], shoe: ['کفش'] }
+    };
+    const cats = categories[occasion] || categories.casual;
+
+    function pickRandom(arr) {
+      if (!arr || arr.length === 0) return null;
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    // ساخت ۳ outfit متنوع
+    for (let i = 0; i < 3; i++) {
+      const items = [];
+      for (const [key, catList] of Object.entries(cats)) {
+        const pool = [];
+        catList.forEach(c => {
+          if (byCategory[c]) pool.push(...byCategory[c]);
+        });
+        const picked = pickRandom(pool);
+        if (picked) {
+          items.push({
+            icon: getCategoryIconSVG(picked.category),
+            name: picked.name,
+            desc: (picked.colors && picked.colors[0]) ? picked.colors[0] : (picked.brand || ''),
+            id: picked.id,
+            price: picked.price
+          });
+        }
+      }
+      if (items.length > 0) {
+        const outfitNames = {
+          casual: ['تیپ روزمره شیک', 'تیپ اسپرت', 'تیپ خیابانی'],
+          formal: ['تیپ رسمی کلاسیک', 'تیپ بیزینس', 'تیپ اداری مدرن'],
+          party: ['تیپ مهمانی', 'تیپ شب', 'تیپ دورهمی'],
+          wedding: ['تیپ عروسی شیک', 'تیپ مجالس بلند', 'تیپ جشن'],
+          business: ['تیپ اداری', 'تیپ بیزینس اسمارت', 'تیپ جلسه کاری'],
+          sport: ['تیپ ورزشی', 'تیپ باشگاه', 'تیپ راحتی']
+        };
+        outfits.push({
+          name: outfitNames[occasion] ? outfitNames[occasion][i] : 'تیپ پیشنهادی',
+          items: items,
+          reason: 'ترکیب محصولات واقعی فروشنده‌های معتبر دیجی‌پوش'
+        });
+      }
+    }
+
+    return { empty: outfits.length === 0, outfits: outfits };
+  }
+
+  function getCategoryIconSVG(cat) {
+    const icons = {
+      'پیراهن': '<path d="M4 6h16v12H4z"/>',
+      'کت': '<path d="M3 7l9-3 9 3v10l-9 3-9-3z"/>',
+      'شلوار': '<path d="M4 4h16l-2 16H6z"/>',
+      'تیشرت': '<path d="M3 7h18v10H3z"/>',
+      'بلوز': '<path d="M4 8h16v8H4z"/>',
+      'کفش': '<path d="M3 18l3-9h12l3 9"/>',
+      'اکسسوری': '<rect x="3" y="6" width="18" height="12" rx="2"/>',
+      'پالتو': '<path d="M4 4h16l-2 18H6z"/>',
+      'دامن': '<path d="M4 6l16 0l-2 14H6z"/>'
+    };
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><${icons[cat] || icons['پیراهن']}/></svg>`;
+  }
+
+  document.querySelectorAll('#daiOccasionChips .dai-chip').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('#daiOccasionChips .dai-chip').forEach(x => x.classList.remove('is-on'));
+      c.classList.add('is-on');
+      const occ = c.dataset.occ;
+      const result = getOutfitsForOccasion(occ);
+      const list = document.getElementById('daiOutfitList');
+      
+      if (result.empty) {
+        list.innerHTML = `<div style="text-align:center;padding:40px 20px;background:var(--bg-soft);border-radius:14px;margin-top:16px;color:var(--text-soft)">
+          <p style="margin:0">${result.message || 'محصولی برای پیشنهاد استایل موجود نیست. لطفاً بعداً دوباره امتحان کنید.'}</p>
+        </div>`;
+        return;
+      }
+      
+      const outfits = result.outfits;
+      list.innerHTML = outfits.map((o, i) => `
+        <div class="dai-panel" style="margin-top:14px;background:var(--bg-soft)">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <div style="width:32px;height:32px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800">${i+1}</div>
+            <h3 style="margin:0;font-size:16px;font-weight:800">${o.name}</h3>
+          </div>
+          <div class="dai-outfit">
+            ${o.items.map(it => `
+              <div class="dai-outfit-item" style="${it.isCustom ? 'border:2px dashed var(--gold);background:rgba(212,175,55,0.05)' : ''}">
+                <div class="dai-outfit-icon">${it.icon}</div>
+                <div style="flex:1">
+                  <h4>${it.name}${it.isCustom ? ' <span style="font-size:10px;background:var(--gold);color:#1a1a1a;padding:1px 5px;border-radius:6px;margin-right:4px;font-weight:800">شخصی</span>' : ''}</h4>
+                  <p>${it.desc}</p>
+                  ${it.price ? `<small style="color:var(--gold);font-weight:700;font-size:11px">${Number(it.price).toLocaleString('fa-IR')} تومان</small>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div style="margin-top:14px;padding:12px;background:var(--bg-card);border-radius:10px;font-size:13px;color:var(--text-soft);line-height:1.7;border-right:3px solid var(--gold)">
+            💡 <strong>چرا این ست؟</strong> ${o.reason}
+          </div>
+          <div class="dai-feedback" style="margin-top:12px">
+            <button class="dai-fb" data-fb="like">👍 پسندیدم</button>
+            <button class="dai-fb" data-fb="save">🔖 ذخیره</button>
+            <button class="dai-fb" data-fb="dislike">👎 تغییر بده</button>
+          </div>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('.dai-fb').forEach(b => {
+        b.addEventListener('click', () => {
+          b.parentElement.querySelectorAll('.dai-fb').forEach(x => x.classList.remove('is-on'));
+          b.classList.add('is-on');
+          saveFeedback(b.dataset.fb, c.dataset.occ);
+          const tx = document.getElementById('toastText');
+          if(b.dataset.fb === 'like'){
+            if(tx) tx.textContent = '✅ بازخورد شما ثبت شد';
+            document.getElementById('toast').classList.add('show');
+            setTimeout(() => document.getElementById('toast').classList.remove('show'), 2000);
+          }
+        });
+      });
+    });
+  });
+
+  // اسکرول
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const sp = document.getElementById('scrollProgress');
+    if(!sp) return;
+    const max = h.scrollHeight - h.clientHeight;
+    sp.style.width = (h.scrollTop / max * 100) + '%';
+  });
+})();
+</script>
+
+<!-- 💬 ویجت چت شناور پایین سمت چپ -->
+<script src="./dp-chat-widget.js"></script>
+
+<!-- ✨ جزئیات خفن سایت -->
+<!-- 🎤 Voice Input -->
+<script src="./dp-voice.js"></script>
+
+<!-- 🎨 تم‌ها و Dark Mode -->
+<!-- 🔍 جستجوی هوشمند (Cmd+K) -->
+<!-- 🎵 افکت‌های صوتی -->
+<!-- ✨ افکت‌های بصری -->
+<!-- 🏆 سیستم امتیازدهی و دستاوردها -->
+<!-- 🎁 تور راهنما -->
+
+<!-- 🛒 سبد خرید -->
+<script src="./assets/js/dp-cart.js"></script>
+<script src="./assets/js/dp-cart-drawer.js"></script>
+<!-- 🧭 منوی استاندارد -->
+<script src="./club-tracker.js"></script>
+<script src="./club-referral.js"></script>
+<script src="./dp-navbar.js"></script>
+
+</body>
+</html>

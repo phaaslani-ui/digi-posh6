@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="مدال‌ها و ماموریت‌های دیجی‌پوش | کلکسیون افتخارات" />
+  <meta name="theme-color" content="#f5f0e8" />
+  <title>مدال‌ها و ماموریت‌ها | دیجی‌پوش</title>
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style-clean.css" />
+  <link rel="stylesheet" href="./dp-navbar.css" />
+  <link rel="stylesheet" href="./club-toast.css" />
+  <link rel="stylesheet" href="./assets/css/dp-cart-drawer.css" />
+  <link rel="stylesheet" href="./club.css" />
+  <link rel="stylesheet" href="./medals.css" />
+</head>
+<body>
+
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- Navbar -->
+<div id="dp-navbar-mount"></div>
+
+<main id="main" class="medals-page">
+  <div class="container">
+
+    <!-- ═══ Hero ═══ -->
+    <section class="medals-hero">
+      <div class="medals-hero-content">
+        <h1>🏅 مدال‌ها و ماموریت‌های من</h1>
+        <p>کلکسیون افتخارات و دستاوردهای واقعی شما در دیجی‌پوش</p>
+      </div>
+
+      <div class="medals-hero-stats">
+        <div class="medals-hero-stat">
+          <span>کل مدال‌ها</span>
+          <strong id="totalMedals">۰</strong>
+        </div>
+        <div class="medals-hero-stat is-gold">
+          <span>کسب شده</span>
+          <strong id="earnedMedals">۰</strong>
+        </div>
+        <div class="medals-hero-stat">
+          <span>ماموریت‌های تکمیل</span>
+          <strong id="completedMissions">۰</strong>
+        </div>
+        <div class="medals-hero-stat">
+          <span>درصد پیشرفت</span>
+          <strong id="completionPercent">۰٪</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Tabs ═══ -->
+    <section class="medals-tabs">
+      <button class="medals-tab is-on" data-tab="medals">🏅 مدال‌ها</button>
+      <button class="medals-tab" data-tab="missions">🎯 ماموریت‌ها</button>
+    </section>
+
+    <!-- ═══ Medals Panel ═══ -->
+    <section class="medals-panel is-active" data-panel="medals">
+      <div class="medals-filters">
+        <button class="medals-filter is-on" data-rarity="all">همه</button>
+        <button class="medals-filter legendary" data-rarity="legendary">🥇 Legendary</button>
+        <button class="medals-filter epic" data-rarity="epic">💎 Epic</button>
+        <button class="medals-filter rare" data-rarity="rare">🥈 Rare</button>
+        <button class="medals-filter common" data-rarity="common">🥉 Common</button>
+        <button class="medals-filter" data-status="earned">✅ کسب شده</button>
+        <button class="medals-filter" data-status="locked">🔒 قفل‌شده</button>
+      </div>
+
+      <div id="medalsByRarity"></div>
+    </section>
+
+    <!-- ═══ Missions Panel ═══ -->
+    <section class="medals-panel" data-panel="missions">
+      <div class="missions-filters">
+        <button class="missions-filter is-on" data-type="all">همه ماموریت‌ها</button>
+        <button class="missions-filter" data-type="level">⭐ سطحی</button>
+        <button class="missions-filter" data-type="seasonal">🌸 فصلی</button>
+        <button class="missions-filter" data-type="expertise">👗 تخصصی</button>
+        <button class="missions-filter" data-type="social">👥 اجتماعی</button>
+        <button class="missions-filter" data-type="special">🎁 ویژه</button>
+      </div>
+
+      <div id="missionsGrid" class="missions-grid"></div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__bottom">
+    <span>© ۱۴۰۵ دیجی‌پوش — تمامی حقوق محفوظ است.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span class="toast__icon">✨</span>
+  <span class="toast__text" id="toastText">عملیات موفق</span>
+</div>
+
+<!-- Scripts -->
+<script src="./seller/js/dp-config.js"></script>
+<script src="./dp-products-hub.js"></script>
+<script src="./dp-products-feed-v2.js"></script>
+<script src="./dp-stylist-engine.js"></script>
+<script src="./dp-god-stylist.js"></script>
+<script src="./dp-auth.js"></script>
+<script src="./dp-memory.js"></script>
+<script src="./assets/js/dp-cart.js"></script>
+<script src="./assets/js/dp-cart-drawer.js"></script>
+<script src="./dp-navbar.js"></script>
+
+<script src="./medals-app.js"></script>
+
+</body>
+</html>

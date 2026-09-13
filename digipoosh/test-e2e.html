@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تست End-to-End محصول واقعی</title>
+<style>
+  body { font-family: 'Vazirmatn', system-ui; padding: 20px; background: #f8fafc; margin: 0; }
+  .card { background: #fff; padding: 20px; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-right: 4px solid #d4af37; }
+  .success { color: #16a34a; font-weight: bold; }
+  .error { color: #dc2626; font-weight: bold; }
+  .warning { color: #f59e0b; font-weight: bold; }
+  .info { color: #2563eb; }
+  pre { background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 6px; font-size: 11px; overflow-x: auto; }
+  button { padding: 10px 16px; background: #d4af37; color: #000; border: none; border-radius: 8px; cursor: pointer; margin: 4px; font-weight: 600; font-family: inherit; }
+  button:hover { background: #b8961f; }
+  button.danger { background: #dc2626; color: #fff; }
+  button.success { background: #16a34a; color: #fff; }
+  h1 { color: #1e293b; }
+  h2 { margin: 0 0 12px; color: #1e293b; font-size: 16px; }
+  .product { display: flex; align-items: center; gap: 12px; padding: 10px; background: #f8fafc; border-radius: 8px; margin: 6px 0; }
+  .product img { width: 50px; height: 50px; border-radius: 6px; object-fit: cover; }
+  input, select, textarea { padding: 8px; border: 1px solid #e2e8f0; border-radius: 6px; font-family: inherit; width: 100%; box-sizing: border-box; margin: 4px 0; }
+</style>
+</head>
+<body>
+<h1>🧪 تست End-to-End محصول واقعی</h1>
+
+<div class="card">
+  <h2>📋 مراحل تست</h2>
+  <ol>
+    <li>محصول تست اضافه کن (شبیه‌سازی فروشنده)</li>
+    <li>بررسی کن در localStorage هست</li>
+    <li>بررسی کن در سرور هست</li>
+    <li>بررسی کن در DPProducts.all() دیده میشه</li>
+    <li>بررسی کن در صفحه اصلی نمایش داده میشه</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>➕ مرحله ۱: افزودن محصول تست</h2>
+  <input type="text" id="prodName" value="محصول تست E2E" placeholder="نام محصول">
+  <input type="number" id="prodPrice" value="450000" placeholder="قیمت">
+  <input type="text" id="prodCategory" value="پیراهن" placeholder="دسته">
+  <input type="text" id="prodColor" value="آبی" placeholder="رنگ">
+  <input type="text" id="prodImage" value="https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=400" placeholder="عکس">
+  <button class="success" onclick="addTestProduct()">➕ افزودن محصول</button>
+  <div id="step1"></div>
+</div>
+
+<div class="card">
+  <h2>💾 مرحله ۲: بررسی localStorage</h2>
+  <button onclick="checkLocal()">🔍 بررسی localStorage</button>
+  <div id="step2"></div>
+</div>
+
+<div class="card">
+  <h2>🌐 مرحله ۳: بررسی سرور</h2>
+  <button onclick="checkServer()">🔍 بررسی سرور API</button>
+  <div id="step3"></div>
+</div>
+
+<div class="card">
+  <h2>📦 مرحله ۴: بررسی DPProducts.all()</h2>
+  <button onclick="checkDPProducts()">🔍 بررسی DPProducts</button>
+  <div id="step4"></div>
+</div>
+
+<div class="card">
+  <h2>👀 مرحله ۵: نمایش در صفحه</h2>
+  <button onclick="checkDisplay()">🔍 رندر در صفحه</button>
+  <div id="step5"></div>
+</div>
+
+<div class="card">
+  <h2>🗑️ پاکسازی</h2>
+  <button class="danger" onclick="reset()">💥 ریست کامل</button>
+</div>
+
+<script src="./dp-product-loader.js"></script>
+<script src="./dp-products.js"></script>
+
+<script>
+function log(id, msg, type = '') {
+  document.getElementById(id).innerHTML = `<span class="${type}">${msg}</span>`;
+}
+function logLines(id, lines) {
+  document.getElementById(id).innerHTML = lines.map(l => `<div>${l}</div>`).join('');
+}
+
+async function addTestProduct() {
+  const product = {
+    id: 'e2e_' + Date.now(),
+    name: document.getElementById('prodName').value,
+    brand: 'برند تست',
+    seller: 'فروشنده تست',
+    sellerId: 's_test',
+    category: document.getElementById('prodCategory').value,
+    subcategory: document.getElementById('prodCategory').value,
+    section: 'woman',
+    price: parseInt(document.getElementById('prodPrice').value),
+    originalPrice: parseInt(document.getElementById('prodPrice').value) * 1.3,
+    discount: 23,
+    color: document.getElementById('prodColor').value,
+    colors: [document.getElementById('prodColor').value],
+    sizes: ['M', 'L'],
+    description: 'محصول تست end-to-end',
+    tags: ['تست'],
+    image: document.getElementById('prodImage').value,
+    stock: 10,
+    sold: 0,
+    rating: 4.5,
+    reviews: 0,
+    status: 'active',
+    approved: true,
+    createdAt: new Date().toISOString()
+  };
+
+  // به localStorage
+  const all = JSON.parse(localStorage.getItem('dp_products') || '[]');
+  all.push(product);
+  localStorage.setItem('dp_products', JSON.stringify(all));
+  
+  // به سرور
+  try {
+    await fetch('http://localhost:8001/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ products: all })
+    });
+  } catch (e) {}
+  
+  log('step1', '✅ محصول اضافه شد: ' + product.name, 'success');
+  log('step1', 'ID: ' + product.id, 'info');
+  log('step1', '⏭️ حالا مرحله ۲ رو بزن', 'info');
+}
+
+function checkLocal() {
+  const raw = localStorage.getItem('dp_products');
+  if (!raw) {
+    log('step2', '❌ localStorage خالی', 'error');
+    return;
+  }
+  const products = JSON.parse(raw);
+  const e2e = products.filter(p => p.id.startsWith('e2e_'));
+  const lines = [
+    `📦 کل محصولات: <strong>${products.length}</strong>`,
+    `🧪 محصولات تست: <strong>${e2e.length}</strong>`
+  ];
+  if (e2e.length > 0) {
+    lines.push(`<span class="success">✅ محصول تست در localStorage موجود</span>`);
+    e2e.forEach(p => {
+      lines.push(`• ${p.name} (${p.price.toLocaleString('fa-IR')} تومان)`);
+    });
+  } else {
+    lines.push(`<span class="warning">⚠️ محصول تست پیدا نشد - مرحله ۱ رو بزن</span>`);
+  }
+  logLines('step2', lines);
+}
+
+async function checkServer() {
+  try {
+    const res = await fetch('http://localhost:8001/api/products');
+    const products = await res.json();
+    const e2e = products.filter(p => p.id && p.id.startsWith('e2e_'));
+    const lines = [
+      `📦 کل محصولات در سرور: <strong>${products.length}</strong>`,
+      `🧪 محصولات تست: <strong>${e2e.length}</strong>`
+    ];
+    if (e2e.length > 0) {
+      lines.push(`<span class="success">✅ محصول تست در سرور موجود</span>`);
+      e2e.forEach(p => {
+        lines.push(`• ${p.name} (${p.price.toLocaleString('fa-IR')} تومان)`);
+      });
+    } else {
+      lines.push(`<span class="warning">⚠️ محصول تست در سرور پیدا نشد</span>`);
+    }
+    logLines('step3', lines);
+  } catch (e) {
+    log('step3', '❌ سرور در دسترس نیست: ' + e.message, 'error');
+  }
+}
+
+function checkDPProducts() {
+  if (!window.DPProducts) {
+    log('step4', '❌ DPProducts تعریف نشده', 'error');
+    return;
+  }
+  const all = window.DPProducts.all();
+  const e2e = all.filter(p => p.id && p.id.startsWith('e2e_'));
+  const lines = [
+    `📦 DPProducts.all(): <strong>${all.length}</strong> محصول`,
+    `🧪 محصولات تست: <strong>${e2e.length}</strong>`
+  ];
+  if (e2e.length > 0) {
+    lines.push(`<span class="success">✅ محصول تست در DPProducts.all() موجود</span>`);
+    e2e.forEach(p => {
+      lines.push(`• ${p.name} - قیمت: ${p.price.toLocaleString('fa-IR')}`);
+    });
+  } else {
+    lines.push(`<span class="warning">⚠️ محصول تست در DPProducts.all() نیست</span>`);
+    lines.push(`💡 ممکنه صفحه رفرش نشده - یک بار reload کن`);
+  }
+  logLines('step4', lines);
+}
+
+async function checkDisplay() {
+  if (!window.DPProducts) {
+    log('step5', '❌ DPProducts تعریف نشده', 'error');
+    return;
+  }
+  
+  const all = await window.DPProducts.allAsync();
+  const e2e = all.filter(p => p.id && p.id.startsWith('e2e_'));
+  
+  const lines = [
+    `📦 DPProducts.allAsync(): <strong>${all.length}</strong> محصول`,
+    `🧪 محصولات تست: <strong>${e2e.length}</strong>`
+  ];
+  
+  if (e2e.length > 0) {
+    lines.push(`<span class="success">✅ نمایش داده میشه!</span>`);
+    e2e.forEach(p => {
+      const html = `
+        <div class="product">
+          <img src="${p.image || ''}" onerror="this.style.display='none'">
+          <div>
+            <strong>${p.name}</strong><br>
+            <span class="info">${p.price.toLocaleString('fa-IR')} تومان</span>
+          </div>
+        </div>
+      `;
+      lines.push(html);
+    });
+  } else {
+    lines.push(`<span class="warning">⚠️ محصول تست نمایش داده نمیشه</span>`);
+  }
+  logLines('step5', lines);
+}
+
+async function reset() {
+  if (!confirm('همه چیز ریست بشه؟')) return;
+  localStorage.clear();
+  try {
+    await fetch('http://localhost:8001/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ products: [] })
+    });
+  } catch (e) {}
+  location.reload();
+}
+
+// تست خودکار اولیه
+setTimeout(() => {
+  log('step1', '👆 فرم رو پر کن و دکمه "افزودن محصول" رو بزن');
+  log('step2', '👆 دکمه "بررسی localStorage" رو بزن');
+  log('step3', '👆 دکمه "بررسی سرور API" رو بزن');
+  log('step4', '👆 دکمه "بررسی DPProducts" رو بزن');
+  log('step5', '👆 دکمه "رندر در صفحه" رو بزن');
+}, 500);
+</script>
+</body>
+</html>

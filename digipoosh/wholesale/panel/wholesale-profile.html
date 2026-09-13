@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="robots" content="noindex" />
+  <title>پروفایل کسب‌وکار | پنل عمده‌فروشی دیجی‌پوش</title>
+
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="./css/wholesale-panel.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-stock.css" />
+</head>
+<body data-dp-page="wholesale-panel">
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="wp-side" id="wpSide"></aside>
+
+<main class="wp-main" id="main">
+
+  <header class="wp-top">
+    <button class="wp-burger" type="button" id="wpBurger" aria-label="منو">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="wp-title">
+      <h1>پروفایل کسب‌وکار</h1>
+      <span>هویت، قواعد و اطلاعات مالی</span>
+    </div>
+    <div class="wp-top-acts"></div>
+  </header>
+
+  <div class="wp-content">
+    <div id="statusNote"></div>
+    <div id="modBox"></div>
+
+    <form id="pForm" novalidate>
+
+      <div class="wp-card">
+        <div class="wp-card-head">
+          <h2>هویت کسب‌وکار</h2>
+          <span class="sub spacer">این اطلاعات به خریداران عمده نشان داده می‌شود</span>
+        </div>
+        <div class="wp-grid">
+          <div class="wp-field">
+            <label for="storeName">نام تجاری / برند <span class="req">*</span></label>
+            <input class="wp-input" id="storeName" />
+          </div>
+          <div class="wp-field">
+            <label for="companyName">نام شرکت / کارگاه</label>
+            <input class="wp-input" id="companyName" />
+          </div>
+          <div class="wp-field">
+            <label for="city">شهر</label>
+            <input class="wp-input" id="city" />
+          </div>
+          <div class="wp-field">
+            <label for="warehouse">شهر انبار</label>
+            <input class="wp-input" id="warehouse" placeholder="اگر با دفتر فرق دارد" />
+          </div>
+          <div class="wp-field full">
+            <label for="address">نشانی</label>
+            <input class="wp-input" id="address" />
+          </div>
+          <div class="wp-field full">
+            <label for="description">معرفی کسب‌وکار</label>
+            <textarea class="wp-input" id="description" rows="4"
+              placeholder="چه می‌سازید، چه ظرفیتی دارید، چه چیزی شما را متمایز می‌کند…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="wp-card">
+        <div class="wp-card-head">
+          <h2>اطلاعات حقوقی</h2>
+          <span class="sub spacer">برای اعتماد خریداران و صدور فاکتور رسمی</span>
+        </div>
+        <div class="wp-grid">
+          <div class="wp-field">
+            <label for="economicCode">کد اقتصادی</label>
+            <input class="wp-input" id="economicCode" inputmode="numeric" />
+          </div>
+          <div class="wp-field">
+            <label for="regNumber">شماره‌ی ثبت</label>
+            <input class="wp-input" id="regNumber" inputmode="numeric" />
+          </div>
+          <div class="wp-field">
+            <label for="nationalId">کد ملی مدیر</label>
+            <input class="wp-input" id="nationalId" inputmode="numeric" />
+          </div>
+          <div class="wp-field">
+            <label for="phone">تلفن تماس</label>
+            <input class="wp-input" id="phone" inputmode="tel" />
+          </div>
+        </div>
+      </div>
+
+      <div class="wp-card">
+        <div class="wp-card-head">
+          <h2>قواعد فروش عمده</h2>
+          <span class="sub spacer">پیش‌فرض‌هایی که به خریدار نشان داده می‌شود</span>
+        </div>
+        <div class="wp-grid">
+          <div class="wp-field">
+            <label for="minOrderValue">حداقل مبلغ سفارش (تومان)</label>
+            <input class="wp-input" id="minOrderValue" inputmode="numeric" />
+            <span class="wp-hint">صفر یعنی محدودیتی نیست.</span>
+          </div>
+          <div class="wp-field">
+            <label for="leadTime">زمان آماده‌سازی پیش‌فرض (روز)</label>
+            <input class="wp-input" id="leadTime" inputmode="numeric" />
+          </div>
+          <div class="wp-field full">
+            <label class="wp-field" style="flex-direction:row;align-items:center;gap:9px">
+              <input type="checkbox" id="acceptsRfq" style="accent-color:var(--wp-gold);width:17px;height:17px" />
+              <span style="color:var(--wp-ink);font-weight:600">استعلام قیمت می‌پذیرم</span>
+            </label>
+            <span class="wp-hint">اگر خاموش باشد، دکمه‌ی «استعلام» روی کالاهای شما نشان داده نمی‌شود.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wp-card">
+        <div class="wp-card-head">
+          <h2>اطلاعات مالی</h2>
+          <span class="sub spacer">برای واریز درآمد</span>
+        </div>
+        <div class="wp-grid">
+          <div class="wp-field full">
+            <label for="shaba">شماره‌ی شبا</label>
+            <input class="wp-input" id="shaba" placeholder="IR..." dir="ltr" />
+          </div>
+        </div>
+      </div>
+
+      <button class="wp-btn wp-btn-gold" type="submit"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 4.5h10l3.5 3.5v11a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 19V6a1.5 1.5 0 0 1 1.5-1.5Z"/><path d="M8 4.5v5h7M8 20v-6h8v6"/></svg> ذخیره‌ی تغییرات</button>
+    </form>
+  </div>
+
+</main>
+
+
+
+<script src="../../seller/js/dp-config.js"></script>
+<script src="../../seller/js/dp-store.js"></script>
+<script src="../../assets/js/dp-guard.js"></script>
+<script src="../../assets/js/dp-safe.js"></script>
+<script src="../../assets/js/dp-stock.js"></script>
+<script src="../../assets/js/dp-taxonomy.js"></script>
+<script src="../../assets/js/dp-moderation.js"></script>
+<script src="../../assets/js/dp-reviews.js"></script>
+<script src="../../assets/js/dp-user.js"></script>
+<script src="./js/dpw-store.js"></script>
+<script src="./js/dpw-boost.js"></script>
+<script src="./js/dpw-ui.js"></script>
+<script>
+
+requireWholesale(function () {
+  var S = DPWStore, U = DPWUi, esc = U.esc;
+  var fa = S.fa, toEn = S.toEn;
+  var $ = function (s) { return document.querySelector(s); };
+  var IC = { box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg>', money: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>', quote: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg>', truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>', users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c0-3.3 2.5-5.4 5.5-5.4s5.5 2.1 5.5 5.4"/><path d="M16 6.5a3 3 0 0 1 0 6"/></svg>', chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V15M9 19.5V9M14 19.5v-7M19 19.5V5"/></svg>', warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5 21 19H3z"/><path d="M12 10v4M12 16.5h.01"/></svg>', check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>', x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>', info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>', clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>', store: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg>', bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5 13.5h6L11 21l8-10.5h-6z"/></svg>' };
+
+  var FIELDS = ['storeName', 'companyName', 'city', 'warehouse', 'address', 'description',
+                'economicCode', 'regNumber', 'nationalId', 'phone', 'shaba'];
+  var NUMS = ['minOrderValue', 'leadTime'];
+
+  function load() {
+    var p = S.profile();
+    if (!p) return;
+
+    FIELDS.forEach(function (f) {
+      var el = $('#' + f);
+      if (el) el.value = p[f] || '';
+    });
+    NUMS.forEach(function (f) {
+      var el = $('#' + f);
+      if (el) el.value = p[f] ? fa(p[f]) : '';
+    });
+    $('#acceptsRfq').checked = p.acceptsRfq !== false;
+
+    var ST = {
+      approved: { cls: 'ok', i: IC.check, t: 'کسب‌وکار شما تأیید شده است.',
+                  b: 'کالاهایتان در بازار عمده دیده می‌شوند و می‌توانید استعلام بگیرید.' },
+      pending:  { cls: 'warn', i: IC.clock, t: 'در انتظار تأیید مدیر.',
+                  b: 'می‌توانید کالا ثبت کنید، ولی تا تأیید نشوید در بازار دیده نمی‌شوند. ' +
+                     'بررسی معمولاً ۲۴ تا ۴۸ ساعت کاری طول می‌کشد.' },
+      rejected: { cls: 'bad', i: IC.x, t: 'درخواست شما رد شد.',
+                  b: p.rejectionReason || 'برای جزئیات با پشتیبانی تماس بگیرید.' },
+      suspended:{ cls: 'bad', i: IC.warn, t: 'حساب شما معلق شده است.',
+                  b: 'با پشتیبانی تماس بگیرید.' },
+    };
+    var st = ST[p.status || 'pending'] || ST.pending;
+    $('#statusNote').innerHTML = '<div class="wp-note ' + st.cls + '">' + st.i +
+      '<div><b>' + st.t + '</b> ' + esc(st.b) + '</div></div>';
+
+    paintModeration();
+  }
+
+  $('#pForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = $('#storeName').value.trim();
+    if (!name) { U.toast('نام تجاری الزامی است.', 'error'); return; }
+
+    var id = S.me();
+    if (!id) { U.toast('ابتدا وارد شوید.', 'error'); return; }
+
+    /* همه‌ی مقدارها یک‌جا جمع می‌شوند */
+    var patch = {};
+    FIELDS.forEach(function (f) {
+      var el = $('#' + f);
+      if (el) patch[f] = el.value.trim();
+    });
+    NUMS.forEach(function (f) {
+      var el = $('#' + f);
+      if (el) patch[f] = Math.max(0, Number(toEn(el.value).replace(/[^\d]/g, '')) || 0);
+    });
+    patch.acceptsRfq = $('#acceptsRfq').checked;
+
+    /* ---------- نظارت مدیر ----------
+       میدان‌های حساس (نام تجاری، کد اقتصادی، شبا و…) مستقیم
+       ذخیره نمی‌شوند؛ به کارتابل مدیر می‌روند. بقیه همان
+       لحظه ثبت می‌شوند. */
+    if (window.DPModeration) {
+      try {
+        var res = DPModeration.submit(id, patch);
+
+        if (res.queued.length) {
+          U.toast(fa(res.queued.length) + ' تغییر برای بررسی مدیر فرستاده شد: ' +
+                  res.queued.join('، '), 'success');
+        }
+        if (res.instant.length && !res.queued.length) {
+          U.toast('اطلاعات ذخیره شد.', 'success');
+        }
+        if (!res.queued.length && !res.instant.length) {
+          U.toast('تغییری برای ذخیره نبود.', 'success');
+        }
+        load();
+        return;
+      } catch (err) {
+        U.toast(err.message, 'error');
+        return;
+      }
+    }
+
+    /* اگر موتور نظارت نبود، مستقیم ذخیره می‌شود */
+    var all = S.read('dp_users', []);
+    var i = all.findIndex(function (u) { return u.id === id; });
+    if (i < 0) { U.toast('حساب پیدا نشد.', 'error'); return; }
+    Object.keys(patch).forEach(function (k) { all[i][k] = patch[k]; });
+    all[i].sellerType = 'wholesale';
+    S.write('dp_users', all);
+    U.toast('اطلاعات ذخیره شد.', 'success');
+    load();
+  });
+
+  /* ---------- وضعیت درخواست‌های در انتظار ---------- */
+  function paintModeration() {
+    var box = $('#modBox');
+    if (!box || !window.DPModeration) return;
+
+    var id = S.me();
+    var pend = DPModeration.pendingOf(id);
+    var hist = DPModeration.mine(id).filter(function (r) {
+      return r.status !== 'pending';
+    }).slice(0, 4);
+
+    var out = '';
+
+    if (pend) {
+      var keys = Object.keys(pend.fields);
+      out += '<div class="wp-note warn">' + IC.clock + '<div>' +
+        '<b>' + fa(keys.length) + ' تغییر در انتظار تأیید مدیر است.</b> ' +
+        'تا تأیید نشوند، نسخه‌ی قبلی به خریداران نشان داده می‌شود.' +
+        '<div class="mod-pend-list">' +
+          keys.map(function (k) {
+            var w = DPModeration.WATCHED[k] || { fa: k };
+            return '<span class="mod-pill">' + esc(w.fa) + '</span>';
+          }).join('') +
+        '</div>' +
+        '<button class="wp-btn wp-btn-ghost wp-btn-sm" type="button" ' +
+          'data-withdraw="' + esc(pend.id) + '" style="margin-top:10px">' +
+          'پس گرفتن درخواست</button>' +
+        '</div></div>';
+    }
+
+    if (hist.length) {
+      out += '<div class="wp-card"><div class="wp-card-head">' +
+        '<h2>تاریخچه‌ی بازبینی</h2>' +
+        '<span class="sub spacer">آخرین تصمیم‌های مدیر</span></div>' +
+        hist.map(function (r) {
+          var okCls = r.status === 'approved' ? 'ok' : 'bad';
+          var lbl = r.status === 'approved' ? 'تأیید شد' : 'رد شد';
+          return '<div class="mod-hist">' +
+            '<span class="wp-tag ' + okCls + '">' + lbl + '</span>' +
+            '<span class="mod-hist-fields">' +
+              Object.keys(r.fields).map(function (k) {
+                var w = DPModeration.WATCHED[k] || { fa: k };
+                return esc(w.fa);
+              }).join('، ') + '</span>' +
+            '<span class="mod-hist-date">' + esc(r.date) + '</span>' +
+            (r.reason ? '<div class="mod-hist-why">' + esc(r.reason) + '</div>' : '') +
+          '</div>';
+        }).join('') + '</div>';
+    }
+
+    box.innerHTML = out;
+  }
+
+  document.addEventListener('click', function (e) {
+    var wd = e.target.closest('[data-withdraw]');
+    if (!wd) return;
+    if (!confirm('این درخواست پس گرفته شود؟')) return;
+    try {
+      DPModeration.withdraw(wd.dataset.withdraw, S.me());
+      U.toast('درخواست پس گرفته شد.', 'success');
+      load();
+    } catch (err) { U.toast(err.message, 'error'); }
+  });
+
+  load();
+});
+</script>
+</body>
+</html>

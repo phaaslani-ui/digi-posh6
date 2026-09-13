@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="داشبورد حساب کاربری دیجی‌پوش — تجربه‌ای لوکس از مد و استایل با هوش مصنوعی" />
+  <title>داشبورد | دیجی‌پوش</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./dashboard-v2.css" />
+  <link rel="stylesheet" href="./assets/css/dp-cart-drawer.css" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+</head>
+<body class="dash-page">
+
+<main id="main" class="dash-container">
+  <div class="dash-main">
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- 📌 SIDEBAR (Premium) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <aside class="dash-side">
+      <div class="dash-side-card">
+        <!-- Profile Card -->
+        <div class="dash-side-profile" onclick="switchSection('info')">
+          <div class="dash-side-avatar" id="dashAvatar">ع</div>
+          <div class="dash-side-profile-info">
+            <div class="dash-side-profile-name" id="dashName">کاربر</div>
+            <div class="dash-side-profile-level">🥇 عضویت طلایی</div>
+          </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div class="dash-side-group-title">حساب کاربری</div>
+        <nav class="dash-side-nav">
+          <button class="dash-side-btn is-on" data-section="dashboard" onclick="switchSection('dashboard')">
+            <span class="dash-side-btn-icon">📊</span>
+            <span>داشبورد</span>
+          </button>
+          <button class="dash-side-btn" data-section="info" onclick="switchSection('info')">
+            <span class="dash-side-btn-icon">👤</span>
+            <span>اطلاعات شخصی</span>
+          </button>
+          <button class="dash-side-btn" data-section="orders" onclick="switchSection('orders')">
+            <span class="dash-side-btn-icon">📦</span>
+            <span>سفارش‌های من</span>
+          </button>
+          <button class="dash-side-btn" data-section="favorites" onclick="switchSection('favorites')">
+            <span class="dash-side-btn-icon">❤️</span>
+            <span>علاقه‌مندی‌ها</span>
+          </button>
+          <button class="dash-side-btn" data-section="security" onclick="switchSection('security')">
+            <span class="dash-side-btn-icon">🔒</span>
+            <span>امنیت</span>
+          </button>
+        </nav>
+
+        <div class="dash-side-divider"></div>
+
+        <!-- AI Features -->
+        <div class="dash-side-group-title">🤖 هوش مصنوعی</div>
+        <nav class="dash-side-nav">
+          <button class="dash-side-btn" data-section="stylist" onclick="switchSection('stylist')">
+            <span class="dash-side-btn-icon">⭐</span>
+            <span>استایلیست AI</span>
+            <span class="dash-side-btn-new">جدید</span>
+          </button>
+          <button class="dash-side-btn" data-section="photo" onclick="switchSection('photo')">
+            <span class="dash-side-btn-icon">📸</span>
+            <span>تطبیق با عکس</span>
+            <span class="dash-side-btn-new">جدید</span>
+          </button>
+          <button class="dash-side-btn" data-section="wardrobe" onclick="switchSection('wardrobe')">
+            <span class="dash-side-btn-icon">🎮</span>
+            <span>کمد مجازی</span>
+            <span class="dash-side-btn-new">جدید</span>
+          </button>
+          <button class="dash-side-btn" data-section="taste" onclick="switchSection('taste')">
+            <span class="dash-side-btn-icon">📊</span>
+            <span>پیشنهادهای من</span>
+          </button>
+          <button class="dash-side-btn" data-section="personality" onclick="switchSection('personality')">
+            <span class="dash-side-btn-icon">👤</span>
+            <span>تیپ شخصیتی</span>
+            <span class="dash-side-btn-new">جدید</span>
+          </button>
+          <button class="dash-side-btn" data-section="mypage" onclick="switchSection('mypage')">
+            <span class="dash-side-btn-icon">🎨</span>
+            <span>صفحه من</span>
+            <span class="dash-side-btn-new">جدید</span>
+          </button>
+        </nav>
+
+        <button class="dash-side-logout" onclick="dashLogout()">
+          🚪 خروج از حساب
+        </button>
+      </div>
+    </aside>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- 📦 MAIN CONTENT -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <div class="dash-content">
+
+      <!-- ═══ Welcome Header ═══ -->
+      <div class="dash-welcome">
+        <h1 class="dash-welcome-text">
+          <span>سلام <span id="dashNameInline">کاربر</span>!</span>
+          <span class="emoji">👋</span>
+          <span>خوش آمدی</span>
+          <span class="emoji" id="dashGreetingEmoji">🌤️</span>
+          <small style="font-size: 14px; color: var(--gray-warm); font-weight: 500;" id="dashDate"></small>
+        </h1>
+        <p class="dash-welcome-subtitle">به داشبورد شخصی خودت خوش اومدی. بیا یه نگاهی به فعالیت‌های اخیرت بندازیم.</p>
+
+        <div class="dash-profile-progress">
+          <div class="dash-progress-row">
+            <strong>📊 پروفایل شما:</strong>
+            <div class="dash-progress-bar">
+              <div class="dash-progress-fill" id="dashProgressFill" style="width: 0%"></div>
+            </div>
+            <span class="dash-progress-text" id="dashProgressText">۰٪</span>
+          </div>
+          <div class="dash-progress-missing" id="dashProgressMissing">
+            <strong>⚡ ۳ بخش ناقص:</strong>
+            <span>اندازه‌های بدن، سلیقه، آدرس</span>
+          </div>
+          <button class="dash-progress-cta" onclick="switchSection('info')">
+            🔓 تکمیل پروفایل و فعال‌سازی دیجی‌ای
+          </button>
+        </div>
+      </div>
+
+      <!-- ═══ Quick Stats ═══ -->
+      <div class="dash-stats" id="dashStats">
+        <div class="dash-stat-card" onclick="switchSection('orders')">
+          <div class="dash-stat-icon">📦</div>
+          <div class="dash-stat-value" data-count="8">۰</div>
+          <div class="dash-stat-label">سفارش‌ها</div>
+          <a class="dash-stat-action">پیگیری</a>
+        </div>
+        <div class="dash-stat-card" onclick="switchSection('favorites')">
+          <div class="dash-stat-icon">❤️</div>
+          <div class="dash-stat-value" data-count="12">۰</div>
+          <div class="dash-stat-label">علاقه‌مندی</div>
+          <a class="dash-stat-action">مشاهده</a>
+        </div>
+        <div class="dash-stat-card" onclick="window.location.href='./club.html'">
+          <div class="dash-stat-icon">🪙</div>
+          <div class="dash-stat-value" data-count="1250">۰</div>
+          <div class="dash-stat-label">سکه دیجی‌پوش</div>
+          <a class="dash-stat-action">باشگاه</a>
+        </div>
+        <div class="dash-stat-card" onclick="window.location.href='./club.html'">
+          <div class="dash-stat-icon">🎁</div>
+          <div class="dash-stat-value" data-count="2450">۰</div>
+          <div class="dash-stat-label">امتیاز باشگاه</div>
+          <a class="dash-stat-action">جوایز</a>
+        </div>
+      </div>
+
+      <!-- ═══ DigiAI Section ═══ -->
+      <div class="dash-card dash-digiai">
+        <div class="dash-card-head">
+          <h2 class="dash-card-title">
+            <span class="dash-card-title-icon">🤖</span>
+            <span>دیجی‌AI — استایلیست شخصی شما</span>
+          </h2>
+          <a href="./digiai.html" class="dash-card-link">
+            مشاهده همه پیشنهادات ←
+          </a>
+        </div>
+
+        <div class="dash-digiai-analysis">
+          <div class="dash-digiai-item">
+            <div class="dash-digiai-item-icon">🎨</div>
+            <div class="dash-digiai-item-content">
+              <div class="dash-digiai-item-label">رنگ پوست</div>
+              <p class="dash-digiai-item-value">گرم (زیرتون طلایی)<br><small style="color: var(--gray-warm); font-weight: 500;">پیشنهادی: طلایی، کرم، زمردی</small></p>
+            </div>
+          </div>
+          <div class="dash-digiai-item">
+            <div class="dash-digiai-item-icon">👤</div>
+            <div class="dash-digiai-item-content">
+              <div class="dash-digiai-item-label">فرم بدن</div>
+              <p class="dash-digiai-item-value">ساعت‌شنی<br><small style="color: var(--gray-warm); font-weight: 500;">پیشنهادی: کمربنددار، یقه هفت</small></p>
+            </div>
+          </div>
+          <div class="dash-digiai-item">
+            <div class="dash-digiai-item-icon">💎</div>
+            <div class="dash-digiai-item-content">
+              <div class="dash-digiai-item-label">سلیقه شما</div>
+              <p class="dash-digiai-item-value">کلاسیک و مجلسی</p>
+            </div>
+          </div>
+          <div class="dash-digiai-item">
+            <div class="dash-digiai-item-icon">🔥</div>
+            <div class="dash-digiai-item-content">
+              <div class="dash-digiai-item-label">ترند این هفته</div>
+              <p class="dash-digiai-item-value">طلایی (۷۳٪ کاربران)</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin: 20px 0 12px; font-size: 15px; color: var(--black); font-weight: 800;">🔥 پیشنهادات ویژه برای شما:</h3>
+        <div class="dash-products-grid" id="dashRecommendations">
+          <!-- محصولات از JS لود میشن -->
+        </div>
+
+        <div class="dash-digiai-actions">
+          <a href="./digiai.html" class="dash-btn dash-btn-primary">
+            👗 تولید ست کامل
+          </a>
+          <button class="dash-btn dash-btn-ghost" onclick="reloadRecommendations()">
+            🔄 بروزرسانی
+          </button>
+          <a href="./chat.html" class="dash-btn dash-btn-ghost">
+            💬 پرسیدن از دیجی‌ای
+          </a>
+        </div>
+      </div>
+
+      <!-- ═══ Customer Club ═══ -->
+      <div class="dash-card">
+        <div class="dash-card-head">
+          <h2 class="dash-card-title">
+            <span class="dash-card-title-icon">🏆</span>
+            <span>باشگاه مشتریان دیجی‌پوش</span>
+          </h2>
+          <a href="./club.html" class="dash-card-link">
+            مشاهده جوایز ←
+          </a>
+        </div>
+
+        <div class="dash-club-level">
+          <div class="dash-club-badge">🥇</div>
+          <div class="dash-club-level-info">
+            <h3 class="dash-club-level-name">سطح طلایی</h3>
+            <p class="dash-club-points">۲,۴۵۰ از ۵,۰۰۰ امتیاز • ۴۹٪ تا سطح بعدی</p>
+            <div class="dash-progress-bar" style="margin-top: 8px;">
+              <div class="dash-progress-fill" style="width: 49%"></div>
+            </div>
+          </div>
+        </div>
+
+        <h4 style="margin: 0 0 12px; font-size: 14px; font-weight: 800;">🎁 جوایز قابل دریافت:</h4>
+        <div class="dash-rewards-grid">
+          <div class="dash-reward-card">
+            <div class="dash-reward-icon">💸</div>
+            <h5 class="dash-reward-title">تخفیف ۱۰٪</h5>
+            <button class="dash-reward-btn">دریافت</button>
+          </div>
+          <div class="dash-reward-card">
+            <div class="dash-reward-icon">🚚</div>
+            <h5 class="dash-reward-title">ارسال رایگان</h5>
+            <button class="dash-reward-btn">دریافت</button>
+          </div>
+          <div class="dash-reward-card">
+            <div class="dash-reward-icon">🎁</div>
+            <h5 class="dash-reward-title">هدیه ویژه</h5>
+            <button class="dash-reward-btn">دریافت</button>
+          </div>
+        </div>
+
+        <div class="dash-challenge">
+          <h4 class="dash-challenge-title">🎯 چالش هفتگی: ۵ ست جدید بساز</h4>
+          <div class="dash-challenge-progress">
+            <div class="dash-challenge-text">پیشرفت: <strong>۲ از ۵</strong> (۴۰٪)</div>
+            <div class="dash-challenge-reward">🎁 ۵۰۰ امتیاز + تخفیف ۱۵٪</div>
+          </div>
+          <div class="dash-progress-bar" style="margin-top: 8px;">
+            <div class="dash-progress-fill" style="width: 40%; background: linear-gradient(90deg, var(--purple), var(--pink));"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Recent Orders ═══ -->
+      <div class="dash-card">
+        <div class="dash-card-head">
+          <h2 class="dash-card-title">
+            <span class="dash-card-title-icon">📦</span>
+            <span>سفارشات اخیر</span>
+          </h2>
+          <a href="javascript:void(0)" onclick="switchSection('orders')" class="dash-card-link">
+            مشاهده همه ←
+          </a>
+        </div>
+
+        <div class="dash-order-list" id="dashOrders">
+          <!-- از JS لود میشه -->
+        </div>
+      </div>
+
+      <!-- ═══ Style Snapshot ═══ -->
+      <div class="dash-card">
+        <div class="dash-card-head">
+          <h2 class="dash-card-title">
+            <span class="dash-card-title-icon">🎨</span>
+            <span>سبک شما در یک نگاه</span>
+          </h2>
+          <a href="javascript:void(0)" onclick="switchSection('taste')" class="dash-card-link">
+            تحلیل کامل ←
+          </a>
+        </div>
+
+        <div class="dash-snapshot-row">
+          <h4 class="dash-snapshot-label">🎨 رنگ‌های مورد علاقه:</h4>
+          <div class="dash-bar-row">
+            <span class="dash-bar-label">طلایی</span>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width: 40%"></div></div>
+            <span class="dash-bar-percent">۴۰٪</span>
+          </div>
+          <div class="dash-bar-row">
+            <span class="dash-bar-label">مشکی</span>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width: 30%"></div></div>
+            <span class="dash-bar-percent">۳۰٪</span>
+          </div>
+          <div class="dash-bar-row">
+            <span class="dash-bar-label">کرم</span>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width: 20%"></div></div>
+            <span class="dash-bar-percent">۲۰٪</span>
+          </div>
+          <div class="dash-bar-row">
+            <span class="dash-bar-label">سرمه‌ای</span>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width: 10%"></div></div>
+            <span class="dash-bar-percent">۱۰٪</span>
+          </div>
+        </div>
+
+        <div class="dash-snapshot-row">
+          <h4 class="dash-snapshot-label">💎 سبک‌های مورد علاقه:</h4>
+          <div class="dash-bar-row">
+            <span class="dash-bar-label">کلاسیک</span>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width: 35%"></div></div>
+            <span class="dash-bar-percent">۳۵٪</span>
+          </div>
+          <div class="dash-bar-row">
+            <span class="dash-bar-label">مجلسی</span>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width: 25%"></div></div>
+            <span class="dash-bar-percent">۲۵٪</span>
+          </div>
+          <div class="dash-bar-row">
+            <span class="dash-bar-label">مدرن</span>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width: 20%"></div></div>
+            <span class="dash-bar-percent">۲۰٪</span>
+          </div>
+          <div class="dash-bar-row">
+            <span class="dash-bar-label">روزمره</span>
+            <div class="dash-bar"><div class="dash-bar-fill" style="width: 20%"></div></div>
+            <span class="dash-bar-percent">۲۰٪</span>
+          </div>
+        </div>
+
+        <div class="dash-snapshot-tip">
+          📈 <strong>روند ماهانه:</strong> +۱۲٪ طلایی، -۵٪ مشکی
+          <br>💡 <strong>پیشنهاد AI:</strong> کرم و یاسی رو بیشتر امتحان کن — با پوست گرم شما عالی ست میشن!
+        </div>
+      </div>
+
+      <!-- ═══ AI Features ═══ -->
+      <div class="dash-card">
+        <div class="dash-card-head">
+          <h2 class="dash-card-title">
+            <span class="dash-card-title-icon">🤖</span>
+            <span>هوش مصنوعی دیجی‌ای</span>
+          </h2>
+        </div>
+
+        <div class="dash-ai-grid">
+          <a href="./digiai.html" class="dash-ai-card">
+            <span class="dash-ai-badge">جدید</span>
+            <div class="dash-ai-icon">⭐</div>
+            <h4 class="dash-ai-title">استایلیست AI</h4>
+            <span class="dash-ai-status">فعال</span>
+          </a>
+          <a href="./profile.html#photo" class="dash-ai-card">
+            <span class="dash-ai-badge">جدید</span>
+            <div class="dash-ai-icon">📸</div>
+            <h4 class="dash-ai-title">تطبیق با عکس</h4>
+            <span class="dash-ai-status">فعال</span>
+          </a>
+          <a href="./profile.html#wardrobe" class="dash-ai-card">
+            <span class="dash-ai-badge">جدید</span>
+            <div class="dash-ai-icon">🎮</div>
+            <h4 class="dash-ai-title">کمد مجازی</h4>
+            <span class="dash-ai-status">فعال</span>
+          </a>
+          <a href="./profile.html#taste" class="dash-ai-card">
+            <div class="dash-ai-icon">📊</div>
+            <h4 class="dash-ai-title">پیشنهادهای من</h4>
+            <span class="dash-ai-status">فعال</span>
+          </a>
+          <a href="./profile.html#personality" class="dash-ai-card">
+            <span class="dash-ai-badge">جدید</span>
+            <div class="dash-ai-icon">👤</div>
+            <h4 class="dash-ai-title">تیپ شخصیتی</h4>
+            <span class="dash-ai-status">فعال</span>
+          </a>
+          <a href="./profile.html#mypage" class="dash-ai-card">
+            <span class="dash-ai-badge">جدید</span>
+            <div class="dash-ai-icon">🎨</div>
+            <h4 class="dash-ai-title">صفحه من</h4>
+            <span class="dash-ai-status">فعال</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- Toast -->
+<div class="dash-toast" id="dashToast"></div>
+
+<!-- Scripts -->
+<script src="./seller/js/dp-config.js"></script>
+<script src="./dp-products-hub.js"></script>
+<script src="./dp-products-feed-v2.js"></script>
+<script src="./dp-stylist-engine.js"></script>
+<script src="./dp-god-stylist.js"></script>
+<script src="./dp-auth.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+ * 🎛️ Dashboard v2 Logic
+ * ═══════════════════════════════════════════════════════════════ */
+
+(function() {
+  // ── تاریخ و خوش‌آمدگویی پویا ──
+  function getGreeting() {
+    const h = new Date().getHours();
+    if (h < 6) return { emoji: '🌙', text: 'شب بخیر' };
+    if (h < 12) return { emoji: '☀️', text: 'صبح بخیر' };
+    if (h < 18) return { emoji: '🌤️', text: 'بعدازظهر بخیر' };
+    return { emoji: '🌆', text: 'عصر بخیر' };
+  }
+
+  function getPersianDate() {
+    try {
+      const d = new Date();
+      const formatter = new Intl.DateTimeFormat('fa-IR', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      return formatter.format(d);
+    } catch (e) {
+      return 'امروز';
+    }
+  }
+
+  // ── اطلاعات کاربر ──
+  function getUserInfo() {
+    const defaults = {
+      name: 'کاربر عزیز',
+      email: 'user@example.com',
+      level: 'طلایی',
+      coins: 1250,
+      points: 2450,
+      orders: 8,
+      favorites: 12,
+      profileProgress: 80,
+      missing: ['اندازه‌های بدن', 'سلیقه', 'آدرس']
+    };
+
+    try {
+      const userStr = localStorage.getItem('dp_user');
+      if (userStr) {
+        const user = JSON.parse(userStr);
+        if (user.name) defaults.name = user.name;
+        if (user.email) defaults.email = user.email;
+      }
+    } catch (e) {}
+
+    return defaults;
+  }
+
+  // ── شمارنده انیمیشنی ──
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.count || '0');
+    const duration = 1500;
+    const start = Date.now();
+    
+    function step() {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(target * ease);
+      
+      el.textContent = current.toLocaleString('fa-IR');
+      
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString('fa-IR');
+    }
+    
+    requestAnimationFrame(step);
+  }
+
+  // ── لود محصولات پیشنهادی ──
+  function loadRecommendations() {
+    const container = document.getElementById('dashRecommendations');
+    if (!container) return;
+
+    let products = [];
+    if (window.DPProductsHub && window.DPProductsHub.all) {
+      products = window.DPProductsHub.all().slice(0, 8);
+    }
+
+    if (products.length === 0) {
+      container.innerHTML = `
+        <div class="dash-empty" style="grid-column: 1/-1;">
+          <div class="dash-empty-icon">🛍️</div>
+          <p class="dash-empty-text">محصولی برای پیشنهاد موجود نیست. به‌زودی پر میشه!</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = products.map((p, i) => {
+      const match = 95 - i * 2;
+      const img = p.image || (p.images && p.images[0]) || '';
+      return `
+        <a href="./product.html?id=${encodeURIComponent(p.id)}" class="dash-product-card">
+          <div class="dash-product-img">
+            ${img 
+              ? `<img src="${img}" loading="lazy" alt="${esc(p.name)}" onerror="this.parentElement.innerHTML='<div class=dash-product-img-placeholder>🛍️</div>'" />` 
+              : '<div class="dash-product-img-placeholder">🛍️</div>'}
+            <span class="dash-product-match">🟢 ${match}٪</span>
+          </div>
+          <div class="dash-product-info">
+            <h5 class="dash-product-name">${esc(p.name)}</h5>
+            <div class="dash-product-rating">${'★'.repeat(Math.round(p.rating || 4))}${'☆'.repeat(5 - Math.round(p.rating || 4))} ${(p.rating || 4).toFixed(1)}</div>
+            <p class="dash-product-price">${Number(p.price || 0).toLocaleString('fa-IR')} <small>تومان</small></p>
+          </div>
+        </a>
+      `;
+    }).join('');
+  }
+
+  function esc(s) {
+    if (!s) return '';
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  // ── لود سفارشات اخیر ──
+  function loadOrders() {
+    const container = document.getElementById('dashOrders');
+    if (!container) return;
+
+    const sampleOrders = [
+      { id: '#SV-۱۴۰۴-۰۰۱', name: 'پیراهن مجلسی طلایی پلیسه', price: 1850000, status: 'success', statusText: 'در حال ارسال' },
+      { id: '#SV-۱۴۰۴-۰۰۲', name: 'کت بلیزر طوسی زنانه', price: 2400000, status: 'success', statusText: 'تحویل شده' },
+      { id: '#SV-۱۴۰۴-۰۰۳', name: 'کیف دستی چرم طبیعی', price: 1650000, status: 'warning', statusText: 'در حال پردازش' }
+    ];
+
+    container.innerHTML = sampleOrders.map(o => `
+      <div class="dash-order-card">
+        <div class="dash-order-icon">📦</div>
+        <div class="dash-order-info">
+          <p class="dash-order-id">${o.id}</p>
+          <h5 class="dash-order-name">${esc(o.name)}</h5>
+          <div class="dash-order-meta">
+            <span class="dash-order-status is-${o.status}">${o.statusText}</span>
+            <span style="color: var(--gray-warm); font-size: 12px;">•</span>
+            <button class="dash-btn dash-btn-ghost" style="padding: 4px 10px; font-size: 11px;">پیگیری</button>
+          </div>
+        </div>
+        <div class="dash-order-price">${o.price.toLocaleString('fa-IR')} <small style="font-size: 10px; color: var(--gray-warm);">تومان</small></div>
+      </div>
+    `).join('');
+  }
+
+  // ── نوار پیشرفت پروفایل ──
+  function updateProgress() {
+    const user = getUserInfo();
+    const fill = document.getElementById('dashProgressFill');
+    const text = document.getElementById('dashProgressText');
+    const missing = document.getElementById('dashProgressMissing');
+    
+    if (fill) {
+      setTimeout(() => {
+        fill.style.width = user.profileProgress + '%';
+      }, 200);
+    }
+    if (text) text.textContent = user.profileProgress.toLocaleString('fa-IR') + '٪';
+    if (missing) {
+      missing.innerHTML = `
+        <strong>⚡ ${user.missing.length} بخش ناقص:</strong>
+        <span>${user.missing.join('، ')}</span>
+      `;
+    }
+  }
+
+  // ── Switch Section (برای sidebar) ──
+  window.switchSection = function(section) {
+    // فعلا فقط UI رو عوض می‌کنه. در نسخه بعدی به صفحات جداگانه لینک میشه
+    document.querySelectorAll('.dash-side-btn').forEach(btn => {
+      btn.classList.toggle('is-on', btn.dataset.section === section);
+    });
+    
+    const sectionMap = {
+      'dashboard': null,
+      'info': './profile.html',
+      'orders': './profile.html#orders',
+      'favorites': './profile.html#favorites',
+      'security': './profile.html#security',
+      'stylist': './digiai.html',
+      'photo': './profile.html#photo',
+      'wardrobe': './profile.html#wardrobe',
+      'taste': './profile.html#taste',
+      'personality': './profile.html#personality',
+      'mypage': './profile.html#mypage'
+    };
+    
+    const url = sectionMap[section];
+    if (url) {
+      window.location.href = url;
+    } else {
+      showToast('🏠 خانه');
+    }
+  };
+
+  window.dashLogout = function() {
+    if (confirm('آیا می‌خواهید از حساب خارج شوید؟')) {
+      try {
+        localStorage.removeItem('dp_user');
+        localStorage.removeItem('dp_token');
+      } catch (e) {}
+      window.location.href = './index.html';
+    }
+  };
+
+  window.reloadRecommendations = function() {
+    showToast('🔄 در حال بروزرسانی...');
+    setTimeout(loadRecommendations, 600);
+  };
+
+  function showToast(msg) {
+    const toast = document.getElementById('dashToast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('is-on');
+    setTimeout(() => toast.classList.remove('is-on'), 2500);
+  }
+
+  // ── Init ──
+  function init() {
+    const user = getUserInfo();
+    const greeting = getGreeting();
+    
+    // نام
+    const nameEls = ['dashName', 'dashNameInline'];
+    nameEls.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = user.name;
+    });
+    
+    // ایموجی و تاریخ
+    const emojiEl = document.getElementById('dashGreetingEmoji');
+    if (emojiEl) emojiEl.textContent = greeting.emoji;
+    
+    const dateEl = document.getElementById('dashDate');
+    if (dateEl) dateEl.textContent = greeting.text + '، ' + getPersianDate();
+    
+    // اواتار
+    const avatarEl = document.getElementById('dashAvatar');
+    if (avatarEl) avatarEl.textContent = user.name.charAt(0);
+
+    // انیمیشن شمارنده‌ها
+    setTimeout(() => {
+      document.querySelectorAll('.dash-stat-value').forEach(animateCounter);
+    }, 300);
+
+    // لود محتوا
+    setTimeout(loadRecommendations, 100);
+    loadOrders();
+    updateProgress();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

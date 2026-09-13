@@ -1,0 +1,561 @@
+/* ════════════════════════════════════════════════════════════════
+ * 🏅 medals.css — استایل صفحه مدال‌ها و ماموریت‌ها
+ * ════════════════════════════════════════════════════════════════ */
+
+.medals-page {
+  min-height: 100vh;
+  background: radial-gradient(ellipse 1000px 500px at 50% -10%, rgba(201, 168, 76, 0.10) 0%, transparent 70%), var(--bg-soft);
+  padding: 24px 0 80px;
+}
+
+.medals-hero {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.15) 0%, rgba(212, 184, 90, 0.05) 100%);
+  border-radius: 24px;
+  padding: 32px 24px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.medals-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.medals-hero-content h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--gold-deep);
+  margin: 0 0 8px;
+  position: relative;
+}
+
+.medals-hero-content p {
+  font-size: 15px;
+  color: var(--text-soft);
+  margin: 0;
+  position: relative;
+}
+
+.medals-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+  position: relative;
+}
+
+.medals-hero-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.medals-hero-stat.is-gold {
+  background: linear-gradient(135deg, #C9A84C, #D4B85A);
+  color: #fff;
+  border-color: var(--gold-deep);
+}
+
+.medals-hero-stat.is-gold span {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.medals-hero-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.medals-hero-stat span {
+  display: block;
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+}
+
+.medals-hero-stat strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* Tabs */
+.medals-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--border-soft);
+  padding-bottom: 0;
+}
+
+.medals-tab {
+  background: transparent;
+  border: none;
+  padding: 12px 24px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-soft);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+
+.medals-tab:hover {
+  color: var(--text);
+}
+
+.medals-tab.is-on {
+  color: var(--gold-deep);
+  border-bottom-color: var(--gold);
+}
+
+/* Panels */
+.medals-panel {
+  display: none;
+}
+
+.medals-panel.is-active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Filters */
+.medals-filters, .missions-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.medals-filter, .missions-filter {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-soft);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.medals-filter:hover, .missions-filter:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.medals-filter.is-on, .missions-filter.is-on {
+  background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+  border-color: var(--gold-deep);
+  color: #1a1a1a;
+}
+
+.medals-filter.legendary.is-on {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  border-color: #DC2626;
+  color: #fff;
+}
+
+.medals-filter.epic.is-on {
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+  border-color: #7C3AED;
+  color: #fff;
+}
+
+.medals-filter.rare.is-on {
+  background: linear-gradient(135deg, #6EC8D9, #3B82F6);
+  border-color: #3B82F6;
+  color: #fff;
+}
+
+.medals-filter.common.is-on {
+  background: linear-gradient(135deg, #8BC9A8, #10B981);
+  border-color: #10B981;
+  color: #fff;
+}
+
+/* ════════════════════════════════════════════════════════════════
+ * Medal Sections by Rarity
+ * ════════════════════════════════════════════════════════════════ */
+
+.medals-section {
+  margin-bottom: 32px;
+}
+
+.medals-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  margin-bottom: 16px;
+  border-right: 4px solid var(--gold);
+}
+
+.medals-section-header.legendary {
+  border-right-color: #EF4444;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), transparent);
+}
+
+.medals-section-header.epic {
+  border-right-color: #8B5CF6;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), transparent);
+}
+
+.medals-section-header.rare {
+  border-right-color: #3B82F6;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), transparent);
+}
+
+.medals-section-header.common {
+  border-right-color: #10B981;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), transparent);
+}
+
+.medals-section-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0;
+  flex: 1;
+}
+
+.medals-section-count {
+  font-size: 13px;
+  color: var(--text-soft);
+  background: var(--bg-soft);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-weight: 700;
+}
+
+.medals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+/* Medal Card */
+.medal-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 20px 14px;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.medal-card.is-earned {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-soft) 100%);
+}
+
+.medal-card.is-earned::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; left: 0;
+  height: 4px;
+  background: var(--medal-color, var(--gold));
+}
+
+.medal-card.is-locked {
+  opacity: 0.55;
+  filter: grayscale(0.7);
+}
+
+.medal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.medal-card.is-locked:hover {
+  transform: none;
+}
+
+.medal-icon {
+  font-size: 56px;
+  margin-bottom: 12px;
+  display: block;
+  line-height: 1;
+}
+
+.medal-card.is-locked .medal-icon {
+  filter: grayscale(1);
+}
+
+.medal-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0 0 4px;
+  line-height: 1.4;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.medal-desc {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin: 0 0 8px;
+  line-height: 1.5;
+  min-height: 32px;
+}
+
+.medal-rarity {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.medal-rarity.legendary { background: linear-gradient(135deg, #EF4444, #DC2626); }
+.medal-rarity.epic { background: linear-gradient(135deg, #8B5CF6, #7C3AED); }
+.medal-rarity.rare { background: linear-gradient(135deg, #3B82F6, #2563EB); }
+.medal-rarity.common { background: linear-gradient(135deg, #10B981, #059669); }
+
+.medal-earned-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+  color: #1a1a1a;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(201, 168, 76, 0.4);
+}
+
+.medal-locked-icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 18px;
+  opacity: 0.5;
+}
+
+/* ════════════════════════════════════════════════════════════════
+ * Missions Grid
+ * ════════════════════════════════════════════════════════════════ */
+
+.missions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.mission-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 18px;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.mission-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.mission-card.is-completed {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.mission-card.is-completed::after {
+  content: '✅';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 20px;
+}
+
+.mission-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.mission-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--bg-soft), var(--bg-card));
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.mission-card.is-completed .mission-icon {
+  background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+  border-color: var(--gold-deep);
+}
+
+.mission-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mission-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 0 0 2px;
+}
+
+.mission-type {
+  font-size: 11px;
+  color: var(--text-soft);
+  background: var(--bg-soft);
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.mission-desc {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.mission-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.mission-progress-row strong {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.mission-progress-bar {
+  height: 8px;
+  background: var(--bg-soft);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.mission-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  border-radius: 100px;
+  transition: width 0.5s ease;
+}
+
+.mission-card.is-completed .mission-progress-fill {
+  background: linear-gradient(90deg, #10B981, #059669);
+  width: 100% !important;
+}
+
+.mission-reward {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-soft);
+}
+
+.mission-reward-points {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold-deep);
+}
+
+.mission-reward-medal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.mission-reward-medal-icon {
+  font-size: 20px;
+}
+
+.mission-reward-medal-name {
+  font-weight: 700;
+}
+
+/* Loading */
+.medals-loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-soft);
+}
+
+.medals-loading .spinner {
+  margin: 0 auto 12px;
+}
+
+/* Empty */
+.medals-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-soft);
+}
+
+.medals-empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .medals-hero-content h1 {
+    font-size: 24px;
+  }
+  .medals-hero-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .medals-tab {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  .medals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .missions-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <title>مدیریت دیجی‌پوش | نردبان و ارتقا</title>
+  <meta name="description" content="پنل مدیریت دیجی‌پوش — نظارت بر فروشگاه‌ها، سفارش‌ها و کالاها." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+</head>
+<body data-dp-panel>
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a href="../index.html" title="بازگشت به سایت">
+      <div class="sb-logo">دیجی‌پوش</div>
+      <span class="sb-sub">پنل مدیریت</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="منوی مدیریت">
+    <div class="sb-label">مدیریت</div>
+      <a class="sb-link" href="admin-dashboard.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3" y="3" width="7.5" height="8.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="5" rx="2"/><rect x="13.5" y="11" width="7.5" height="10" rx="2"/><rect x="3" y="14.5" width="7.5" height="6.5" rx="2"/></svg><span>داشبورد</span></a>
+      <a class="sb-link" href="admin-sellers.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg><span>فروشگاه‌ها</span><span class="sb-badge" id="badgeAll" hidden></span></a>
+      <a class="sb-link" href="admin-pending.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg><span>در انتظار تأیید</span><span class="sb-badge" id="badgePending" hidden></span></a>
+      <a class="sb-link" href="admin-moderation.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15.5 4.5 19.5 8.5 9 19H5v-4z"/><path d="m14 6 4 4"/></svg><span>بازبینی پروفایل</span><span class="sb-badge" id="badgeMod" hidden></span></a>
+      <a class="sb-link" href="admin-boost.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13.5 3.5c3 0 6 3 6 6 0 4.5-5 8-5 8l-4-4s3.5-5 8-5"/><path d="M9.5 14.5 6 18l-1.5-1.5L8 13"/><path d="M5 19l-1.5 1.5"/></svg><span>نردبان و ارتقا</span><span class="sb-badge" id="badgeBoost" hidden></span></a>
+      <a class="sb-link" href="admin-wholesale.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span>بازار عمده</span><span class="sb-badge" id="badgeWhole" hidden></span></a>
+      <a class="sb-link" href="admin-catalog.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg><span>همه‌ی محصولات</span></a>
+      <a class="sb-link" href="admin-orders.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><span>همه‌ی سفارش‌ها</span></a>
+      <a class="sb-link" href="admin-reviews.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg><span>نظرها</span><span class="sb-badge" id="badgeFlag" hidden></span></a>
+      <a class="sb-link" href="admin-policy.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m6 18 12-12"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg><span>سیاست کمیسیون</span></a>
+      <a class="sb-link" href="admin-settings.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg><span>تنظیمات</span></a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <a class="sb-link" href="../index.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7V20a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 20z"/><path d="M9.5 21.5v-7h5v7"/></svg><span>بازگشت به سایت</span></a>
+    <a class="sb-link logout" href="admin-login.html" data-logout><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15 4.5h3.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M10 8.5 6 12l4 3.5M6 12h9"/></svg><span>خروج</span></a>
+  </div>
+</aside>
+
+<div class="backdrop" id="backdrop"></div>
+
+<main class="main" id="main">
+  <header class="topbar">
+    <button class="burger" type="button" aria-label="منو"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div>
+      <h1 class="page-title">نردبان و ارتقا</h1>
+      <div class="page-sub">مدیریت بسته‌های برجسته‌سازی فروشگاه‌ها</div>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="notice-soft" id="trialNote" hidden>
+      <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="12" rx="1.6"/><path d="M3.5 12.5h17M12 8.5v12"/><path d="M12 8.5S10.5 4 8 4a2 2 0 0 0 0 4.5zM12 8.5S13.5 4 16 4a2 2 0 0 1 0 4.5z"/></svg>
+      <span><b>دوره‌ی آزمایشی رایگان فعال است</b> — بسته‌ها بدون پرداخت و
+      بی‌درنگ فعال می‌شوند. برای پولی‌کردن، در فایل
+      <code>assets/js/dp-boost.js</code> مقدار <code>FREE_TRIAL</code> را
+      به <code>false</code> تغییر دهید. قیمت‌ها دست‌نخورده باقی مانده‌اند.</span>
+    </div>
+
+    <div class="notice-soft" id="paidNote" hidden>
+      <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16h.01"/></svg>
+      <span>سفارش نردبان فروشندگان اینجا می‌آید. پس از دریافت وجه، <b>تأیید پرداخت</b> را بزنید
+      تا بسته فعال شود. می‌توانید بدون پرداخت هم بسته هدیه بدهید.</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-top"><span class="stat-icon si-gold"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg></span>
+          <span class="stat-label" id="waitLbl">در انتظار پرداخت</span></div>
+        <span class="stat-number num" id="kWait">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top"><span class="stat-icon si-green"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13.5 3.5c3 0 6 3 6 6 0 4.5-5 8-5 8l-4-4s3.5-5 8-5"/><path d="M9.5 14.5 6 18l-1.5-1.5L8 13"/><path d="M5 19l-1.5 1.5"/></svg></span>
+          <span class="stat-label">بسته‌ی فعال</span></div>
+        <span class="stat-number num" id="kLive">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top"><span class="stat-icon si-blue"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M3.5 7.5A2 2 0 0 1 5.5 5.5h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M16.5 12.5h4"/><circle cx="16.8" cy="12.5" r="1"/></svg></span>
+          <span class="stat-label" id="revLbl">درآمد از نردبان</span></div>
+        <span class="stat-number num" id="kRev">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top"><span class="stat-icon si-silver"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="12" rx="1.6"/><path d="M3.5 12.5h17M12 8.5v12"/><path d="M12 8.5S10.5 4 8 4a2 2 0 0 0 0 4.5zM12 8.5S13.5 4 16 4a2 2 0 0 1 0 4.5z"/></svg></span>
+          <span class="stat-label">هدیه‌ی داده‌شده</span></div>
+        <span class="stat-number num" id="kGift">۰</span>
+      </div>
+    </div>
+
+    <div class="notice-soft" id="kInsight" style="margin-bottom:18px">—</div>
+
+    <!-- درآمد و پرفروش‌ترین بسته‌ها -->
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>درآمد برجسته‌سازی</h2>
+        <span class="sub spacer" id="revSub">—</span>
+      </div>
+      <div class="pln-grid" id="plnGrid"></div>
+    </div>
+
+    <!-- فروشندگان برتر -->
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>بیشترین استفاده از نردبان</h2>
+        <span class="sub spacer">بر پایه‌ی هزینه و تعداد بسته</span>
+      </div>
+      <div id="topSellers"></div>
+    </div>
+
+    <!-- تخفیف دستی -->
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>تخفیف ویژه برای فروشگاه</h2>
+        <span class="sub spacer">روی همه‌ی بسته‌های آن فروشگاه اعمال می‌شود</span>
+      </div>
+      <div id="discList"></div>
+      <form id="discForm" novalidate style="margin-top:14px">
+        <div class="form-grid">
+          <div class="field">
+            <label for="dSeller">فروشگاه</label>
+            <select class="input" id="dSeller"></select>
+          </div>
+          <div class="field">
+            <label for="dPct">درصد تخفیف</label>
+            <input class="input num" id="dPct" value="۱۰" />
+          </div>
+          <div class="field">
+            <label for="dNote">علت</label>
+            <input class="input" id="dNote" placeholder="مثلاً: همکاری بلندمدت" />
+          </div>
+        </div>
+        <button class="btn btn-primary mt-18" type="submit">ثبت تخفیف</button>
+      </form>
+    </div>
+
+    <!-- صدرنشین کنونی -->
+    <div class="card mb-18" id="spotCard">
+      <div class="card-head">
+        <h2>جایگاه صدرنشین</h2>
+        <span class="sub spacer">در هر لحظه فقط یک فروشگاه</span>
+      </div>
+      <div id="spotBox"></div>
+      <div id="spotQueue"></div>
+    </div>
+
+    <!-- هدیه دادن -->
+    <div class="card mb-18">
+      <div class="card-head">
+        <h2>هدیه‌ی نردبان</h2>
+        <span class="sub spacer">بدون پرداخت، بی‌درنگ فعال می‌شود</span>
+      </div>
+      <form id="giftForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="gSeller">فروشگاه</label>
+            <select class="input" id="gSeller"></select>
+          </div>
+          <div class="field">
+            <label for="gPlan">بسته</label>
+            <select class="input" id="gPlan"></select>
+          </div>
+          <div class="field">
+            <label for="gDays">مدت (روز)</label>
+            <input class="input num" id="gDays" value="۷" />
+          </div>
+          <div class="field">
+            <label for="gNote">علت هدیه</label>
+            <input class="input" id="gNote" placeholder="مثلاً: فروشگاه تازه" />
+          </div>
+        </div>
+        <button class="btn btn-primary mt-18" type="submit">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="12" rx="1.6"/><path d="M3.5 12.5h17M12 8.5v12"/><path d="M12 8.5S10.5 4 8 4a2 2 0 0 0 0 4.5zM12 8.5S13.5 4 16 4a2 2 0 0 1 0 4.5z"/></svg> فعال‌سازی هدیه
+        </button>
+      </form>
+    </div>
+
+    <!-- فهرست -->
+    <div class="card">
+      <div class="card-head">
+        <h2>سفارش‌های نردبان</h2>
+        <div class="seg spacer" id="kFilter" role="tablist">
+          <button class="seg-btn on" type="button" data-f="awaiting">در انتظار</button>
+          <button class="seg-btn" type="button" data-f="active">فعال</button>
+          <button class="seg-btn" type="button" data-f="expired">پایان‌یافته</button>
+          <button class="seg-btn" type="button" data-f="">همه</button>
+        </div>
+      </div>
+      <div id="boostBox"></div>
+    </div>
+  </div>
+</main>
+
+<div class="toast-wrap"></div>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="../assets/js/dp-taxonomy.js"></script>
+<script src="../assets/js/dp-promo.js"></script>
+<script src="../assets/js/dp-boost.js"></script>
+<script src="../assets/js/dp-boost-pro.js"></script>
+<script src="../assets/js/dp-moderation.js"></script>
+<script src="../assets/js/dp-returns.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="../assets/js/dp-rate-pop.js"></script>
+<script src="../seller/js/dp-config.js"></script>
+<script src="js/admin-store.js"></script>
+<script src="js/admin-script.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+
+requireAdmin(async function () {
+  var B = window.DPBoost;
+  var $ = function (s) { return document.querySelector(s); };
+  var fa = B.fa, money = B.money;
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+  var toEn = function (s) {
+    return String(s).replace(/[۰-۹]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); });
+  };
+
+  var filter = 'awaiting';
+  var names = {};
+
+  /* ---------- نام فروشگاه‌ها ---------- */
+  async function loadSellers() {
+    var list = await DPAdmin.sellers.list();
+    names = {};
+    var sel = $('#gSeller');
+    sel.innerHTML = '';
+    list.forEach(function (s) {
+      names[s.id] = s.storeName || '—';
+      var o = document.createElement('option');
+      o.value = s.id;
+      o.textContent = s.storeName || s.id;
+      sel.appendChild(o);
+    });
+    if (!list.length) {
+      var o = document.createElement('option');
+      o.textContent = 'هنوز فروشگاهی نیست';
+      o.disabled = true;
+      sel.appendChild(o);
+    }
+  }
+
+  function fillPlans() {
+    var sel = $('#gPlan');
+    sel.innerHTML = '';
+    Object.keys(B.PLANS).forEach(function (k) {
+      var o = document.createElement('option');
+      o.value = k;
+      o.textContent = B.PLANS[k].fa;
+      sel.appendChild(o);
+    });
+  }
+
+  /* ---------- صف نوبت ---------- */
+  function paintQueue() {
+    var line = B.queueOf('spotlight');
+    if (!line.length) { $('#spotQueue').innerHTML = ''; return; }
+
+    $('#spotQueue').innerHTML =
+      '<div class="q-admin">' +
+        '<div class="q-admin-head">' + fa(line.length) +
+          ' فروشگاه در صف این جایگاه</div>' +
+        '<ol class="q-list">' +
+        line.map(function (x, i) {
+          var p = B.PLANS[x.plan] || {};
+          return '<li>' +
+            '<span class="q-num num">' + fa(i + 1) + '</span>' +
+            '<span class="q-name">' + esc(names[x.sellerId] || x.sellerId) + '</span>' +
+            '<span class="q-days num">' + fa(x.days) + ' روز</span>' +
+            '<span class="q-date num">' + esc(x.date) + '</span>' +
+            '<button type="button" class="btn btn-ghost btn-sm" data-qdel="' + esc(x.sellerId) + '">حذف</button>' +
+          '</li>';
+        }).join('') +
+        '</ol>' +
+      '</div>';
+  }
+
+  /* ---------- جایگاه صدرنشین ---------- */
+  function paintSpot() {
+    var r = B.spotlight();
+    if (!r) {
+      var waiting = B.queueOf('spotlight').length;
+      $('#spotBox').innerHTML =
+        '<div class="empty-inline">جایگاه صدرنشین <b>آزاد</b> است. ' +
+        (waiting
+          ? fa(waiting) + ' فروشگاه در صف‌اند و نوبت اول به‌زودی خودکار فعال می‌شود.'
+          : 'هر فروشگاهی می‌تواند آن را بگیرد.') + '</div>';
+      return;
+    }
+    var p = B.PLANS[r.plan] || {};
+    var left = B.daysLeft(r);
+    var pct = Math.max(0, Math.min(100, Math.round(left / r.days * 100)));
+
+    $('#spotBox').innerHTML =
+      '<div class="boost-live" style="--pc:' + (p.color || '#f5a0a0') + '">' +
+        '<div class="bl-head">' +
+          '<strong>' + esc(names[r.sellerId] || r.sellerId) + '</strong>' +
+          (r.gift ? '<em class="bl-gift">هدیه</em>' : '') +
+          (r.trial ? '<em class="free-tag">آزمایشی</em>' : '') +
+          '<span class="bl-left num">' +
+            (B.timeLeft && B.timeLeft(r) ? B.timeLeft(r).fa + ' مانده'
+                                         : fa(left) + ' روز مانده') + '</span>' +
+        '</div>' +
+        (r.endDateTime || r.endDate
+          ? '<div class="bl-until">پایان دقیق: <b>' +
+            esc(r.endDateTime || r.endDate) + '</b>' +
+            (r.startDate ? ' · شروع: ' + esc(r.startDate) : '') + '</div>' : '') +
+        '<div class="bl-bar"><i style="width:' + pct + '%"></i></div>' +
+        '<div class="bl-foot">' +
+          '<span>' + (r.paused ? 'موقتاً متوقف' : 'در حال نمایش به همه‌ی مشتری‌ها') + '</span>' +
+          '<span class="num">' + fa(r.views || 0) + ' بازدید · ' +
+            fa(r.clicks || 0) + ' کلیک</span>' +
+        '</div>' +
+        '<div class="row-actions" style="margin-top:12px">' +
+          '<button type="button" class="btn btn-ghost btn-sm" data-pause="' + esc(r.id) + '">' +
+            (r.paused ? 'ادامه' : 'توقف موقت') + '</button>' +
+          '<button type="button" class="btn btn-ghost btn-sm" data-stop="' + esc(r.id) + '">' +
+            'آزادسازی جایگاه</button>' +
+        '</div>' +
+      '</div>';
+  }
+
+  /* ---------- رسم ---------- */
+  function paint() {
+    paintSpot();
+    paintQueue();
+    var all = B.all();
+    var rev = B.revenue();
+
+    $('#kWait').textContent = fa(all.filter(function (r) { return r.status === 'awaiting'; }).length);
+    $('#kLive').textContent = fa(all.filter(B.live).length);
+    $('#kGift').textContent = fa(rev.gifts);
+
+    /* میانگین کارایی همه‌ی بسته‌ها — برای قیمت‌گذاری بهتر */
+    var tv = 0, tc = 0;
+    all.forEach(function (r) { tv += r.views || 0; tc += r.clicks || 0; });
+    var box = $('#kInsight');
+    if (box) {
+      box.innerHTML = tv
+        ? 'مجموع <b class="num">' + fa(tv) + '</b> بازدید و <b class="num">' +
+          fa(tc) + '</b> کلیک — نرخ کلیک کل <b class="num">٪' +
+          fa(tv ? Math.round(tc / tv * 1000) / 10 : 0) + '</b>'
+        : 'هنوز آماری ثبت نشده است.';
+    }
+
+    if (B.FREE_TRIAL) {
+      /* درآمدی نیست — به‌جایش برآورد درآمد آینده نشان داده می‌شود */
+      $('#revLbl').textContent = 'درآمد بالقوه (اگر پولی بود)';
+      $('#kRev').textContent = money(rev.wouldBe || 0);
+      $('#waitLbl').textContent = 'بسته‌ی آزمایشی';
+      $('#kWait').textContent = fa(rev.trials || 0);
+    } else {
+      $('#revLbl').textContent = 'درآمد از نردبان';
+      $('#kRev').textContent = money(rev.total);
+      $('#waitLbl').textContent = 'در انتظار پرداخت';
+    }
+
+    var list = filter === 'active' ? all.filter(B.live)
+             : filter ? all.filter(function (r) { return r.status === filter && !B.live(r); })
+             : all;
+    if (filter === 'awaiting') list = all.filter(function (r) { return r.status === 'awaiting'; });
+
+    if (!list.length) {
+      $('#boostBox').innerHTML = '<div class="empty-inline">سفارشی در این بخش نیست.</div>';
+      return;
+    }
+
+    var CLS = { awaiting: 'b-warn', active: 'b-ok', expired: 'b-mute', rejected: 'b-bad' };
+
+    $('#boostBox').innerHTML =
+      '<div class="table-wrap"><table class="table"><thead><tr>' +
+        '<th>فروشگاه</th><th>بسته</th><th>مدت</th><th>مبلغ</th>' +
+        '<th>وضعیت</th><th>آمار</th><th>عملیات</th>' +
+      '</tr></thead><tbody>' +
+      list.map(function (r) {
+        var p = B.PLANS[r.plan] || {};
+        var st = B.live(r) ? 'active' : r.status;
+        var left = B.daysLeft(r);
+        var acts = '';
+
+        if (r.status === 'awaiting') {
+          acts = '<button type="button" class="btn btn-primary btn-sm" data-go="' + esc(r.id) + '">تأیید پرداخت</button>' +
+                 '<button type="button" class="btn btn-ghost btn-sm" data-no="' + esc(r.id) + '">رد</button>';
+        } else if (B.live(r)) {
+          acts = '<button type="button" class="btn btn-ghost btn-sm" data-pause="' + esc(r.id) + '">' +
+                   (r.paused ? 'ادامه' : 'توقف موقت') + '</button>' +
+                 '<button type="button" class="btn btn-ghost btn-sm" data-stop="' + esc(r.id) + '">پایان</button>';
+        }
+
+        return '<tr>' +
+          '<td><b>' + esc(names[r.sellerId] || r.sellerId) + '</b>' +
+            (r.note ? '<div class="tiny-note">' + esc(r.note) + '</div>' : '') + '</td>' +
+          '<td>' + esc(p.fa || r.plan) +
+            (r.gift ? ' <em class="bl-gift">هدیه</em>' : '') + '</td>' +
+          '<td class="num">' + fa(r.days) + ' روز' +
+            (B.live(r) ? '<div class="tiny-note num">' + fa(left) + ' روز مانده</div>' : '') + '</td>' +
+          '<td class="num">' + (r.price ? money(r.price)
+            : (r.trial ? '<span class="free-tag">آزمایشی</span>'
+                       : (r.gift ? 'هدیه' : 'رایگان'))) + '</td>' +
+          '<td><span class="badge ' + (CLS[st] || 'b-mute') + '">' +
+            (r.paused && st === 'active' ? 'موقتاً متوقف' : (B.STATUS_FA[st] || st)) + '</span>' +
+            (r.reason ? '<div class="tiny-note">' + esc(r.reason) + '</div>' : '') + '</td>' +
+          (function () {
+            var ins = B.insight(r);
+            return '<td class="num">' + fa(ins.views) + ' بازدید' +
+              '<div class="tiny-note num">' + fa(ins.clicks) + ' کلیک · ٪' +
+              fa(ins.ctr) + ' نرخ</div>' +
+              (ins.perDay ? '<div class="tiny-note num">روزی ' + fa(ins.perDay) + '</div>' : '') +
+            '</td>';
+          })() +
+          '<td><div class="row-actions">' + acts + '</div></td>' +
+        '</tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- رویدادها ---------- */
+  $('#kFilter').addEventListener('click', function (e) {
+    var b = e.target.closest('.seg-btn');
+    if (!b) return;
+    filter = b.dataset.f;
+    $('#kFilter').querySelectorAll('.seg-btn').forEach(function (x) {
+      x.classList.toggle('on', x === b);
+    });
+    paint();
+  });
+
+  $('#giftForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    try {
+      B.gift($('#gSeller').value, $('#gPlan').value, toEn($('#gDays').value), $('#gNote').value);
+      toast('بسته‌ی هدیه فعال شد.', 'success');
+      $('#gNote').value = '';
+      paint();
+    } catch (err) { toast(err.message, 'error'); }
+  });
+
+  document.addEventListener('click', function (e) {
+    var go = e.target.closest('[data-go]');
+    if (go) {
+      if (!confirm('پرداخت دریافت شد و بسته فعال شود؟')) return;
+      try { B.activate(go.dataset.go); toast('بسته فعال شد.', 'success'); paint(); }
+      catch (err) { toast(err.message, 'error'); }
+      return;
+    }
+    var no = e.target.closest('[data-no]');
+    if (no) {
+      var why = prompt('دلیل رد را بنویسید:');
+      if (why === null) return;
+      try { B.reject(no.dataset.no, why); toast('سفارش رد شد.', 'success'); paint(); }
+      catch (err) { toast(err.message, 'error'); }
+      return;
+    }
+    var pz = e.target.closest('[data-pause]');
+    if (pz) {
+      try {
+        var now = B.togglePause(pz.dataset.pause);
+        toast(now ? 'موقتاً متوقف شد. روزها نمی‌سوزند.' : 'دوباره فعال شد.', 'success');
+        paint();
+      } catch (err) { toast(err.message, 'error'); }
+      return;
+    }
+    var qd = e.target.closest('[data-qdel]');
+    if (qd) {
+      if (!confirm('این فروشگاه از صف حذف شود؟')) return;
+      B.dequeue(qd.dataset.qdel, 'spotlight');
+      toast('از صف حذف شد.', 'success');
+      paint();
+      return;
+    }
+
+    var sp = e.target.closest('[data-stop]');
+    if (sp) {
+      if (!confirm('این بسته همین حالا پایان یابد؟')) return;
+      try { B.stop(sp.dataset.stop); toast('بسته پایان یافت.', 'success'); paint(); }
+      catch (err) { toast(err.message, 'error'); }
+    }
+  });
+
+  document.addEventListener('dp:boost', paint);
+
+  await (async function () {
+    $('#trialNote').hidden = !B.FREE_TRIAL;
+    $('#paidNote').hidden = !!B.FREE_TRIAL;
+
+    /* در دوره‌ی آزمایشی چیزی «در انتظار پرداخت» نمی‌ماند،
+       پس نمای پیش‌فرض روی «فعال» می‌رود */
+    if (B.FREE_TRIAL) {
+      filter = 'active';
+      $('#kFilter').querySelectorAll('.seg-btn').forEach(function (x) {
+        x.classList.toggle('on', x.dataset.f === 'active');
+      });
+    }
+
+    await loadSellers();
+    fillPlans();
+    paint();
+  })();
+});
+
+</script>
+<script>
+/* ============================================================
+   داشبورد پیشرفته‌ی مدیر برای نردبان
+   ============================================================ */
+requireAdmin(async function () {
+  var B = window.DPBoost, P = window.DPBoostPro;
+  if (!B || !P) return;
+
+  var $ = function (s) { return document.querySelector(s); };
+  var fa = P.fa, money = P.money;
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+  var toEn = function (s) {
+    return String(s).replace(/[۰-۹]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); });
+  };
+
+  var names = {};
+
+  async function loadNames() {
+    var list = await DPAdmin.sellers.list();
+    names = {};
+    var sel = $('#dSeller');
+    sel.innerHTML = '';
+    list.forEach(function (s) {
+      names[s.id] = s.storeName || '—';
+      var o = document.createElement('option');
+      o.value = s.id;
+      o.textContent = s.storeName || s.id;
+      sel.appendChild(o);
+    });
+  }
+
+  var nameOf = function (id) { return names[id] || 'فروشگاه ' + esc(String(id).slice(0, 6)); };
+
+  /* ---------- درآمد و بسته‌ها ---------- */
+  function paintPlans(r) {
+    $('#revSub').textContent = B.FREE_TRIAL
+      ? 'دوره‌ی آزمایشی — درآمد بالقوه ' + money(r.wouldBe) + ' تومان'
+      : money(r.total) + ' تومان از ' + fa(r.paidCount) + ' سفارش';
+
+    $('#plnGrid').innerHTML = r.plans.map(function (p, i) {
+      var ctr = p.views ? Math.round(p.clicks / p.views * 1000) / 10 : 0;
+      return '<div class="pln-cell' + (i === 0 && p.count ? ' is-top' : '') +
+          '" style="--pc:' + (p.plan.color || '#c9a84c') + '">' +
+        '<strong>' + esc(p.plan.fa) +
+          (i === 0 && p.count ? '<span class="pln-top-tag">پرفروش‌ترین</span>' : '') +
+        '</strong>' +
+        '<dl>' +
+          '<dt>تعداد فروش</dt><dd class="num">' + fa(p.count) + '</dd>' +
+          '<dt>درآمد</dt><dd class="num">' + money(p.revenue) + '</dd>' +
+          '<dt>مجموع روز</dt><dd class="num">' + fa(p.days) + '</dd>' +
+          '<dt>بازدید</dt><dd class="num">' + fa(p.views) + '</dd>' +
+          '<dt>نرخ کلیک</dt><dd class="num">٪' + fa(ctr) + '</dd>' +
+        '</dl>' +
+      '</div>';
+    }).join('');
+  }
+
+  /* ---------- فروشندگان برتر ---------- */
+  function paintTop(r) {
+    var rows = r.sellers.slice(0, 10);
+    if (!rows.length) {
+      $('#topSellers').innerHTML =
+        '<div class="empty-inline">هنوز کسی از نردبان استفاده نکرده است.</div>';
+      return;
+    }
+    $('#topSellers').innerHTML =
+      '<div class="table-wrap"><table class="table"><thead><tr>' +
+        '<th>فروشگاه</th><th>بسته</th><th>روز</th><th>هزینه</th>' +
+        '<th>بازدید</th><th>امتیاز</th>' +
+      '</tr></thead><tbody>' +
+      rows.map(function (s) {
+        var t = P.tierOf(s.sellerId);
+        return '<tr>' +
+          '<td><b>' + nameOf(s.sellerId) + '</b></td>' +
+          '<td class="num">' + fa(s.count) + '</td>' +
+          '<td class="num">' + fa(s.days) + '</td>' +
+          '<td class="num">' + (s.spent ? money(s.spent) : 'رایگان') + '</td>' +
+          '<td class="num">' + fa(s.views) + '</td>' +
+          '<td><span class="dp-tier-chip" style="--tc:' + t.color + '">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
+              'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+              '<path d="M12 3.5 14.2 8l5 .7-3.6 3.5.9 5-4.5-2.4L7.5 17l.9-5L4.8 8.7l5-.7z"/></svg>' +
+            esc(t.fa) + ' · ' + fa(t.score) + '</span></td>' +
+        '</tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- تخفیف‌های دستی ---------- */
+  function paintDisc(r) {
+    var ids = Object.keys(r.discounts);
+    if (!ids.length) {
+      $('#discList').innerHTML =
+        '<div class="empty-inline">هیچ تخفیف ویژه‌ای ثبت نشده است.</div>';
+      return;
+    }
+    $('#discList').innerHTML = ids.map(function (id) {
+      var d = r.discounts[id];
+      return '<div class="disc-row">' +
+        '<b>' + nameOf(id) + '</b>' +
+        '<span class="disc-p num">٪' + fa(d.percent) + '</span>' +
+        '<small>' + esc(d.note || 'بدون توضیح') + '</small>' +
+        '<button class="btn btn-ghost btn-sm spacer-x" type="button" ' +
+          'data-ddel="' + esc(id) + '">برداشتن</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function paintPro() {
+    var r = P.adminReport();
+    paintPlans(r);
+    paintTop(r);
+    paintDisc(r);
+  }
+
+  $('#discForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = $('#dSeller').value;
+    var pct = Number(toEn($('#dPct').value));
+    if (!id) { toast('فروشگاهی انتخاب نشده است.', 'error'); return; }
+    if (!(pct > 0 && pct <= 90)) { toast('درصد باید میان ۱ تا ۹۰ باشد.', 'error'); return; }
+    P.setDiscount(id, pct, $('#dNote').value);
+    toast('تخفیف ٪' + fa(pct) + ' ثبت شد.', 'success');
+    $('#dNote').value = '';
+    paintPro();
+  });
+
+  document.addEventListener('click', function (e) {
+    var d = e.target.closest('[data-ddel]');
+    if (!d) return;
+    if (!confirm('این تخفیف برداشته شود؟')) return;
+    P.setDiscount(d.dataset.ddel, 0);
+    toast('تخفیف برداشته شد.', 'success');
+    paintPro();
+  });
+
+  document.addEventListener('dp:boost', paintPro);
+
+  await loadNames();
+  paintPro();
+});
+</script>
+</body>
+</html>

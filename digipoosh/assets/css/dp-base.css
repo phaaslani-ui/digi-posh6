@@ -1,0 +1,101 @@
+/* ============================================================
+   دیجی‌پوش — پایه‌ی مشترک صفحه‌های مشتری
+   ------------------------------------------------------------
+   چرا این فایل ساخته شد؟
+
+   صفحه‌ی کالا (`product.html`) کل `store.css` را بار می‌کرد —
+   یعنی ۲۱۸ قانون، که **۱۶۲ تای آنها هیچ کاری روی این صفحه
+   نمی‌کردند** (قانون‌های `hero`, `crumbs`, `pcard` و…).
+
+   بدتر: `store.css` قانون‌های عمومی داشت (`body`, `:root`,
+   `html`, `img`, `a`) که با `product.css` سر ترتیب می‌جنگیدند
+   و چیدمان را به‌هم می‌ریختند.
+
+   حالا پایه‌ی مشترک اینجاست — سبک، تمیز، و بدون هیچ قانون
+   مخصوصِ یک صفحه. هر صفحه بعدش فقط فایل خودش را می‌گیرد.
+   ============================================================ */
+
+:root {
+  --gold: #c9a84c;
+  --gold-bright: #d4b85a;
+  --bronze: #b8943c;
+  --cream: #f5f0e8;
+  --off-white: #faf8f5;
+  --beige: #ede8e0;
+  --ink: #1a1a1a;
+
+  /* خاکستری متن — ۴٫۷۰:۱ روی کرم، استاندارد WCAG AA */
+  --gray: #75695f;
+  --silver: #c0c0c0;
+  --success: #4a8f6b;
+  --danger: #b4544f;
+  --wrap: min(1560px, calc(100% - 36px));
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+
+  /* جلوگیری از پیمایش افقی — روی html، نه body.
+     اگر روی body باشد، هر `position: fixed` (کشوی منو، سبد،
+     جست‌وجو) به body مقید می‌شود و ته صفحه می‌افتد. */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  direction: rtl;
+  font-family: "Vazirmatn", system-ui, sans-serif;
+  color: var(--ink);
+  line-height: 1.85;
+  background:
+    radial-gradient(circle at top right, rgba(201, 168, 76, 0.09), transparent 28%),
+    radial-gradient(circle at left 30%, rgba(192, 192, 192, 0.07), transparent 26%),
+    var(--cream);
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+.wrap { width: var(--wrap); margin-inline: auto; }
+
+/* ============================================================
+   حاشیه‌ی طلایی — امضای بصری برند
+   ============================================================ */
+.gold-border {
+  position: relative;
+  border-radius: 20px;
+  background: var(--off-white);
+}
+
+.gold-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2.5px;
+  border-radius: inherit;
+  background: linear-gradient(115deg,
+    var(--gold), var(--gold-bright), var(--silver), var(--bronze), var(--gold));
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: dp-goldflow 9s linear infinite;
+}
+
+@keyframes dp-goldflow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gold-border::before { animation: none; }
+  html { scroll-behavior: auto; }
+}

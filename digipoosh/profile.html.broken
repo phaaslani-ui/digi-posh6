@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>داشبورد حساب کاربری | دیجی‌پوش</title>
+  <meta name="theme-color" content="#f5f0e8" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style-clean.css" />
+  <link rel="stylesheet" href="./dp-navbar.css" />
+  <link rel="stylesheet" href="./club-toast.css" />
+  <link rel="stylesheet" href="./assets/css/dp-cart-drawer.css" />
+  <style>
+  <link rel="stylesheet" href="./dashboard-v2.css" />
+  <link rel="stylesheet" href="./wardrobe-v2.css" />
+    .prof-page {
+      min-height: 100vh;
+      background: radial-gradient(ellipse 1000px 500px at 50% -10%, rgba(212, 175, 55, 0.10) 0%, transparent 70%), var(--bg-soft);
+      padding: 24px 0 80px;
+    }
+    .prof-container { max-width: 1320px; margin: 0 auto; padding: 0 20px; }
+    .prof-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .prof-side {
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-soft);
+      position: sticky;
+      top: 90px;
+    }
+    .prof-user {
+      text-align: center;
+      padding: 10px 0 14px;
+      border-bottom: 1px solid var(--border-soft);
+      margin-bottom: 12px;
+    }
+    .prof-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; font-weight: 800;
+      box-shadow: 0 3px 12px rgba(212, 175, 55, 0.3);
+      margin: 0 auto 8px;
+    }
+    .prof-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .prof-email-mini { font-size: 10.5px; color: var(--text-soft); }
+
+    .prof-side-group {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 10px 4px;
+    }
+    .prof-side-group:first-of-type { padding-top: 0; }
+    .prof-side-nav { display: flex; flex-direction: column; gap: 2px; }
+    .prof-side-btn {
+      display: flex; align-items: center; gap: 9px;
+      padding: 8px 10px;
+      background: transparent; border: none;
+      border-radius: 8px;
+      color: var(--text-soft);
+      font-size: 12px; font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: right;
+      width: 100%;
+      position: relative;
+    }
+    .prof-side-btn:hover { background: var(--bg-soft); color: var(--text); }
+    .prof-side-btn.is-on {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(244, 229, 177, 0.05));
+      color: var(--gold-dark);
+      font-weight: 700;
+    }
+    .prof-side-btn.is-on::before {
+      content: ''; position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 3px; height: 60%;
+      background: var(--gold);
+      border-radius: 0 3px 3px 0;
+    }
+    .prof-side-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .prof-side-divider { height: 1px; background: var(--border-soft); margin: 6px 0; }
+    .prof-side-btn--danger { color: #ef4444; }
+
+    .prof-main { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+    .prof-card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-soft);
+    }
+    .prof-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .prof-card-head h2 { font-size: 14px; font-weight: 800; margin: 0; }
+    .prof-card-head p { font-size: 11px; color: var(--text-soft); margin: 0; }
+    .prof-card-icon {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .prof-card-icon svg { width: 16px; height: 16px; }
+
+    .prof-hero {
+      background: linear-gradient(135deg, var(--bg-card) 0%, #fff 100%);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-soft);
+      position: relative;
+      overflow: hidden;
+    }
+    .prof-hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    }
+    .prof-hero-greet {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prof-hero-greet .name { color: var(--gold-dark); }
+    .prof-hero-sub { font-size: 13px; color: var(--text-soft); margin: 0; }
+
+    .prof-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .prof-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+    .prof-stat-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 8px;
+    }
+    .prof-stat-icon svg { width: 18px; height: 18px; }
+    .prof-stat-num { font-size: 22px; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 4px; }
+    .prof-stat-lbl { font-size: 11px; color: var(--text-soft); }
+
+    .prof-section { display: none; }
+    .prof-section.is-on { display: block; }
+
+    .prof-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+    .prof-form-row label { display: block; font-size: 11px; font-weight: 600; color: var(--text-soft); margin-bottom: 4px; }
+    .prof-form-row input, .prof-form-row textarea {
+      width: 100%; padding: 10px 12px;
+      background: var(--bg-soft); border: 1.5px solid var(--border-soft);
+      border-radius: 8px; font-size: 13px; font-family: inherit; text-align: right;
+    }
+    .prof-btn {
+      padding: 9px 18px; background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #1a1a1a; border: none; border-radius: 9px;
+      font-weight: 700; font-size: 12px; cursor: pointer;
+      font-family: inherit; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .prof-btn:hover { transform: translateY(-1px); }
+    .prof-btn--ghost { background: transparent; border: 1.5px solid var(--border-soft); color: var(--text); }
+    .prof-btn--danger { background: transparent; border: 1.5px solid #ef4444; color: #ef4444; }
+    .prof-btn--danger:hover { background: #ef4444; color: #fff; }
+
+    .prof-empty { text-align: center; padding: 30px 20px; color: var(--text-soft); }
+    .prof-empty svg { width: 40px; height: 40px; opacity: 0.3; margin-bottom: 10px; }
+    .prof-empty p { font-size: 13px; margin: 0; }
+
+    @media (max-width: 968px) {
+      .prof-layout { grid-template-columns: 1fr; }
+      .prof-side { position: static; }
+      .prof-stats-grid { grid-template-columns: 1fr; }
+      .prof-form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- منوی استاندارد قبل از main -->
+<main id="main" class="prof-page">
+  <div class="prof-container">
+    <div class="prof-layout">
+
+      <!-- ═══ سایدبار ═══ -->
+      <aside class="prof-side">
+        <div class="prof-user">
+          <div class="prof-avatar" id="profAvatar">ع</div>
+          <div class="prof-name" id="profName">کاربر</div>
+          <div class="prof-email-mini" id="profEmail">user@mail.com</div>
+        </div>
+
+        <div class="prof-side-group">حساب</div>
+        <div class="prof-side-nav">
+          <button class="prof-side-btn is-on" data-section="dashboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            داشبورد
+          </button>
+          <button class="prof-side-btn" data-section="info">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+            اطلاعات شخصی
+          </button>
+          <button class="prof-side-btn" data-section="orders">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+            سفارش‌ها
+          </button>
+          <button class="prof-side-btn" data-section="favorites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9.5C0 6 4 2 8 4l4 3 4-3c4-2 8 2 5.5 7.5C19 16.5 12 21 12 21z"/></svg>
+            علاقه‌مندی‌ها
+          </button>
+          <button class="prof-side-btn" data-section="security">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></svg>
+            امنیت
+          </button>
+        </div>
+
+        <div class="prof-side-divider"></div>
+        <div class="prof-side-group">هوش مصنوعی</div>
+        <div class="prof-side-nav">
+          <button class="prof-side-btn is-new-feature" data-section="stylist">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 1.5 4 4.5.5-3.5 3 1 4.5L12 13l-3.5 2.5 1-4.5L6 8l4.5-.5z"/></svg>
+            استایلیست AI
+          </button>
+          <button class="prof-side-btn is-new-feature" data-section="match">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            تطبیق با عکس
+          </button>
+          <button class="prof-side-btn is-new-feature" data-section="wardrobe">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1h-5v-7H10v7H4a1 1 0 0 1-1-1V9z"/></svg>
+            کمد مجازی
+          </button>
+          <button class="prof-side-btn is-new-feature" data-section="taste" id="profTasteBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 7H22l-6 4.5 2.5 7L12 16l-6.5 4.5 2.5-7L2 9h7.5z"/></svg>
+            پیشنهادهای من
+            <span class="prof-side-badge" id="profTasteBadge" style="display:none">!</span>
+          </button>
+          <button class="prof-side-btn is-new-feature" data-section="personality" id="profPersonalityBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+            تیپ شخصیتی من
+            <span class="prof-side-badge" id="profPersonalityBadge" style="display:none">!</span>
+          </button>
+          <button class="prof-side-btn is-new-feature" data-section="theme" id="profThemeBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 10-10c0 1.7-1.3 3-3 3h-2.5a2.5 2.5 0 0 0 0 5c1.7 0 3 1.3 3 3a3 3 0 0 1-3 3"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
+            تم صفحه من
+            <span class="prof-side-badge" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">🎨</span>
+          </button>
+        </div>
+
+        <div class="prof-side-divider"></div>
+        <div class="prof-side-nav">
+          <button class="prof-side-btn prof-side-btn--danger" id="signOutBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+            خروج
+          </button>
+        </div>
+      </aside>
+
+      <!-- ═══ محتوای اصلی ═══ -->
+      <div class="prof-main">
+
+        <!-- داشبورد -->
+        <div id="sec-dashboard" class="prof-section is-on">
+          <div class="prof-hero">
+            <h1 class="prof-hero-greet">
+              <span>سلام <span class="name" id="profGreetName">کاربر</span> عزیز</span>
+              👋
+            </h1>
+            <p class="prof-hero-sub">به پنل کاربری خودت خوش اومدی.</p>
+          </div>
+
+          <div class="prof-stats-grid">
+            <div class="prof-stat-card">
+              <div class="prof-stat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+              </div>
+              <div class="prof-stat-num" id="statOrders">۰</div>
+              <div class="prof-stat-lbl">سفارش</div>
+            </div>
+            <div class="prof-stat-card">
+              <div class="prof-stat-icon" style="background:linear-gradient(135deg, #ec4899, #be185d)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9.5C0 6 4 2 8 4l4 3 4-3c4-2 8 2 5.5 7.5C19 16.5 12 21 12 21z"/></svg>
+              </div>
+              <div class="prof-stat-num" id="statFavs">۰</div>
+              <div class="prof-stat-lbl">علاقه‌مندی</div>
+            </div>
+            <div class="prof-stat-card">
+              <div class="prof-stat-icon" style="background:linear-gradient(135deg, var(--gold), #ff6b9d)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M2 9h20"/></svg>
+              </div>
+              <div class="prof-stat-num" id="statCoins">۰</div>
+              <div class="prof-stat-lbl">سکه باشگاه</div>
+            </div>
+          </div>
+
+          <div class="prof-card" style="background:linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);color:#fff;border:none">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">🏆</div>
+              <div>
+                <h2 style="color:#fff">باشگاه مشتریان</h2>
+                <p style="color:rgba(255,255,255,0.7)">با هر خرید سکه جمع کن، جایزه بگیر</p>
+              </div>
+            </div>
+            <p style="font-size:13px;color:rgba(255,255,255,0.85);margin:0 0 16px;line-height:1.7">به باشگاه مشتریان دیجی‌پوش بپیوند. با ماموریت‌های روزانه، سکه جمع کن و به سطح بالاتر برس.</p>
+            <a href="./club.html" class="prof-btn" style="background:#fff;color:#1a1a1a">🎁 ورود به باشگاه</a>
+          </div>
+        </div>
+
+        <!-- اطلاعات شخصی -->
+        <div id="sec-info" class="prof-section">
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+              </div>
+              <div>
+                <h2>اطلاعات شخصی</h2>
+                <p>ویرایش اطلاعات حساب</p>
+              </div>
+            </div>
+            <form id="profileForm">
+              <div class="prof-form-row">
+                <div>
+                  <label>نام</label>
+                  <input type="text" id="profFirstName" required />
+                </div>
+                <div>
+                  <label>نام خانوادگی</label>
+                  <input type="text" id="profLastName" />
+                </div>
+              </div>
+              <div class="prof-form-row">
+                <div>
+                  <label>موبایل</label>
+                  <input type="tel" id="profPhone" placeholder="۰۹۱۲۳۴۵۶۷۸۹" maxlength="11" />
+                </div>
+                <div>
+                  <label>شهر</label>
+                  <input type="text" id="profCity" placeholder="مثلاً تهران" />
+                </div>
+              </div>
+              <button type="submit" class="prof-btn">💾 ذخیره تغییرات</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- سفارش‌ها -->
+        <div id="sec-orders" class="prof-section">
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+              </div>
+              <div>
+                <h2>سفارش‌های من</h2>
+                <p>تاریخچه خریدهای شما</p>
+              </div>
+            </div>
+            <div class="prof-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+              <p>هنوز سفارشی نداری</p>
+              <a href="./index.html" class="prof-btn" style="margin-top:12px">🛍️ مشاهده محصولات</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- علاقه‌مندی‌ها -->
+        <div id="sec-favorites" class="prof-section">
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9.5C0 6 4 2 8 4l4 3 4-3c4-2 8 2 5.5 7.5C19 16.5 12 21 12 21z"/></svg>
+              </div>
+              <div>
+                <h2>علاقه‌مندی‌های من</h2>
+                <p>محصولات ذخیره‌شده</p>
+              </div>
+            </div>
+            <div class="prof-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9.5C0 6 4 2 8 4l4 3 4-3c4-2 8 2 5.5 7.5C19 16.5 12 21 12 21z"/></svg>
+              <p>لیست علاقه‌مندی‌ها خالیه</p>
+              <a href="./index.html" class="prof-btn" style="margin-top:12px">🛍️ کاوش محصولات</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- استایلیست AI -->
+        <div id="sec-stylist" class="prof-section">
+          <div class="prof-feature-hero">
+            <div class="prof-feature-hero-content">
+              <div class="prof-feature-hero-icon">✨</div>
+              <div class="prof-feature-hero-text">
+                <h2>استایلیست AI</h2>
+                <p>از بین لباس‌های کمدت، ست‌های هماهنگ پیشنهاد بگیر</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="prof-stats-mini">
+            <div class="prof-stat-mini-card">
+              <span class="prof-stat-mini-icon">👔</span>
+              <div class="prof-stat-mini-num" id="stylistItemCount">۰</div>
+              <div class="prof-stat-mini-lbl">آیتم کمد</div>
+            </div>
+            <div class="prof-stat-mini-card">
+              <span class="prof-stat-mini-icon">🎨</span>
+              <div class="prof-stat-mini-num" id="stylistOutfitCount">۰</div>
+              <div class="prof-stat-mini-lbl">ست ذخیره‌شده</div>
+            </div>
+            <div class="prof-stat-mini-card">
+              <span class="prof-stat-mini-icon">💎</span>
+              <div class="prof-stat-mini-num" id="stylistCoverage">۰٪</div>
+              <div class="prof-stat-mini-lbl">پوشش فصلی</div>
+            </div>
+            <div class="prof-stat-mini-card">
+              <span class="prof-stat-mini-icon">✨</span>
+              <div class="prof-stat-mini-num" id="stylistAvgMatch">۰</div>
+              <div class="prof-stat-mini-lbl">میانگین تطبیق</div>
+            </div>
+          </div>
+
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">🎨</div>
+              <div>
+                <h2>ست‌های پیشنهادی</h2>
+                <p>هوشمندانه از بین آیتم‌های کمدت</p>
+              </div>
+            </div>
+            <div id="stylistList"></div>
+          </div>
+        </div>
+
+        <!-- تحلیل با عکس -->
+        <div id="sec-match" class="prof-section" data-profile-root>
+          <div class="prof-feature-hero">
+            <div class="prof-feature-hero-content">
+              <div class="prof-feature-hero-icon">📸</div>
+              <div class="prof-feature-hero-text">
+                <h2>تحلیل با عکس</h2>
+                <p>عکست رو آپلود کن، AI واقعی رنگ پوست، فرم بدن و چهره رو تحلیل می‌کنه و محصولات <strong>واقعی</strong> فروشگاه رو پیشنهاد میده</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">📷</div>
+              <div>
+                <h2>آپلود عکس</h2>
+                <p>برای تحلیل کامل با AI</p>
+              </div>
+            </div>
+
+            <label class="prof-upload-box" id="photoUploadBox">
+              <div class="prof-upload-icon">📸</div>
+              <div class="prof-upload-text">عکست رو اینجا بنداز یا کلیک کن</div>
+              <div class="prof-upload-hint">JPG یا PNG - حداکثر ۵ مگابایت - بهتره روبه‌رو و با نور کافی</div>
+              <input type="file" accept="image/*" class="prof-upload-input" id="photoInput" />
+            </label>
+
+            <div id="photoResult" style="display:none; margin-top: 16px;">
+              <div class="prof-photo-preview-wrap">
+                <img id="photoPreview" alt="" />
+                <button class="prof-btn prof-btn--ghost prof-btn--sm" id="photoResetBtn" style="margin-top:8px">🔄 عکس دیگه</button>
+              </div>
+              <div id="photoAnalysisGrid" class="prof-photo-analysis"></div>
+            </div>
+          </div>
+
+          <!-- 🆕 محصولات پیشنهادی بر اساس تحلیل عکس -->
+          <div class="prof-card" id="photoMatchProductsCard" style="display:none">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">✨</div>
+              <div>
+                <h2>پیشنهادهای متناسب با شما</h2>
+                <p>بر اساس رنگ پوست، چهره و فرم بدنت</p>
+              </div>
+            </div>
+            <div class="prof-photo-match-grid" id="photoMatchGrid"></div>
+          </div>
+
+          <!-- 🆕 Virtual Try-On -->
+          <div class="prof-card" id="virtualTryOnCard" style="display:none">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">🕶️</div>
+              <div>
+                <h2>پرو مجازی (Virtual Try-On)</h2>
+                <p>محصولات رو روی عکست امتحان کن</p>
+              </div>
+            </div>
+            <div class="prof-tryon-tabs">
+              <button class="prof-tryon-tab is-on" data-tryon="glasses">🕶️ عینک</button>
+              <button class="prof-tryon-tab" data-tryon="necklace">📿 گردنبند</button>
+              <button class="prof-tryon-tab" data-tryon="earring">💎 گوشواره</button>
+            </div>
+            <div class="prof-tryon-stage" id="tryonStage">
+              <div class="prof-tryon-canvas" id="tryonCanvas">
+                <img id="tryonBaseImage" alt="" />
+                <canvas id="tryonOverlay"></canvas>
+              </div>
+              <div class="prof-tryon-products" id="tryonProducts"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- کمد مجازی -->
+        <div id="sec-wardrobe" class="prof-section">
+          <div class="prof-feature-hero">
+            <div class="prof-feature-hero-content">
+              <div class="prof-feature-hero-icon">👔</div>
+              <div class="prof-feature-hero-text">
+                <h2>کمد مجازی</h2>
+                <p>تمام لباس‌هات رو اینجا ببین، دسته‌بندی و استفاده کن</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="prof-stats-mini">
+            <div class="prof-stat-mini-card">
+              <span class="prof-stat-mini-icon">👕</span>
+              <div class="prof-stat-mini-num" id="wardrobeTotal">۰</div>
+              <div class="prof-stat-mini-lbl">کل آیتم</div>
+            </div>
+            <div class="prof-stat-mini-card">
+              <span class="prof-stat-mini-icon">👗</span>
+              <div class="prof-stat-mini-num" id="wardrobeTops">۰</div>
+              <div class="prof-stat-mini-lbl">تاپ</div>
+            </div>
+            <div class="prof-stat-mini-card">
+              <span class="prof-stat-mini-icon">👖</span>
+              <div class="prof-stat-mini-num" id="wardrobeBottoms">۰</div>
+              <div class="prof-stat-mini-lbl">شلوار</div>
+            </div>
+            <div class="prof-stat-mini-card">
+              <span class="prof-stat-mini-icon">💎</span>
+              <div class="prof-stat-mini-num" id="wardrobeValue">۰</div>
+              <div class="prof-stat-mini-lbl">ارزش کل</div>
+            </div>
+          </div>
+
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">👔</div>
+              <div>
+                <h2>آیتم‌های کمد</h2>
+                <p>دسته‌بندی بر اساس نوع</p>
+              </div>
+              <div style="margin-right:auto;display:flex;gap:6px;flex-wrap:wrap">
+                <button class="prof-btn prof-btn--gold prof-btn--sm" id="addManualWardrobeBtn" style="background:linear-gradient(135deg,#d4af37,#f4d97c)">➕ افزودن دستی</button>
+                <button class="prof-btn prof-btn--ghost prof-btn--sm" id="syncWardrobeBtn">🔄 همگام‌سازی</button>
+                <button class="prof-btn prof-btn--ghost prof-btn--sm" id="quickFillWardrobeBtn">⚡ نمونه‌های آماده</button>
+              </div>
+            </div>
+
+            <div class="prof-wardrobe-tabs" id="wardrobeTabs">
+              <button class="prof-wardrobe-tab is-on" data-cat="all">همه <span class="count" id="countAll">۰</span></button>
+              <button class="prof-wardrobe-tab" data-cat="top">تاپ <span class="count" id="countTop">۰</span></button>
+              <button class="prof-wardrobe-tab" data-cat="bottom">شلوار <span class="count" id="countBottom">۰</span></button>
+              <button class="prof-wardrobe-tab" data-cat="shoe">کفش <span class="count" id="countShoe">۰</span></button>
+              <button class="prof-wardrobe-tab" data-cat="accessory">اکسسوری <span class="count" id="countAccessory">۰</span></button>
+            </div>
+
+            <div class="prof-wardrobe-grid" id="wardrobeGrid"></div>
+          </div>
+        </div>
+
+        <!-- 🆕 v18.2 — AI ست‌ساز با کمد کاربر -->
+        <div id="sec-ai-outfit" class="prof-section" style="margin-top:24px">
+          <div class="prof-feature-hero" style="background:linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05))">
+            <div class="prof-feature-hero-content">
+              <div class="prof-feature-hero-icon">🤖</div>
+              <div class="prof-feature-hero-text">
+                <h2>AI ست‌ساز با کمد شما</h2>
+                <p>عکس لباس‌هات رو آپلود کن، AI رنگ و استایل رو می‌فهمه و با لباس‌های واقعی‌ات ست می‌سازه</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 🆕 v19.0 — انتخاب‌گر هوشمند -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;padding:12px;background:var(--bg-soft);border-radius:12px">
+            <div>
+              <label style="display:block;font-size:12px;color:var(--text-soft);margin-bottom:4px;font-weight:700">موقعیت:</label>
+              <select id="aiOutfitOccasionSelect" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;background:var(--bg-card)">
+                <option value="روزمره">☀️ روزمره</option>
+                <option value="اداری">💼 اداری</option>
+                <option value="رسمی">👔 رسمی</option>
+                <option value="مجلسی">✨ مجلسی</option>
+                <option value="ورزشی">🏃 ورزشی</option>
+                <option value="عروسی">💍 عروسی</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;color:var(--text-soft);margin-bottom:4px;font-weight:700">فصل:</label>
+              <select id="aiOutfitSeasonSelect" style="width:100%;padding:8px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;background:var(--bg-card)">
+                <option value="چهار فصل">🌍 چهار فصل</option>
+                <option value="بهار">🌸 بهار</option>
+                <option value="تابستان">☀️ تابستان</option>
+                <option value="پاییز">🍂 پاییز</option>
+                <option value="زمستان">❄️ زمستان</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- دکمه‌های اصلی -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin:16px 0">
+            <button id="aiOutfitAddBtn" class="prof-btn prof-btn--gold">
+              ➕ افزودن لباس به کمد
+            </button>
+            <button id="aiOutfitGenerateBtn" class="prof-btn prof-btn--gold" style="background:linear-gradient(135deg,#d4af37,#f4d97c)">
+              ✨ ساخت ست هوشمند
+            </button>
+            <span style="margin-right:auto;color:var(--text-soft);font-size:13px;align-self:center" id="aiOutfitStatus">
+              کمد شما: <strong id="aiOutfitCount">۰</strong> آیتم
+            </span>
+          </div>
+
+          <!-- نتایج ست‌ها -->
+          <div id="aiOutfitResults" style="display:none">
+            <h3 style="margin:20px 0 12px;font-size:16px;color:var(--gold)">✨ ست‌های پیشنهادی برای شما</h3>
+            <div id="aiOutfitList"></div>
+          </div>
+
+          <!-- پیام خالی -->
+          <div id="aiOutfitEmpty" style="display:none;text-align:center;padding:40px 20px;background:var(--bg-soft);border-radius:14px;margin-top:16px">
+            <div style="font-size:48px;margin-bottom:12px;opacity:0.5">🤖</div>
+            <p style="margin:0;color:var(--text-soft);font-size:14px">برای ساخت ست، ابتدا حداقل یک تاپ و یک شلوار/دامن به کمد اضافه کنید</p>
+          </div>
+        </div>
+
+        <!-- پیشنهادهای من (سلیقه + AI) -->
+        <div id="sec-taste" class="prof-section">
+          <!-- اگه سلیقه ثبت نشده: فرم -->
+          <div id="tasteFormWrap" style="display:none">
+            <div class="prof-feature-hero" style="background:linear-gradient(135deg, rgba(212,175,55,0.18), rgba(212,175,55,0.06))">
+              <div class="prof-feature-hero-content">
+                <div class="prof-feature-hero-icon">✨</div>
+                <div class="prof-feature-hero-text">
+                  <h2>سلیقه‌ات رو ثبت کن</h2>
+                  <p>با چند کلیک، بهترین محصولات واقعی فروشندگان رو بهت معرفی می‌کنیم</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="prof-card" id="tasteFormCard">
+              <!-- فرم ۵ مرحله‌ای توسط dp-taste-profile.js رندر می‌شود -->
+            </div>
+          </div>
+
+          <!-- اگه سلیقه ثبت شده: پیشنهادها -->
+          <div id="tasteResultWrap" style="display:none">
+            <div class="prof-feature-hero" style="background:linear-gradient(135deg, rgba(16,185,129,0.15), rgba(212,175,55,0.08))">
+              <div class="prof-feature-hero-content">
+                <div class="prof-feature-hero-icon">🎯</div>
+                <div class="prof-feature-hero-text">
+                  <h2>پیشنهادهای ویژه برای تو</h2>
+                  <p id="tasteResultSubtitle">بر اساس سلیقه‌ات، از بین محصولات واقعی فروشندگان</p>
+                </div>
+                <button class="prof-btn prof-btn--ghost prof-btn--sm" id="tasteEditBtn" style="margin-right:auto">✏️ ویرایش سلیقه</button>
+              </div>
+            </div>
+
+            <div class="prof-stats-mini">
+              <div class="prof-stat-mini-card">
+                <span class="prof-stat-mini-icon">🎯</span>
+                <div class="prof-stat-mini-num" id="tasteMatchCount">۰</div>
+                <div class="prof-stat-mini-lbl">تطابق بالای ۶۵٪</div>
+              </div>
+              <div class="prof-stat-mini-card">
+                <span class="prof-stat-mini-icon">🏪</span>
+                <div class="prof-stat-mini-num" id="tasteSellerCount">۰</div>
+                <div class="prof-stat-mini-lbl">فروشنده</div>
+              </div>
+              <div class="prof-stat-mini-card">
+                <span class="prof-stat-mini-icon">💎</span>
+                <div class="prof-stat-mini-num" id="tasteTopMatch">۰٪</div>
+                <div class="prof-stat-mini-lbl">بالاترین تطابق</div>
+              </div>
+              <div class="prof-stat-mini-card">
+                <span class="prof-stat-mini-icon">🧬</span>
+                <div class="prof-stat-mini-num" id="tasteType" style="font-size:14px">—</div>
+                <div class="prof-stat-mini-lbl">DNA سلیقه</div>
+              </div>
+            </div>
+
+            <div class="prof-card">
+              <div class="prof-card-head">
+                <div class="prof-card-icon">✨</div>
+                <div>
+                  <h2>محصولات پیشنهادی</h2>
+                  <p>حداقل ۶۵٪ تطابق با سلیقه شما</p>
+                </div>
+                <button class="prof-btn prof-btn--ghost prof-btn--sm" id="tasteRefreshBtn" style="margin-right:auto">🔄 به‌روزرسانی</button>
+              </div>
+              <div class="prof-taste-grid" id="tasteGrid"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- تیپ شخصیتی من -->
+        <div id="sec-personality" class="prof-section">
+          <div class="prof-feature-hero" style="background:linear-gradient(135deg, rgba(139,92,246,0.18), rgba(236,72,153,0.06))">
+            <div class="prof-feature-hero-content">
+              <div class="prof-feature-hero-icon">🪞</div>
+              <div class="prof-feature-hero-text">
+                <h2>تیپ شخصیتی من</h2>
+                <p>AI بر اساس سلیقه و رفتارت، یه تصویر واقع‌بینانه ازت می‌ده</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- کارت اصلی شخصیت -->
+          <div class="prof-card" id="personalityMainCard">
+            <!-- توسط JS رندر میشه -->
+          </div>
+
+          <!-- ۳ آرکی‌تایپ برتر -->
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">🎭</div>
+              <div>
+                <h2>آرکی‌تایپ‌های شخصیتی</h2>
+                <p>بر اساس Big Five و رفتار واقعی</p>
+              </div>
+            </div>
+            <div id="archetypesGrid" class="prof-archetypes-grid"></div>
+          </div>
+
+          <!-- نمودار Big Five -->
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">🧠</div>
+              <div>
+                <h2>پروفایل شخصیتی (Big Five)</h2>
+                <p>پنج بُعد اصلی شخصیت</p>
+              </div>
+            </div>
+            <div id="bigFiveChart" class="prof-bigfive-chart"></div>
+          </div>
+
+          <!-- آمار رفتاری -->
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">📊</div>
+              <div>
+                <h2>تحلیل رفتاری</h2>
+                <p>از ۹۰ روز استفاده‌ات</p>
+              </div>
+              <button class="prof-btn prof-btn--ghost prof-btn--sm" id="refreshPersonalityBtn" style="margin-right:auto">🔄 به‌روزرسانی</button>
+            </div>
+            <div id="behaviorStats" class="prof-behavior-stats"></div>
+          </div>
+
+          <!-- بینش‌ها -->
+          <div class="prof-card" id="insightsCard">
+            <div class="prof-card-head">
+              <div class="prof-card-icon">💡</div>
+              <div>
+                <h2>بینش‌های AI درباره تو</h2>
+                <p>تحلیل صادقانه بر اساس رفتار واقعی</p>
+              </div>
+            </div>
+            <div id="personalityInsights"></div>
+          </div>
+        </div>
+
+        <!-- تم صفحه من -->
+        <div id="sec-theme" class="prof-section" data-profile-root>
+          <div class="prof-feature-hero">
+            <div class="prof-feature-hero-content">
+              <div class="prof-feature-hero-icon">🎨</div>
+              <div class="prof-feature-hero-text">
+                <h2>تم صفحه من</h2>
+                <p>رنگ صفحه پروفایلت رو شخصی‌سازی کن. فقط صفحه خودت عوض می‌شه</p>
+              </div>
+            </div>
+          </div>
+          <div id="themeBuilderContainer"></div>
+        </div>
+
+        <!-- امنیت -->
+        <div id="sec-security" class="prof-section">
+          <div class="prof-card">
+            <div class="prof-card-head">
+              <div class="prof-card-icon" style="background:linear-gradient(135deg, #ef4444, #f59e0b)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></svg>
+              </div>
+              <div>
+                <h2>امنیت حساب</h2>
+                <p>محافظت از حساب شما</p>
+              </div>
+            </div>
+
+            <form id="passwordForm" style="max-width:400px">
+              <div style="margin-bottom:12px">
+                <label style="display:block;font-size:11px;font-weight:600;color:var(--text-soft);margin-bottom:4px">رمز عبور فعلی</label>
+                <input type="password" id="oldPassword" required minlength="6" style="width:100%;padding:10px 12px;background:var(--bg-soft);border:1.5px solid var(--border-soft);border-radius:8px;font-size:13px;font-family:inherit" />
+              </div>
+              <div style="margin-bottom:12px">
+                <label style="display:block;font-size:11px;font-weight:600;color:var(--text-soft);margin-bottom:4px">رمز جدید</label>
+                <input type="password" id="newPassword" required minlength="6" style="width:100%;padding:10px 12px;background:var(--bg-soft);border:1.5px solid var(--border-soft);border-radius:8px;font-size:13px;font-family:inherit" />
+              </div>
+              <div style="margin-bottom:12px">
+                <label style="display:block;font-size:11px;font-weight:600;color:var(--text-soft);margin-bottom:4px">تکرار رمز جدید</label>
+                <input type="password" id="confirmPassword" required minlength="6" style="width:100%;padding:10px 12px;background:var(--bg-soft);border:1.5px solid var(--border-soft);border-radius:8px;font-size:13px;font-family:inherit" />
+              </div>
+              <button type="submit" class="prof-btn">🔒 تغییر رمز عبور</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__bottom">
+    <span>© ۱۴۰۵ دیجی‌پوش — تمامی حقوق محفوظ است.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span class="toast__icon">✨</span>
+  <span class="toast__text" id="toastText">عملیات موفق</span>
+</div>
+
+<script src="./dp-auth.js"></script>
+<script src="./dp-memory.js"></script>
+<!-- 🆕 v18.2 — Modal افزودن لباس با آپلود عکس -->
+<!-- 🆕 v19.1 — Modal افزودن لباس به کمد -->
+<div id="manualWardrobeModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)">
+  <div style="background:var(--bg-card);border-radius:20px;padding:24px;max-width:480px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,0.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h3 style="margin:0;font-size:18px;color:var(--gold)">👕 افزودن لباس به کمد</h3>
+      <button id="manualWardrobeClose" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft)">✕</button>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">نام لباس *</label>
+      <input type="text" id="mwName" placeholder="مثلاً: پیراهن سفید دکمه‌دار"
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)"/>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">دسته *</label>
+      <select id="mwCategory" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)">
+        <option value="پیراهن">👕 پیراهن</option>
+        <option value="تیشرت">👕 تیشرت</option>
+        <option value="بلوز">👚 بلوز</option>
+        <option value="کت">🧥 کت</option>
+        <option value="پالتو">🧥 پالتو</option>
+        <option value="شلوار">👖 شلوار</option>
+        <option value="دامن">👗 دامن</option>
+        <option value="کفش">👟 کفش</option>
+        <option value="اکسسوری">💎 اکسسوری</option>
+      </select>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+      <div>
+        <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">رنگ</label>
+        <input type="text" id="mwColor" placeholder="مثلاً: آبی"
+          style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)"/>
+      </div>
+      <div>
+        <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">سایز</label>
+        <input type="text" id="mwSize" placeholder="مثلاً: M"
+          style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)"/>
+      </div>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">قیمت (تومان)</label>
+      <input type="number" id="mwPrice" placeholder="مثلاً: 850000"
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)"/>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">تگ‌ها (با کاما جدا کنید)</label>
+      <input type="text" id="mwTags" placeholder="مثلاً: کلاسیک, رسمی, اداری"
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)"/>
+    </div>
+
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button id="mwCancel" style="padding:11px 22px;background:var(--bg-soft);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-family:inherit;font-weight:700">انصراف</button>
+      <button id="mwSave" style="padding:11px 22px;background:linear-gradient(135deg,#d4af37,#f4d97c);color:#1a1a1a;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:800">✅ افزودن به کمد</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="aiOutfitModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)">
+  <div style="background:var(--bg-card);border-radius:20px;padding:24px;max-width:500px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,0.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h3 style="margin:0;font-size:18px;color:var(--gold)">📸 افزودن لباس به کمد</h3>
+      <button id="aiOutfitModalClose" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--text-soft)">✕</button>
+    </div>
+
+    <!-- آپلود عکس -->
+    <div id="aiOutfitUploadArea" style="border:2px dashed var(--border);border-radius:14px;padding:30px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--bg-soft);margin-bottom:16px">
+      <div style="font-size:48px;margin-bottom:8px">📷</div>
+      <p style="margin:0;font-weight:700;color:var(--text)">عکس لباس رو اینجا بنداز</p>
+      <small style="color:var(--text-soft);font-size:11px;display:block;margin-top:4px">یا کلیک کن برای انتخاب عکس</small>
+      <input type="file" id="aiOutfitFileInput" accept="image/*" style="display:none"/>
+    </div>
+
+    <!-- پیش‌نمایش عکس + تحلیل AI -->
+    <div id="aiOutfitPreview" style="display:none;margin-bottom:16px">
+      <img id="aiOutfitPreviewImg" style="width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin-bottom:12px"/>
+      <div id="aiOutfitAnalysis" style="background:linear-gradient(135deg,rgba(212,175,55,0.1),rgba(212,175,55,0.05));border:1px solid var(--gold);border-radius:12px;padding:14px">
+        <div style="font-size:12px;color:var(--gold);font-weight:800;margin-bottom:8px">🤖 تحلیل AI:</div>
+        <div id="aiOutfitAnalysisContent" style="font-size:13px;line-height:1.7"></div>
+      </div>
+    </div>
+
+    <!-- فرم اطلاعات لباس -->
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">نام لباس *</label>
+      <input type="text" id="aiOutfitName" placeholder="مثلاً: پیراهن سفید دکمه‌دار"
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)"/>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">دسته *</label>
+      <select id="aiOutfitCategory" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)">
+        <option value="پیراهن">👕 پیراهن</option>
+        <option value="تیشرت">👕 تیشرت</option>
+        <option value="بلوز">👚 بلوز</option>
+        <option value="کت">🧥 کت</option>
+        <option value="پالتو">🧥 پالتو</option>
+        <option value="شلوار">👖 شلوار</option>
+        <option value="دامن">👗 دامن</option>
+        <option value="کفش">👟 کفش</option>
+        <option value="اکسسوری">💎 اکسسوری</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">رنگ (تشخیص خودکار از عکس)</label>
+      <input type="text" id="aiOutfitColor" placeholder="مثلاً: آبی"
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)"/>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <label style="display:block;font-size:13px;font-weight:700;margin-bottom:6px">قیمت خرید (تومان - اختیاری)</label>
+      <input type="number" id="aiOutfitPrice" placeholder="مثلاً: 850000"
+        style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:var(--bg-soft)"/>
+    </div>
+
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button id="aiOutfitCancel" style="padding:11px 22px;background:var(--bg-soft);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-family:inherit;font-weight:700">انصراف</button>
+      <button id="aiOutfitSave" style="padding:11px 22px;background:linear-gradient(135deg,#d4af37,#f4d97c);color:#1a1a1a;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:800">✅ افزودن به کمد</button>
+    </div>
+  </div>
+</div>
+
+
+  <script src="./dp-wardrobe.js"></script>
+<script src="./dp-wardrobe-ai.js"></script>
+  <script src="./dp-wardrobe-ai-v2.js"></script>
+  <script src="./dp-stylist-engine.js"></script>
+  <script src="./dp-god-stylist.js"></script>
+<script src="./dp-photo-ai.js"></script>
+<script src="./dp-photo-style.js"></script>
+<script src="./dp-taste-engine.js"></script>
+<script src="./dp-taste-profile.js"></script>
+<script src="./dp-personality-ui.js"></script>
+<script src="./dp-theme-builder.js"></script>
+<script src="./dp-real-match.js"></script>
+<script src="./dp-ai-engine.js"></script>
+<script src="./dp-ai-engine-ultra.js"></script>
+<script src="./dp-ai-nlu.js"></script>
+<script src="./dp-chat-ai.js"></script>
+<script src="./dp-chat-widget.js"></script>
+<script src="./dp-voice.js"></script>
+<script src="./dp-seller-seed.js"></script>
+<script src="./dp-product-loader.js"></script>
+<script src="./dp-products.js"></script>
+<script src="./dp-behavior-tracker.js"></script>
+<script src="./dp-hybrid-scorer.js"></script>
+<script src="./dp-products-feed.js"></script>
+<script src="./club.js"></script>
+<script src="./assets/js/dp-cart.js"></script>
+<script src="./assets/js/dp-cart-drawer.js"></script>
+<script src="./club-tracker.js"></script>
+<script src="./club-referral.js"></script>
+<script src="./dp-navbar.js"></script>
+<script>
+(function(){
+  const user = window.DPAuth?.currentUser?.();
+  if(!user){
+    window.location.href = './auth.html?redirect=./profile.html';
+    return;
+  }
+
+  const firstName = (user.name || 'کاربر').split(' ')[0];
+  document.getElementById('profGreetName').textContent = firstName;
+  document.getElementById('profName').textContent = user.name;
+  document.getElementById('profEmail').textContent = user.email;
+  document.getElementById('profAvatar').textContent = firstName.charAt(0);
+
+
+  // آمار
+  const orders = JSON.parse(localStorage.getItem('dp_user_orders') || '[]');
+  const favs = JSON.parse(localStorage.getItem('dp_user_favorites') || '[]');
+  const clubState = JSON.parse(localStorage.getItem('dp-club-v1') || '{}');
+  function toFa(n) { return String(n).replace(/[0-9]/g, c => '۰۱۲۳۴۵۶۷۸۹'[c]); }
+  document.getElementById('statOrders').textContent = toFa(orders.length);
+  document.getElementById('statFavs').textContent = toFa(favs.length);
+  document.getElementById('statCoins').textContent = toFa(clubState.coins || 0);
+
+  // پر کردن فرم
+  if (user.name) {
+    const parts = user.name.split(' ');
+    document.getElementById('profFirstName').value = parts[0] || '';
+    document.getElementById('profLastName').value = parts.slice(1).join(' ') || '';
+  }
+  document.getElementById('profPhone').value = user.phone || '';
+  document.getElementById('profCity').value = user.city || '';
+
+  // تب‌ها
+  const navBtns = document.querySelectorAll('.prof-side-btn[data-section]');
+  const sections = document.querySelectorAll('.prof-section');
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.section;
+      navBtns.forEach(b => b.classList.toggle('is-on', b === btn));
+      sections.forEach(s => s.classList.toggle('is-on', s.id === 'sec-' + target));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // خروج
+  document.getElementById('signOutBtn').addEventListener('click', () => {
+    if(confirm('از حسابت خارج می‌شی؟')){
+      window.DPAuth.signout();
+      window.location.href = './index.html';
+    }
+  });
+
+  // Toast
+  function showToast(msg, ok = true) {
+    const t = document.getElementById('toast');
+    const tx = document.getElementById('toastText');
+    tx.textContent = (ok ? '✅ ' : '❌ ') + msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ذخیره پروفایل
+  document.getElementById('profileForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    try {
+      const first = document.getElementById('profFirstName').value.trim();
+      const last = document.getElementById('profLastName').value.trim();
+      const phone = document.getElementById('profPhone').value.replace(/\D/g, '');
+      const city = document.getElementById('profCity').value.trim();
+      if(phone && !/^09[0-9]{9}$/.test(phone)){
+        showToast('شماره باید ۰۹ شروع شود و ۱۱ رقم باشد', false);
+        return;
+      }
+      await window.DPAuth.updateProfile({
+        name: (first + ' ' + last).trim(),
+        phone, city,
+      });
+      showToast('اطلاعات ذخیره شد');
+      setTimeout(() => location.reload(), 800);
+    } catch(err) {
+      showToast(err.error || 'خطا', false);
+    }
+  });
+
+  // تغییر رمز
+  document.getElementById('passwordForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const oldP = document.getElementById('oldPassword').value;
+    const newP = document.getElementById('newPassword').value;
+    const confP = document.getElementById('confirmPassword').value;
+    if(newP !== confP){
+      showToast('رمز جدید و تکرار یکسان نیست', false);
+      return;
+    }
+    try{
+      await window.DPAuth.changePassword(oldP, newP);
+      showToast('رمز با موفقیت تغییر کرد');
+      e.target.reset();
+    } catch(err) {
+      showToast(err.error || 'خطا', false);
+    }
+  });
+
+  // اسکرول
+  window.addEventListener('scroll', () => {
+    const sp = document.getElementById('scrollProgress');
+    if(!sp) return;
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    sp.style.width = (h.scrollTop / max * 100) + '%';
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// 🤖 استایلیست، تطبیق و کمد مجازی
+// ═══════════════════════════════════════════════════════════════
+
+function toFa(n) { return String(n).replace(/[0-9]/g, c => '۰۱۲۳۴۵۶۷۸۹'[c]); }
+
+// ═══ کمد مجازی ═══
+function renderWardrobe() {
+  if (!window.DPWardrobe) return;
+  const grid = document.getElementById('wardrobeGrid');
+  const tabs = document.querySelectorAll('.prof-wardrobe-tab');
+  if (!grid) return;
+
+  const cat = window._wardrobeCat || 'all';
+  let items = window.DPWardrobe.all();
+  if (cat !== 'all') items = items.filter(i => i.category === cat);
+
+  // شمارش‌ها
+  const all = window.DPWardrobe.all();
+  const setCount = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = toFa(n); };
+  setCount('countAll', all.length);
+  setCount('countTop', all.filter(i => i.category === 'top').length);
+  setCount('countBottom', all.filter(i => i.category === 'bottom').length);
+  setCount('countShoe', all.filter(i => i.category === 'shoe').length);
+  setCount('countAccessory', all.filter(i => i.category === 'accessory').length);
+
+  // آمار کلی
+  setCount('wardrobeTotal', all.length);
+  setCount('wardrobeTops', all.filter(i => i.category === 'top').length);
+  setCount('wardrobeBottoms', all.filter(i => i.category === 'bottom').length);
+  setCount('wardrobeValue', all.reduce((s, i) => s + (i.price || 0), 0).toLocaleString('fa-IR'));
+
+  if (items.length === 0) {
+    grid.innerHTML = `
+      <div class="prof-wardrobe-empty" style="grid-column: 1/-1">
+        <span class="prof-wardrobe-empty-icon">👔</span>
+        <h3>کمدت خالیه!</h3>
+        <p>وقتی اولین سفارشت رو ثبت کنی، لباس‌ها اینجا نمایش داده می‌شن</p>
+        <button class="prof-btn" id="syncEmptyBtn">🔄 همگام‌سازی از سفارش‌ها</button>
+      </div>
+    `;
+    const btn = document.getElementById('syncEmptyBtn');
+    if (btn) btn.addEventListener('click', syncWardrobe);
+    return;
+  }
+
+  grid.innerHTML = items.map(item => {
+    const wearCount = (item.wearCount || 0);
+    const isFav = item.favorite;
+    return `
+      <article class="prof-wardrobe-item">
+        <div class="prof-wardrobe-img">
+          ${item.image ? `<img src="${item.image}" style="width:100%;height:100%;object-fit:cover" alt="" />` : (item.icon || '👕')}
+          ${isFav ? '<span class="prof-wardrobe-tag-fav">❤️</span>' : ''}
+        </div>
+        <div class="prof-wardrobe-info">
+          <h4 class="prof-wardrobe-name">${item.name || 'بدون نام'}</h4>
+          <div class="prof-wardrobe-meta">
+            <span>${item.color || ''}</span>
+            <span class="prof-wardrobe-wear">${toFa(wearCount)}× پوشیده</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function syncWardrobe() {
+  if (!window.DPWardrobe || !window.DPWardrobe.syncFromOrders) return;
+  const result = window.DPWardrobe.syncFromOrders();
+  showToast('✅ همگام‌سازی انجام شد');
+  renderWardrobe();
+  renderStylist();
+}
+
+// ═══ استایلیست AI ═══
+function renderStylist() {
+  if (!window.DPWardrobe || !window.DPWardrobe.suggestOutfits) return;
+  const list = document.getElementById('stylistList');
+  if (!list) return;
+
+  // آمار
+  const all = window.DPWardrobe.all();
+  const outfits = window.DPWardrobe.listOutfits ? window.DPWardrobe.listOutfits() : [];
+  const setCount = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = toFa(n); };
+  setCount('stylistItemCount', all.length);
+  setCount('stylistOutfitCount', outfits.length);
+
+  // پوشش فصلی
+  if (all.length > 0) {
+    const bySeason = window.DPWardrobe.bySeason ? window.DPWardrobe.bySeason() : {};
+    const covered = Object.values(bySeason).filter(s => s.length > 0).length;
+    setCount('stylistCoverage', Math.floor((covered / 4) * 100) + '٪');
+  } else {
+    setCount('stylistCoverage', '۰٪');
+  }
+
+  if (all.length < 3) {
+    list.innerHTML = `
+      <div class="prof-wardrobe-empty">
+        <span class="prof-wardrobe-empty-icon">✨</span>
+        <h3>برای پیشنهاد، حداقل ۳ آیتم نیاز داری</h3>
+        <p>اول یه چیزی به کمدت اضافه کن (سفارش ثبت کن یا دستی اضافه کن)</p>
+      </div>
+    `;
+    return;
+  }
+
+  const suggestions = window.DPWardrobe.suggestOutfits(6);
+  if (suggestions.length === 0) {
+    list.innerHTML = `
+      <div class="prof-wardrobe-empty">
+        <span class="prof-wardrobe-empty-icon">🎨</span>
+        <h3>فعلاً ست مناسبی پیدا نشد</h3>
+        <p>آیتم‌های بیشتری اضافه کن</p>
+      </div>
+    `;
+    return;
+  }
+
+  // میانگین تطبیق
+  const avgMatch = Math.round(suggestions.reduce((s, o) => s + (o.score || o.matchPercent || 0), 0) / suggestions.length);
+  setCount('stylistAvgMatch', avgMatch + '٪');
+
+  list.innerHTML = suggestions.map((outfit, idx) => {
+    const score = outfit.score || outfit.matchPercent || 0;
+    const items = outfit.items || [];
+    return `
+      <div class="prof-outfit-card">
+        <div class="prof-outfit-head">
+          <div class="prof-outfit-title">✨ ست ${toFa(idx + 1)} - ${outfit.occasion || 'روزمره'}</div>
+          <span class="prof-outfit-match">${toFa(score)}٪ تطبیق</span>
+        </div>
+        <div class="prof-outfit-items">
+          ${items.map(item => `
+            <div class="prof-outfit-item">
+              <span class="prof-outfit-item-icon">${item.icon || '👕'}</span>
+              <div class="prof-outfit-item-name">${item.name || ''}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="prof-outfit-actions">
+          <button class="prof-btn" data-outfit-save="${idx}">💾 ذخیره ست</button>
+          <button class="prof-btn prof-btn--ghost" data-outfit-wear="${idx}">✓ پوشیدم</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // event listeners
+  list.querySelectorAll('[data-outfit-save]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.outfitSave);
+      const outfit = suggestions[idx];
+      if (window.DPWardrobe.saveOutfit) {
+        window.DPWardrobe.saveOutfit(outfit);
+        showToast('💾 ست ذخیره شد');
+        renderStylist();
+      }
+    });
+  });
+  list.querySelectorAll('[data-outfit-wear]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.outfitWear);
+      const outfit = suggestions[idx];
+      (outfit.items || []).forEach(item => {
+        if (item.id && window.DPWardrobe.markWorn) {
+          window.DPWardrobe.markWorn(item.id);
+        }
+      });
+      showToast('👔 آیتم‌ها به‌روزرسانی شد');
+
+      // ثبت ماموریت استایل
+      if (window.ClubTracker) {
+        window.ClubTracker.track('m6', 1, { source: 'stylist-wear' });
+      }
+    });
+  });
+}
+
+// ═══ تطبیق با عکس ═══
+function setupPhotoUpload() {
+  const input = document.getElementById('photoInput');
+  const box = document.getElementById('photoUploadBox');
+  if (!input || !box) return;
+
+  input.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      showToast('حجم عکس نباید بیشتر از ۵MB باشد', false);
+      return;
+    }
+    box.classList.add('is-loading');
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      document.getElementById('photoPreview').src = ev.target.result;
+      document.getElementById('photoResult').style.display = 'block';
+      window._lastPhotoDataUrl = ev.target.result; // 🆕 برای virtual try-on
+      analyzePhoto(ev.target.result);
+    };
+    reader.readAsDataURL(file);
+
+    // 🆕 دکمه ریست عکس
+    const resetBtn = document.getElementById('photoResetBtn');
+    if (resetBtn) {
+      resetBtn.onclick = () => {
+        document.getElementById('photoResult').style.display = 'none';
+        document.getElementById('photoAnalysisGrid').innerHTML = '';
+        document.getElementById('photoMatchProductsCard').style.display = 'none';
+        document.getElementById('virtualTryOnCard').style.display = 'none';
+        input.value = '';
+        window._lastPhotoDataUrl = null;
+      };
+    }
+  });
+}
+
+// 🆕 v16.5 — تحلیل واقعی عکس (Canvas API + real color sampling)
+async function analyzePhoto(dataUrl) {
+  if (!window.DPRealMatch) {
+    showToast('سیستم تحلیل عکس آماده نیست', false);
+    document.getElementById('photoUploadBox').classList.remove('is-loading');
+    return;
+  }
+
+  try {
+    // 🆕 تحلیل واقعی با DPRealMatch (Canvas + نمونه‌برداری واقعی)
+    const realAnalysis = await window.DPRealMatch.analyzeImage(dataUrl);
+    
+    if (!realAnalysis) {
+      showToast('عکس قابل تحلیل نیست. لطفاً عکس واضح‌تری آپلود کنید', false);
+      document.getElementById('photoUploadBox').classList.remove('is-loading');
+      return;
+    }
+
+    // تبدیل به فرمت مورد نیاز renderPhotoAnalysis
+    const result = {
+      skinTone: realAnalysis.skinTemperature === 'گرم' ? 'گرم' : (realAnalysis.skinTemperature === 'سرد' ? 'سرد' : 'خنثی'),
+      skinToneDetail: `${realAnalysis.skinTone} ${realAnalysis.skinTemperature}`,
+      skinRgb: realAnalysis.skinRgb,
+      colorSeason: realAnalysis.season,
+      contrast: realAnalysis.contrast,
+      hairColor: realAnalysis.hairColor,
+      eyeColor: realAnalysis.eyeColor,
+      faceShape: realAnalysis.faceShape,
+      bodyShape: 'متعادل', // نیاز به تحلیل پیشرفته‌تر
+      // پالت بر اساس فصل رنگی واقعی
+      palette: derivePalette(realAnalysis),
+      styleRecs: deriveStyleRecs(realAnalysis),
+      realAnalysis: true
+    };
+    
+    renderPhotoAnalysis(result);
+    document.getElementById('photoUploadBox').classList.remove('is-loading');
+  } catch (e) {
+    console.warn('Real analysis failed:', e);
+    showToast('خطا در تحلیل. لطفاً دوباره تلاش کنید', false);
+    document.getElementById('photoUploadBox').classList.remove('is-loading');
+  }
+}
+
+// 🆕 استخراج پالت واقعی بر اساس فصل رنگی
+function derivePalette(analysis) {
+  const season = analysis.season || '';
+  const skinTemp = analysis.skinTemperature;
+  const bright = analysis.skinBrightness;
+  
+  if (season.includes('بهار')) {
+    return [
+      { name: 'مرجانی', color: '#ff7f50' },
+      { name: 'طلایی', color: '#d4af37' },
+      { name: 'هلویی', color: '#ffb07f' },
+      { name: 'زرد کمرنگ', color: '#fef3c7' },
+      { name: 'فیروزه‌ای', color: '#06b6d4' },
+      { name: 'سبز بهاری', color: '#84cc16' }
+    ];
+  } else if (season.includes('تابستان')) {
+    return [
+      { name: 'یاسی', color: '#c4b5fd' },
+      { name: 'صورتی پاستلی', color: '#fbcfe8' },
+      { name: 'آبی آسمانی', color: '#7dd3fc' },
+      { name: 'سفید', color: '#ffffff' },
+      { name: 'سرمه‌ای', color: '#1e3a8a' },
+      { name: 'نقره‌ای', color: '#c0c0c0' }
+    ];
+  } else if (season.includes('پاییز')) {
+    return [
+      { name: 'زرشکی', color: '#7d2027' },
+      { name: 'خردلی', color: '#ca8a04' },
+      { name: 'قهوه‌ای', color: '#78350f' },
+      { name: 'زیتونی', color: '#65a30d' },
+      { name: 'نارنجی سوخته', color: '#c2410c' },
+      { name: 'کرم', color: '#fef3c7' }
+    ];
+  } else { // زمستان
+    return [
+      { name: 'مشکی', color: '#1f2937' },
+      { name: 'سفید', color: '#ffffff' },
+      { name: 'قرمز پررنگ', color: '#dc2626' },
+      { name: 'سرمه‌ای', color: '#1e3a8a' },
+      { name: 'سبز زمردی', color: '#059669' },
+      { name: 'بنفش', color: '#7c3aed' }
+    ];
+  }
+}
+
+// 🆕 استخراج استایل‌های پیشنهادی واقعی
+function deriveStyleRecs(analysis) {
+  const recs = [];
+  const season = analysis.season || '';
+  
+  if (season.includes('بهار')) {
+    recs.push('رنگ‌های شاد و گرم');
+    recs.push('پارچه‌های طبیعی');
+    recs.push('لایه‌های سبک');
+  } else if (season.includes('تابستان')) {
+    recs.push('رنگ‌های پاستلی و ملایم');
+    recs.push('پارچه‌های خنک');
+    recs.push('استایل رمانتیک');
+  } else if (season.includes('پاییز')) {
+    recs.push('رنگ‌های گرم و خاکی');
+    recs.push('پارچه‌های ضخیم‌تر');
+    recs.push('اکسسوری طلایی');
+  } else { // زمستان
+    recs.push('کنتراست بالا');
+    recs.push('رنگ‌های جسورانه');
+    recs.push('استایل کلاسیک');
+  }
+  
+  // بر اساس کنتراست
+  if (analysis.contrast === 'بالا') {
+    recs.push('طرح‌های برجسته');
+  } else {
+    recs.push('طرح‌های ساده');
+  }
+  
+  return recs;
+}
+
+function renderPhotoAnalysis(result) {
+  const grid = document.getElementById('photoAnalysisGrid');
+  if (!grid) return;
+
+  // پالت رنگی
+  const palette = (result.palette || []).slice(0, 6);
+  const paletteHtml = palette.length > 0
+    ? `<div class="prof-palette-grid">
+        ${palette.map(c => {
+          const color = c.color || c;
+          const name = c.name || c;
+          return `<div class="prof-palette-color" style="background:${color}" data-name="${name}" title="${name}">
+            <span class="prof-palette-color-name">${name}</span>
+          </div>`;
+        }).join('')}
+      </div>`
+    : '';
+
+  // استایل‌ها
+  const styleHtml = (result.styleRecs || result.recommendations || []).slice(0, 4)
+    .map(s => `<span class="prof-style-chip">${s}</span>`)
+    .join('');
+
+  // فرم چهره
+  const faceShape = result.faceShape || 'بیضی';
+  const faceMap = {
+    'oval': 'بیضی', 'round': 'گرد', 'square': 'مربع', 'heart': 'قلبی',
+    'long': 'کشیده', 'diamond': 'لوزی'
+  };
+
+  // فرم بدن
+  const bodyShape = result.bodyShape || 'متعادل';
+  const bodyMap = {
+    'slim': 'لاغر', 'athletic': 'ورزشکاری', 'average': 'متوسط',
+    'curvy': 'خوش‌فرم', 'plus': 'پُر', 'hourglass': 'ساعت شنی',
+    'pear': 'گلابی', 'apple': 'سیب'
+  };
+
+  grid.innerHTML = `
+    <div class="prof-analysis-card prof-analysis-card--highlight">
+      <div class="prof-analysis-icon">🌈</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">فصل رنگی شما</div>
+        <div class="prof-analysis-value">${result.colorSeason || 'متعادل'}</div>
+        <div class="prof-analysis-sublabel">${result.colorSeasonDesc || 'ترکیب رنگی منحصر به فرد شما'}</div>
+      </div>
+    </div>
+
+    <div class="prof-analysis-card">
+      <div class="prof-analysis-icon">🎨</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">رنگ پوست</div>
+        <div class="prof-analysis-value">${result.skinTone || 'متوسط'}</div>
+      </div>
+    </div>
+
+    <div class="prof-analysis-card">
+      <div class="prof-analysis-icon">👁️</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">رنگ چشم</div>
+        <div class="prof-analysis-value">${result.eyeColor || 'قهوه‌ای'}</div>
+      </div>
+    </div>
+
+    <div class="prof-analysis-card">
+      <div class="prof-analysis-icon">💇</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">رنگ مو</div>
+        <div class="prof-analysis-value">${result.hairColor || 'قهوه‌ای'}</div>
+      </div>
+    </div>
+
+    <div class="prof-analysis-card">
+      <div class="prof-analysis-icon">⚡</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">کنتراست</div>
+        <div class="prof-analysis-value">${result.contrast || 'متوسط'}</div>
+      </div>
+    </div>
+
+    <div class="prof-analysis-card">
+      <div class="prof-analysis-icon">👤</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">فرم چهره</div>
+        <div class="prof-analysis-value">${faceMap[faceShape] || faceShape}</div>
+      </div>
+    </div>
+
+    <div class="prof-analysis-card">
+      <div class="prof-analysis-icon">🧍</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">فرم بدن</div>
+        <div class="prof-analysis-value">${bodyMap[bodyShape] || bodyShape}</div>
+      </div>
+    </div>
+
+    <div class="prof-analysis-card prof-analysis-card--wide">
+      <div class="prof-analysis-icon">🎨</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">پالت رنگی پیشنهادی (۶ رنگ اصلی)</div>
+        ${paletteHtml}
+      </div>
+    </div>
+
+    <div class="prof-analysis-card prof-analysis-card--wide">
+      <div class="prof-analysis-icon">✨</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">سبک‌های پیشنهادی</div>
+        <div class="prof-style-chips">${styleHtml || '<span class="prof-style-chip">کلاسیک</span><span class="prof-style-chip">شیک</span><span class="prof-style-chip">مینیمال</span>'}</div>
+      </div>
+    </div>
+
+    <div class="prof-analysis-card prof-analysis-card--wide prof-analysis-card--success">
+      <div class="prof-analysis-icon">🎯</div>
+      <div class="prof-analysis-content">
+        <div class="prof-analysis-label">توصیه‌های شخصی</div>
+        <div class="prof-advice-list">
+          ${(result.advices || []).slice(0, 4).map(a => `<div class="prof-advice-item">✓ ${a}</div>`).join('')}
+          ${!result.advices || result.advices.length === 0 ? `
+            <div class="prof-advice-item">✓ رنگ‌های گرم و خنثی بهت می‌آد</div>
+            <div class="prof-advice-item">✓ از پارچه‌های طبیعی استفاده کن</div>
+            <div class="prof-advice-item">✓ کنتراست متوسط تا بالا برات مناسبه</div>
+            <div class="prof-advice-item">✓ طلایی و نقره‌ای هر دو بهت میاد</div>
+          ` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // ذخیره برای محصولات پیشنهادی
+  window._lastPhotoAnalysis = result;
+
+  // لود محصولات پیشنهادی بر اساس تحلیل
+  if (typeof renderPhotoMatchProducts === 'function') {
+    renderPhotoMatchProducts(result);
+  }
+
+  // نمایش virtual try-on
+  const tryonCard = document.getElementById('virtualTryOnCard');
+  if (tryonCard) {
+    tryonCard.style.display = 'block';
+    setupVirtualTryOn(result);
+  }
+}
+
+// 🆕 محصولات پیشنهادی بر اساس تحلیل عکس
+function renderPhotoMatchProducts(analysis) {
+  const grid = document.getElementById('photoMatchGrid');
+  const card = document.getElementById('photoMatchProductsCard');
+  if (!grid || !card) return;
+
+  // دریافت سلیقه
+  const taste = (window.DPTasteProfile && window.DPTasteProfile.load) ? window.DPTasteProfile.load() : null;
+
+  // دریافت همه محصولات
+  if (!window.DPProducts || !window.DPProducts.all) {
+    card.style.display = 'none';
+    return;
+  }
+  const allProducts = window.DPProducts.all();
+  if (!Array.isArray(allProducts) || allProducts.length === 0) {
+    card.style.display = 'none';
+    return;
+  }
+
+  // 🆕 v16.5 — محاسبه تطابق واقعی با DPRealMatch
+  const scored = allProducts.map(p => {
+    if (!window.DPRealMatch) {
+      // fallback
+      return { ...p, matchPercent: 50, matchReasons: [{ icon: '⚠️', text: 'سیستم تطابق در دسترس نیست' }] };
+    }
+
+    const match = window.DPRealMatch.calculatePhotoMatch(p, analysis.realAnalysis || analysis);
+    
+    return {
+      ...p,
+      matchPercent: match.score,
+      matchReasons: match.reasons,
+      matchConfidence: match.confidence
+    };
+  });
+
+  // فیلتر بالای ۶۵٪
+  let filtered = scored.filter(p => p.matchPercent >= 65);
+
+  // 🆕 اگه چیزی بالای ۶۵٪ نبود، نزدیک‌ترین تطابق رو نشون بده
+  let isFallback = false;
+  if (filtered.length === 0) {
+    const sorted = [...scored].sort((a, b) => b.matchPercent - a.matchPercent);
+    const topPercent = sorted[0]?.matchPercent || 0;
+    if (topPercent > 0) {
+      filtered = sorted.filter(p => p.matchPercent >= Math.max(15, topPercent - 15));
+      isFallback = true;
+    }
+  }
+
+  if (filtered.length === 0) {
+    card.style.display = 'none';
+    return;
+  }
+
+  // مرتب‌سازی
+  filtered.sort((a, b) => b.matchPercent - a.matchPercent);
+
+  // نمایش پیام fallback
+  if (isFallback) {
+    const note = document.createElement('div');
+    note.style.cssText = 'background:rgba(245,158,11,0.1);color:#92400e;padding:10px 14px;border-radius:10px;font-size:13px;margin-bottom:12px;border-right:3px solid #f59e0b;';
+    note.innerHTML = '💡 <strong>نزدیک‌ترین تطابق‌ها:</strong> محصولی با بیش از ۶۵٪ تطابق یافت نشد. نزدیک‌ترین محصولات به سلیقه شما نمایش داده می‌شود.';
+    grid.parentNode.insertBefore(note, grid);
+  }
+
+  // رندر
+  grid.innerHTML = filtered.slice(0, 6).map(p => {
+    const url = p.id ? `./product.html?id=${p.id}` : './index.html';
+    // 🆕 reason می‌تونه string یا object باشه
+    const reasonRaw = p.matchReasons[0];
+    let reason = '✨ بر اساس تحلیل عکس شما';
+    if (typeof reasonRaw === 'string') reason = reasonRaw;
+    else if (reasonRaw && reasonRaw.text) reason = `${reasonRaw.icon || '✨'} ${reasonRaw.text}`;
+    
+    const colors = (p.colors || []).slice(0, 3);
+    return `
+      <a class="prof-photo-match-card" href="${url}">
+        <div class="prof-photo-match-img">
+          ${p.image
+            ? `<img src="${p.image}" alt="${p.name || ''}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />`
+            : ''
+          }
+          <div class="prof-photo-match-fallback" ${p.image ? 'style="display:none"' : ''}>🛍️</div>
+          <span class="prof-photo-match-badge">🎯 ${p.matchPercent}٪</span>
+        </div>
+        <div class="prof-photo-match-body">
+          <div class="prof-photo-match-name">${p.name || 'محصول'}</div>
+          <div class="prof-photo-match-reason">${reason}</div>
+          <div class="prof-photo-match-price">
+            <strong>${(p.price || 0).toLocaleString('fa-IR')} تومان</strong>
+          </div>
+          ${colors.length > 0 ? `<div class="prof-photo-match-colors">${colors.map(c => `<span style="background:${getColorHex(c)}"></span>`).join('')}</div>` : ''}
+        </div>
+      </a>
+    `;
+  }).join('');
+
+  card.style.display = 'block';
+}
+
+function getColorHex(colorName) {
+  const map = {
+    'black': '#1f2937', 'مشکی': '#1f2937',
+    'white': '#f9fafb', 'سفید': '#f9fafb',
+    'gold': '#d4af37', 'طلایی': '#d4af37',
+    'cream': '#fef3c7', 'کرم': '#fef3c7',
+    'red': '#ef4444', 'قرمز': '#ef4444',
+    'blue': '#3b82f6', 'آبی': '#3b82f6',
+    'navy': '#1e3a8a', 'سرمه‌ای': '#1e3a8a',
+    'green': '#10b981', 'سبز': '#10b981',
+    'brown': '#92400e', 'قهوه‌ای': '#92400e',
+    'gray': '#6b7280', 'طوسی': '#6b7280',
+    'purple': '#a855f7', 'بنفش': '#a855f7',
+    'pink': '#ec4899', 'صورتی': '#ec4899',
+    'silver': '#c0c0c0', 'نقره': '#c0c0c0',
+  };
+  return map[(colorName || '').toLowerCase()] || '#9ca3af';
+}
+
+// 🆕 Virtual Try-On
+function setupVirtualTryOn(analysis) {
+  const baseImage = document.getElementById('tryonBaseImage');
+  if (baseImage && window._lastPhotoDataUrl) {
+    baseImage.src = window._lastPhotoDataUrl;
+  }
+
+  // محصولات اکسسوری
+  const productsContainer = document.getElementById('tryonProducts');
+  if (productsContainer && window.DPProducts) {
+    const allProducts = window.DPProducts.all();
+    const accessories = allProducts.filter(p => {
+      const cat = (p.category || '').toLowerCase();
+      return cat.includes('عینک') || cat.includes('گردنبند') || cat.includes('گوشواره') || cat.includes('اکسسوری') || cat.includes('ساعت');
+    });
+
+    productsContainer.innerHTML = accessories.slice(0, 8).map(p => `
+      <button class="prof-tryon-product" data-product-id="${p.id}" data-image="${p.image || ''}">
+        <img src="${p.image || ''}" alt="${p.name}" onerror="this.style.display='none'" />
+        <span>${p.name || 'محصول'}</span>
+      </button>
+    `).join('');
+
+    productsContainer.querySelectorAll('.prof-tryon-product').forEach(btn => {
+      btn.addEventListener('click', () => {
+        drawTryonOverlay(btn.dataset.image, btn.dataset.productId);
+        productsContainer.querySelectorAll('.prof-tryon-product').forEach(b => b.classList.remove('is-on'));
+        btn.classList.add('is-on');
+      });
+    });
+  }
+
+  // tab switching
+  document.querySelectorAll('.prof-tryon-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.prof-tryon-tab').forEach(t => t.classList.remove('is-on'));
+      tab.classList.add('is-on');
+      const type = tab.dataset.tryon;
+      filterTryonProducts(type);
+    });
+  });
+}
+
+function filterTryonProducts(type) {
+  const productsContainer = document.getElementById('tryonProducts');
+  if (!productsContainer) return;
+  const keywords = {
+    glasses: ['عینک', 'شیشه'],
+    necklace: ['گردنبند', 'زنجیر'],
+    earring: ['گوشواره', 'گوش']
+  };
+  const words = keywords[type] || [];
+  productsContainer.querySelectorAll('.prof-tryon-product').forEach(p => {
+    const name = p.querySelector('span')?.textContent || '';
+    const matches = words.some(w => name.includes(w));
+    p.style.display = matches ? '' : 'none';
+  });
+}
+
+function drawTryonOverlay(productImage, productId) {
+  // شبیه‌سازی ساده - محصول روی عکس بذار
+  const canvas = document.getElementById('tryonOverlay');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const baseImg = document.getElementById('tryonBaseImage');
+  if (!baseImg) return;
+
+  // اندازه canvas = اندازه تصویر
+  canvas.width = baseImg.naturalWidth || baseImg.width || 300;
+  canvas.height = baseImg.naturalHeight || baseImg.height || 300;
+
+  // پاک کردن
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (!productImage) return;
+
+  const prodImg = new Image();
+  prodImg.crossOrigin = 'anonymous';
+  prodImg.onload = () => {
+    // گذاشتن محصول در ناحیه چشم‌ها (تقریبی)
+    const w = canvas.width * 0.3;
+    const h = w * (prodImg.naturalHeight / prodImg.naturalWidth);
+    const x = (canvas.width - w) / 2;
+    const y = canvas.height * 0.3; // تقریباً چشم‌ها
+    ctx.drawImage(prodImg, x, y, w, h);
+  };
+  prodImg.src = productImage;
+}
+
+// ═══ Setup تب‌ها ═══
+function setupNewTabs() {
+  // تب‌های کمد
+  document.querySelectorAll('.prof-wardrobe-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.prof-wardrobe-tab').forEach(b => b.classList.remove('is-on'));
+      btn.classList.add('is-on');
+      window._wardrobeCat = btn.dataset.cat;
+      renderWardrobe();
+    });
+  });
+
+  // دکمه همگام‌سازی
+  document.getElementById('syncWardrobeBtn')?.addEventListener('click', syncWardrobe);
+}
+
+// ═══ رندر همه چیز با تغییر تب ═══
+const origSideBtnClick = document.querySelectorAll('.prof-side-btn[data-section]');
+origSideBtnClick.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.section;
+    setTimeout(() => {
+      if (target === 'wardrobe') renderWardrobe();
+      if (target === 'stylist') renderStylist();
+      if (target === 'match') setupPhotoUpload();
+      if (target === 'taste' && window.DPTasteProfile) {
+        window.DPTasteProfile.refresh();
+      }
+    }, 100);
+  });
+});
+
+// اجرای اولیه
+setTimeout(() => {
+  if (window.DPWardrobe) {
+    if (document.getElementById('sec-wardrobe').classList.contains('is-on')) renderWardrobe();
+    if (document.getElementById('sec-stylist').classList.contains('is-on')) renderStylist();
+    if (document.getElementById('sec-match').classList.contains('is-on')) setupPhotoUpload();
+    // پیشنهادهای من
+    if (window.DPTasteProfile) {
+      window.DPTasteProfile.init();
+    }
+    // تیپ شخصیتی
+    if (window.DPPersonalityUI) {
+      window.DPPersonalityUI.init();
+    }
+    // تم صفحه من - همیشه render بشه
+    if (window.DPThemeBuilder) {
+      window.DPThemeBuilder.init();
+      // 🆕 اگه tab theme فعاله، force render
+      setTimeout(() => {
+        if (document.getElementById('sec-theme')?.classList.contains('is-on')) {
+          window.DPThemeBuilder.render();
+        }
+      }, 100);
+    }
+  }
+  setupNewTabs();
+}, 200);
+</script>
+
+<script>
+/* 🆕 v19.1 — Wardrobe Manual Add + Quick Fill */
+(function() {
+  if (window.WardrobeUIInit) return;
+  window.WardrobeUIInit = true;
+
+  // نمونه‌های آماده برای quick fill
+  const SAMPLE_WARDROBE = [
+    { name: 'پیراهن سفید ساده', category: 'پیراهن', color: 'سفید', price: 750000, tags: 'کلاسیک,اداری' },
+    { name: 'پیراهن آبی روشن', category: 'پیراهن', color: 'آبی', price: 850000, tags: 'کلاسیک,اداری' },
+    { name: 'بلوز مشکی', category: 'بلوز', color: 'مشکی', price: 650000, tags: 'مینیمال,مجلسی' },
+    { name: 'تی‌شرت سفید', category: 'تیشرت', color: 'سفید', price: 350000, tags: 'روزمره,اسپرت' },
+    { name: 'تی‌شرت طوسی', category: 'تیشرت', color: 'طوسی', price: 380000, tags: 'روزمره' },
+    { name: 'کت سرمه‌ای', category: 'کت', color: 'سرمه‌ای', price: 1850000, tags: 'رسمی,کلاسیک' },
+    { name: 'کت بلیزر طوسی', category: 'کت', color: 'طوسی', price: 1650000, tags: 'رسمی,مدرن' },
+    { name: 'پالتو بژ', category: 'پالتو', color: 'بژ', price: 2400000, tags: 'پاییز,زمستان' },
+    { name: 'شلوار جین آبی', category: 'شلوار', color: 'آبی', price: 950000, tags: 'روزمره,کژوال' },
+    { name: 'شلوار مشکی پارچه‌ای', category: 'شلوار', color: 'مشکی', price: 1100000, tags: 'رسمی,اداری' },
+    { name: 'شلوار کرم', category: 'شلوار', color: 'کرم', price: 980000, tags: 'مدرن,روزمره' },
+    { name: 'دامن مشکی میدی', category: 'دامن', color: 'مشکی', price: 850000, tags: 'مجلسی,رسمی' },
+    { name: 'کفش رسمی مشکی', category: 'کفش', color: 'مشکی', price: 1450000, tags: 'رسمی' },
+    { name: 'کفش کتانی سفید', category: 'کفش', color: 'سفید', price: 1250000, tags: 'اسپرت,روزمره' },
+    { name: 'کفش پاشنه‌دار مشکی', category: 'کفش', color: 'مشکی', price: 980000, tags: 'مجلسی' },
+    { name: 'کیف دستی قهوه‌ای', category: 'اکسسوری', color: 'قهوه‌ای', price: 1850000, tags: 'کلاسیک' },
+    { name: 'شال طلایی', category: 'اکسسوری', color: 'طلایی', price: 650000, tags: 'مجلسی' }
+  ];
+
+  setTimeout(() => {
+    const addBtn = document.getElementById('addManualWardrobeBtn');
+    const quickBtn = document.getElementById('quickFillWardrobeBtn');
+    const modal = document.getElementById('manualWardrobeModal');
+    const close = document.getElementById('manualWardrobeClose');
+    const cancel = document.getElementById('mwCancel');
+    const save = document.getElementById('mwSave');
+
+    function openModal() {
+      if (!modal) return;
+      modal.style.display = 'flex';
+      document.getElementById('mwName').value = '';
+      document.getElementById('mwColor').value = '';
+      document.getElementById('mwSize').value = '';
+      document.getElementById('mwPrice').value = '';
+      document.getElementById('mwTags').value = '';
+      setTimeout(() => document.getElementById('mwName')?.focus(), 100);
+    }
+
+    if (addBtn) addBtn.onclick = openModal;
+    if (close) close.onclick = () => { if (modal) modal.style.display = 'none'; };
+    if (cancel) cancel.onclick = () => { if (modal) modal.style.display = 'none'; };
+    if (modal) modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+    if (save) {
+      save.onclick = () => {
+        const name = document.getElementById('mwName').value.trim();
+        if (!name) { alert('لطفاً نام لباس را وارد کنید'); return; }
+        
+        const item = {
+          name: name,
+          category: document.getElementById('mwCategory').value,
+          color: document.getElementById('mwColor').value.trim(),
+          size: document.getElementById('mwSize').value.trim(),
+          price: parseInt(document.getElementById('mwPrice').value) || 0,
+          tags: document.getElementById('mwTags').value.split(',').map(t => t.trim()).filter(Boolean)
+        };
+        
+        if (window.DPWardrobe && window.DPWardrobe.addManual) {
+          window.DPWardrobe.addManual(item);
+          if (modal) modal.style.display = 'none';
+          // re-render wardrobe
+          if (typeof renderWardrobe === 'function') renderWardrobe();
+          // update count
+          if (typeof updateCount === 'function') updateCount();
+          showToast('✅ لباس "' + name + '" به کمد اضافه شد');
+        } else {
+          alert('DPWardrobe بارگذاری نشده');
+        }
+      };
+    }
+
+    if (quickBtn) {
+      quickBtn.onclick = () => {
+        if (!confirm(SAMPLE_WARDROBE.length + ' لباس نمونه به کمد شما اضافه شود؟')) return;
+        
+        let added = 0;
+        SAMPLE_WARDROBE.forEach(item => {
+          if (window.DPWardrobe && window.DPWardrobe.addManual) {
+            window.DPWardrobe.addManual({
+              ...item,
+              tags: item.tags.split(',')
+            });
+            added++;
+          }
+        });
+        
+        if (typeof renderWardrobe === 'function') renderWardrobe();
+        if (typeof updateCount === 'function') updateCount();
+        showToast('⚡ ' + added + ' لباس نمونه اضافه شد');
+      };
+    }
+
+    function showToast(msg) {
+      let t = document.getElementById('manualWardrobeToast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'manualWardrobeToast';
+        t.style.cssText = 'position:fixed;bottom:30px;right:30px;background:#1a1a1a;color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.3);z-index:99999;font-weight:700;max-width:400px;transition:all 0.3s;opacity:0;transform:translateY(20px)';
+        document.body.appendChild(t);
+      }
+      t.textContent = msg;
+      t.style.opacity = '1';
+      t.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transform = 'translateY(20px)';
+      }, 3000);
+    }
+  }, 600);
+})();
+</script>
+
+<script>
+/* 🆕 v18.2 — AI Outfit Logic */
+(function() {
+  if (window.AIOutfitInit) return;
+  window.AIOutfitInit = true;
+
+  const WARDROBE_KEY = 'dp_user_wardrobe_v2';
+  let currentImageData = null;
+  let currentAnalysis = null;
+
+  // دریافت کمد کاربر
+  function getWardrobe() {
+    try {
+      const v = JSON.parse(localStorage.getItem(WARDROBE_KEY) || '[]');
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  }
+  
+  function saveWardrobe(items) {
+    try { 
+      localStorage.setItem(WARDROBE_KEY, JSON.stringify(items));
+      updateCount();
+    } catch (e) {}
+  }
+  
+  function updateCount() {
+    const items = getWardrobe();
+    const el = document.getElementById('aiOutfitCount');
+    if (el) el.textContent = items.length;
+  }
+
+  // باز کردن modal
+  setTimeout(() => {
+    const addBtn = document.getElementById('aiOutfitAddBtn');
+    const genBtn = document.getElementById('aiOutfitGenerateBtn');
+    const modal = document.getElementById('aiOutfitModal');
+    const close = document.getElementById('aiOutfitModalClose');
+    const cancel = document.getElementById('aiOutfitCancel');
+    const upload = document.getElementById('aiOutfitUploadArea');
+    const fileInput = document.getElementById('aiOutfitFileInput');
+    const preview = document.getElementById('aiOutfitPreview');
+    const previewImg = document.getElementById('aiOutfitPreviewImg');
+    const analysisContent = document.getElementById('aiOutfitAnalysisContent');
+    const save = document.getElementById('aiOutfitSave');
+
+    if (addBtn) {
+      addBtn.onclick = () => {
+        modal.style.display = 'flex';
+        resetModal();
+      };
+    }
+
+    if (close) close.onclick = () => { modal.style.display = 'none'; };
+    if (cancel) cancel.onclick = () => { modal.style.display = 'none'; };
+    if (modal) modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+    // آپلود عکس
+    if (upload) {
+      upload.onclick = () => fileInput.click();
+      
+      upload.ondragover = (e) => {
+        e.preventDefault();
+        upload.style.borderColor = '#d4af37';
+        upload.style.background = 'rgba(212,175,55,0.05)';
+      };
+      
+      upload.ondragleave = () => {
+        upload.style.borderColor = '';
+        upload.style.background = '';
+      };
+      
+      upload.ondrop = (e) => {
+        e.preventDefault();
+        upload.style.borderColor = '';
+        upload.style.background = '';
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) {
+          handleImageFile(file);
+        }
+      };
+    }
+
+    if (fileInput) {
+      fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) handleImageFile(file);
+      };
+    }
+
+    function handleImageFile(file) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        currentImageData = e.target.result;
+        previewImg.src = currentImageData;
+        preview.style.display = 'block';
+        upload.style.display = 'none';
+        
+        // تحلیل AI
+        analysisContent.innerHTML = '<div style="color:var(--text-soft)">⏳ در حال تحلیل...</div>';
+        
+        if (window.DPWardrobeAI && window.DPWardrobeAI.analyzeImage) {
+          const result = await window.DPWardrobeAI.analyzeImage(currentImageData);
+          if (result.error) {
+            analysisContent.innerHTML = '<span style="color:#ef4444">❌ ' + result.error + '</span>';
+            return;
+          }
+          
+          currentAnalysis = result;
+          
+          // پر کردن خودکار فرم
+          const colorInput = document.getElementById('aiOutfitColor');
+          if (colorInput && result.dominant) {
+            colorInput.value = result.dominant.name || '';
+          }
+          
+          // نمایش نتایج تحلیل
+          let html = '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+          html += '<div style="width:36px;height:36px;border-radius:50%;background:' + result.dominant.hex + ';border:2px solid #fff;box-shadow:0 0 0 1px #ddd"></div>';
+          html += '<div>';
+          html += '<strong>' + result.dominant.name + '</strong>';
+          if (result.secondary) html += ' + ' + result.secondary.name;
+          html += '<br/><small style="color:var(--text-soft)">روشنایی: ' + (result.isLight ? 'روشن' : 'تیره') + ' • فصل: ' + result.season + '</small>';
+          html += '</div></div>';
+          
+          if (result.secondary) {
+            html += '<div style="font-size:11px;color:var(--text-soft);margin-top:6px">';
+            html += '💡 رنگ مکمل پیشنهادی: ';
+            const complements = window.DPWardrobeAI.OutfitEngine.complementaryColors(result.dominant.name);
+            html += complements.slice(0, 3).join('، ');
+            html += '</div>';
+          }
+          
+          analysisContent.innerHTML = html;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetModal() {
+      currentImageData = null;
+      currentAnalysis = null;
+      preview.style.display = 'none';
+      upload.style.display = 'block';
+      fileInput.value = '';
+      document.getElementById('aiOutfitName').value = '';
+      document.getElementById('aiOutfitColor').value = '';
+      document.getElementById('aiOutfitPrice').value = '';
+      analysisContent.innerHTML = '';
+    }
+
+    // ذخیره لباس
+    if (save) {
+      save.onclick = () => {
+        const name = document.getElementById('aiOutfitName').value.trim();
+        const category = document.getElementById('aiOutfitCategory').value;
+        const color = document.getElementById('aiOutfitColor').value.trim();
+        const price = parseInt(document.getElementById('aiOutfitPrice').value) || 0;
+        
+        if (!name) {
+          alert('لطفاً نام لباس را وارد کنید');
+          return;
+        }
+        
+        const item = {
+          id: 'wb_' + Date.now().toString(36),
+          name: name,
+          category: category,
+          color: color,
+          colors: color ? [color] : [],
+          price: price,
+          image: currentImageData,
+          analysis: currentAnalysis,
+          createdAt: Date.now()
+        };
+        
+        const wardrobe = getWardrobe();
+        wardrobe.push(item);
+        saveWardrobe(wardrobe);
+        
+        modal.style.display = 'none';
+        resetModal();
+        updateCount();
+        
+        // toast
+        showToast('✅ لباس "' + name + '" به کمد شما اضافه شد');
+      };
+    }
+
+    // ساخت ست هوشمند
+    if (genBtn) {
+      genBtn.onclick = async () => {
+        const wardrobe = getWardrobe();
+        if (wardrobe.length === 0) {
+          alert('ابتدا چند لباس به کمد اضافه کنید');
+          return;
+        }
+        
+        const results = document.getElementById('aiOutfitResults');
+        const list = document.getElementById('aiOutfitList');
+        const empty = document.getElementById('aiOutfitEmpty');
+        
+        results.style.display = 'block';
+        empty.style.display = 'none';
+        list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-soft)">⏳ در حال ساخت ست...</div>';
+        
+        // 👑 v20.0 — God Stylist Supreme (بهترین استایلیست دنیا)
+        const currentOccasion = document.querySelector('#aiOutfitOccasionSelect')?.value || 'روزمره';
+        const currentSeason = document.querySelector('#aiOutfitSeasonSelect')?.value || 'چهار فصل';
+        const outfitResult = window.DPGodStylist 
+          ? window.DPGodStylist.buildOutfits(wardrobe, { occasion: currentOccasion, season: currentSeason })
+          : (window.DPStylistEngine 
+              ? window.DPStylistEngine.buildOutfits(wardrobe, { occasion: currentOccasion, season: currentSeason })
+              : window.DPWardrobeAI.buildOutfits(wardrobe));
+        
+        if (outfitResult.empty) {
+          list.innerHTML = '<div style="text-align:center;padding:40px;background:var(--bg-soft);border-radius:14px">' +
+            '<p style="margin:0;color:var(--text-soft)">' + outfitResult.message + '</p></div>';
+          return;
+        }
+        
+        // دریافت محصولات واقعی از Hub
+        const realProducts = (window.DPProductsHub && window.DPProductsHub.all) 
+          ? window.DPProductsHub.all() 
+          : [];
+        
+        // رندر ست‌ها
+        list.innerHTML = outfitResult.outfits.map((outfit, idx) => {
+          const suggestedProducts = window.DPWardrobeAI.suggestProducts(outfit, realProducts, 3);
+          
+          return `
+            <div style="background:var(--bg-card);border:2px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                <div style="width:38px;height:38px;background:linear-gradient(135deg,#d4af37,#f4d97c);color:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800">${idx+1}</div>
+                <div style="flex:1">
+                  <h3 style="margin:0;font-size:16px;font-weight:800">${outfit.name}</h3>
+                  <small style="color:var(--text-soft)">${outfit.occasion} • ${outfit.season || 'چهار فصل'} • <strong style="color:var(--gold)">${outfit.score}٪</strong> هماهنگی${outfit.confidence ? ' • اطمینان ' + outfit.confidence + '٪' : ''}</small>
+                  ${outfit.explanation ? '<div style="font-size:11px;color:var(--text-soft);margin-top:4px;line-height:1.5">' + outfit.explanation + '</div>' : ''}
+                </div>
+                <div style="display:flex;gap:6px">
+                  ${outfit.complementaries.slice(0, 3).map(c => {
+                    const colorMap = {'مشکی':'#1a1a1a','سفید':'#fff','قرمز':'#dc2626','آبی':'#3b82f6','صورتی':'#ec4899','کرم':'#fef3c7','قهوه‌ای':'#78350f'};
+                    const hex = colorMap[c] || '#9ca3af';
+                    return `<span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:${hex};border:1px solid #ddd" title="${c}"></span>`;
+                  }).join('')}
+                </div>
+              </div>
+              
+              <!-- آیتم‌های ست -->
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-bottom:14px">
+                ${outfit.items.map(item => `
+                  <div style="background:var(--bg-soft);border-radius:10px;padding:8px;text-align:center">
+                    ${item.image ? `<img src="${item.image}" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;margin-bottom:6px"/>` : '<div style="width:100%;aspect-ratio:1;background:#f5f5f5;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:6px;opacity:0.4">👕</div>'}
+                    <div style="font-size:11px;font-weight:700;line-height:1.3">${item.name}</div>
+                    <small style="color:var(--text-soft);font-size:10px">${item.category}</small>
+                  </div>
+                `).join('')}
+              </div>
+              
+              <!-- دلیل -->
+              <div style="padding:10px;background:var(--bg-soft);border-radius:10px;font-size:12px;color:var(--text-soft);line-height:1.7;border-right:3px solid var(--gold);margin-bottom:12px">
+                💡 ${outfit.reason}
+              </div>
+              
+              <!-- محصولات پیشنهادی برای تکمیل -->
+              ${suggestedProducts.length > 0 ? `
+                <div style="background:linear-gradient(135deg,rgba(212,175,55,0.08),rgba(212,175,55,0.02));border:1px solid var(--gold);border-radius:12px;padding:12px;margin-top:12px">
+                  <div style="font-size:13px;font-weight:800;color:var(--gold);margin-bottom:8px">🛍️ برای تکمیل این ست، از فروشندگان:</div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px">
+                    ${suggestedProducts.map(p => `
+                      <a href="./product.html?id=${encodeURIComponent(p.id)}" style="background:#fff;border-radius:8px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid #eee;transition:all 0.2s">
+                        ${p.image ? `<div style="aspect-ratio:1;background:#f5f5f5;overflow:hidden"><img src="${p.image}" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.parentElement.innerHTML='🛍️'"/></div>` : '<div style="aspect-ratio:1;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:24px;opacity:0.3">🛍️</div>'}
+                        <div style="padding:6px;font-size:10px">
+                          <div style="font-weight:600;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name || 'محصول'}</div>
+                          <div style="color:var(--gold);font-weight:800;margin-top:2px">${Number(p.price || 0).toLocaleString('fa-IR')}</div>
+                        </div>
+                      </a>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
+              
+              <div style="display:flex;gap:6px;margin-top:12px;justify-content:flex-end">
+                <button onclick="this.closest('div[style*=border:2px]').style.display='none'" style="padding:6px 12px;background:var(--bg-soft);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-family:inherit;font-size:11px">بستن</button>
+                <button onclick="alert('💾 ست ذخیره شد')" style="padding:6px 12px;background:linear-gradient(135deg,#d4af37,#f4d97c);color:#1a1a1a;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700">🔖 ذخیره ست</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        
+        showToast('✨ ' + outfitResult.outfits.length + ' ست هوشمند برای شما ساخته شد');
+      };
+    }
+
+    function showToast(msg) {
+      let toast = document.getElementById('aiOutfitToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'aiOutfitToast';
+        toast.style.cssText = 'position:fixed;bottom:30px;right:30px;background:#1a1a1a;color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.3);z-index:99999;font-weight:700;max-width:400px;transition:all 0.3s;opacity:0;transform:translateY(20px)';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+      }, 3000);
+    }
+
+    updateCount();
+  }, 500);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="دیجی‌پوش | بازارگاه لوکس مد ایران — اتصال خریداران به فروشندگان معتبر پوشاک زنانه، مردانه و بچگانه."
+    />
+    <meta
+      name="keywords"
+      content="دیجی‌پوش, بازارگاه مد, لباس زنانه, لباس مردانه, لباس بچگانه, فروشندگان معتبر"
+    />
+    <meta name="theme-color" content="#f5f0e8" />
+    <title>دیجی‌پوش | بازارگاه لوکس مد ایران</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- =====================================================
+       NAVBAR (Extra Bold 3.5px sage border)
+       ===================================================== -->
+    <header class="site-header" id="siteHeader">
+      <nav class="navbar sage-border" aria-label="ناوبری اصلی">
+        <a class="nav-logo" href="#" aria-label="دیجی‌پوش، صفحه اصلی">
+          <span class="nav-logo__mark">د</span>
+          <span class="nav-logo__stack">
+                 <strong>دیجی‌پوش</strong>
+                 
+            <small>بازارگاه ممتاز فروشندگان مد</small>
+          </span>
+        </a>
+        
+        
+      
+        
+
+        <ul class="nav-menu" role="menubar" aria-label="منوی اصلی">
+          <li role="none"><a role="menuitem" href="./woman/index.html">لباس زنانه</a></li>
+          <li role="none"><a role="menuitem" href="./man/index.html">لباس مردانه</a></li>
+          <li role="none"><a role="menuitem" href="./kids/index.html">لباس بچگانه</a></li>
+          <li role="none"><a role="menuitem" href="./teen/index.html">تینیجر</a></li>
+          <li role="none">
+            <a role="menuitem" href="#featured-sellers">فروشندگان</a>
+          </li>
+          <li role="none">
+            <a role="menuitem" href="#footer">ارتباط با ما</a>
+          </li>
+        </ul>
+
+        <div class="nav-icons">
+          <button class="icon-button" type="button" aria-label="جستجو">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3-3"></path>
+            </svg>
+
+          </button>       
+             
+            </head>
+          </h1>
+          <button
+            class="icon-button icon-button--badge"
+            type="button"
+            aria-label="سبد خرید"
+          >
+
+
+      
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+          
+                  
+              <path
+                d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"
+              >
+            </path>
+              <path d="M3 6h18"></path>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+
+            <span class="badge" id="cartBadge">۲</span>
+          </button>
+          <button class="icon-button" type="button" aria-label="حساب کاربری">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-  4width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="8" r="5"></circle>
+              <path d="M20 21a8 8 0 0 0-16 0"></path>
+            </svg>
+
+          </button>
+          <button
+            class="nav-burger"
+            id="navBurger"  
+            type="button"
+            aria-label="باز کردن منو"
+          >
+
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mobile-drawer-backdrop" id="mobileBackdrop"></div>
+    <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer__head">
+        <strong>منوی دیجی‌پوش</strong>
+        <button
+          class="mobile-drawer__close"
+          type="button"
+          aria-label="بستن منو"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-drawer__nav" aria-label="ناوبری موبایل">
+        <a href="./woman/index.html">لباس زنانه</a>
+        <a href="./man/index.html">لباس مردانه</a>
+        <a href="./kids/index.html">لباس بچگانه</a>
+        <a href="./teen/index.html">تینیجر</a>
+        <a href="#featured-sellers">فروشندگان</a>
+        <a href="#footer">ارتباط با ما</a>
+      </nav>
+    </aside>
+
+    <main id="main">
+      <!-- =====================================================
+         HERO (Extra Bold 3.5px sage border)
+         ===================================================== -->
+      <section class="hero sage-border" id="hero">
+        <div class="hero__ambient">
+          <div class="hero__mesh hero__mesh--one"></div>
+          <div class="hero__mesh hero__mesh--two"></div>
+          <div class="hero__mesh hero__mesh--three"></div>
+          <div class="hero__spotlight" id="heroSpotlight"></div>
+          <div class="hero__sweep"></div>
+          <div class="hero__dust" id="heroDust" aria-hidden="true"></div>
+        </div>
+
+        <div class="hero__backdrop">
+          <img
+            src="https://images.pexels.com/photos/36168977/pexels-photo-36168977.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1600&w=1200"
+            alt="مدل ایرانی با پوشش لوکس"
+            fetchpriority="high"
+          />
+          <div class="hero__backdrop-overlay"></div>
+        </div>
+
+        <div class="hero__layout" id="heroLayout">
+          <div class="hero__copy" data-parallax="0.06">
+            <span class="eyebrow reveal">بازارگاه ممتاز فروشندگان مد</span>
+              
+            
+            <h1 class="hero__title reveal">پوشیدن بهترین‌ها</h1>
+            <p class="hero__subtitle reveal">
+              حسی‌ست که باید تجربه کرد</p>
+            <p class="hero__desc reveal">
+              دیجی‌پوش، بازارگاه لوکس مد ایران؛ جایی که فروشندگان معتبر و پوشاک
+              اصیل کنار هم می‌آیند تا خرید مد به تجربه‌ای آرام، حرفه‌ای و قابل
+              اعتماد تبدیل شود.
+            </p>
+          
+            
+            <div class="hero__actions reveal">
+              <a href="#cta" class="button button--primary">ساخت حساب</a>
+              <a href="#featured-sellers" class="button button--outline"
+                >شروع خرید</a
+              >
+            </div>
+            <div class="hero__metrics reveal">
+              <div>
+                <strong data-counter="۱۸۰">۰</strong><span>فروشنده ممتاز</span>
+              </div>
+              <div>
+                <strong data-counter="۹۸">۰</strong><span>درصد رضایت</span>
+              </div>
+              <div>
+                <strong data-counter="۴۸">۰</strong
+                ><span>ساعت میانگین تحویل</span>
+              </div>
+            </div>
+            
+          </div>
+
+          
+          <div class="hero__visual reveal" data-parallax="0.14">
+            <figure class="hero__card hero__card--main">
+              <img
+                src="https://images.pexels.com/photos/36168986/pexels-photo-36168986.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1500&w=1100"
+                alt="مدل زنانه با پالتوی لوکس"
+                loading="eager"
+              />
+              
+              <figcaption>
+                <span>ویترین برگزیده</span>
+                <strong>فروشگاه ماه‌رخ</strong>
+              </figcaption>
+            </figure>
+            <figure class="hero__card hero__card--side">
+              <img
+                src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=900"
+                alt="استایل مردانه لوکس"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         WHY DIGIPOOSH — 6 Cards (Extra Bold 3.5px sage border)
+         ===================================================== -->
+      <section class="why-section" id="why">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow eyebrow--center">چرا دیجی‌پوش</span>
+            <h2>بازارگاه لوکس، با ضمانت اعتماد</h2>
+            <p>
+              هر خرید در دیجی‌پوش با اطمینان کامل انجام می‌شود؛ از انتخاب
+              فروشنده تا لحظه‌ی تحویل.
+            </p>
+          </div>
+          <div class="why-grid">
+            <article class="why-card sage-border reveal">
+              <div class="why-card__icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="m12 2 2.2 4.9L19 8l-3.6 3.5.9 5L12 14.7 7.7 16.5l.9-5L5 8l4.8-1.1L12 2Z"
+                  />
+                </svg>
+              </div>
+              <h3>محصولات اصل</h3>
+              <p>
+                اصالت و شفافیت معرفی کالاها، ستون اصلی تجربه‌ی خرید در بازارگاه
+                دیجی‌پوش است.
+              </p>
+            </article>
+            <article class="why-card sage-border reveal">
+              <div class="why-card__icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 3 4 7v5c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V7l-8-4Z"
+                  />
+                  <path d="m9.5 12.5 1.8 1.8 3.7-4.1" />
+                </svg>
+              </div>
+              <h3>فروشندگان معتبر</h3>
+              <p>
+                فروشنده‌هایی که به دیجی‌پوش وارد می‌شوند، پیش از حضور از نظر
+                کیفیت و اعتبار بررسی می‌شوند.
+              </p>
+            </article>
+            <article class="why-card sage-border reveal">
+              <div class="why-card__icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="5" width="20" height="14" rx="2" />
+                  <path d="M2 10h20" />
+                </svg>
+              </div>
+              <h3>پرداخت امن</h3>
+              <p>
+                پرداخت‌ها در بستری شفاف، امن و قابل پیگیری انجام می‌شوند تا خیال
+                شما آسوده باشد.
+              </p>
+            </article>
+            <article class="why-card sage-border reveal">
+              <div class="why-card__icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v9Z"
+                  />
+                </svg>
+              </div>
+              <h3>پشتیبانی ۲۴/۷</h3>
+              <p>
+                همراهی انسانی و سریع برای پاسخ‌گویی به پرسش‌ها، سفارش‌ها و
+                نیازهای خریداران.
+              </p>
+            </article>
+            <article class="why-card sage-border reveal">
+              <div class="why-card__icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 7h13a4 4 0 1 1 0 8H8" />
+                  <path d="m6 4-3 3 3 3" />
+                  <path d="m18 14 3 3-3 3" />
+                </svg>
+              </div>
+              <h3>بازگشت آسان</h3>
+              <p>
+                اگر انتخاب شما مطابق انتظار نبود، فرایند بازگشت روشن و قابل اتکا
+                در اختیارتان است.
+              </p>
+            </article>
+            <article class="why-card sage-border reveal">
+              <div class="why-card__icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 12h13" />
+                  <path d="m13 5 7 7-7 7" />
+                </svg>
+              </div>
+              <h3>ارسال سریع</h3>
+              <p>
+                فروشگاه‌های منتخب متعهدند کالاها را در زمان‌بندی شفاف و با
+                بسته‌بندی حرفه‌ای ارسال کنند.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         MARKETPLACE BENEFITS — 3 Columns (Clean, NO border)
+         ===================================================== -->
+      <section class="benefits-section" id="benefits">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow eyebrow--center">مزایای بازارگاه</span>
+            <h2>دیجی‌پوش، بستری برای رشد فروشندگان و اعتماد خریداران</h2>
+            <p>
+              ما تجربه‌ای ساخته‌ایم که در آن خریدار با اطمینان بیشتری تصمیم
+              می‌گیرد و فروشنده با کیفیت واقعی‌اش بهتر دیده می‌شود.
+            </p>
+          </div>
+          <div class="benefits-grid">
+            <article class="benefit-column reveal">
+              <img
+                src="https://images.pexels.com/photos/33393823/pexels-photo-33393823.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=640"
+                alt="انتخاب دقیق فروشندگان"
+                loading="lazy"
+              />
+              <h3>انتخاب دقیق فروشندگان</h3>
+              <p>
+                فقط فروشگاه‌هایی که استاندارد تصویر، بسته‌بندی و پاسخ‌گویی را
+                رعایت کنند، دیده می‌شوند.
+              </p>
+            </article>
+            <article class="benefit-column reveal">
+              <img
+                src="https://images.pexels.com/photos/9218392/pexels-photo-9218392.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=640"
+                alt="تجربه یکپارچه خرید"
+                loading="lazy"
+              />
+              <h3>تجربه‌ی یکپارچه خرید</h3>
+              <p>
+                از کشف فروشگاه تا پرداخت، همه‌چیز با یک زبان بصری آرام و منسجم
+                ارائه می‌شود.
+              </p>
+            </article>
+            <article class="benefit-column reveal">
+              <img
+                src="https://images.pexels.com/photos/17907027/pexels-photo-17907027.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=640"
+                alt="رشد فروشندگان با هویت"
+                loading="lazy"
+              />
+              <h3>رشد فروشندگان با هویت</h3>
+              <p>
+                هر فروشنده می‌تواند ویترینی داشته باشد که شخصیت برندش را به‌وضوح
+                منتقل می‌کند.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         SELECT SELLERS (Extra Bold 3.5px sage border)
+         ===================================================== -->
+      <section class="select-sellers-section" id="select-sellers">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow eyebrow--center">انتخاب فروشندگان</span>
+            <h2>انتخاب دقیق فروشندگان</h2>
+            <p>
+              هر فروشنده پیش از حضور در دیجی‌پوش، از نظر کیفیت ویترین، بسته‌بندی
+              و پاسخ‌گویی بررسی می‌شود.
+            </p>
+          </div>
+          <div class="select-sellers sage-border">
+            <ul>
+              <li>
+                <span class="select-sellers__dot"></span>
+                <div>
+                  <strong>بررسی پیش از حضور</strong>
+                  <p>
+                    هویت تجاری، کیفیت محصول و ثبات عملکرد پیش از ورود به
+                    بازارگاه ارزیابی می‌شود.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="select-sellers__dot"></span>
+                <div>
+                  <strong>نظارت بر رضایت</strong>
+                  <p>
+                    امتیاز، بازخورد و نرخ بازگشت به‌صورت مستمر برای حفظ
+                    استانداردهای دیجی‌پوش پایش می‌شود.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="select-sellers__dot"></span>
+                <div>
+                  <strong>شفافیت کامل</strong>
+                  <p>
+                    تمامی اطلاعات هر فروشگاه از زمان پاسخ‌گویی تا سیاست بازگشت
+                    برای خریدار قابل مشاهده است.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         RESPONSE TIME (Extra Bold 3.5px sage border)
+         ===================================================== -->
+      <section class="response-section" id="response-time">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow eyebrow--center">ساعات پاسخگویی</span>
+            <h2>زمان پاسخ‌گویی فروشندگان</h2>
+            <p>شفافیت و سرعت، دو اصل مهم در دیجی‌پوش هستند.</p>
+          </div>
+          <div class="response-grid sage-border">
+            <article class="response-stat">
+              <span>میانگین زمان پاسخ</span>
+              <strong>کمتر از ۲ ساعت</strong>
+              <p>پاسخ‌گویی سریع و مؤثر در تمام روزهای هفته</p>
+            </article>
+            <article class="response-stat">
+              <span>نرخ رضایت خریداران</span>
+              <strong>۹۶٪</strong>
+              <p>مشتریان از تجربه‌ی خرید و خدمات فروشندگان رضایت کامل دارند</p>
+            </article>
+            <article class="response-stat">
+              <span>نرخ بازگشت موفق</span>
+              <strong>۹۸٪</strong>
+              <p>فرایند بازگشت سریع، شفاف و بدون پیچیدگی</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         FEATURED SELLERS — 4 Cards
+         (Only فروشگاه ماه‌رخ has Extra Bold 3.5px sage border)
+         ===================================================== -->
+      <section class="featured-sellers-section" id="featured-sellers">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow eyebrow--center">فروشندگان منتخب</span>
+            <h2>فروشگاه‌هایی با هویت، سلیقه و امضای روشن</h2>
+            <p>
+              هر ویترین در دیجی‌پوش قرار است بیشتر از یک صفحه‌ی فروش باشد؛ یک
+              تجربه‌ی برندسازی و اعتمادسازی است.
+            </p>
+          </div>
+          <div class="sellers-grid">
+            <!-- فروشگاه ماه‌رخ — WITH extra bold sage border -->
+            <article class="seller-card sage-border reveal">
+              <div class="seller-card__cover">
+                <img
+                  src="https://images.pexels.com/photos/36168986/pexels-photo-36168986.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=720"
+                  alt="فروشگاه ماه‌رخ"
+                  loading="lazy"
+                />
+              </div>
+              <div class="seller-card__body">
+                <div class="seller-card__top">
+                  <div class="seller-avatar">م</div>
+                  <div>
+                    <h3>فروشگاه ماه‌رخ</h3>
+                    <span>پوشاک زنانه رسمی</span>
+                  </div>
+                  <em class="seller-badge">تأیید شده</em>
+                </div>
+                <div class="seller-card__meta">
+                  <div class="seller-rate">★★★★★ <span>۴٫۹</span></div>
+                  <span class="seller-count">۴۲ محصول</span>
+                </div>
+                <a href="#" class="seller-card__link">مشاهده فروشگاه</a>
+              </div>
+            </article>
+
+            <article class="seller-card reveal">
+              <div class="seller-card__cover">
+                <img
+                  src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=720"
+                  alt="استودیو آوان"
+                  loading="lazy"
+                />
+              </div>
+              <div class="seller-card__body">
+                <div class="seller-card__top">
+                  <div class="seller-avatar">آ</div>
+                  <div>
+                    <h3>استودیو آوان</h3>
+                    <span>پوشاک مردانه مینیمال</span>
+                  </div>
+                  <em class="seller-badge">تأیید شده</em>
+                </div>
+                <div class="seller-card__meta">
+                  <div class="seller-rate">★★★★★ <span>۴٫۸</span></div>
+                  <span class="seller-count">۳۸ محصول</span>
+                </div>
+                <a href="#" class="seller-card__link">مشاهده فروشگاه</a>
+              </div>
+            </article>
+
+            <article class="seller-card reveal">
+              <div class="seller-card__cover">
+                <img
+                  src="https://images.pexels.com/photos/9218392/pexels-photo-9218392.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=720"
+                  alt="بوتیک نگار"
+                  loading="lazy"
+                />
+              </div>
+              <div class="seller-card__body">
+                <div class="seller-card__top">
+                  <div class="seller-avatar">ن</div>
+                  <div>
+                    <h3>بوتیک نگار</h3>
+                    <span>لباس مجلسی و رسمی</span>
+                  </div>
+                  <em class="seller-badge">تأیید شده</em>
+                </div>
+                <div class="seller-card__meta">
+                  <div class="seller-rate">★★★★☆ <span>۴٫۶</span></div>
+                  <span class="seller-count">۵۴ محصول</span>
+                </div>
+                <a href="#" class="seller-card__link">مشاهده فروشگاه</a>
+              </div>
+            </article>
+
+            <article class="seller-card reveal">
+              <div class="seller-card__cover">
+                <img
+                  src="https://images.pexels.com/photos/35537/child-children-girl-happy.jpg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=720"
+                  alt="خانه کودک ریوا"
+                  loading="lazy"
+                />
+              </div>
+              <div class="seller-card__body">
+                <div class="seller-card__top">
+                  <div class="seller-avatar">ر</div>
+                  <div>
+                    <h3>خانه کودک ریوا</h3>
+                    <span>پوشاک بچگانه لطیف</span>
+                  </div>
+                  <em class="seller-badge">تأیید شده</em>
+                </div>
+                <div class="seller-card__meta">
+                  <div class="seller-rate">★★★★☆ <span>۴٫۷</span></div>
+                  <span class="seller-count">۳۱ محصول</span>
+                </div>
+                <a href="#" class="seller-card__link">مشاهده فروشگاه</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         HOW IT WORKS — 3 Steps (Clean, NO border)
+         ===================================================== -->
+      <section class="how-section" id="how">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow eyebrow--center">چطور کار می‌کند</span>
+            <h2>سه قدم تا خریدی مطمئن</h2>
+            <p>
+              فرایند خرید در دیجی‌پوش برای سرعت، وضوح و حس اعتماد طراحی شده است.
+            </p>
+          </div>
+          <div class="how-grid">
+            <article class="how-card reveal">
+              <div class="how-card__number">۰۱</div>
+              <h3>ثبت‌نام</h3>
+              <p>
+                در چند ثانیه حساب خود را بسازید و به فروشگاه‌های محبوب و
+                پیشنهادهای اختصاصی دسترسی پیدا کنید.
+              </p>
+            </article>
+            <article class="how-card reveal">
+              <div class="how-card__number">۰۲</div>
+              <h3>انتخاب</h3>
+              <p>
+                فروشندگان منتخب، سبک‌های متفاوت و اطلاعات شفاف باعث می‌شوند
+                انتخابی آگاهانه‌تر داشته باشید.
+              </p>
+            </article>
+            <article class="how-card reveal">
+              <div class="how-card__number">۰۳</div>
+              <h3>دریافت</h3>
+              <p>
+                از ثبت سفارش تا تحویل، همه‌چیز قابل رهگیری و با پشتیبانی حرفه‌ای
+                همراه است.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         TRUST SECTION (Clean, NO border)
+         ===================================================== -->
+      <section class="trust-section" id="trust">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow eyebrow--center">اعتماد و تضمین</span>
+            <h2>زیرساختی برای اعتماد، نه فقط زیبایی</h2>
+          </div>
+          <div class="trust-grid">
+            <div class="trust-badge reveal">
+              <span>پرداخت امن</span>
+              <strong>تراکنش محافظت‌شده</strong>
+            </div>
+            <div class="trust-badge reveal">
+              <span>اصالت</span>
+              <strong>فروشندگان راستی‌آزمایی‌شده</strong>
+            </div>
+            <div class="trust-badge reveal">
+              <span>ارسال</span>
+              <strong>رهگیری شفاف و زمان‌بندی دقیق</strong>
+            </div>
+            <div class="trust-badge reveal">
+              <span>بازگشت</span>
+              <strong>تا ۷ روز بدون پیچیدگی</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         CUSTOMER REVIEWS — 3 Cards (Clean, NO border)
+         ===================================================== -->
+      <section class="reviews-section" id="reviews">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow eyebrow--center">نظر مشتریان</span>
+            <h2>روایت خریدارانی که بازگشته‌اند</h2>
+          </div>
+          <div class="reviews-grid">
+            <article class="review-card reveal">
+              <div class="review-card__stars">★★★★★</div>
+              <p>
+                حس یک بازار حرفه‌ای و آرام را داشت؛ جایی که می‌توانم بدون عجله و
+                با اطمینان انتخاب کنم.
+              </p>
+              <div class="review-card__author">
+                <strong>نگار رستمی</strong>
+                <span>خریدار از تهران</span>
+              </div>
+            </article>
+            <article class="review-card reveal">
+              <div class="review-card__stars">★★★★★</div>
+              <p>
+                فروشندگان معرفی‌شده واقعاً باکیفیت بودند. از تصویر محصول تا
+                پشتیبانی، همه‌چیز منظم و قابل اعتماد بود.
+              </p>
+              <div class="review-card__author">
+                <strong>آرمان زمانی</strong>
+                <span>خریدار از شیراز</span>
+              </div>
+            </article>
+            <article class="review-card reveal">
+              <div class="review-card__stars">★★★★★</div>
+              <p>
+                به‌عنوان فروشنده، دیجی‌پوش به برند من یک قاب حرفه‌ای داد.
+                مشتریان با اعتماد بیشتری سفارش می‌دهند.
+              </p>
+              <div class="review-card__author">
+                <strong>مزون ماه‌رخ</strong>
+                <span>فروشنده منتخب</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         LARGE REGISTRATION CTA (Extra Bold 3.5px sage border)
+         ===================================================== -->
+      <section class="cta-section" id="cta">
+        <div class="container">
+          <div class="cta-box sage-border">
+            <span class="eyebrow eyebrow--center">ساخت حساب</span>
+            <h2>
+              برای ورود به تجربه‌ای دقیق‌تر، حساب خود را در دیجی‌پوش بسازید.
+            </h2>
+            <p>
+              ویترین‌های محبوب را ذخیره کنید، سریع‌تر خرید کنید و زودتر از
+              دیگران به مجموعه‌های جدید دسترسی داشته باشید.
+            </p>
+            <form class="cta-form" id="ctaForm">
+              <input
+                id="ctaEmail"
+                type="email"
+                placeholder="ایمیل خود را برای شروع وارد کنید"
+                aria-label="ایمیل"
+                required
+              />
+              <button class="button button--primary" type="submit">
+                ساخت حساب
+              </button>
+            </form>
+            <div class="cta-tags">
+              <span>دسترسی زودهنگام</span>
+              <span>فروشندگان منتخب</span>
+              <span>پیگیری ساده سفارش</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================
+       FOOTER (Extra Bold 3.5px sage border — subtler)
+       ===================================================== -->
+    <footer class="footer sage-border sage-border--subtle" id="footer">
+      <div class="footer__grid">
+        <div class="footer__story">
+          <div class="footer__logo">
+            <span class="nav-logo__mark">د</span>
+            <span
+              ><strong>دیجی‌پوش</strong
+              ><small>بازارگاه ممتاز فروشندگان مد</small></span
+            >
+          </div>
+          <p>
+            دیجی‌پوش، بازارگاه لوکس مد ایران؛ اتصال خریداران به فروشندگان معتبر
+            پوشاک زنانه، مردانه و بچگانه.
+          </p>
+          <form class="footer-newsletter" id="footerNewsletter">
+            <input
+              type="email"
+              placeholder="برای دریافت خبرهای ویژه، ایمیل خود را وارد کنید"
+              aria-label="عضویت در خبرنامه"
+              required
+            />
+            <button type="submit">عضویت</button>
+          </form>
+        </div>
+        <div class="footer__col">
+          <h3>لینک‌های سریع</h3>
+          <a href="./woman/index.html">لباس زنانه</a>
+          <a href="./man/index.html">لباس مردانه</a>
+          <a href="./kids/index.html">لباس بچگانه</a>
+          <a href="./teen/index.html">تینیجر</a>
+          <a href="#featured-sellers">فروشندگان</a>
+        </div>
+        <div class="footer__col">
+          <h3>پشتیبانی</h3>
+          <a href="#">راهنمای خرید</a>
+          <a href="#">شرایط بازگشت</a>
+          <a href="#">پیگیری سفارش</a>
+          <a href="#">پرسش‌های متداول</a>
+        </div>
+        <div class="footer__col">
+          <h3>ارتباط با ما</h3>
+          <a href="tel:02100000000">۰۲۱ ـ ۰۰۰۰ ۰۰۰۰</a>
+          <a href="mailto:hello@digipoosh.ir">hello@digipoosh.ir</a>
+          <span>تهران، خیابان ولیعصر</span>
+          <div class="footer__socials">
+            <a href="#" class="social-icon" aria-label="اینستاگرام">◐</a>
+            <a href="#" class="social-icon" aria-label="تلگرام">◎</a>
+            <a href="#" class="social-icon" aria-label="پینترست">◌</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© ۱۴۰۵ دیجی‌پوش — تمامی حقوق محفوظ است.</span>
+        <div class="footer__badges">
+          <span>پرداخت امن</span>
+          <span>ضمانت اصالت</span>
+          <span>فروشندگان معتبر</span>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
+      <span class="toast__icon">✦</span>
+      <span class="toast__text" id="toastText">به سبد خرید افزوده شد</span>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

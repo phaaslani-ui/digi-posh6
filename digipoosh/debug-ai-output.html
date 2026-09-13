@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="UTF-8"><title>Debug AI</title></head>
+<body>
+<h1>Debug AI Output</h1>
+<pre id="out">Loading...</pre>
+<script src="./seller/js/dp-config.js"></script>
+<script src="./dp-products.js"></script>
+<script src="./dp-product-loader.js"></script>
+<script src="./dp-ai-nlu.js"></script>
+<script src="./dp-chat-ai.js"></script>
+<script>
+async function run() {
+  // منتظر sync
+  await new Promise(r => setTimeout(r, 2000));
+  
+  const out = document.getElementById('out');
+  let text = '';
+  
+  // پاک کردن localStorage
+  localStorage.removeItem('dp_products');
+  localStorage.removeItem('dp_seed_version');
+  
+  // sync از سرور
+  if (window.DPProductLoader && window.DPProductLoader.syncWithServer) {
+    await window.DPProductLoader.syncWithServer();
+  }
+  
+  const products = window.DPProducts.all();
+  text += `محصولات در DPProducts: ${products.length}\n`;
+  text += `نمونه:\n`;
+  products.slice(0, 3).forEach(p => {
+    text += `  ${p.id}: ${p.name} (${p.price})\n`;
+  });
+  
+  // تست چت
+  text += '\n--- تست چت ---\n';
+  const queries = ['پیراهن قرمز', 'کفش ورزشی', 'ست عروسی'];
+  for (const q of queries) {
+    text += `\n💬 "${q}":\n`;
+    const r = window.DPChatAI.generateResponse(q, {});
+    text += `  text: ${r.text?.substring(0, 60)}\n`;
+    if (r.products) {
+      r.products.slice(0, 2).forEach(p => {
+        text += `  - ${p.id}: ${p.name}\n`;
+      });
+    }
+  }
+  
+  out.textContent = text;
+}
+run();
+</script>
+</body>
+</html>

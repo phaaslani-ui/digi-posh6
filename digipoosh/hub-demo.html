@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🏛️ Hub Demo | دیجی‌پوش</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background: #fafafa;
+      color: #1a1a1a;
+      padding: 24px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    h1 { color: #d4af37; margin-bottom: 8px; font-size: 28px; }
+    .subtitle { color: #666; margin-bottom: 24px; }
+    .box {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .box.highlight { border-color: #d4af37; background: #fffbeb; }
+    .box.dark { background: #1a1a1a; color: #fff; }
+    .box-title { font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    input, button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    input {
+      border: 1px solid #ddd;
+      margin: 4px;
+    }
+    input:focus { outline: 2px solid #d4af37; outline-offset: -1px; }
+    button {
+      background: #d4af37;
+      color: #1a1a1a;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      margin: 4px;
+    }
+    button:hover { background: #b8941f; }
+    button.danger { background: #dc2626; color: #fff; }
+    button.ghost { background: transparent; color: #d4af37; border: 1px solid #d4af37; }
+    .stat {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin: 8px 0;
+    }
+    .stat div {
+      background: #f5f5f5;
+      padding: 16px 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat strong {
+      display: block;
+      color: #d4af37;
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+    .stat span { color: #666; font-size: 11px; }
+    .stat.ok strong { color: #22c55e; }
+    .stat.warn strong { color: #eab308; }
+    .stat.err strong { color: #ef4444; }
+    .log {
+      background: #000;
+      color: #0f0;
+      padding: 14px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-top: 8px;
+    }
+    .log .time { color: #888; }
+    .log .ok { color: #22c55e; }
+    .log .warn { color: #eab308; }
+    .log .err { color: #ef4444; }
+    .log .info { color: #60a5fa; }
+    pre {
+      background: #000;
+      color: #0f0;
+      padding: 14px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 300px;
+      overflow: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏛️ DP Products Hub v18.0</h1>
+    <p class="subtitle">معماری جدید: منبع حقیقت واحد، Real-time، Zero Hardcode</p>
+
+    <!-- ۱) وضعیت Hub -->
+    <div class="box">
+      <div class="box-title">📊 وضعیت Hub</div>
+      <div id="stats"></div>
+    </div>
+
+    <!-- ۲) افزودن محصول تست -->
+    <div class="box highlight">
+      <div class="box-title">➕ افزودن محصول (Real-time)</div>
+      <p style="margin-bottom:12px;font-size:13px;color:#666">
+        محصول اضافه کن. feed زیر <strong>فوری</strong> re-render میشه.
+      </p>
+      <input type="text" id="pName" placeholder="نام محصول" value="محصول تست Hub" />
+      <input type="number" id="pPrice" placeholder="قیمت" value="750000" />
+      <select id="pCat" style="padding:10px 16px;border-radius:8px;border:1px solid #ddd;margin:4px">
+        <option value="پیراهن">پیراهن</option>
+        <option value="کت">کت</option>
+        <option value="شلوار">شلوار</option>
+        <option value="کفش">کفش</option>
+        <option value="کیف">کیف</option>
+        <option value="اکسسوری">اکسسوری</option>
+      </select>
+      <br/>
+      <button onclick="addProduct()">➕ افزودن + sync</button>
+      <button class="ghost" onclick="addHardcode()">🚨 تست فیلتر (محصول الکی)</button>
+      <button class="danger" onclick="deleteLast()">🗑️ حذف آخرین</button>
+      <button class="danger" onclick="clearAll()">🗑️ پاک کامل</button>
+      <div id="log" class="log">لاگ رویدادها...</div>
+    </div>
+
+    <!-- ۳) Feed زنده -->
+    <div class="box">
+      <div class="box-title">🛍️ Feed زنده (Real-time)</div>
+      <div data-products-feed></div>
+    </div>
+
+    <!-- ۴) لیست محصولات -->
+    <div class="box">
+      <div class="box-title">📋 لیست محصولات در Hub</div>
+      <pre id="productList">در حال بارگذاری...</pre>
+    </div>
+
+    <!-- ۵) تست‌های خودکار -->
+    <div class="box dark">
+      <div class="box-title" style="color:#d4af37">🧪 تست‌های خودکار</div>
+      <button onclick="runTests()" style="background:#22c55e;color:#fff">▶ اجرای تست‌ها</button>
+      <div id="testResults" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- لود فایل‌ها به ترتیب صحیح -->
+  <script src="./dp-products-hub.js"></script>
+  <script src="./dp-products-feed-v2.js"></script>
+
+  <script>
+    function log(msg, type = 'ok') {
+      const logEl = document.getElementById('log');
+      const time = new Date().toLocaleTimeString('fa-IR');
+      const first = logEl.innerHTML.trim() === 'لاگ رویدادها...';
+      logEl.innerHTML = (first ? '' : logEl.innerHTML) + 
+        `<span class="time">[${time}]</span> <span class="${type}">${msg}</span><br>`;
+      // اسکرول به بالا
+      logEl.scrollTop = 0;
+    }
+
+    async function addProduct() {
+      const name = document.getElementById('pName').value.trim() || 'محصول تست';
+      const price = parseInt(document.getElementById('pPrice').value) || 500000;
+      const category = document.getElementById('pCat').value;
+
+      log('➕ افزودن محصول: ' + name, 'info');
+      
+      const newProduct = {
+        id: 'sp_' + Date.now().toString(36),
+        name: name,
+        price: price,
+        brand: 'تست Hub',
+        seller: 'Hub Demo',
+        sellerId: 'hub_demo',
+        category: category,
+        subcategory: category,
+        section: 'woman',
+        color: 'قرمز',
+        colors: ['قرمز', 'مشکی'],
+        sizes: ['M', 'L'],
+        image: 'https://images.pexels.com/photos/36168977/pexels-photo-36168977.jpeg?auto=compress&w=400',
+        stock: 5,
+        sold: 0,
+        rating: 4.5,
+        reviews: 0,
+        status: 'active',
+        approved: true,
+        createdAt: Date.now()
+      };
+
+      const success = await window.DPProductsHub.add(newProduct);
+      if (success) {
+        log('✅ محصول اضافه شد و به سرور sync شد', 'ok');
+      } else {
+        log('⚠️ محصول اضافه شد ولی سرور fail بود (local ذخیره شد)', 'warn');
+      }
+      
+      updateStats();
+    }
+
+    async function addHardcode() {
+      log('🚨 تست: محصول الکی p1 اضافه می‌کنم...', 'warn');
+      const result = await window.DPProductsHub.add({
+        id: 'p1',  // ❌ این ID باید فیلتر بشه
+        name: 'پیراهن قرمز مجلسی',  // ❌ این نام هم فیلتر میشه
+        price: 999999,
+        category: 'پیراهن'
+      });
+      log('نتیجه: ' + (result ? 'اضافه شد (نبود!)' : 'رد شد (درست!)'), result ? 'err' : 'ok');
+      updateStats();
+    }
+
+    async function deleteLast() {
+      const products = window.DPProductsHub.all();
+      if (products.length === 0) {
+        log('محصولی برای حذف نیست', 'warn');
+        return;
+      }
+      const last = products[products.length - 1];
+      log('🗑️ حذف: ' + last.name, 'info');
+      await window.DPProductsHub.remove(last.id);
+      log('✅ حذف شد', 'ok');
+      updateStats();
+    }
+
+    async function clearAll() {
+      if (!confirm('همه محصولات پاک بشن؟')) return;
+      
+      const products = window.DPProductsHub.all();
+      for (const p of [...products]) {
+        await window.DPProductsHub.remove(p.id);
+      }
+      log('🧹 همه محصولات پاک شدند', 'warn');
+      updateStats();
+    }
+
+    async function updateStats() {
+      const products = window.DPProductsHub.all();
+      const stats = window.DPProductsHub.stats();
+      
+      document.getElementById('stats').innerHTML = `
+        <div class="stat">
+          <div class="${stats.total === stats.unique ? 'ok' : 'warn'}">
+            <strong>${stats.total}</strong>
+            <span>کل محصولات</span>
+          </div>
+          <div class="ok">
+            <strong>${stats.unique}</strong>
+            <span>یونیک</span>
+          </div>
+          <div class="${stats.duplicates > 0 ? 'err' : 'ok'}">
+            <strong>${stats.duplicates}</strong>
+            <span>تکراری</span>
+          </div>
+          <div class="${stats.isValidVersion ? 'ok' : 'err'}">
+            <strong>${stats.isValidVersion ? '✓' : '✗'}</strong>
+            <span>نسخه Hub</span>
+          </div>
+          <div>
+            <strong>${new Date(stats.lastSync).toLocaleTimeString('fa-IR') || '?'}</strong>
+            <span>آخرین sync</span>
+          </div>
+        </div>
+      `;
+
+      // لیست محصولات
+      let listText = '';
+      products.slice(0, 10).forEach((p, i) => {
+        listText += `${i+1}. ${p.id} | ${p.name} | ${p.price} تومان | ${p.category}\n`;
+      });
+      if (products.length > 10) listText += `... و ${products.length - 10} محصول دیگر`;
+      if (products.length === 0) listText = 'محصولی نیست';
+      document.getElementById('productList').textContent = listText;
+    }
+
+    async function runTests() {
+      const out = document.getElementById('testResults');
+      out.innerHTML = '<div style="color:#d4af37">⏳ در حال اجرا...</div>';
+      
+      const results = [];
+      
+      // تست ۱: Hub موجود است
+      results.push({
+        name: '✅ Hub بارگذاری شد',
+        pass: !!window.DPProductsHub,
+        detail: window.DPProductsHub ? 'window.DPProductsHub موجود است' : 'NOT FOUND'
+      });
+
+      // تست ۲: محصولات لود شدن
+      const products = window.DPProductsHub ? window.DPProductsHub.all() : [];
+      results.push({
+        name: '✅ محصولات لود شدن',
+        pass: products.length > 0,
+        detail: `${products.length} محصول در Hub`
+      });
+
+      // تست ۳: هیچ محصول الکی نیست
+      const fakeIds = products.filter(p => /^(p|sample|demo|test)/i.test(String(p.id)) && !String(p.id).startsWith('sp'));
+      results.push({
+        name: '✅ هیچ محصول الکی نیست',
+        pass: fakeIds.length === 0,
+        detail: fakeIds.length === 0 ? 'همه محصولات معتبر هستند' : `${fakeIds.length} محصول الکی پیدا شد!`
+      });
+
+      // تست ۴: هیچ تکراری نیست
+      const ids = products.map(p => p.id);
+      const unique = new Set(ids);
+      results.push({
+        name: '✅ هیچ تکراری نیست',
+        pass: ids.length === unique.size,
+        detail: `${unique.size} یونیک از ${ids.length}`
+      });
+
+      // تست ۵: سرور فعال
+      try {
+        const res = await fetch('http://localhost:8001/api/products', { cache: 'no-store' });
+        const serverProducts = await res.json();
+        results.push({
+          name: '✅ سرور فعال',
+          pass: res.ok && serverProducts.length > 0,
+          detail: `${serverProducts.length} محصول در سرور`
+        });
+      } catch (e) {
+        results.push({
+          name: '❌ سرور',
+          pass: false,
+          detail: e.message
+        });
+      }
+
+      // تست ۶: افزودن محصول
+      try {
+        const testProduct = {
+          id: 'test_' + Date.now().toString(36),
+          name: 'محصول تست',
+          price: 100000,
+          category: 'پیراهن'
+        };
+        const before = products.length;
+        await window.DPProductsHub.add(testProduct);
+        const after = window.DPProductsHub.all().length;
+        results.push({
+          name: '✅ افزودن محصول',
+          pass: after === before + 1,
+          detail: `${before} → ${after}`
+        });
+        // پاک کردن تست
+        await window.DPProductsHub.remove(testProduct.id);
+      } catch (e) {
+        results.push({
+          name: '❌ افزودن',
+          pass: false,
+          detail: e.message
+        });
+      }
+
+      // نمایش نتایج
+      let html = '';
+      results.forEach(r => {
+        html += `<div style="padding:8px 12px;margin:4px 0;border-radius:6px;background:${r.pass ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)'};border-left:3px solid ${r.pass ? '#22c55e' : '#ef4444'}">
+          <strong style="color:${r.pass ? '#22c55e' : '#ef4444'}">${r.pass ? '✓' : '✗'}</strong> ${r.name}
+          <div style="font-size:11px;color:#aaa;margin-top:2px">${r.detail}</div>
+        </div>`;
+      });
+      out.innerHTML = html;
+    }
+
+    // بارگذاری اولیه
+    setTimeout(updateStats, 1000);
+    setInterval(updateStats, 5000);
+
+    // listener برای تغییرات
+    if (window.DPProductsHub) {
+      window.DPProductsHub.onChange((data) => {
+        log('🔔 Hub تغییر: ' + data.type + ' - ' + (data.product?.name || data.id || ''), 'info');
+        setTimeout(updateStats, 100);
+      });
+    }
+
+    // listener برای CustomEvent
+    window.addEventListener('dp-hub:changed', (e) => {
+      log('📡 Event: ' + e.detail.type, 'info');
+    });
+  </script>
+</body>
+</html>

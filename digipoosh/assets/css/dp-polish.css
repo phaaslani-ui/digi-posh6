@@ -1,0 +1,219 @@
+/* ============================================================
+   دیجی‌پوش — لایه‌ی صیقل
+   ------------------------------------------------------------
+   جزئیات کوچکی که حس کار کردن با سایت را بهتر می‌کنند.
+   ============================================================ */
+
+:root {
+  --dpp-gold: #c9a84c;
+  --dpp-bronze: #b8943c;
+  --dpp-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   ۱. موج لمس روی دکمه‌ها
+   ============================================================ */
+.dp-ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: currentColor;
+  opacity: 0.22;
+  transform: scale(0);
+  animation: dpRipple 0.5s var(--dpp-ease) forwards;
+}
+
+@keyframes dpRipple {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* ============================================================
+   ۲. دکمه‌ی بازگشت به بالا
+   ============================================================ */
+.dp-up {
+  position: fixed;
+  bottom: 22px;
+  inset-inline-start: 22px;
+  z-index: 900;
+
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 14px;
+  color: #14100a;
+  cursor: pointer;
+  background: linear-gradient(135deg, #d4b85a, var(--dpp-bronze));
+  box-shadow: 0 12px 28px -14px rgba(201, 168, 76, 0.85);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity 0.3s var(--dpp-ease),
+              transform 0.3s var(--dpp-ease),
+              visibility 0.3s;
+}
+
+.dp-up.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.dp-up:hover { transform: translateY(-3px); }
+.dp-up:active { transform: translateY(0) scale(0.94); }
+.dp-up svg { width: 22px; height: 22px; }
+.dp-up:focus-visible { outline: 2px solid var(--dpp-gold); outline-offset: 3px; }
+
+/* روی صفحه‌ی کوچک کمی جمع‌تر */
+@media (max-width: 560px) {
+  .dp-up { width: 42px; height: 42px; bottom: 16px; inset-inline-start: 16px; }
+}
+
+/* ============================================================
+   ۳. تصویر شکسته
+   ------------------------------------------------------------
+   به‌جای آیکون شکسته‌ی مرورگر، یک بافت طلایی ملایم.
+   ============================================================ */
+.dp-img-fail {
+  background:
+    linear-gradient(135deg,
+      rgba(201, 168, 76, 0.14),
+      rgba(192, 192, 192, 0.1));
+  position: relative;
+  min-height: 60px;
+}
+
+.dp-img-fail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg,
+      transparent, transparent 9px,
+      rgba(201, 168, 76, 0.07) 9px,
+      rgba(201, 168, 76, 0.07) 18px);
+}
+
+/* ============================================================
+   ۴. نوار «اینترنت قطع است»
+   ============================================================ */
+.dp-net {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 12px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.8;
+  text-align: center;
+
+  color: #faf8f5;
+  background: linear-gradient(135deg, #b06a6a, #8f5555);
+  box-shadow: 0 -8px 26px -12px rgba(0, 0, 0, 0.4);
+
+  transform: translateY(100%);
+  transition: transform 0.34s var(--dpp-ease);
+}
+
+.dp-net.is-on { transform: none; }
+.dp-net svg { width: 19px; height: 19px; flex: none; }
+
+/* ============================================================
+   ۵. بهبود دسترسی — حلقه‌ی فوکوس یکدست
+   ------------------------------------------------------------
+   کاربری که با صفحه‌کلید کار می‌کند باید همیشه بداند کجاست.
+   ============================================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--dpp-gold);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* لنگرهایی که با پیمایش نرم تمرکز می‌گیرند نباید کادر بگیرند */
+section:focus,
+div:focus,
+[id]:focus:not(:focus-visible) { outline: none; }
+
+/* ============================================================
+   ۶. پرش به محتوا — برای صفحه‌خوان و صفحه‌کلید
+   ============================================================ */
+.dp-skip {
+  position: fixed;
+  top: -60px;
+  inset-inline-start: 16px;
+  z-index: 2000;
+  padding: 11px 20px;
+  border-radius: 0 0 12px 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #14100a;
+  background: linear-gradient(135deg, #d4b85a, var(--dpp-bronze));
+  transition: top 0.24s var(--dpp-ease);
+}
+
+.dp-skip:focus { top: 0; }
+
+/* ============================================================
+   ۷. انتخاب متن با رنگ برند
+   ============================================================ */
+::selection {
+  background: rgba(201, 168, 76, 0.28);
+  color: inherit;
+}
+
+/* ============================================================
+   ۸. نوار پیمایش باریک و هم‌رنگ
+   ============================================================ */
+@media (min-width: 900px) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201, 168, 76, 0.4) transparent;
+  }
+
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+
+  *::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    background-color: rgba(201, 168, 76, 0.34);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(201, 168, 76, 0.55);
+  }
+}
+
+/* ============================================================
+   ۹. اعداد جدولی — ستون‌های عددی نلرزند
+   ============================================================ */
+.num,
+.stat-number,
+.dcd-price,
+.dpp-price,
+.sp-clock,
+table td {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-ripple { display: none; }
+  .dp-up, .dp-net { transition-duration: 0.001ms !important; }
+}

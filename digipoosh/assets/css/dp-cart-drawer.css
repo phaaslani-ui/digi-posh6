@@ -1,0 +1,386 @@
+/* ============================================================
+   دیجی‌پوش — کشوی سبد خرید
+   ============================================================ */
+
+:root {
+  --dcd-gold: #c9a84c;
+  --dcd-bronze: #b8943c;
+  --dcd-bg: #faf8f5;
+  --dcd-bg2: #f5f0e8;
+  --dcd-ink: #1a1a1a;
+  --dcd-gray: #8a7e72;
+  --dcd-line: rgba(201, 168, 76, 0.22);
+  --dcd-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-dp-page="man"], [data-dp-page="teen"] {
+  --dcd-bg: #141414;
+  --dcd-bg2: #0e0e0e;
+  --dcd-ink: #f0f0f0;
+  --dcd-gray: #9a9088;
+  --dcd-line: rgba(201, 168, 76, 0.3);
+}
+
+/* قفل پیمایش هنگام باز بودن — روی html، نه body.
+   اگر روی body باشد، خودِ همین کشو (که position: fixed است)
+   جایگاهش را از دست می‌دهد و ته صفحه می‌افتد. */
+html:has(body.dcd-lock) { overflow: hidden; }
+body.dcd-lock { overflow: hidden; }
+
+/* ---------- پرده ---------- */
+.dcd-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transition: opacity 0.3s var(--dcd-ease), visibility 0.3s;
+}
+
+.dcd-veil.is-on { opacity: 1; visibility: visible; }
+
+/* ---------- خود کشو ---------- */
+.dcd-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: auto;
+  z-index: 1201;
+  width: min(410px, 92vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--dcd-bg);
+  border-inline-start: 1px solid var(--dcd-line);
+  box-shadow: -30px 0 70px -34px rgba(0, 0, 0, 0.5);
+  transform: translateX(102%);
+  visibility: hidden;
+  transition: transform 0.36s var(--dcd-ease), visibility 0.36s;
+}
+
+.dcd-panel.is-on { transform: none; visibility: visible; }
+
+/* محافظ — کشوی سبد همیشه روی پنجره ثابت بماند */
+body > .dcd-panel,
+.dcd-panel { position: fixed !important; z-index: 1201 !important; }
+body > .dcd-veil,
+.dcd-veil { position: fixed !important; z-index: 1200 !important; }
+
+/* ---------- سربرگ ---------- */
+.dcd-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--dcd-line);
+  background: var(--dcd-bg2);
+}
+
+.dcd-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--dcd-ink);
+}
+
+.dcd-title strong { font-size: 16px; font-weight: 800; }
+
+.dcd-n {
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--dcd-bronze);
+  background: rgba(201, 168, 76, 0.15);
+}
+
+.dcd-n[hidden] { display: none; }
+
+.dcd-i { width: 20px; height: 20px; flex: none; }
+.dcd-i-lg { width: 23px; height: 23px; color: var(--dcd-bronze); }
+.dcd-big { width: 52px; height: 52px; opacity: 0.35; color: var(--dcd-bronze); }
+
+.dcd-x {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--dcd-line);
+  border-radius: 12px;
+  background: none;
+  color: var(--dcd-gray);
+  cursor: pointer;
+  transition: background 0.22s var(--dcd-ease), color 0.22s, transform 0.28s var(--dcd-ease);
+}
+
+.dcd-x:hover { background: rgba(201, 168, 76, 0.14); color: var(--dcd-ink); transform: rotate(90deg); }
+.dcd-x:focus-visible { outline: 2px solid var(--dcd-gold); outline-offset: 2px; }
+
+/* ---------- بدنه ---------- */
+.dcd-body {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- گروه فروشنده ---------- */
+.dcd-group {
+  margin-bottom: 14px;
+  border-radius: 16px;
+  background: var(--dcd-bg2);
+  border: 1px solid var(--dcd-line);
+  overflow: hidden;
+}
+
+.dcd-seller {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 13px;
+  border-bottom: 1px solid var(--dcd-line);
+}
+
+.dcd-seller strong {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--dcd-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dcd-seller em {
+  flex: none;
+  font-size: 12.5px;
+  font-style: normal;
+  font-weight: 800;
+  color: var(--dcd-bronze);
+  white-space: nowrap;
+}
+
+.dcd-slogo {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 800;
+  color: #faf8f5;
+  background: linear-gradient(135deg, var(--dcd-gold), var(--dcd-bronze));
+}
+
+.dcd-slogo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- ردیف کالا ---------- */
+.dcd-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 13px;
+  border-bottom: 1px dashed var(--dcd-line);
+}
+
+.dcd-row:last-child { border-bottom: 0; }
+
+.dcd-thumb {
+  width: 58px;
+  height: 66px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+  color: var(--dcd-bronze);
+  background: rgba(201, 168, 76, 0.12);
+}
+
+.dcd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.dcd-txt { flex: 1; min-width: 0; }
+
+.dcd-txt strong {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.65;
+  color: var(--dcd-ink);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.dcd-txt small {
+  display: block;
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--dcd-gray);
+}
+
+.dcd-price {
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--dcd-bronze);
+}
+
+.dcd-price s {
+  margin-inline-start: 5px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--dcd-gray);
+}
+
+.dcd-off {
+  display: inline-block;
+  margin-inline-start: 5px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 800;
+  color: #faf8f5;
+  background: #d05a5a;
+}
+
+/* ---------- تعداد ---------- */
+.dcd-qty {
+  flex: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 2px;
+}
+
+.dcd-qty b {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--dcd-ink);
+}
+
+.dcd-q {
+  width: 28px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--dcd-line);
+  border-radius: 9px;
+  background: var(--dcd-bg);
+  color: var(--dcd-ink);
+  cursor: pointer;
+  transition: background 0.2s var(--dcd-ease), color 0.2s, transform 0.2s var(--dcd-ease);
+}
+
+.dcd-q svg { width: 15px; height: 15px; }
+.dcd-q:hover { background: rgba(201, 168, 76, 0.18); }
+.dcd-q:active { transform: scale(0.9); }
+.dcd-q:focus-visible { outline: 2px solid var(--dcd-gold); outline-offset: 2px; }
+
+.dcd-del { margin-top: 4px; color: #ae5757; border-color: rgba(192, 96, 96, 0.3); }
+.dcd-del:hover { background: rgba(192, 96, 96, 0.14); }
+
+/* ---------- سبد خالی ---------- */
+.dcd-empty {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.dcd-empty strong { font-size: 15px; color: var(--dcd-ink); }
+.dcd-empty span { font-size: 13px; color: var(--dcd-gray); }
+.dcd-empty .dcd-cta { margin-top: 12px; }
+
+/* ---------- پاورقی ---------- */
+.dcd-foot {
+  flex: none;
+  padding: 16px 18px calc(16px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--dcd-line);
+  background: var(--dcd-bg2);
+}
+
+.dcd-foot[hidden] { display: none; }
+
+.dcd-sum {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.dcd-sum span { font-size: 13px; color: var(--dcd-gray); }
+.dcd-sum b { font-size: 16px; font-weight: 800; color: var(--dcd-ink); }
+
+.dcd-note {
+  margin: -6px 0 12px;
+  font-size: 11.5px;
+  line-height: 1.8;
+  color: var(--dcd-gray);
+}
+
+.dcd-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #faf8f5;
+  background: linear-gradient(135deg, var(--dcd-gold), var(--dcd-bronze));
+  box-shadow: 0 14px 28px -16px rgba(184, 148, 60, 0.9);
+  transition: transform 0.26s var(--dcd-ease), box-shadow 0.26s var(--dcd-ease);
+}
+
+.dcd-cta:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -16px rgba(184, 148, 60, 0.95); }
+.dcd-cta:active { transform: translateY(0); }
+.dcd-cta svg { width: 18px; height: 18px; }
+
+.dcd-ghost {
+  color: var(--dcd-bronze);
+  background: none;
+  border: 1px solid var(--dcd-line);
+  box-shadow: none;
+}
+
+.dcd-ghost:hover { background: rgba(201, 168, 76, 0.12); box-shadow: none; }
+
+@media (max-width: 480px) {
+  .dcd-panel { width: 100vw; }
+  .dcd-thumb { width: 52px; height: 60px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dcd-panel, .dcd-veil, .dcd-x, .dcd-q, .dcd-cta { transition-duration: 0.001ms !important; }
+}
+
+/* ---------- تخفیف کد در کشوی سبد ---------- */
+.dcd-off b { color: #2f7033; }
+
+.dcd-pay {
+  padding-top: 8px;
+  margin-top: 4px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.32);
+}
+
+.dcd-pay b { color: #8a6d1f; font-size: 15px; }

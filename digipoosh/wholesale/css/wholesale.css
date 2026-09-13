@@ -1,0 +1,2117 @@
+/* ============================================================
+   دیجی‌پوش — بازار عمده‌فروشان
+   ------------------------------------------------------------
+   لحن این بخش با بقیه‌ی سایت فرق دارد: اینجا خریدار حرفه‌ای
+   است، نه کسی که برای دل خودش می‌گردد. پس:
+
+     • زمینه‌ی تیره — چشم در کار طولانی خسته نشود
+     • چگالی بالا — اطلاعات بیشتر در فضای کمتر
+     • بدون تزئین اضافه — هر پیکسل باید کاری بکند
+
+   ------------------------------------------------------------
+   چرا این تم؟
+
+   بازار عمده نسخه‌ی شب‌رنگِ همان برند است: سرمه‌ای و طلایی،
+   دقیقاً مثل سایت اصلی و پنل فروشنده — ولی تیره، چون خریدار
+   عمده دقیقه‌ها اینجا می‌گردد و مقایسه می‌کند.
+
+   مشکی مطلق کنار گذاشته شد: رنگ ندارد و طلا رویش سرد می‌افتد.
+   سرمه‌ای عمق دارد و طلا رویش گرم و گران می‌نشیند.
+   ============================================================ */
+
+:root {
+  /* ---------- سه‌تایی‌های RGB — پایه‌ی تعویض تم روشن/تیره ---------- */
+  --w-s1: 11, 18, 32;      /* عمیق‌ترین سطح */
+  --w-s2: 20, 32, 58;      /* سطح میانی */
+  --w-s3: 30, 45, 77;      /* سطح بالاتر */
+  --w-g:  201, 168, 76;    /* طلا */
+  --w-sv: 192, 192, 192;   /* نقره */
+  --w-sh: 0, 0, 0;         /* سایه */
+
+  /* ---------- طلای برند — همان طلای سایت اصلی ---------- */
+  --w-gold: #c9a84c;
+  --w-gold-l: #d4b85a;
+  --w-bronze: #b8943c;
+
+  /* ---------- نقره ---------- */
+  --w-silver: #c0c0c0;
+  --w-silver-l: #d8d8d8;
+  --w-bg: #0b1220;        /* عمیق‌ترین لایه */
+  --w-navy: #14203a;      /* سرمه‌ای برند */
+  --w-blue: #1e2d4d;      /* لایه‌ی بالاتر */
+
+  /* ---------- متن ---------- */
+  --w-ink: #f2eee6;       /* سفید گرم — با طلا هم‌خانواده */
+  --w-gray: #9aa6bb;
+  --w-dim: #8b98b0;      /* ۴٫۶۹:۱ روی کارت سرمه‌ای */
+
+  /* ---------- وضعیت ---------- */
+  --w-in: #4caf50;
+  --w-low: #e8b552;
+  --w-out: #e57373;
+
+  /* طلای نوشتاری — روی زمینه‌ی روشن تیره‌تر می‌شود تا خوانا بماند */
+  --w-gold-t: #d4b85a;
+  /* رنگ نوشته‌ی روی دکمه‌ی طلایی — در هر دو تم تیره می‌ماند */
+  --w-on-gold: #0b1220;
+
+  --w-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --w-wrap: min(1440px, 94vw);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+html:has(body.w-lock) { overflow: hidden; }
+
+body {
+  margin: 0;
+  font-family: Vazirmatn, system-ui, sans-serif;
+  color: var(--w-ink);
+  /* سه لایه نور: طلا از بالا-راست، سرمه‌ای روشن از پایین-چپ،
+     و یک هاله‌ی سرمه‌ای در میانه که عمق می‌سازد. */
+  background:
+    radial-gradient(ellipse 60% 45% at 88% 0%, rgba(var(--w-g), 0.13), transparent 58%),
+    radial-gradient(ellipse 55% 50% at 4% 92%, rgba(var(--w-s3), 0.55), transparent 60%),
+    radial-gradient(ellipse 90% 60% at 50% 45%, rgba(var(--w-s2), 0.5), transparent 70%),
+    var(--w-bg);
+  background-attachment: fixed;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { width: var(--w-wrap); margin-inline: auto; }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+button, input, select, textarea { font: inherit; }
+
+/* پیمایش طلایی */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--w-navy); }
+::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: linear-gradient(var(--w-gold), var(--w-bronze));
+}
+
+/* ============================================================
+   حاشیه‌ی متحرک طلا-نقره
+   ============================================================ */
+@keyframes wFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.gs-border {
+  position: relative;
+  isolation: isolate;
+  background: rgba(var(--w-s2), 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 14px;
+}
+
+.gs-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(90deg,
+    var(--w-gold), var(--w-gold-l), var(--w-silver), var(--w-silver-l), var(--w-gold));
+  background-size: 300% 100%;
+  animation: wFlow 4s ease-in-out infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-border::before { animation: none; }
+}
+
+/* ============================================================
+   ۱. نوار بالا
+   ============================================================ */
+.w-head {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  padding: 12px 0;
+  background: rgba(var(--w-s1), 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(var(--w-g), 0.18);
+}
+
+.w-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 11px 18px;
+}
+
+.w-logo { display: flex; align-items: center; gap: 10px; flex: none; }
+
+.w-mark {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--w-on-gold);
+  background: linear-gradient(135deg, var(--w-gold-l), var(--w-bronze));
+}
+
+.w-logo-txt { display: flex; flex-direction: column; line-height: 1.3; }
+.w-logo-txt strong { font-size: 15px; color: var(--w-gold-t); }
+.w-logo-txt small { font-size: 10px; color: var(--w-gray); }
+
+.w-nav {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.w-nav a {
+  display: block;
+  padding: 7px 13px;
+  border-radius: 9px;
+  font-size: 13.5px;
+  color: var(--w-ink);
+  transition: background 0.22s var(--w-ease), color 0.22s var(--w-ease);
+}
+
+.w-nav a:hover, .w-nav a.on {
+  color: var(--w-gold-t);
+  background: rgba(var(--w-g), 0.1);
+}
+
+/* جست‌وجوی بالا */
+.w-search {
+  flex: 1;
+  min-width: 0;
+  max-width: 420px;
+  position: relative;
+  margin-inline: auto;
+}
+
+.w-search input {
+  width: 100%;
+  padding: 10px 40px 10px 14px;
+  border-radius: 10px;
+  color: var(--w-ink);
+  background: rgba(var(--w-s3), 0.6);
+  border: 1px solid rgba(var(--w-g), 0.2);
+  font-size: 13.5px;
+  transition: border-color 0.22s var(--w-ease);
+}
+
+.w-search input::placeholder { color: var(--w-dim); }
+.w-search input:focus { outline: none; border-color: var(--w-gold); }
+
+.w-search svg {
+  position: absolute;
+  inset-inline-end: 13px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 17px;
+  height: 17px;
+  color: var(--w-gray);
+  pointer-events: none;
+}
+
+.w-acts { display: flex; align-items: center; gap: 8px; flex: none; }
+
+.w-icon-btn {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--w-ink);
+  background: rgba(var(--w-s3), 0.6);
+  border: 1px solid rgba(var(--w-g), 0.18);
+  cursor: pointer;
+  transition: border-color 0.22s var(--w-ease), color 0.22s var(--w-ease);
+}
+
+.w-icon-btn:hover { color: var(--w-gold-t); border-color: var(--w-gold); }
+.w-icon-btn svg { width: 18px; height: 18px; }
+
+.w-badge {
+  position: absolute;
+  top: -5px;
+  inset-inline-end: -5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 800;
+  font-style: normal;
+  color: var(--w-on-gold);
+  background: var(--w-gold);
+}
+
+.w-burger { display: none; }
+
+/* ============================================================
+   ۲. سربرگ
+   ============================================================ */
+.w-hero { padding: 34px 0 26px; }
+
+.w-hero-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 26px;
+  align-items: center;
+  padding: 30px 32px;
+}
+
+.w-hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(24px, 3.4vw, 38px);
+  font-weight: 800;
+  line-height: 1.35;
+  background-image: linear-gradient(120deg, var(--w-gold-l), var(--w-silver-l) 55%, var(--w-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.w-hero p {
+  margin: 0 0 20px;
+  font-size: 14.5px;
+  color: var(--w-gray);
+  max-width: 54ch;
+}
+
+.w-cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.w-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 11px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: translate 0.24s var(--w-ease), box-shadow 0.24s var(--w-ease);
+}
+
+.w-btn svg { width: 17px; height: 17px; }
+
+.w-btn-gold {
+  color: var(--w-on-gold);
+  background: linear-gradient(135deg, var(--w-gold-l), var(--w-bronze));
+  box-shadow: 0 12px 26px -14px rgba(var(--w-g), 0.9);
+}
+
+.w-btn-silver {
+  color: var(--w-silver-l);
+  background: transparent;
+  border: 1px solid rgba(var(--w-sv), 0.36);
+}
+
+.w-btn:hover { translate: 0 -2px; }
+.w-btn-silver:hover { background: rgba(var(--w-sv), 0.08); }
+
+/* آمار */
+.w-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(112px, 1fr));
+  gap: 11px;
+  flex: none;
+}
+
+.w-stat {
+  position: relative;
+  overflow: hidden;
+  padding: 15px 16px;
+  border-radius: 12px;
+  text-align: center;
+  background: linear-gradient(160deg,
+    rgba(var(--w-s3), 0.72), rgba(var(--w-s2), 0.55));
+  border: 1px solid rgba(var(--w-g), 0.2);
+  transition: border-color 0.26s var(--w-ease),
+              translate 0.26s var(--w-ease);
+}
+
+/* نوار طلایی باریک بالای هر شاخص */
+.w-stat::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--w-gold), transparent);
+  opacity: 0.7;
+}
+
+.w-stat:hover {
+  translate: 0 -2px;
+  border-color: rgba(var(--w-g), 0.42);
+}
+
+.w-stat-i {
+  display: grid;
+  place-items: center;
+  margin: 0 auto 6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  color: var(--w-gold-t);
+  background: rgba(var(--w-g), 0.12);
+  border: 1px solid rgba(var(--w-g), 0.2);
+}
+
+.w-stat-i svg { width: 16px; height: 16px; }
+
+.w-stat b {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--w-gold-t);
+  line-height: 1.25;
+}
+
+.w-stat span { font-size: 11.5px; color: var(--w-gray); }
+
+/* ============================================================
+   ۳. فیلترها
+   ============================================================ */
+.w-filters { padding: 6px 0 18px; }
+
+.w-fbar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(var(--w-s2), 0.55);
+  border: 1px solid rgba(var(--w-g), 0.12);
+}
+
+.w-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+
+.w-field label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--w-gray);
+}
+
+.w-input {
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 9px;
+  color: var(--w-ink);
+  background: rgba(var(--w-s1), 0.6);
+  border: 1px solid rgba(var(--w-g), 0.2);
+  font-size: 13px;
+  transition: border-color 0.2s var(--w-ease);
+}
+
+.w-input:focus { outline: none; border-color: var(--w-gold); }
+.w-input::placeholder { color: var(--w-dim); }
+
+select.w-input { cursor: pointer; }
+select.w-input option { background: var(--w-navy); color: var(--w-ink); }
+
+/* بازه‌ی قیمت */
+.w-range { display: flex; align-items: center; gap: 6px; }
+.w-range .w-input { padding: 9px 8px; text-align: center; }
+.w-range span { color: var(--w-dim); font-size: 12px; }
+
+.w-fbtns { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+
+/* دکمه‌ی ذخیره‌ی فیلتر — آیکون و نوشته کنار هم */
+#fSave { display: inline-flex; align-items: center; gap: 6px; }
+#fSave svg { width: 14px; height: 14px; flex: none; }
+
+.w-chip-btn {
+  padding: 9px 14px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--w-silver);
+  background: transparent;
+  border: 1px solid rgba(var(--w-sv), 0.28);
+  transition: background 0.2s var(--w-ease), color 0.2s var(--w-ease);
+  white-space: nowrap;
+}
+
+.w-chip-btn:hover { color: var(--w-gold-t); border-color: var(--w-gold); }
+
+/* برندها */
+.w-brands {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(var(--w-g), 0.16);
+}
+
+.w-brand {
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--w-gray);
+  background: rgba(var(--w-s3), 0.5);
+  border: 1px solid transparent;
+  transition: all 0.2s var(--w-ease);
+}
+
+.w-brand:hover { color: var(--w-ink); }
+
+.w-brand.on {
+  color: var(--w-gold-t);
+  border-color: rgba(var(--w-g), 0.5);
+  background: rgba(var(--w-g), 0.12);
+}
+
+/* ============================================================
+   عنوان بخش
+   ============================================================ */
+.w-sec { padding: 26px 0; }
+
+.w-sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.w-sec-head h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.w-sec-head span {
+  font-size: 13px;
+  color: var(--w-gray);
+}
+
+.w-sec-head .spacer { margin-inline-start: auto; }
+
+/* ============================================================
+   ۴. شبکه‌ی کالاها
+   ============================================================ */
+.w-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+}
+
+.w-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  background: linear-gradient(165deg,
+    rgba(var(--w-s3), 0.72), rgba(var(--w-s2), 0.62));
+  border: 1px solid rgba(var(--w-g), 0.14);
+  overflow: hidden;
+  transition: translate 0.28s var(--w-ease),
+              border-color 0.28s var(--w-ease),
+              box-shadow 0.28s var(--w-ease);
+  contain: layout paint;
+}
+
+/* نوار طلایی بالای کارت — هنگام هاور از راست باز می‌شود */
+.w-card::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--w-gold), var(--w-gold-l), transparent);
+  scale: 0 1;
+  transform-origin: right;
+  transition: scale 0.36s var(--w-ease);
+}
+
+.w-card:hover::after { scale: 1 1; }
+
+.w-card:hover {
+  translate: 0 -4px;
+  border-color: rgba(var(--w-g), 0.44);
+  box-shadow: 0 18px 42px -18px rgba(var(--w-sh), 0.7),
+              0 0 0 1px rgba(var(--w-g), 0.12);
+}
+
+.w-thumb {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 9px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--w-blue), var(--w-navy));
+  display: grid;
+  place-items: center;
+}
+
+.w-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.w-thumb-letter {
+  font-size: 40px;
+  font-weight: 800;
+  color: rgba(var(--w-g), 0.5);
+}
+
+/* دکمه‌ی نمای سریع */
+.w-eye {
+  position: absolute;
+  top: 8px;
+  inset-inline-end: 8px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--w-ink);
+  background: rgba(var(--w-s1), 0.7);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.24s var(--w-ease), color 0.2s var(--w-ease);
+}
+
+.w-card:hover .w-eye, .w-eye:focus-visible { opacity: 1; }
+.w-eye:hover { color: var(--w-gold-t); }
+.w-eye svg { width: 16px; height: 16px; }
+
+/* نشان تخفیف */
+.w-off {
+  position: absolute;
+  top: 8px;
+  inset-inline-start: 8px;
+  padding: 3px 8px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 800;
+  font-style: normal;
+  color: #fff;
+  background: #c0453f;
+}
+
+.w-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.9em;
+}
+
+.w-brandname { font-size: 11.5px; color: var(--w-gray); }
+
+.w-price {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--w-gold-t);
+  line-height: 1.3;
+}
+
+.w-price s {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--w-dim);
+}
+
+.w-price small { font-size: 11px; font-weight: 400; opacity: 0.7; }
+
+.w-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--w-gray);
+  padding-top: 7px;
+  border-top: 1px solid rgba(var(--w-g), 0.1);
+}
+
+.w-meta b { color: var(--w-gold-t); font-weight: 700; }
+
+/* ردیف دوم — ارزش کمینه‌ی سفارش و زمان آماده‌سازی */
+.w-meta-2 {
+  border-top: none;
+  padding-top: 2px;
+  color: var(--w-dim);
+  font-size: 11px;
+  /* دو ستون با فاصله‌ی روشن — وگرنه اعداد به هم می‌چسبند */
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.w-meta-2 span { display: inline-flex; align-items: center; gap: 4px; }
+.w-meta-2 svg { opacity: 0.75; }
+
+/* نشان صرفه‌جویی پلکانی — مهم‌ترین عدد برای خریدار عمده */
+.w-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--w-gold-t);
+  background: rgba(var(--w-g), 0.12);
+  border: 1px solid rgba(var(--w-g), 0.26);
+}
+
+.w-save b { font-weight: 800; }
+
+.w-stock { font-size: 11.5px; font-weight: 600; }
+.w-stock.in { color: var(--w-in); }
+.w-stock.low { color: var(--w-low); }
+.w-stock.out { color: var(--w-out); }
+
+.w-seller {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  color: var(--w-gray);
+  min-width: 0;
+}
+
+.w-seller-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.w-verified { color: var(--w-gold-t); flex: none; }
+.w-verified svg { width: 13px; height: 13px; display: block; }
+
+.w-stars { display: inline-flex; gap: 1px; flex: none; }
+.w-star { width: 11px; height: 11px; fill: rgba(154, 166, 187, 0.35); }
+.w-star.on { fill: var(--w-gold-l); }
+
+.w-rate-n { font-size: 11px; color: var(--w-gold-t); font-weight: 700; }
+
+.w-actions { display: flex; gap: 7px; margin-top: auto; padding-top: 8px; }
+
+.w-btn-rfq, .w-btn-cart {
+  flex: 1;
+  padding: 8px 6px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s var(--w-ease);
+  white-space: nowrap;
+}
+
+.w-btn-rfq {
+  color: var(--w-gold-t);
+  background: transparent;
+  border: 1px solid rgba(var(--w-g), 0.3);
+}
+
+.w-btn-rfq:hover { background: rgba(var(--w-g), 0.12); border-color: var(--w-gold); }
+
+.w-btn-cart {
+  color: var(--w-on-gold);
+  border: 0;
+  background: linear-gradient(135deg, var(--w-gold), var(--w-gold-l));
+}
+
+.w-btn-cart:hover { box-shadow: 0 6px 16px -6px rgba(var(--w-g), 0.8); }
+
+.w-btn-cart:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* جعبه‌ی مقایسه */
+.w-cmp {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  color: var(--w-gray);
+  cursor: pointer;
+  user-select: none;
+}
+
+.w-cmp input { accent-color: var(--w-gold); cursor: pointer; }
+
+/* حالت خالی */
+.w-empty {
+  grid-column: 1 / -1;
+  padding: 50px 20px;
+  text-align: center;
+  color: var(--w-gray);
+  border-radius: 14px;
+  border: 1px dashed rgba(var(--w-g), 0.22);
+}
+
+.w-empty svg { width: 40px; height: 40px; color: var(--w-dim); margin-bottom: 12px; }
+.w-empty b { display: block; color: var(--w-ink); margin-bottom: 5px; }
+
+/* ============================================================
+   ۷. فروشندگان
+   ============================================================ */
+.w-sellers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 13px;
+}
+
+.w-scard {
+  padding: 18px;
+  text-align: center;
+  cursor: pointer;
+  transition: translate 0.26s var(--w-ease);
+}
+
+.w-scard:hover { translate: 0 -4px; }
+
+.w-slogo {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 11px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--w-on-gold);
+  background: linear-gradient(135deg, var(--w-gold-l), var(--w-bronze));
+}
+
+.w-scard h3 {
+  margin: 0 0 3px;
+  font-size: 14.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.w-scard .cat { font-size: 11.5px; color: var(--w-gray); }
+
+.w-srow {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 11px 0;
+  padding: 9px 0;
+  border-block: 1px solid rgba(var(--w-g), 0.12);
+  font-size: 11.5px;
+  color: var(--w-gray);
+}
+
+.w-srow b { display: block; color: var(--w-gold-t); font-size: 14px; }
+
+/* ============================================================
+   ۸. سفارش انبوه
+   ============================================================ */
+.w-bulk {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  padding: 22px;
+}
+
+.w-bulk h3 {
+  margin: 0 0 5px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.w-bulk h3 svg { width: 18px; height: 18px; color: var(--w-gold-t); }
+
+.w-bulk p {
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  color: var(--w-gray);
+}
+
+.w-quick-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.w-quick-row .w-input { flex: 1; min-width: 110px; }
+
+.w-drop {
+  padding: 24px 16px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1.5px dashed rgba(var(--w-g), 0.3);
+  background: rgba(var(--w-s1), 0.4);
+  cursor: pointer;
+  transition: border-color 0.22s var(--w-ease), background 0.22s var(--w-ease);
+}
+
+.w-drop:hover, .w-drop.over {
+  border-color: var(--w-gold);
+  background: rgba(var(--w-g), 0.07);
+}
+
+.w-drop svg { width: 30px; height: 30px; color: var(--w-gold-t); margin-bottom: 8px; }
+.w-drop b { display: block; font-size: 13px; margin-bottom: 3px; }
+.w-drop span { font-size: 11.5px; color: var(--w-gray); }
+
+/* ============================================================
+   ۹. بازدیدهای اخیر
+   ============================================================ */
+.w-recent {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+}
+
+.w-rcard {
+  flex: none;
+  width: 148px;
+  padding: 10px;
+  border-radius: 11px;
+  cursor: pointer;
+  scroll-snap-align: start;
+  background: rgba(var(--w-s2), 0.55);
+  border: 1px solid rgba(var(--w-g), 0.1);
+  transition: border-color 0.22s var(--w-ease);
+}
+
+.w-rcard:hover { border-color: rgba(var(--w-g), 0.4); }
+
+.w-rcard .w-thumb { aspect-ratio: 4 / 3; margin-bottom: 7px; }
+
+.w-rcard .nm {
+  font-size: 11.5px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.w-rcard .pr { font-size: 12.5px; font-weight: 700; color: var(--w-gold-t); }
+
+/* ============================================================
+   ۱۰. نوار مقایسه
+   ============================================================ */
+.w-cmpbar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 300;
+  padding: 12px 0;
+  background: rgba(var(--w-s1), 0.94);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(var(--w-g), 0.28);
+  translate: 0 100%;
+  transition: translate 0.3s var(--w-ease);
+}
+
+.w-cmpbar.on { translate: 0 0; }
+
+.w-cmpbar-in {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.w-cmp-items { display: flex; gap: 8px; flex: 1; flex-wrap: wrap; min-width: 0; }
+
+.w-cmp-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  background: rgba(var(--w-s3), 0.8);
+  border: 1px solid rgba(var(--w-g), 0.2);
+  max-width: 190px;
+}
+
+.w-cmp-tag span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.w-cmp-tag button {
+  border: 0;
+  background: transparent;
+  color: var(--w-gray);
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.w-cmp-tag button:hover { color: var(--w-out); }
+.w-cmp-tag svg { width: 13px; height: 13px; }
+
+/* ============================================================
+   پنجره‌ها
+   ============================================================ */
+.w-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(var(--w-s1), 0.8);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.26s var(--w-ease), visibility 0.26s;
+}
+
+.w-modal.open { opacity: 1; visibility: visible; }
+
+.w-modal-card {
+  position: relative;
+  width: min(860px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 24px;
+  translate: 0 14px;
+  transition: translate 0.3s var(--w-ease);
+}
+
+.w-modal.open .w-modal-card { translate: 0 0; }
+
+.w-x {
+  position: absolute;
+  top: 14px;
+  inset-inline-start: 14px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--w-ink);
+  background: rgba(var(--w-s3), 0.8);
+  border: 1px solid rgba(var(--w-g), 0.22);
+  transition: color 0.2s var(--w-ease), border-color 0.2s var(--w-ease);
+}
+
+.w-x:hover { color: var(--w-out); border-color: var(--w-out); }
+.w-x svg { width: 17px; height: 17px; }
+
+/* جزئیات کالا */
+.w-detail { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 22px; }
+.w-detail > * { min-width: 0; }
+
+.w-gallery .w-thumb { aspect-ratio: 1 / 1; border-radius: 12px; }
+
+.w-gal-dots { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+
+.w-gal-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  cursor: pointer;
+  background: rgba(var(--w-g), 0.3);
+  transition: width 0.24s var(--w-ease), background 0.24s var(--w-ease);
+}
+
+.w-gal-dots button.on { width: 22px; background: var(--w-gold); }
+
+.w-detail h2 { margin: 0 0 5px; font-size: 20px; line-height: 1.4; }
+
+.w-detail .sub {
+  font-size: 12.5px;
+  color: var(--w-gray);
+  margin-bottom: 14px;
+}
+
+/* پلکان قیمت */
+.w-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.w-tier {
+  padding: 11px 9px;
+  text-align: center;
+  border-radius: 10px;
+  background: rgba(var(--w-s3), 0.6);
+  border: 1px solid rgba(var(--w-g), 0.16);
+  transition: border-color 0.2s var(--w-ease);
+}
+
+.w-tier.best { border-color: rgba(var(--w-g), 0.55); background: rgba(var(--w-g), 0.09); }
+
+.w-tier span { display: block; font-size: 11px; color: var(--w-gray); margin-bottom: 3px; }
+.w-tier b { font-size: 15px; color: var(--w-gold-t); font-weight: 800; }
+.w-tier small { display: block; font-size: 10.5px; color: var(--w-dim); }
+
+/* جدول ویژگی‌ها */
+.w-specs { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 14px 0; }
+
+.w-specs th, .w-specs td {
+  padding: 8px 11px;
+  text-align: start;
+  border-bottom: 1px solid rgba(var(--w-g), 0.1);
+}
+
+.w-specs th { color: var(--w-gray); font-weight: 600; width: 38%; }
+.w-specs tr:last-child th, .w-specs tr:last-child td { border-bottom: 0; }
+
+/* شمارنده */
+.w-qty {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--w-g), 0.26);
+}
+
+.w-qty button {
+  width: 34px;
+  height: 38px;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--w-gold-t);
+  background: rgba(var(--w-s3), 0.7);
+}
+
+.w-qty button:hover { background: rgba(var(--w-g), 0.16); }
+
+.w-qty input {
+  width: 68px;
+  height: 38px;
+  border: 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--w-ink);
+  background: rgba(var(--w-s1), 0.5);
+}
+
+.w-buy-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
+
+.w-note {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--w-gray);
+  background: rgba(var(--w-s3), 0.5);
+  border-inline-start: 3px solid var(--w-gold);
+}
+
+/* جدول مقایسه */
+.w-cmp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+
+.w-cmp-table th, .w-cmp-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid rgba(var(--w-g), 0.14);
+}
+
+.w-cmp-table thead th {
+  background: rgba(var(--w-g), 0.1);
+  color: var(--w-gold-t);
+  font-size: 12px;
+}
+
+.w-cmp-table tbody th {
+  text-align: start;
+  color: var(--w-gray);
+  font-weight: 600;
+  background: rgba(var(--w-s3), 0.45);
+  white-space: nowrap;
+}
+
+.w-cmp-table .best-cell { color: var(--w-in); font-weight: 800; }
+
+/* ============================================================
+   ۱۱. دعوت به ثبت‌نام
+   ============================================================ */
+.w-join {
+  padding: 34px 30px;
+  text-align: center;
+}
+
+.w-join h2 {
+  margin: 0 0 8px;
+  font-size: 23px;
+  background-image: linear-gradient(120deg, var(--w-gold-l), var(--w-silver-l));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.w-join p { margin: 0 0 18px; font-size: 14px; color: var(--w-gray); }
+
+/* ============================================================
+   ۱۲. پابرگ
+   ============================================================ */
+.w-foot { margin-top: 30px; padding: 30px 0 0; }
+
+.w-foot-in {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(2, 1fr) 1.4fr;
+  gap: 26px;
+  padding: 28px 30px;
+}
+
+.w-foot h4 {
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  color: var(--w-gold-t);
+}
+
+.w-foot p { margin: 0; font-size: 12.5px; color: var(--w-gray); line-height: 1.9; }
+
+.w-foot ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.w-foot ul a { font-size: 12.5px; color: var(--w-gray); transition: color 0.2s var(--w-ease); }
+.w-foot ul a:hover { color: var(--w-gold-t); }
+
+.w-social { display: flex; gap: 8px; margin-top: 14px; }
+
+.w-social a {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: var(--w-gray);
+  background: rgba(var(--w-s3), 0.6);
+  border: 1px solid rgba(var(--w-g), 0.14);
+  transition: color 0.2s var(--w-ease), border-color 0.2s var(--w-ease);
+}
+
+.w-social a:hover { color: var(--w-gold-t); border-color: var(--w-gold); }
+.w-social svg { width: 16px; height: 16px; }
+
+.w-news { display: flex; gap: 7px; margin-top: 11px; }
+.w-news .w-input { flex: 1; }
+
+.w-copy {
+  padding: 16px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--w-dim);
+}
+
+/* ============================================================
+   پیام‌ها
+   ============================================================ */
+.w-toasts {
+  position: fixed;
+  inset-block-start: 78px;
+  inset-inline-end: 18px;
+  z-index: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  pointer-events: none;
+}
+
+.w-toast {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 16px;
+  border-radius: 11px;
+  font-size: 13px;
+  color: var(--w-ink);
+  background: rgba(var(--w-s2), 0.97);
+  border: 1px solid rgba(var(--w-g), 0.32);
+  box-shadow: 0 14px 34px rgba(var(--w-sh), 0.55);
+  animation: wToast 0.3s var(--w-ease);
+  max-width: 330px;
+}
+
+.w-toast svg { width: 17px; height: 17px; flex: none; }
+.w-toast.ok { border-color: rgba(78, 201, 138, 0.5); }
+.w-toast.ok svg { color: var(--w-in); }
+.w-toast.err { border-color: rgba(229, 115, 115, 0.5); }
+.w-toast.err svg { color: var(--w-out); }
+
+@keyframes wToast {
+  from { opacity: 0; translate: 0 -10px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+/* ============================================================
+   واکنش‌گرایی
+   ============================================================ */
+@media (max-width: 1100px) {
+  .w-hero-in { grid-template-columns: 1fr; }
+  .w-stats { grid-template-columns: repeat(3, 1fr); }
+  .w-foot-in { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 900px) {
+  .w-nav { display: none; }
+  .w-burger { display: grid; }
+  .w-search { max-width: none; }
+  .w-detail { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .w-bar { flex-wrap: wrap; gap: 10px; }
+  .w-search { order: 3; width: 100%; flex-basis: 100%; }
+  .w-hero-in { padding: 22px 18px; }
+  .w-stats { grid-template-columns: 1fr; }
+  .w-foot-in { grid-template-columns: 1fr; padding: 22px 18px; }
+  .w-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 10px; }
+  .w-card { padding: 10px; }
+  .w-actions { flex-direction: column; }
+  .w-modal-card { padding: 18px; }
+  .w-toasts { inset-inline: 12px; inset-block-start: 70px; }
+  .w-toast { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   نردبان بازار عمده
+   ------------------------------------------------------------
+   این نشان‌ها فقط اینجا دیده می‌شوند. ویترین اصلی سایت
+   نردبان جدای خودش را دارد.
+   ============================================================ */
+
+/* ---------- کارت تأمین‌کننده‌ی ویژه ---------- */
+.w-card.is-boost {
+  border-color: rgba(var(--w-g), 0.45);
+  background:
+    linear-gradient(160deg, rgba(var(--w-g), 0.07), transparent 55%),
+    rgba(var(--w-s2), 0.72);
+  box-shadow: 0 0 0 1px rgba(var(--w-g), 0.18) inset;
+}
+
+.w-card.is-boost:hover {
+  border-color: var(--w-gold);
+  box-shadow: 0 18px 40px -18px rgba(var(--w-g), 0.55);
+}
+
+.w-boost-tag {
+  position: absolute;
+  top: -1px;
+  inset-inline-start: -1px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px 4px 8px;
+  border-start-start-radius: 12px;
+  border-end-end-radius: 10px;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--w-on-gold);
+  background: linear-gradient(135deg, var(--w-gold-l), var(--w-bronze));
+}
+
+.w-i-xs { width: 12px; height: 12px; flex: none; }
+
+/* ============================================================
+   بنر صدر بازار
+   ============================================================ */
+.w-hero-band {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: 22px;
+  padding: 22px 24px;
+  align-items: center;
+}
+
+.w-hb-side { display: flex; flex-direction: column; gap: 13px; min-width: 0; }
+
+.w-hb-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--w-on-gold);
+  background: linear-gradient(135deg, var(--w-gold-l), var(--w-bronze));
+  box-shadow: 0 7px 18px -9px rgba(var(--w-g), 0.9);
+}
+
+.w-hb-id { display: flex; align-items: center; gap: 13px; min-width: 0; }
+
+.w-hb-logo {
+  width: 58px;
+  height: 58px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--w-on-gold);
+  background: linear-gradient(135deg, var(--w-gold-l), var(--w-bronze));
+  box-shadow: 0 12px 26px -14px rgba(var(--w-g), 0.9);
+}
+
+.w-hb-txt { min-width: 0; }
+
+.w-hb-txt h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.w-hb-txt p {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  color: var(--w-gray);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.w-hb-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+  font-size: 12px;
+  color: var(--w-gray);
+}
+
+.w-hb-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.w-hb-meta b { color: var(--w-gold-t); font-weight: 700; }
+.w-hb-meta svg { color: var(--w-gold-t); }
+
+/* ---------- قفسه‌ی کالاها ---------- */
+.w-hb-shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  gap: 10px;
+  min-width: 0;
+}
+
+.w-hb-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: start;
+  cursor: pointer;
+  min-width: 0;
+  transition: translate 0.24s var(--w-ease);
+}
+
+.w-hb-item:hover { translate: 0 -4px; }
+
+.w-hb-thumb {
+  aspect-ratio: 1 / 1;
+  border-radius: 11px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 800;
+  color: rgba(var(--w-g), 0.5);
+  background: linear-gradient(135deg, var(--w-blue), var(--w-navy));
+  border: 1px solid rgba(var(--w-g), 0.2);
+  transition: border-color 0.24s var(--w-ease);
+}
+
+.w-hb-item:hover .w-hb-thumb { border-color: var(--w-gold); }
+.w-hb-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.w-hb-name {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--w-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.w-hb-price { font-size: 12.5px; font-weight: 800; color: var(--w-gold-t); }
+.w-hb-price small { display: block; font-size: 10px; font-weight: 400; color: var(--w-dim); }
+
+.w-hb-foot {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(var(--w-g), 0.16);
+  font-size: 12px;
+  color: var(--w-gray);
+}
+
+.w-hb-foot svg { color: var(--w-gold-t); }
+.w-hb-foot b { color: var(--w-gold-t); }
+
+@media (max-width: 900px) {
+  .w-hero-band { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .w-hero-band { padding: 18px; gap: 16px; }
+  .w-hb-shelf { grid-template-columns: repeat(3, 1fr); }
+  .w-hb-item:nth-child(n + 4) { display: none; }
+  .w-hb-txt h3 { font-size: 17px; }
+}
+
+/* آیکون بزرگ — حالت خالی سبد */
+.w-i-lg { width: 44px; height: 44px; opacity: .5; }
+
+/* ============================================================
+   ورود و ثبت‌نام تأمین‌کننده
+   ------------------------------------------------------------
+   دو ستون: سمت راست توضیح و مزایا، سمت چپ فرم ورود.
+   روی موبایل زیر هم می‌نشینند.
+   ============================================================ */
+.w-auth {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 34px;
+  align-items: start;
+  padding: 34px;
+  border-radius: 18px;
+}
+
+.w-auth-side h2 {
+  margin: 0 0 10px;
+  font-size: 23px;
+  letter-spacing: -0.4px;
+}
+
+.w-auth-side > p {
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--w-gray);
+}
+
+.w-auth-list {
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 9px;
+}
+
+.w-auth-list li {
+  position: relative;
+  padding-inline-start: 25px;
+  font-size: 13.5px;
+  color: var(--w-ink);
+}
+
+.w-auth-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 9px;
+  width: 13px;
+  height: 8px;
+  border-inline-start: 2px solid var(--w-gold);
+  border-bottom: 2px solid var(--w-gold);
+  rotate: -45deg;
+}
+
+.w-auth-alt {
+  font-size: 13px;
+  color: var(--w-gray);
+  padding-top: 16px;
+  border-top: 1px solid rgba(160, 172, 190, 0.14);
+}
+
+.w-auth-alt a {
+  color: var(--w-gold-t);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(var(--w-g), 0.4);
+}
+
+.w-auth-alt a:hover { color: var(--w-gold-t); }
+
+/* ---------- فرم ---------- */
+.w-auth-form {
+  padding: 24px;
+  border-radius: 14px;
+  background: rgba(var(--w-s2), 0.7);
+  border: 1px solid rgba(160, 172, 190, 0.14);
+}
+
+.w-auth-form h3 {
+  margin: 0 0 18px;
+  font-size: 16px;
+}
+
+/* ---------- چشمک رمز ---------- */
+.w-pass-wrap { position: relative; }
+.w-pass-wrap .w-input { padding-inline-end: 42px; }
+
+.w-pass-eye {
+  position: absolute;
+  inset-inline-end: 6px;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--w-gray);
+  background: transparent;
+  transition: color 0.2s var(--w-ease), background 0.2s var(--w-ease);
+}
+
+.w-pass-eye:hover {
+  color: var(--w-gold-t);
+  background: rgba(var(--w-g), 0.1);
+}
+
+.w-pass-eye svg { width: 17px; height: 17px; }
+
+/* ---------- پیام ---------- */
+.w-auth-msg {
+  margin-top: 10px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--w-gold-t);
+  background: rgba(var(--w-g), 0.1);
+  border: 1px solid rgba(var(--w-g), 0.24);
+}
+
+.w-auth-msg.is-bad {
+  color: #f0a9a9;
+  background: rgba(229, 115, 115, 0.11);
+  border-color: rgba(229, 115, 115, 0.3);
+}
+
+.w-auth-tiny {
+  margin: 14px 0 0;
+  font-size: 11.5px;
+  line-height: 1.9;
+  text-align: center;
+  color: var(--w-dim);
+}
+
+/* ============================================================
+   کارت «وارد شده‌اید» — میان‌بر به پنل
+   ============================================================ */
+.w-me-badge {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--w-on-gold);
+  background: linear-gradient(140deg, var(--w-gold-l), var(--w-bronze));
+}
+
+/* ============================================================
+   دکمه‌ی «پنل من» در نوار بالا
+   ============================================================ */
+.w-panel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--w-on-gold);
+  background: linear-gradient(135deg, var(--w-gold-l), var(--w-bronze));
+  transition: filter 0.2s var(--w-ease), translate 0.2s var(--w-ease);
+}
+
+.w-panel-btn:hover { filter: brightness(1.08); translate: 0 -1px; }
+.w-panel-btn svg { width: 16px; height: 16px; flex: none; }
+
+@media (max-width: 900px) {
+  .w-auth { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+  .w-panel-btn span { display: none; }
+  .w-panel-btn { padding: 8px 11px; }
+}
+
+/* ---------- شروع قیمت و شهر تأمین‌کننده ---------- */
+.w-sprice {
+  margin-top: 8px;
+  padding: 6px 11px;
+  border-radius: 9px;
+  font-size: 11.5px;
+  color: var(--w-gray);
+  background: rgba(var(--w-g), 0.09);
+  border: 1px solid rgba(var(--w-g), 0.18);
+}
+
+.w-sprice b { color: var(--w-gold-t); font-weight: 800; font-size: 13px; }
+
+.w-scity {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 7px;
+  font-size: 11px;
+  color: var(--w-dim);
+}
+
+/* ============================================================
+   پیوند «پرش به محتوا»
+   ------------------------------------------------------------
+   تا وقتی تمرکز نگرفته دیده نمی‌شود. با نخستین Tab ظاهر
+   می‌شود تا کاربر صفحه‌کلید مجبور نباشد از کل منو رد شود.
+   ============================================================ */
+.dp-skip {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 3000;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--w-on-gold);
+  background: var(--w-gold-l);
+  box-shadow: 0 8px 24px rgba(var(--w-sh), 0.5);
+  transform: translateY(-200%);
+  transition: transform 0.18s ease;
+}
+
+.dp-skip:focus,
+.dp-skip:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid var(--w-ink);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-skip { transition: none; }
+}
+
+/* ============================================================
+   نشان‌های اعتماد
+   ============================================================ */
+.w-trust {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 16px;
+}
+
+.w-trust-i {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: start;
+  column-gap: 14px;
+  row-gap: 4px;
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(165deg,
+    rgba(var(--w-s3), 0.6), rgba(var(--w-s2), 0.5));
+  transition: translate 0.3s var(--w-ease),
+              border-color 0.3s var(--w-ease),
+              box-shadow 0.3s var(--w-ease);
+}
+
+.w-trust-i:hover {
+  translate: 0 -3px;
+  border-color: rgba(var(--w-g), 0.42);
+  box-shadow: 0 10px 28px -14px rgba(var(--w-g), 0.4);
+}
+
+.w-trust-ico {
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 12px;
+  color: var(--w-gold-t);
+  background: rgba(var(--w-g), 0.12);
+  border: 1px solid rgba(var(--w-g), 0.26);
+}
+
+.w-trust-ico svg { width: 21px; height: 21px; }
+
+.w-trust-i strong {
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--w-ink);
+}
+
+.w-trust-i p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: var(--w-gray);
+}
+
+/* ============================================================
+   فیلترهای ذخیره‌شده
+   ============================================================ */
+.w-saved {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(var(--w-g), 0.16);
+}
+
+.w-saved-lbl {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--w-gold-t);
+}
+
+.w-saved-lbl svg { width: 15px; height: 15px; }
+
+.w-saved-chip {
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(var(--w-s3), 0.7);
+  border: 1px solid rgba(var(--w-g), 0.24);
+  transition: border-color 0.26s var(--w-ease), background 0.26s var(--w-ease);
+}
+
+.w-saved-chip:hover {
+  border-color: rgba(var(--w-g), 0.55);
+  background: rgba(var(--w-g), 0.12);
+}
+
+.w-saved-chip > button {
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--w-ink);
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.w-saved-chip .w-saved-x {
+  display: grid;
+  place-items: center;
+  padding: 0 9px;
+  color: var(--w-gray);
+  border-inline-start: 1px solid rgba(var(--w-g), 0.2);
+  transition: color 0.24s var(--w-ease);
+}
+
+.w-saved-chip .w-saved-x:hover { color: var(--w-out); }
+.w-saved-chip .w-saved-x svg { width: 12px; height: 12px; }
+
+/* ============================================================
+   تیلت سه‌بعدی ملایم روی کارت کالا
+   ------------------------------------------------------------
+   با JS فقط دو زاویه به‌صورت متغیر تنظیم می‌شود؛ خودِ چرخش
+   کار مرورگر است تا روی ۶۰ فریم بماند.
+   ============================================================ */
+.w-card.is-tilt {
+  transform: perspective(900px)
+             rotateX(var(--tx, 0deg))
+             rotateY(var(--ty, 0deg));
+  transition: transform 0.12s linear,
+              border-color 0.28s var(--w-ease),
+              box-shadow 0.28s var(--w-ease);
+  will-change: transform;
+}
+
+/* روی صفحه‌های لمسی و حالت کاهش حرکت، تیلت خاموش */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .w-card.is-tilt { transform: none; will-change: auto; }
+}
+
+@media (max-width: 640px) {
+  .w-trust-i { padding: 14px; column-gap: 11px; }
+  .w-trust-ico { width: 38px; height: 38px; }
+  .w-saved { gap: 6px; }
+}
+
+/* ============================================================
+   جدول پلکان قیمت
+   ============================================================ */
+.w-tiertbl-wrap { margin-bottom: 14px; }
+
+/* عنوان جدول فقط برای صفحه‌خوان */
+.w-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.w-tiertbl {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 12.5px;
+  background: rgba(var(--w-s3), 0.5);
+  border: 1px solid rgba(var(--w-g), 0.18);
+}
+
+.w-tiertbl thead th {
+  padding: 9px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--w-gold-t);
+  background: rgba(var(--w-g), 0.1);
+  border-bottom: 1px solid rgba(var(--w-g), 0.22);
+}
+
+.w-tiertbl tbody th,
+.w-tiertbl tbody td {
+  padding: 9px 10px;
+  text-align: center;
+  font-weight: 500;
+  color: var(--w-ink);
+  border-bottom: 1px solid rgba(var(--w-g), 0.1);
+}
+
+.w-tiertbl tbody th {
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--w-gray);
+}
+
+.w-tiertbl tbody tr:last-child th,
+.w-tiertbl tbody tr:last-child td { border-bottom: 0; }
+
+/* بهترین پله — پررنگ‌تر تا چشم برود سراغش */
+.w-tiertbl tbody tr.best th,
+.w-tiertbl tbody tr.best td {
+  background: rgba(var(--w-g), 0.09);
+}
+
+.w-tiertbl tbody tr.best td b { color: var(--w-gold-t); }
+
+.w-tier-off {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--w-on-gold);
+  background: linear-gradient(135deg, var(--w-gold-l), var(--w-gold));
+}
+
+.w-tier-save {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--w-in);
+}
+
+.w-tier-zero { color: var(--w-dim); }
+
+.w-tiernotes {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+}
+
+.w-tiernotes li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--w-gray);
+}
+
+.w-tiernotes li b { color: var(--w-gold-t); }
+.w-tiernotes svg { flex: none; color: var(--w-gold-t); }
+
+@media (max-width: 520px) {
+  .w-tiertbl { font-size: 11.5px; }
+  .w-tiertbl thead th,
+  .w-tiertbl tbody th,
+  .w-tiertbl tbody td { padding: 7px 5px; }
+  .w-tiernotes { gap: 6px 11px; }
+  .w-tiernotes li { font-size: 11.5px; }
+}
+
+/* ============================================================
+   تم روشن — کرم گرم + طلا
+   ------------------------------------------------------------
+   با گذاشتن data-w-theme="light" روی <html> فعال می‌شود.
+   هیچ گزینشگری تکرار نشده؛ فقط همان متغیرهای پایه عوض می‌شوند
+   تا کل صفحه یکجا رنگ بگیرد.
+   ============================================================ */
+html[data-w-theme="light"] {
+  /* سه‌تایی‌ها: از تیره به روشن — کرم، سفید مایل، بژ */
+  --w-s1: 237, 232, 224;   /* بژ ملایم — عمیق‌ترین سطح */
+  --w-s2: 250, 248, 245;   /* سفید مایل — سطح میانی (کارت‌ها) */
+  --w-s3: 255, 255, 255;   /* سفید خالص — سطح بالاتر */
+  --w-sh: 90, 76, 48;      /* سایه‌ی گرم به‌جای مشکی */
+
+  --w-bg: #f5f0e8;         /* کرم گرم — زمینه‌ی اصلی */
+  --w-navy: #faf8f5;
+  --w-blue: #ede8e0;
+  --w-ink: #1a1a1a;        /* مشکی مات — ۱۵٫۳۴:۱ */
+  --w-gray: #75695f;       /* خاکستری گرم — ۴٫۷۰:۱ */
+  --w-dim: #756a5d;        /* کم‌رنگ — ۴٫۶۶:۱ */
+
+  --w-gold-t: #84681d;     /* طلای نوشتاری — ۴٫۶۵:۱ */
+  --w-in: #2f7033;         /* موجود — ۵٫۳۱:۱ */
+  --w-low: #8f6206;        /* کم — ۴٫۷۳:۱ */
+  --w-out: #c0453f;        /* ناموجود — ۴٫۴۵:۱ */
+
+  color-scheme: light;
+}
+
+/* زمینه‌ی چندلایه در تم روشن ملایم‌تر می‌شود */
+html[data-w-theme="light"] body {
+  background:
+    radial-gradient(ellipse 60% 45% at 88% 0%, rgba(var(--w-g), 0.16), transparent 58%),
+    radial-gradient(ellipse 55% 50% at 4% 92%, rgba(201, 168, 76, 0.09), transparent 60%),
+    radial-gradient(ellipse 90% 60% at 50% 45%, rgba(255, 255, 255, 0.7), transparent 70%),
+    var(--w-bg);
+  background-attachment: fixed;
+}
+
+/* در تم روشن، سایه‌ها باید بسیار نرم‌تر باشند */
+html[data-w-theme="light"] .w-card,
+html[data-w-theme="light"] .w-modal-card,
+html[data-w-theme="light"] .w-seller {
+  box-shadow: 0 4px 20px rgba(var(--w-sh), 0.06);
+}
+
+html[data-w-theme="light"] .w-card:hover {
+  box-shadow: 0 8px 32px rgba(var(--w-g), 0.16);
+}
+
+/* عکس کالا در تم روشن نباید تیره دیده شود */
+html[data-w-theme="light"] .w-thumb { background: #ffffff; }
+
+/* ---------- کلید تعویض تم ---------- */
+.w-theme-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 12px;
+  color: var(--w-gold-t);
+  background: rgba(var(--w-s3), 0.6);
+  border: 1px solid rgba(var(--w-g), 0.22);
+  transition: color 0.3s var(--w-ease), background 0.3s var(--w-ease),
+              border-color 0.3s var(--w-ease), transform 0.3s var(--w-ease);
+}
+
+.w-theme-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--w-g), 0.5);
+  background: rgba(var(--w-g), 0.12);
+}
+
+.w-theme-btn svg { width: 19px; height: 19px; }
+
+/* آیکون ماه در تم تیره، خورشید در تم روشن */
+.w-theme-btn .w-ico-sun  { display: none; }
+html[data-w-theme="light"] .w-theme-btn .w-ico-sun  { display: block; }
+html[data-w-theme="light"] .w-theme-btn .w-ico-moon { display: none; }
+
+/* ============================================================
+   عرض‌های مرزی — ۳۲۰ پیکسل
+   ------------------------------------------------------------
+   در باریک‌ترین گوشی، هیچ چیز نباید از صفحه بیرون بزند یا
+   افقی اسکرول بسازد.
+   ============================================================ */
+@media (max-width: 380px) {
+  :root { --w-wrap: min(1440px, 96vw); }
+
+  .w-fbar { grid-template-columns: 1fr; padding: 12px; }
+  .w-fbtns { flex-direction: column; align-items: stretch; }
+  .w-fbtns .w-chip-btn { justify-content: center; }
+
+  /* شبکه‌ی کالا در ۳۲۰ پیکسل تک‌ستونه می‌شود تا متن نشکند */
+  .w-grid { grid-template-columns: 1fr; }
+
+  .w-trust { grid-template-columns: 1fr; }
+  .w-saved-lbl { width: 100%; }
+
+  /* نوار مقایسه نباید نیمی از صفحه را بگیرد */
+  .w-cmpbar-in { flex-wrap: wrap; row-gap: 8px; }
+}

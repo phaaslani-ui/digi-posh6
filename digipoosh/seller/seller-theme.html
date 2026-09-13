@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="پنل فروشندگان دیجی‌پوش — تم‌ساز ویترین" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <title>دیجی‌پوش | تم‌ساز ویترین</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="../assets/css/dp-theme.css" />
+  <link rel="stylesheet" href="css/seller-style.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+</head>
+<body data-dp-panel>
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a href="../index.html" style="display:flex;flex-direction:column;gap:2px" title="بازگشت به سایت اصلی">
+      <div class="sb-logo">دیجی‌پوش</div>
+      <span class="sb-sub">پنل فروشندگان</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="منوی پنل">
+    <div class="sb-label">مدیریت</div>
+      <a class="sb-link" href="seller-dashboard.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3" y="3" width="7.5" height="8.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="5" rx="2"/><rect x="13.5" y="11" width="7.5" height="10" rx="2"/><rect x="3" y="14.5" width="7.5" height="6.5" rx="2"/></svg><span>داشبورد</span></a>
+      <a class="sb-link" href="seller-products.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg><span>محصولات</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-orders.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M3.5 4.5h2.2l2.3 10.2h10L20 8H7"/></svg><span>سفارش‌ها</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-returns.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.6h-4.6"/></svg><span>مرجوعی‌ها</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-reviews.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg><span>نظرها</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-promos.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m6 18 12-12"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg><span>سیاست فروش</span></a>
+      <a class="sb-link" href="seller-boost.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13.5 3.5c3 0 6 3 6 6 0 4.5-5 8-5 8l-4-4s3.5-5 8-5"/><path d="M9.5 14.5 6 18l-1.5-1.5L8 13"/><path d="M5 19l-1.5 1.5"/></svg><span>نردبان و برجسته‌سازی</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-earnings.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M3.5 7.5A2 2 0 0 1 5.5 5.5h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M16.5 12.5h4"/><circle cx="16.8" cy="12.5" r="1"/></svg><span>درآمد و تسویه</span></a>
+      <a class="sb-link active" href="seller-theme.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 0 0 17c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.4-1.1a1.6 1.6 0 0 1 1.2-2.6h1.9A4.2 4.2 0 0 0 20.5 11c0-4.1-3.8-7.5-8.5-7.5Z"/><circle cx="7.8" cy="10.3" r="1.1"/><circle cx="11" cy="7.2" r="1.1"/><circle cx="15.2" cy="8.6" r="1.1"/></svg><span>تم‌ساز ویترین</span></a>
+      <a class="sb-link" href="seller-profile.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.8"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>پروفایل فروشگاه</span></a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <div class="sb-user">
+      <span class="sb-avatar" data-dp="letter">&nbsp;</span>
+      <div>
+        <div class="sb-user-name" data-dp="fullName">&nbsp;</div>
+        <div class="sb-user-role" data-dp="storeName">&nbsp;</div>
+      </div>
+    </div>
+    <a class="sb-link" href="../index.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7V20a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 20z"/><path d="M9.5 21.5v-7h5v7"/></svg><span>بازگشت به سایت</span></a>
+    <a class="sb-link logout" href="seller-login.html" data-logout><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15 4.5h3.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M10 8.5 6 12l4 3.5M6 12h9"/></svg><span>خروج از حساب</span></a>
+  </div>
+</aside>
+
+<div class="backdrop" id="backdrop"></div>
+
+<main class="main" id="main">
+  <header class="topbar">
+    <button class="burger" type="button" aria-label="منو"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div>
+      <h1 class="page-title">تم‌ساز ویترین</h1>
+      <div class="page-sub">ظاهر صفحه‌ی فروشگاه شما را خودتان بسازید</div>
+    </div>
+    <div class="topbar-actions">
+      
+      <button class="icon-btn" type="button" aria-label="اعلان‌ها"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 1 0-12 0c0 5-2 6.5-2 6.5h16S18 14 18 9Z"/><path d="M13.7 19a2 2 0 0 1-3.4 0"/></svg><span class="dot-alert"></span></button>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="th-layout">
+      <div class="th-tools">
+      <div class="card mb-18 th-intro">
+        <div class="th-intro-in">
+          <span class="th-intro-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3.5a8.5 8.5 0 1 0 0 17c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.4-1.1a1.6 1.6 0 0 1 1.2-2.6h1.9A4.2 4.2 0 0 0 20.5 11c0-4.1-3.8-7.5-8.5-7.5Z"/>
+              <circle cx="7.8" cy="10.3" r="1.1"/><circle cx="11" cy="7.2" r="1.1"/><circle cx="15.2" cy="8.6" r="1.1"/>
+            </svg>
+          </span>
+          <div>
+            <h2>ویترین شما، سلیقه‌ی شما</h2>
+            <p>
+              به‌طور پیش‌فرض فروشگاه شما حال‌وهوای بخشی را می‌گیرد که مشتری از آن
+              وارد شده. اگر می‌خواهید ویترین‌تان امضای خودتان را داشته باشد،
+              اینجا از صفر بسازیدش — رنگ‌ها، شکل‌ها، حرکت و گردی گوشه‌ها.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-18">
+        <div class="card-head">
+          <h2>ظاهر ویترین</h2>
+          <span class="sub spacer">یکی را بزنید — همان لحظه در پیش‌نمایش می‌بینید</span>
+        </div>
+
+        <!-- ═══════ حالت ویترین: خودکار یا دلخواه ═══════ -->
+        <div class="th-mode" id="thMode">
+          <button class="th-mode-opt" type="button" data-mode="auto" aria-pressed="false">
+            <span class="th-mode-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5"/><path d="M20.5 4.5 12 13"/>
+                <path d="M15.5 3.5h5v5"/>
+              </svg>
+            </span>
+            <span class="th-mode-txt">
+              <b>خودکار</b>
+              <em>ویترین با حال‌وهوای بخشی که مشتری از آن می‌آید هماهنگ می‌شود</em>
+            </span>
+          </button>
+
+          <button class="th-mode-opt" type="button" data-mode="custom" aria-pressed="false">
+            <span class="th-mode-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3.5a8.5 8.5 0 1 0 0 17c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.4-1.1a1.6 1.6 0 0 1 1.2-2.6h1.9A4.2 4.2 0 0 0 20.5 11c0-4.1-3.8-7.5-8.5-7.5Z"/>
+                <circle cx="7.8" cy="10.3" r="1.1"/><circle cx="11" cy="7.2" r="1.1"/>
+                <circle cx="15.2" cy="8.6" r="1.1"/>
+              </svg>
+            </span>
+            <span class="th-mode-txt">
+              <b>ظاهر دلخواه من</b>
+              <em>ویترین همیشه با همین ظاهری که می‌سازید دیده می‌شود</em>
+            </span>
+          </button>
+        </div>
+
+        <!-- کلید اصلی، پنهان — حالت از دکمه‌های بالا می‌آید -->
+        <input type="checkbox" id="thLock" hidden aria-hidden="true" tabindex="-1" />
+
+        <!-- توضیح حالت خودکار، وقتی فعال است -->
+        <div class="th-auto-note" id="thAutoNote" hidden>
+          <div class="th-auto-row" id="thAutoRow"></div>
+          <p class="hint">
+            هر مشتری ویترین شما را متناسب با چیزی که دنبالش آمده می‌بیند.
+            کسی که از بخش نوجوان وارد شود ویترین پرانرژی می‌بیند و کسی که از
+            بخش زنانه بیاید، ویترین لطیف.
+          </p>
+        </div>
+
+        <p class="hint mb-18" id="thLockNote" hidden></p>
+
+        <!-- گام ۱: ظاهر آماده -->
+        <div class="th-looks" id="thLooks"></div>
+
+        <!-- گام ۲: حال‌وهوا -->
+        <div class="th-sec">
+          <p class="th-step">حال‌وهوای شکل‌های پس‌زمینه</p>
+          <div class="th-vibes" id="thVibes"></div>
+        </div>
+
+        <!-- نام دلخواه -->
+        <div class="th-sec">
+          <div class="field">
+            <label for="thName">نام ظاهر شما <span class="hint">— اختیاری، روی ویترین دیده می‌شود</span></label>
+            <input class="input" id="thName" maxlength="30" placeholder="مثلاً: ویترین پاییزی" />
+          </div>
+        </div>
+
+        <!-- هشدار خوانایی -->
+        <div class="th-warn" id="thWarn" hidden role="status" aria-live="polite">
+          <div class="th-warn-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3.5 21 19H3z"/><path d="M12 9.5v4M12 16h.01"/>
+            </svg>
+            <strong>این رنگ‌ها برای مشتری سخت‌خوان است</strong>
+          </div>
+          <ul id="thWarnList"></ul>
+          <label class="switch-row th-warn-fix">
+            <input type="checkbox" id="thGuard" checked />
+            <span>خودکار درستش کن (پیشنهاد می‌شود)</span>
+          </label>
+        </div>
+
+        <!-- ═══════ تنظیم پیشرفته — پنهان تا کسی که نمی‌خواهد نبیندش ═══════ -->
+        <details class="th-adv" id="thAdv">
+          <summary>
+            <span>تنظیم دستی رنگ‌ها و جزئیات</span>
+            <em>برای وقتی که می‌خواهید همه‌چیز دقیقاً مطابق سلیقه‌تان باشد</em>
+            <svg class="th-adv-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true"><path d="m6 9.5 6 6 6-6"/></svg>
+          </summary>
+
+          <div class="th-adv-body">
+            <div class="th-sec-head">
+              <p class="th-step">رنگ‌ها</p>
+              <button class="chip" type="button" id="thResetAll">بازگشت به ظاهر آماده</button>
+            </div>
+            <div class="th-grid" id="thColors"></div>
+
+            <div class="th-sec">
+              <p class="th-step">جزئیات</p>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="thShapeSel">شکل شناور</label>
+                  <select class="select" id="thShapeSel"></select>
+                </div>
+
+                <div class="field">
+                  <label for="thMotionSel">نوع حرکت</label>
+                  <select class="select" id="thMotionSel"></select>
+                </div>
+
+                <div class="field">
+                  <label for="thDensity">تراکم شکل‌ها</label>
+                  <select class="select" id="thDensity"></select>
+                </div>
+
+                <div class="field full">
+                  <label for="thRadius">گردی گوشه‌ها — <b id="thRadiusVal">۱۶</b> پیکسل</label>
+                  <input type="range" id="thRadius" min="0" max="32" step="2" value="16"
+                         aria-label="گردی گوشه‌ها" />
+                </div>
+
+                <div class="field full">
+                  <label for="thBorder">ضخامت قاب متحرک — <b id="thBorderVal">۲</b> پیکسل</label>
+                  <input type="range" id="thBorder" min="0" max="6" step="1" value="2"
+                         aria-label="ضخامت قاب" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- تم پایه — فقط داخل پیشرفته معنا دارد، ولی برای سازگاری می‌ماند -->
+        <div class="st-picker" id="thPicker" hidden></div>
+        <div id="thPickWrap"></div>
+
+
+      </div>
+      </div>
+
+      <!-- ═══════ ستون چسبان: پیش‌نمایش همیشه در دید ═══════ -->
+      <aside class="th-side" aria-label="پیش‌نمایش ویترین">
+        <div class="th-preview" id="thPreview">
+          <span class="th-pv-label">پیش‌نمایش ویترین</span>
+          <div class="th-pv-stage" id="thStage">
+            <div class="th-pv-shapes" id="thShapes" aria-hidden="true"></div>
+            <div class="th-pv-card">
+              <strong id="thPvName">بوتیک ماه‌رخ</strong>
+              <span id="thPvMood">—</span>
+              <div class="th-pv-row">
+                <em class="th-pv-price">۴۵۰٬۰۰۰ تومان</em>
+                <button class="th-pv-btn" type="button" tabindex="-1">افزودن به سبد</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="th-side-acts">
+          <button class="btn btn-primary btn-block" type="button" id="thSave">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+          ذخیره‌ی ظاهر
+        </button>
+          <p class="th-side-note" id="thSideNote"></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<button class="th-jump" type="button" id="thJump" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/>
+    <circle cx="12" cy="12" r="3"/>
+  </svg>
+  دیدن نتیجه
+</button>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="../assets/js/dp-promo.js"></script>
+<script src="../assets/js/dp-boost.js"></script>
+<script src="../assets/js/dp-boost-pro.js"></script>
+<script src="../assets/js/dp-moderation.js"></script>
+<script src="js/dp-config.js"></script>
+<script src="js/dp-store.js"></script>
+<script src="../assets/js/dp-mod-hook.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="../assets/js/dp-rate-pop.js"></script>
+<script src="../assets/js/dp-returns.js"></script>
+<script src="../assets/js/dp-theme.js"></script>
+<script src="js/seller-script.js"></script>
+<script src="js/dp-ui.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+onDPReady(async (me) => {
+  const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  (function storeTheme() {
+    const T = window.DPTheme;
+    if (!T) return;
+
+    const el2 = (i) => document.getElementById(i);
+    const lockBox = el2('thLock');
+    const wrap    = el2('thPickWrap');
+    const picker  = el2('thPicker');
+    const stage   = el2('thStage');
+    if (!lockBox || !picker) return;
+
+    /* ---------- حالت جاری ---------- */
+    const saved = T.readLock(me.id) || {};
+    let pick = T.SECTIONS.indexOf(saved.section) > -1 ? saved.section : guessSection();
+    let custom = Object.assign({}, saved.custom || {});
+    let guard = true;
+
+    /* پرکالاترین بخش فروشنده — پیشنهاد اولیه */
+    function guessSection() {
+      try {
+        const all = window.DPSafe ? DPSafe.products() : [];
+        const mine = all.filter((p) => p.sellerId === me.id && p.status === 'active');
+        return T.resolve({ sellerId: '', products: mine, category: me.category }).section;
+      } catch (e) { return 'women'; }
+    }
+
+    /** متغیرهای نهایی — تم پایه + سفارشی‌سازی */
+    function finalVars(useGuard) {
+      const base = T.THEMES[pick];
+      const v = {};
+      Object.keys(base.vars).forEach((k) => { v[k] = base.vars[k]; });
+      T.mergeCustom(v, custom, useGuard !== false && guard);
+      return v;
+    }
+
+    /* ============================================================
+       پر کردن منوهای ریز از فهرست رسمی
+       ------------------------------------------------------------
+       اگر خانواده‌ی شکل تازه‌ای اضافه شود، اینجا خودکار می‌آید —
+       نیازی به دست‌زدن به HTML نیست.
+       ============================================================ */
+    (function fillSelects() {
+      const F = T.CHOICE_FA || {};
+      const build = (id, list, fa, dflt) => {
+        const el = el2(id);
+        if (!el) return;
+        el.innerHTML = `<option value="">${dflt}</option>` +
+          list.map((v) => `<option value="${esc(v)}">${esc((fa && fa[v]) || v)}</option>`).join('');
+      };
+      build('thShapeSel', T.CHOICES.shapes, F.shapes, 'پیش‌فرض');
+      build('thMotionSel', T.CHOICES.motion, F.motion, 'پیش‌فرض');
+      build('thDensity', T.CHOICES.density, F.density, 'پیش‌فرض');
+    })();
+
+    /* ============================================================
+       ظاهرهای آماده — گام اصلی
+       ------------------------------------------------------------
+       فروشنده فقط یکی را می‌زند. هفت رنگ یکجا و هماهنگ اعمال
+       می‌شود، بدون اینکه لازم باشد چیزی درباره‌ی کنتراست بداند.
+       ============================================================ */
+    function drawLooks() {
+      const box = el2('thLooks');
+      if (!box) return;
+      const now = custom.look || T.matchLook(custom);
+
+      box.innerHTML = T.LOOKS.map((l) => `
+        <button class="th-look${l.key === now ? ' on' : ''}" type="button"
+                data-look="${esc(l.key)}" aria-pressed="${l.key === now}"
+                style="--lk-bg:${l.bg};--lk-sf:${l.surface};--lk-ink:${l.ink};
+                       --lk-mute:${l.mute};--lk-pri:${l.primary};--lk-sec:${l.second}">
+          <span class="th-look-pv" aria-hidden="true">
+            <span class="th-look-card">
+              <i class="th-look-line"></i>
+              <i class="th-look-line short"></i>
+              <i class="th-look-btn"></i>
+            </span>
+          </span>
+          <span class="th-look-txt">
+            <b>${esc(l.label)}</b>
+            <em>${esc(l.mood)}</em>
+          </span>
+        </button>`).join('');
+    }
+
+    /* ============================================================
+       حال‌وهوای شکل‌ها — چهار گزینه، نه سه منوی جدا
+       ------------------------------------------------------------
+       پیش‌تر فروشنده باید شکل، حرکت و تراکم را جداگانه انتخاب
+       می‌کرد — سه تصمیم که ترکیب‌های بی‌معنا هم می‌ساختند
+       (مثلاً بادکنک با چرخش). حالا چهار حال‌وهوای آماده هست.
+       ============================================================ */
+    const VIBES = [
+      { key: '',        label: 'پیش‌فرض', note: 'هماهنگ با بخش' },
+      { key: 'calm',    label: 'آرام',    note: 'گلبرگ شناور',
+        shapes: 'petals', motion: 'drift', density: 4 },
+      { key: 'lively',  label: 'سرزنده',  note: 'بادکنک جهنده',
+        shapes: 'balloons', motion: 'bounce', density: 11 },
+      { key: 'sharp',   label: 'رسمی',    note: 'هندسی چرخان',
+        shapes: 'geo', motion: 'spin', density: 7 },
+      { key: 'dreamy',  label: 'رؤیایی',  note: 'حباب صعودی',
+        shapes: 'bubbles', motion: 'rise', density: 11 },
+      { key: 'autumn',  label: 'پاییزی',  note: 'برگ در باد',
+        shapes: 'leaves', motion: 'sway', density: 11 },
+      { key: 'magic',   label: 'جادویی',  note: 'درخشش نبض‌دار',
+        shapes: 'sparks', motion: 'pulse', density: 16 },
+      { key: 'ocean',   label: 'دریایی',  note: 'موج شناور',
+        shapes: 'waves', motion: 'float', density: 7 },
+      { key: 'snow',    label: 'بارشی',   note: 'ستاره از بالا',
+        shapes: 'sparks', motion: 'fall', density: 16 },
+      { key: 'cosmic',  label: 'کهکشانی', note: 'مدار نئون',
+        shapes: 'neon', motion: 'orbit', density: 7 },
+      { key: 'zen',     label: 'مینیمال', note: 'نفس آرام',
+        shapes: 'waves', motion: 'breathe', density: 4 },
+      { key: 'plain',   label: 'ساده',    note: 'بدون شکل',
+        shapes: 'none', motion: 'none', density: 0 },
+    ];
+
+    /** حال‌وهوای جاری را از تنظیم‌های ریز حدس می‌زند */
+    function currentVibe() {
+      if (custom.shapes === 'none' || custom.density === 0) return 'plain';
+      let hit = '';
+      VIBES.forEach((v) => {
+        if (v.key && custom.shapes === v.shapes && custom.motion === v.motion) hit = v.key;
+      });
+      if (hit) return hit;
+      return custom.shapes || custom.motion ? '' : '';
+    }
+
+    function drawVibes() {
+      const box = el2('thVibes');
+      if (!box) return;
+      const now = currentVibe();
+      const noneSet = !custom.shapes && !custom.motion && custom.density == null;
+
+      box.innerHTML = VIBES.map((v) => {
+        const on = v.key ? v.key === now : noneSet;
+        return `<button class="th-vibe${on ? ' on' : ''}" type="button"
+                  data-vibe="${v.key}" aria-pressed="${on}">
+          <b>${esc(v.label)}</b><em>${esc(v.note)}</em>
+        </button>`;
+      }).join('');
+    }
+
+    /* ============================================================
+       ردیف‌های رنگ — هر کدام با نشانگر تغییر
+       ============================================================ */
+    const COLOR_KEYS = ['bg', 'surface', 'ink', 'mute', 'primary', 'second', 'accent'];
+
+    function drawColors() {
+      const base = T.THEMES[pick].vars;
+      const box = el2('thColors');
+      if (!box) return;
+
+      box.innerHTML = COLOR_KEYS.map((k) => {
+        const f = T.FIELDS[k];
+        const val = custom[k] || base[f.css];
+        const changed = !!custom[k];
+        return `
+          <label class="th-row${changed ? ' is-set' : ''}" for="thc-${k}">
+            <input type="color" id="thc-${k}" data-color-key="${k}" value="${val}"
+                   aria-label="${esc(f.label)}" />
+            <span class="th-row-txt">
+              <b>${esc(f.label)}</b>
+              <em>${val}</em>
+            </span>
+            ${changed
+              ? `<button class="th-row-x" type="button" data-th-reset="${k}"
+                   aria-label="بازگشت ${esc(f.label)} به پیش‌فرض">
+                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                        stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                 </button>`
+              : ''}
+          </label>`;
+      }).join('');
+    }
+
+    /* ============================================================
+       پیش‌نمایش زنده
+       ============================================================ */
+    function drawPreview() {
+      if (!stage) return;
+      const v = finalVars();
+
+      Object.keys(v).forEach((k) => stage.style.setProperty(k, v[k]));
+      stage.style.setProperty('--st-flow', T.THEMES[pick].flow);
+      stage.dataset.theme = pick;
+
+      el2('thPvName').textContent = me.storeName || 'فروشگاه شما';
+      el2('thPvMood').textContent = custom.name || T.THEMES[pick].mood;
+
+      /* شکل‌های تزئینی، با انتخاب فروشنده */
+      const box = el2('thShapes');
+      if (box) T.paintAmbient(box, pick, custom);
+
+      drawWarnings();
+    }
+
+    /* ============================================================
+       هشدار خوانایی
+       ------------------------------------------------------------
+       فروشنده آزاد است رنگ دلخواهش را بگذارد — ولی اگر نتیجه
+       ناخوانا شد، باید بداند. محافظ پیش‌فرض روشن است.
+       ============================================================ */
+    function drawWarnings() {
+      const box = el2('thWarn');
+      const list = el2('thWarnList');
+      if (!box || !list) return;
+
+      /* هشدار روی مقدار خامِ فروشنده حساب می‌شود، نه اصلاح‌شده —
+         وگرنه با محافظ روشن هرگز هشداری دیده نمی‌شد */
+      const raw = finalVars(false);
+      const bad = T.auditColors(raw);
+
+      if (!bad.length) { box.hidden = true; return; }
+
+      box.hidden = false;
+      list.innerHTML = bad.map((w) =>
+        `<li>${esc(w.label)} — نسبت <b>${toFa(w.ratio)}</b> است، ` +
+        `دست‌کم <b>${toFa(w.need)}</b> لازم است</li>`).join('');
+    }
+
+    /* ============================================================
+       همگام‌سازی فرم
+       ============================================================ */
+    function syncInputs() {
+      const base = T.THEMES[pick].vars;
+
+      const r = custom.radius != null ? custom.radius : parseInt(base['--st-radius'], 10);
+      el2('thRadius').value = r;
+      el2('thRadiusVal').textContent = toFa(r);
+
+      const bw = custom.border != null ? custom.border : 2;
+      el2('thBorder').value = bw;
+      el2('thBorderVal').textContent = toFa(bw);
+
+      el2('thShapeSel').value = custom.shapes || '';
+      el2('thMotionSel').value = custom.motion || '';
+      el2('thDensity').value = custom.density != null ? String(custom.density) : '';
+      el2('thName').value = custom.name || '';
+      el2('thGuard').checked = guard;
+    }
+
+    function refresh() {
+      if (typeof drawMode === 'function') drawMode();
+      drawLooks();
+      drawVibes();
+      drawColors();
+      syncInputs();
+      drawPreview();
+    }
+
+    /* ============================================================
+       رویدادها
+       ============================================================ */
+    lockBox.checked = !!saved.locked;
+    wrap.hidden = false;
+
+    /* ============================================================
+       حالت ویترین — خودکار یا دلخواه
+       ------------------------------------------------------------
+       «خودکار» یعنی رکورد تم به‌کلی پاک می‌شود، نه اینکه فقط
+       خاموش بماند. پس ویترین دوباره همان رفتار اولیه را دارد:
+       هر مشتری متناسب با بخشی که از آن آمده، ویترین را می‌بیند.
+       ============================================================ */
+    function drawMode() {
+      const box = el2('thMode');
+      if (!box) return;
+      const auto = !lockBox.checked;
+
+      box.querySelectorAll('[data-mode]').forEach((b) => {
+        const on = (b.dataset.mode === 'auto') === auto;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+
+      /* در حالت خودکار، ابزار ساخت کم‌رنگ می‌شود ولی قفل نیست —
+         فروشنده می‌تواند ظاهرش را بسازد و بعد فعالش کند */
+      el2('thPickWrap')?.classList.toggle('is-dim', auto);
+      const looks = el2('thLooks')?.closest('.card');
+      if (looks) looks.classList.toggle('has-auto', auto);
+
+      const note = el2('thAutoNote');
+      if (note) note.hidden = !auto;
+      if (auto) drawAutoRow();
+
+      drawSideNote();
+    }
+
+    /** چهار نمونه‌ی کوچک — نشان می‌دهد هر مشتری چه می‌بیند */
+    function drawAutoRow() {
+      const row = el2('thAutoRow');
+      if (!row) return;
+      row.innerHTML = T.SECTIONS.map((k) => {
+        const t = T.THEMES[k];
+        const v = t.vars;
+        return `
+          <span class="th-auto-chip"
+                style="--ac-bg:${v['--st-bg']};--ac-sf:${v['--st-surface']};
+                       --ac-ink:${v['--st-ink']};--ac-pri:${v['--st-primary']};
+                       --ac-sec:${v['--st-second']}">
+            <i class="th-auto-pv" aria-hidden="true"><b></b></i>
+            <em>${esc(t.label)}</em>
+          </span>`;
+      }).join('');
+    }
+
+    el2('thMode').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-mode]');
+      if (!b) return;
+      const wantAuto = b.dataset.mode === 'auto';
+      if (wantAuto === !lockBox.checked) return;      /* همین حالا همان است */
+
+      if (wantAuto) {
+        /* بازگشت به خودکار — رکورد پاک می‌شود */
+        const hasWork = Object.keys(custom).length > 0;
+        if (hasWork && !confirm(
+            'ویترین به حالت خودکار برمی‌گردد و ظاهر دلخواه شما پاک می‌شود. مطمئنید؟')) return;
+
+        T.clearLock(me.id);
+        custom = {};
+        pick = guessSection();
+        lockBox.checked = false;
+        refresh();
+        drawMode();
+        toast('ویترین به حالت خودکار برگشت — هر مشتری متناسب با بخش خودش می‌بیند.', 'success');
+        return;
+      }
+
+      lockBox.checked = true;
+      drawMode();
+    });
+
+
+
+    /* ---------- ظاهر آماده ---------- */
+    el2('thLooks').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-look]');
+      if (!b) return;
+
+      const c = T.lookToCustom(b.dataset.look);
+      if (!c) return;
+
+      /* رنگ‌ها یکجا عوض می‌شوند؛ شکل و حرکت و نام دست‌نخورده
+         می‌مانند چون تصمیم جداگانه‌ای هستند */
+      COLOR_KEYS.forEach((k) => delete custom[k]);
+      Object.keys(c).forEach((k) => { custom[k] = c[k]; });
+
+      /* انتخاب ظاهر یعنی فروشنده حالت دلخواه می‌خواهد */
+      if (!lockBox.checked) { lockBox.checked = true; drawMode(); }
+      refresh();
+    });
+
+    /* ---------- حال‌وهوا ---------- */
+    el2('thVibes').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-vibe]');
+      if (!b) return;
+      const v = VIBES.find((x) => x.key === b.dataset.vibe);
+      if (!v) return;
+
+      if (!v.key) {
+        delete custom.shapes; delete custom.motion; delete custom.density;
+      } else {
+        custom.shapes = v.shapes;
+        custom.motion = v.motion;
+        custom.density = v.density;
+      }
+      refresh();
+    });
+
+    /* ---------- تم پایه (فقط در حالت پیشرفته) ---------- */
+    if (picker) picker.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-th]');
+      if (!b || b.dataset.th === pick) return;
+      pick = b.dataset.th;
+      COLOR_KEYS.forEach((k) => delete custom[k]);
+      delete custom.look;
+      refresh();
+    });
+
+    /* ---------- رنگ‌ها ---------- */
+    el2('thColors').addEventListener('input', (e) => {
+      const inp = e.target.closest('[data-color-key]');
+      if (!inp) return;
+      custom[inp.dataset.colorKey] = inp.value.toLowerCase();
+      /* دست‌بردن در رنگ یعنی دیگر «ظاهر آماده» نیست */
+      delete custom.look;
+      /* فقط متن کنار همان ردیف به‌روز می‌شود — بازسازی کامل
+         انتخابگر رنگ را می‌بندد */
+      const em = inp.parentElement.querySelector('em');
+      if (em) em.textContent = inp.value.toLowerCase();
+      inp.parentElement.classList.add('is-set');
+      /* ظاهر آماده دیگر معتبر نیست، پس تیکش برداشته می‌شود */
+      drawLooks();
+      drawPreview();
+    });
+
+    /* پس از رها کردن، ردیف بازسازی می‌شود تا دکمه‌ی حذف بیاید */
+    el2('thColors').addEventListener('change', () => { drawColors(); });
+
+    el2('thColors').addEventListener('click', (e) => {
+      const x = e.target.closest('[data-th-reset]');
+      if (!x) return;
+      e.preventDefault();
+      delete custom[x.dataset.thReset];
+      drawColors();
+      drawPreview();
+    });
+
+    el2('thResetAll').addEventListener('click', () => {
+      if (!confirm('رنگ‌های دستی پاک شود و به ظاهر آماده برگردد؟')) return;
+      COLOR_KEYS.forEach((k) => delete custom[k]);
+      delete custom.look;
+      refresh();
+      toast('رنگ‌ها به حالت اولیه برگشت.', 'success');
+    });
+
+    /* ---------- لغزنده‌ها ---------- */
+    el2('thRadius').addEventListener('input', (e) => {
+      custom.radius = Number(e.target.value);
+      el2('thRadiusVal').textContent = toFa(custom.radius);
+      drawPreview();
+    });
+
+    el2('thBorder').addEventListener('input', (e) => {
+      custom.border = Number(e.target.value);
+      el2('thBorderVal').textContent = toFa(custom.border);
+      drawPreview();
+    });
+
+    /* ---------- شکل، حرکت، تراکم ---------- */
+    el2('thShapeSel').addEventListener('change', (e) => {
+      if (e.target.value) custom.shapes = e.target.value;
+      else delete custom.shapes;
+      drawVibes();
+      drawPreview();
+    });
+
+    el2('thMotionSel').addEventListener('change', (e) => {
+      if (e.target.value) custom.motion = e.target.value;
+      else delete custom.motion;
+      drawVibes();
+      drawPreview();
+    });
+
+    el2('thDensity').addEventListener('change', (e) => {
+      if (e.target.value !== '') custom.density = Number(e.target.value);
+      else delete custom.density;
+      drawVibes();
+      drawPreview();
+    });
+
+    el2('thName').addEventListener('input', (e) => {
+      const v = e.target.value.trim();
+      if (v) custom.name = v; else delete custom.name;
+      el2('thPvMood').textContent = v || T.THEMES[pick].mood;
+    });
+
+    el2('thGuard').addEventListener('change', (e) => {
+      guard = e.target.checked;
+      drawPreview();
+    });
+
+    /* ---------- ذخیره ---------- */
+    el2('thSave').addEventListener('click', () => {
+      /* اگر محافظ روشن است، رنگ‌های اصلاح‌شده ذخیره می‌شوند —
+         نه مقدار خام. وگرنه صفحه‌ی واقعی با محافظ خاموش
+         ناخوانا می‌شد. */
+      let toSave = Object.assign({}, custom);
+
+      if (guard) {
+        const fixed = finalVars(true);
+        const base = T.THEMES[pick].vars;
+        COLOR_KEYS.forEach((k) => {
+          const css = T.FIELDS[k].css;
+          if (custom[k] && fixed[css] !== custom[k]) toSave[k] = fixed[css];
+        });
+      }
+
+      const ok = T.saveLock(me.id, pick, lockBox.checked, toSave);
+      if (!ok) { toast('ذخیره‌ی تم ممکن نشد.', 'error'); return; }
+
+      /* اگر محافظ چیزی را عوض کرده، به فروشنده می‌گوییم */
+      const changed = COLOR_KEYS.filter((k) => custom[k] && toSave[k] !== custom[k]).length;
+
+      custom = Object.assign({}, toSave);
+      refresh();
+
+      if (!lockBox.checked) {
+        toast('تم آزاد شد — ویترین با بخشی که مشتری از آن می‌آید هماهنگ می‌شود.', 'success');
+      } else if (changed) {
+        toast(`تم ذخیره شد. ${toFa(changed)} رنگ برای خوانایی کمی تیره‌تر شد.`, 'success');
+      } else {
+        toast(`ویترین شما همیشه با تم «${custom.name || T.THEMES[pick].label}» دیده می‌شود.`, 'success');
+      }
+    });
+
+    /* ============================================================
+       دکمه‌ی «دیدن نتیجه»
+       ------------------------------------------------------------
+       روی موبایل نوار پیش‌نمایش بالای صفحه می‌چسبد، ولی اگر
+       کاربر خیلی پایین برود از دید خارج می‌شود. این دکمه
+       برش می‌گرداند — و فقط وقتی ظاهر می‌شود که واقعاً لازم است.
+       ============================================================ */
+    (function jumpBtn() {
+      const btn = document.getElementById('thJump');
+      const side = document.querySelector('.th-side');
+      if (!btn || !side || !window.IntersectionObserver) return;
+
+      const io = new IntersectionObserver((rows) => {
+        rows.forEach((r) => {
+          /* وقتی پیش‌نمایش از دید رفت، دکمه می‌آید */
+          const gone = !r.isIntersecting;
+          btn.hidden = !gone;
+          btn.classList.toggle('show', gone);
+        });
+      }, { threshold: 0.12 });
+
+      io.observe(side);
+
+      btn.addEventListener('click', () => {
+        side.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    })();
+
+    /* راهنمای کوتاه زیر دکمه‌ی ذخیره */
+    function drawSideNote() {
+      const n = el2('thSideNote');
+      if (!n) return;
+      n.innerHTML = lockBox.checked
+        ? 'پس از ذخیره، مشتری ویترین شما را <b>دقیقاً همین‌طور</b> می‌بیند.'
+        : 'حالت <b>خودکار</b> روشن است — این فقط پیش‌نمایش است.';
+    }
+
+    drawSideNote();
+    drawMode();
+    refresh();
+  })();
+});
+</script>
+</body>
+</html>

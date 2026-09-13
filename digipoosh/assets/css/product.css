@@ -1,0 +1,2407 @@
+/* ============================================================
+   دیجی‌پوش — صفحه‌ی اختصاصی هر کالا
+   ------------------------------------------------------------
+   همه‌چیز حول طلای برند #c9a84c. بدون ایموجی، بدون کتابخانه.
+   ============================================================ */
+
+:root {
+  --pd-gold: #c9a84c;
+  --pd-gold-lite: #d4b85a;
+  --pd-bronze: #b8943c;
+  --pd-gold-text: #8a6d1f;
+  --pd-ink: #1a1a1a;
+  --pd-body: #4a4038;
+  --pd-gray: #75695f;
+  --pd-cream: #f5f0e8;
+  --pd-white: #fdfbf7;
+  --pd-card: #ffffff;
+  --pd-line: rgba(201, 168, 76, 0.24);
+  --pd-line-soft: rgba(201, 168, 76, 0.14);
+  --pd-glow: rgba(201, 168, 76, 0.13);
+  --pd-good: #3d7a59;
+  --pd-bad: #a33d38;
+  --pd-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pd-wrap {
+  width: min(1280px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* ============================================================
+   مسیر بالای صفحه
+   ============================================================ */
+.pd-crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 16px 0;
+  font-size: 12.5px;
+  color: var(--pd-gray);
+}
+.pd-crumbs a {
+  color: var(--pd-gray);
+  text-decoration: none;
+  transition: color 0.2s var(--pd-ease);
+}
+.pd-crumbs a:hover { color: var(--pd-gold-text); }
+.pd-crumbs strong {
+  color: var(--pd-ink);
+  font-weight: 700;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pd-crumbs span { opacity: 0.5; }
+
+/* ============================================================
+   چیدمان اصلی
+   ============================================================ */
+.pd-top {
+  display: grid;
+
+  /* ---------- تقسیم فضا ----------
+     عکس مهم‌ترین چیز صفحه‌ی کالاست — مشتری با چشم می‌خرد.
+     ولی نباید آنقدر بزرگ باشد که قیمت و دکمه‌ی خرید زیر
+     خط دید بیفتند.
+
+     اندازه‌ی حرفه‌ای بازار:
+       زارا ~۶۵۰px · نت‌آ‌پورته ~۶۲۰px · ASOS ~۶۰۰px
+
+     `clamp` عرض را بین ۳۶۰ و ۶۲۰ نگه می‌دارد و بین این دو،
+     ۴۸٪ فضا را می‌گیرد. ستون خرید هم دست‌کم ۳۶۰px می‌ماند
+     تا دکمه و قیمت جا شوند. */
+  grid-template-columns:
+    clamp(400px, 52%, 670px)
+    minmax(340px, 1fr);
+  gap: 44px;
+  align-items: start;
+  padding-bottom: 40px;
+}
+
+/* ============================================================
+   نگارخانه
+   ============================================================ */
+.pd-gallery {
+  position: sticky;
+  top: 84px;
+}
+
+.pd-stage {
+  position: relative;
+
+  /* ---------- نسبت و سقف ----------
+     نسبت ۴:۵ استاندارد عکس پوشاک است (همان چیزی که همه‌ی
+     فروشگاه‌های مد استفاده می‌کنند) — قامت انسان را بهتر
+     نشان می‌دهد تا مربع.
+
+     سقف ارتفاع بر پایه‌ی **ارتفاع پنجره** است، نه عدد ثابت:
+     روی لپ‌تاپ کوتاه، عکس کوچک‌تر می‌شود تا قیمت هم دیده
+     شود؛ روی مانیتور بلند، بزرگ‌تر. */
+  aspect-ratio: 4 / 5;
+  max-height: min(840px, calc(100vh - 130px));
+
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--pd-cream), #ece5d8);
+  border: 1px solid var(--pd-line);
+  display: grid;
+  place-items: center;
+}
+
+.pd-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pd-letter {
+  font-size: 76px;
+  font-weight: 800;
+  color: rgba(201, 168, 76, 0.4);
+}
+
+.pd-zoom {
+  position: absolute;
+  bottom: 16px;
+  inset-inline-start: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 42px;
+  padding: 0 15px;
+  border-radius: 99px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--pd-ink);
+  background: rgba(253, 251, 247, 0.92);
+  border: 1px solid var(--pd-line);
+  backdrop-filter: blur(4px);
+  transition: transform 0.24s var(--pd-ease), background 0.24s var(--pd-ease);
+}
+.pd-zoom svg { width: 18px; height: 18px; flex: none; }
+.pd-zoom:hover { transform: scale(1.1); background: #fff; }
+
+/* ---------- نشان‌های روی عکس ---------- */
+.pd-off, .pd-low, .pd-out {
+  position: absolute;
+  top: 14px;
+  inset-inline-end: 14px;
+  padding: 5px 13px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 800;
+  font-style: normal;
+}
+.pd-off {
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  box-shadow: 0 6px 16px -8px rgba(201, 168, 76, 0.9);
+}
+.pd-low {
+  top: auto; bottom: 14px; inset-inline-end: 14px;
+  color: #fff; background: var(--pd-bad);
+}
+.pd-out {
+  top: 50%; inset-inline: 0;
+  width: max-content; margin-inline: auto;
+  translate: 0 -50%;
+  padding: 9px 22px;
+  font-size: 14px;
+  color: #fff;
+  background: rgba(26, 26, 26, 0.82);
+}
+
+/* ---------- بندانگشتی‌ها ---------- */
+.pd-thumbs {
+  display: flex;
+  gap: 9px;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+.pd-thumb {
+  flex: 0 0 auto;
+  /* بزرگ‌تر از قبل (۷۰px) — بندانگشتی باید آنقدر باشد که
+     بشود تشخیص داد کدام عکس است، نه فقط یک لکه‌ی رنگ */
+  width: 84px;
+  height: 105px;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--pd-cream);
+  border: 2px solid transparent;
+  transition: border-color 0.22s var(--pd-ease), opacity 0.22s var(--pd-ease);
+  opacity: 0.68;
+}
+.pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pd-thumb:hover { opacity: 1; }
+.pd-thumb.on { border-color: var(--pd-gold); opacity: 1; }
+
+/* ============================================================
+   ستون خرید
+   ============================================================ */
+.pd-name {
+  margin: 0 0 12px;
+  font-size: clamp(20px, 2.6vw, 27px);
+  font-weight: 800;
+  line-height: 1.55;
+  color: var(--pd-ink);
+  overflow-wrap: anywhere;
+}
+
+.pd-topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--pd-line-soft);
+  font-size: 12.5px;
+  color: var(--pd-gray);
+}
+.pd-topline > * { display: inline-flex; align-items: center; gap: 6px; }
+.pd-topline .ico-s { width: 14px; height: 14px; color: var(--pd-gold-text); }
+
+.pd-rate {
+  text-decoration: none;
+  color: var(--pd-gray);
+  transition: color 0.2s var(--pd-ease);
+}
+.pd-rate:hover { color: var(--pd-gold-text); }
+.pd-rate b { font-size: 13.5px; font-weight: 800; color: var(--pd-ink); }
+.pd-rate.none { cursor: default; }
+
+.pd-stars { display: inline-flex; gap: 1px; }
+.pd-stars svg { width: 15px; height: 15px; color: rgba(138, 126, 114, 0.3); }
+.pd-stars svg.f { color: var(--pd-gold); }
+
+/* ---------- قیمت ---------- */
+.pd-pricebox {
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  background: linear-gradient(140deg, var(--pd-glow), rgba(201, 168, 76, 0.05));
+  border: 1px solid var(--pd-line);
+}
+.pd-priceline { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.pd-old {
+  font-size: 14px;
+  color: var(--pd-gray);
+  text-decoration: line-through;
+}
+.pd-badge {
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+}
+.pd-price {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--pd-ink);
+}
+.pd-price small { font-size: 14px; font-weight: 600; margin-inline-start: 6px; color: var(--pd-gray); }
+
+.pd-saved {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pd-good);
+}
+.pd-saved .ico-s { width: 15px; height: 15px; flex: none; }
+
+.pd-timer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--pd-line);
+  font-size: 12px;
+  color: var(--pd-bad);
+  font-weight: 600;
+}
+.pd-timer .ico-s { width: 14px; height: 14px; flex: none; }
+.pd-timer b { font-weight: 800; }
+
+/* ---------- موجودی ---------- */
+.pd-stock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 9px 13px;
+  border-radius: 11px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.pd-stock .ico-s { width: 15px; height: 15px; flex: none; }
+.pd-stock.ok  { color: var(--pd-good); background: rgba(61, 122, 89, 0.08); }
+.pd-stock.low { color: var(--pd-bad);  background: rgba(163, 61, 56, 0.08); }
+.pd-stock.out { color: var(--pd-gray); background: rgba(138, 126, 114, 0.1); }
+
+/* ---------- انتخاب رنگ و سایز ---------- */
+.pd-pick { margin-bottom: 18px; }
+.pd-pick h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pd-body);
+}
+.pd-pick h3 em {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12.5px;
+  color: var(--pd-gray);
+}
+
+.pd-guide {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--pd-gold-text);
+  background: var(--pd-glow);
+  border: 1px solid var(--pd-line);
+  transition: background 0.2s var(--pd-ease);
+}
+.pd-guide .ico-s { width: 13px; height: 13px; }
+.pd-guide:hover { background: rgba(201, 168, 76, 0.22); }
+
+.pd-dots { display: flex; flex-wrap: wrap; gap: 10px; }
+.pd-dot {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  padding: 3px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid transparent;
+  transition: border-color 0.22s var(--pd-ease), transform 0.22s var(--pd-ease);
+}
+.pd-dot i {
+  display: block;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+.pd-dot:hover { transform: scale(1.1); border-color: rgba(201, 168, 76, 0.55); }
+.pd-dot.on { border-color: var(--pd-gold); }
+.pd-dot.on::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+}
+
+.pd-sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+.pd-size {
+  min-width: 54px;
+  padding: 9px 14px;
+  border-radius: 11px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--pd-body);
+  background: var(--pd-card);
+  border: 1px solid var(--pd-line);
+  transition: all 0.22s var(--pd-ease);
+}
+.pd-size:hover { border-color: var(--pd-gold); transform: translateY(-1px); }
+.pd-size.on {
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  border-color: transparent;
+  box-shadow: 0 5px 14px -6px rgba(201, 168, 76, 0.75);
+}
+
+.pd-warn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 9px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pd-bad);
+}
+.pd-warn .ico-s { width: 14px; height: 14px; flex: none; }
+
+/* ---------- تعداد و افزودن ---------- */
+.pd-buyrow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 11px;
+  margin-bottom: 14px;
+}
+
+.pd-qty {
+  display: flex;
+  align-items: center;
+  border-radius: 13px;
+  background: var(--pd-card);
+  border: 1px solid var(--pd-line);
+  overflow: hidden;
+}
+.pd-qty button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 50px;
+  cursor: pointer;
+  color: var(--pd-body);
+  background: transparent;
+  border: 0;
+  transition: background 0.2s var(--pd-ease), color 0.2s var(--pd-ease);
+}
+.pd-qty button:hover { color: var(--pd-gold-text); background: var(--pd-glow); }
+.pd-qty .ico-s { width: 15px; height: 15px; }
+.pd-qty b {
+  min-width: 34px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.pd-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: 50px;
+  border-radius: 13px;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 800;
+  cursor: pointer;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  border: 0;
+  box-shadow: 0 10px 26px -12px rgba(201, 168, 76, 0.9);
+  transition: transform 0.22s var(--pd-ease), filter 0.22s var(--pd-ease);
+}
+.pd-add svg { width: 20px; height: 20px; }
+.pd-add:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.04); }
+.pd-add:active:not(:disabled) { transform: translateY(0); }
+.pd-add:disabled {
+  cursor: not-allowed;
+  color: var(--pd-gray);
+  background: rgba(138, 126, 114, 0.16);
+  box-shadow: none;
+}
+.pd-add.done {
+  background: linear-gradient(135deg, #4a9f74, var(--pd-good));
+  color: #fff;
+}
+
+/* ---------- کارهای جانبی ---------- */
+.pd-side {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 20px;
+}
+.pd-sbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--pd-body);
+  background: var(--pd-card);
+  border: 1px solid var(--pd-line);
+  transition: all 0.22s var(--pd-ease);
+}
+.pd-sbtn .ico-s { width: 16px; height: 16px; flex: none; }
+.pd-sbtn:hover { border-color: var(--pd-gold); color: var(--pd-ink); }
+.pd-sbtn.on {
+  color: var(--pd-bad);
+  background: rgba(163, 61, 56, 0.07);
+  border-color: rgba(163, 61, 56, 0.3);
+}
+.pd-sbtn.on .ico-s { fill: currentColor; }
+
+/* ---------- ضمانت‌ها ---------- */
+.pd-trust {
+  list-style: none;
+  margin: 0;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--pd-white);
+  border: 1px solid var(--pd-line-soft);
+  display: grid;
+  gap: 14px;
+}
+.pd-trust li { display: flex; align-items: flex-start; gap: 11px; }
+.pd-trust svg { width: 20px; height: 20px; flex: none; color: var(--pd-gold); margin-top: 2px; }
+.pd-trust b { display: block; font-size: 13px; font-weight: 700; }
+.pd-trust span { font-size: 12px; color: var(--pd-gray); line-height: 1.7; }
+
+/* ============================================================
+   پنل‌های پایین
+   ============================================================ */
+.pd-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  padding-bottom: 40px;
+}
+
+.pd-panel {
+  padding: 20px 22px;
+  margin-bottom: 20px;
+  border-radius: 18px;
+  background: var(--pd-white);
+  border: 1px solid var(--pd-line-soft);
+  box-shadow: 0 6px 26px -20px rgba(26, 26, 26, 0.45);
+}
+.pd-panel:last-child { margin-bottom: 0; }
+
+.pd-panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--pd-ink);
+}
+.pd-panel h2 svg { width: 19px; height: 19px; color: var(--pd-gold); }
+
+.pd-desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 2;
+  color: var(--pd-body);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- جدول مشخصات ---------- */
+.pd-spectable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.pd-spectable th,
+.pd-spectable td {
+  padding: 10px 12px;
+  text-align: start;
+  vertical-align: top;
+}
+.pd-spectable tbody tr { border-bottom: 1px solid var(--pd-line-soft); }
+.pd-spectable tbody tr:last-child { border-bottom: 0; }
+.pd-spectable tbody tr:nth-child(even) { background: rgba(245, 240, 232, 0.5); }
+.pd-spectable th {
+  width: 38%;
+  font-weight: 600;
+  color: var(--pd-gray);
+  white-space: nowrap;
+}
+.pd-spectable td { font-weight: 600; color: var(--pd-ink); overflow-wrap: anywhere; }
+.pd-spectable thead th {
+  font-weight: 800;
+  color: var(--pd-ink);
+  background: var(--pd-glow);
+  border-bottom: 1px solid var(--pd-line);
+  width: auto;
+}
+.pd-spectable tbody tr.on { background: var(--pd-glow); }
+.pd-spectable tbody tr.on th { color: var(--pd-gold-text); font-weight: 800; }
+
+/* ---------- کارت فروشنده ---------- */
+.pd-shopcard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+.pd-shopava {
+  width: 58px; height: 58px;
+  border-radius: 16px;
+  display: grid; place-items: center;
+  overflow: hidden;
+  font-size: 22px; font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--pd-gold), var(--pd-bronze));
+}
+.pd-shopava img { width: 100%; height: 100%; object-fit: cover; }
+.pd-shopinfo { min-width: 0; }
+.pd-shoplabel { font-size: 11px; color: var(--pd-gray); }
+.pd-shopinfo h3 {
+  margin: 2px 0 6px;
+  font-size: 15.5px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.pd-shopmeta {
+  display: flex; flex-wrap: wrap; gap: 4px 12px;
+  font-size: 11.5px; color: var(--pd-gray);
+}
+.pd-shopmeta span { display: inline-flex; align-items: center; gap: 4px; }
+.pd-shopmeta .ico-s { width: 13px; height: 13px; color: var(--pd-gold); }
+
+.pd-shopgo {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 14px;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--pd-gold-text);
+  background: var(--pd-glow);
+  border: 1px solid var(--pd-line);
+  transition: background 0.22s var(--pd-ease);
+}
+.pd-shopgo .ico-s { width: 16px; height: 16px; }
+.pd-shopgo:hover { background: rgba(201, 168, 76, 0.22); }
+
+/* ============================================================
+   نوارهای پیشنهاد — بازطراحی فشرده
+   ------------------------------------------------------------
+   ایراد پیشین: `grid-auto-columns: minmax(178px, 1fr)` بود.
+   کلمه‌ی `1fr` یعنی «هرچه فضا هست را بگیر». وقتی فقط سه کالا
+   وجود داشت، هر کارت یک‌سوم صفحه می‌شد — غول‌آسا و زشت.
+
+   حالا عرض ثابت است: کارت‌ها هر تعدادی که باشند، همان اندازه
+   می‌مانند و اگر جا زیاد بود، فقط فضای خالی می‌ماند نه کارت
+   کش‌آمده.
+   ============================================================ */
+.pd-strip {
+  padding-block: 26px;
+  border-top: 1px solid var(--pd-line-soft);
+}
+.pd-strip:first-child { border-top: 0; padding-top: 8px; }
+
+.pd-strip-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 15px;
+}
+
+/* خط طلایی کوتاه کنار عنوان — امضای بصری برند */
+.pd-strip-head h2 {
+  position: relative;
+  margin: 0;
+  padding-inline-start: 13px;
+  font-size: clamp(15px, 1.7vw, 17.5px);
+  font-weight: 800;
+  color: var(--pd-ink);
+  letter-spacing: -0.2px;
+}
+.pd-strip-head h2::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%;
+  translate: 0 -50%;
+  width: 3px;
+  height: 17px;
+  border-radius: 99px;
+  background: linear-gradient(to bottom, var(--pd-gold-lite), var(--pd-bronze));
+}
+.pd-strip-head p {
+  margin: 2px 0 0;
+  padding-inline-start: 13px;
+  font-size: 11.5px;
+  color: var(--pd-gray);
+}
+
+.pd-strip-nav { display: flex; gap: 6px; flex: none; }
+.pd-strip-nav button {
+  display: grid;
+  place-items: center;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--pd-gray);
+  background: var(--pd-card);
+  border: 1px solid var(--pd-line-soft);
+  transition: color 0.2s var(--pd-ease), background 0.2s var(--pd-ease),
+              border-color 0.2s var(--pd-ease);
+}
+.pd-strip-nav .ico-s { width: 14px; height: 14px; }
+.pd-strip-nav button:hover {
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  border-color: transparent;
+}
+/* وقتی کالاها در یک نگاه جا می‌شوند، پیمایش بی‌معناست */
+.pd-strip.no-scroll .pd-strip-nav { display: none; }
+
+/* ---------- ریل ----------
+   `flex` به‌جای `grid` تا `flex: 0 0 <عرض>` عرض قطعی بدهد
+   و کارت‌ها هرگز کش نیایند. */
+.pd-rail {
+  display: flex;
+  gap: 13px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 168, 76, 0.36) transparent;
+  /* محو شدن نرم لبه — نشان می‌دهد ادامه دارد */
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 22px);
+  mask-image: linear-gradient(to left, transparent 0, #000 22px);
+}
+.pd-strip.no-scroll .pd-rail {
+  -webkit-mask-image: none;
+  mask-image: none;
+  flex-wrap: wrap;
+}
+
+.pd-rail::-webkit-scrollbar { height: 6px; }
+.pd-rail::-webkit-scrollbar-track { background: transparent; }
+.pd-rail::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: rgba(201, 168, 76, 0.3);
+}
+.pd-rail:hover::-webkit-scrollbar-thumb { background: rgba(201, 168, 76, 0.55); }
+
+/* ============================================================
+   کارت کوچک — فشرده و شیک
+   ------------------------------------------------------------
+   ۱۵۸ پیکسل عرض: به‌اندازه‌ای که عکس دیده شود و نام دو خط جا
+   بگیرد، ولی نه آنقدر که در صفحه غالب شود. کارت‌های پیشنهاد
+   نباید با خود کالا رقابت کنند.
+   ============================================================ */
+.pd-mini {
+  flex: 0 0 158px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  border-radius: 13px;
+  overflow: hidden;
+  background: var(--pd-card);
+  border: 1px solid var(--pd-line-soft);
+  transition: transform 0.22s var(--pd-ease), box-shadow 0.22s var(--pd-ease),
+              border-color 0.22s var(--pd-ease);
+}
+.pd-mini:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 168, 76, 0.42);
+  box-shadow: 0 12px 26px -18px rgba(26, 26, 26, 0.52);
+}
+.pd-mini.dim { opacity: 0.6; }
+
+.pd-mini-thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--pd-cream), #ece5d8);
+  font-size: 26px;
+  font-weight: 800;
+  color: rgba(201, 168, 76, 0.4);
+  text-decoration: none;
+}
+.pd-mini-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: scale 0.45s var(--pd-ease);
+}
+.pd-mini:hover .pd-mini-thumb img { scale: 1.06; }
+
+/* ---------- نشان‌های روی عکس ---------- */
+.pd-mini-off, .pd-mini-out {
+  position: absolute;
+  font-style: normal;
+  font-weight: 800;
+}
+.pd-mini-off {
+  top: 7px; inset-inline-end: 7px;
+  padding: 2px 7px;
+  border-radius: 99px;
+  font-size: 10px;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  box-shadow: 0 3px 9px -4px rgba(201, 168, 76, 0.9);
+}
+.pd-mini-out {
+  top: 50%; inset-inline: 0;
+  width: max-content; margin-inline: auto;
+  translate: 0 -50%;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  color: #fff;
+  background: rgba(26, 26, 26, 0.78);
+}
+
+/* نشان امتیاز — گوشه‌ی پایین عکس */
+.pd-mini-rate {
+  position: absolute;
+  bottom: 6px;
+  inset-inline-start: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: rgba(253, 251, 247, 0.94);
+  backdrop-filter: blur(3px);
+}
+.pd-mini-rate svg { width: 10px; height: 10px; color: var(--pd-gold); }
+
+/* ---------- بدنه ---------- */
+.pd-mini-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 10px 10px;
+  flex: 1;
+}
+.pd-mini-shop {
+  font-size: 10px;
+  color: var(--pd-gray);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pd-mini-name {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--pd-ink);
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* ارتفاع ثابت دو خط — کارت‌ها هم‌قد می‌مانند حتی اگر
+     یکی نامش کوتاه باشد و دیگری بلند */
+  min-height: 2lh;
+  transition: color 0.2s var(--pd-ease);
+}
+.pd-mini-name:hover { color: var(--pd-gold-text); }
+
+.pd-mini-foot {
+  margin-top: auto;
+  padding-top: 5px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px;
+}
+.pd-mini-price {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--pd-ink);
+  line-height: 1.35;
+}
+.pd-mini-price s {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--pd-gray);
+}
+.pd-mini-price small {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--pd-gray);
+  margin-inline-start: 2px;
+}
+
+/* دکمه‌ی افزودن سریع — روی هاور ظاهر می‌شود */
+.pd-mini-add {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px; height: 28px;
+  border-radius: 9px;
+  cursor: pointer;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  border: 0;
+  opacity: 0;
+  scale: 0.85;
+  transition: opacity 0.2s var(--pd-ease), scale 0.2s var(--pd-ease),
+              filter 0.2s var(--pd-ease);
+}
+.pd-mini-add svg { width: 15px; height: 15px; }
+.pd-mini:hover .pd-mini-add,
+.pd-mini:focus-within .pd-mini-add { opacity: 1; scale: 1; }
+.pd-mini-add:hover { filter: brightness(1.06); }
+.pd-mini-add.done {
+  background: linear-gradient(135deg, #4a9f74, var(--pd-good));
+  color: #fff;
+  opacity: 1; scale: 1;
+}
+
+/* روی صفحه‌ی لمسی هاور نیست — همیشه دیده شود */
+@media (hover: none) {
+  .pd-mini-add { opacity: 1; scale: 1; }
+}
+
+.pd-mini-low {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--pd-bad);
+}
+
+/* ============================================================
+   نمای بزرگ عکس
+   ============================================================ */
+.pd-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background: rgba(16, 14, 11, 0.92);
+  animation: pd-fade 0.24s var(--pd-ease);
+}
+@keyframes pd-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.pd-lightbox img {
+  max-width: min(880px, 100%);
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+.pd-lbx, .pd-lbnav {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #f2eee6;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s var(--pd-ease);
+}
+.pd-lbx svg, .pd-lbnav svg { width: 21px; height: 21px; }
+.pd-lbx:hover, .pd-lbnav:hover { background: rgba(255, 255, 255, 0.22); }
+.pd-lbx { top: 18px; inset-inline-end: 18px; }
+.pd-lbnav { top: 50%; translate: 0 -50%; }
+.pd-lbnav.prev { inset-inline-end: 18px; }
+.pd-lbnav.next { inset-inline-start: 18px; }
+
+.pd-lbcount {
+  position: absolute;
+  bottom: 20px;
+  inset-inline: 0;
+  width: max-content;
+  margin-inline: auto;
+  padding: 5px 15px;
+  border-radius: 99px;
+  font-size: 12.5px;
+  color: #f2eee6;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.pd-lock { overflow: hidden; }
+
+/* ============================================================
+   راهنمای سایز
+   ============================================================ */
+.pd-guidebox {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  padding: 24px 18px;
+  background: rgba(20, 18, 15, 0.62);
+  backdrop-filter: blur(3px);
+  animation: pd-fade 0.24s var(--pd-ease);
+}
+
+.pd-guide-card {
+  width: min(560px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--pd-white);
+  border: 1px solid var(--pd-line);
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.65);
+}
+
+.pd-guide-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.pd-guide-head h3 {
+  display: flex; align-items: center; gap: 9px;
+  margin: 0; font-size: 16px; font-weight: 800;
+}
+.pd-guide-head svg { width: 19px; height: 19px; color: var(--pd-gold); }
+.pd-guide-head button {
+  display: grid; place-items: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--pd-gray);
+  background: transparent;
+  border: 1px solid var(--pd-line-soft);
+  transition: all 0.2s var(--pd-ease);
+}
+.pd-guide-head button:hover { color: #fff; background: var(--pd-bad); border-color: var(--pd-bad); }
+
+.pd-guide-tip {
+  margin: 0 0 12px;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: var(--pd-gray);
+}
+.pd-guide-tip:last-child { margin: 12px 0 0; }
+.pd-guide-scroll { overflow-x: auto; }
+.pd-guide-scroll table { min-width: 440px; }
+
+/* ============================================================
+   پیام کوتاه
+   ============================================================ */
+.pd-toast {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 26px;
+  z-index: 200;
+  width: max-content;
+  max-width: min(430px, calc(100% - 32px));
+  margin-inline: auto;
+  padding: 12px 22px;
+  border-radius: 99px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  box-shadow: 0 16px 36px -14px rgba(26, 26, 26, 0.65);
+  opacity: 0;
+  translate: 0 16px;
+  pointer-events: none;
+  transition: opacity 0.28s var(--pd-ease), translate 0.28s var(--pd-ease);
+}
+.pd-toast.on { opacity: 1; translate: 0 0; }
+.pd-toast.good { color: #fff; background: linear-gradient(135deg, #4a9f74, var(--pd-good)); }
+.pd-toast.bad  { color: #fff; background: linear-gradient(135deg, #c25f59, var(--pd-bad)); }
+
+/* ============================================================
+   حالت‌های ویژه
+   ============================================================ */
+.pd-loading, .pd-missing {
+  display: grid;
+  place-items: center;
+  gap: 14px;
+  padding: 80px 20px;
+  text-align: center;
+}
+.pd-missing h1 { margin: 0; font-size: 21px; font-weight: 800; }
+.pd-missing p { margin: 0; font-size: 13.5px; color: var(--pd-gray); }
+.pd-missing svg { width: 54px; height: 54px; color: rgba(201, 168, 76, 0.45); }
+
+.pd-spin {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--pd-line);
+  border-top-color: var(--pd-gold);
+  animation: pd-turn 0.8s linear infinite;
+}
+@keyframes pd-turn { to { rotate: 360deg; } }
+
+.pd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  box-shadow: 0 10px 24px -12px rgba(201, 168, 76, 0.85);
+  transition: transform 0.22s var(--pd-ease);
+}
+.pd-btn:hover { transform: translateY(-2px); }
+
+/* ============================================================
+   نوار خرید چسبان روی موبایل
+   ------------------------------------------------------------
+   روی گوشی، دکمه‌ی خرید بالای صفحه می‌ماند و مشتری باید
+   برگردد بالا. این نوار همیشه در دسترس است.
+   ============================================================ */
+.pd-bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 80;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px calc(11px + env(safe-area-inset-bottom, 0px));
+  background: rgba(253, 251, 247, 0.97);
+  border-top: 1px solid var(--pd-line);
+  box-shadow: 0 -8px 24px -16px rgba(26, 26, 26, 0.5);
+  translate: 0 110%;
+  transition: translate 0.3s var(--pd-ease);
+}
+.pd-bar.on { translate: 0 0; }
+.pd-bar .b-price { flex: 1; min-width: 0; }
+.pd-bar .b-price b { display: block; font-size: 16px; font-weight: 800; }
+.pd-bar .b-price s { font-size: 11.5px; color: var(--pd-gray); }
+.pd-bar .pd-add { flex: 0 0 auto; padding-inline: 22px; }
+
+@media (max-width: 900px) {
+  .pd-bar { display: flex; }
+}
+
+/* ============================================================
+   واکنش‌گرا
+   ============================================================ */
+/* ---------- تبلت افقی: هنوز دوستونه، ولی جمع‌تر ---------- */
+@media (max-width: 1180px) {
+  .pd-top {
+    grid-template-columns: clamp(360px, 50%, 570px) minmax(310px, 1fr);
+    gap: 32px;
+  }
+}
+
+/* ---------- تبلت عمودی و پایین‌تر: تک‌ستونه ---------- */
+@media (max-width: 1020px) {
+  .pd-top { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+
+  .pd-gallery {
+    position: static;
+    /* در حالت تک‌ستونه عکس نباید تمام عرض را بگیرد —
+       روی تبلت ۱۰۰۰ پیکسلی یعنی عکس ۱۰۰۰×۱۲۵۰ که مسخره است */
+    max-width: 570px;
+    margin-inline: auto;
+  }
+
+  .pd-stage { max-height: min(680px, 72vh); }
+}
+
+@media (max-width: 640px) {
+  .pd-wrap { width: calc(100% - 26px); }
+  .pd-panel { padding: 16px 15px; }
+  .pd-side { grid-template-columns: minmax(0, 1fr); }
+  .pd-rail { grid-auto-columns: minmax(152px, 1fr); }
+  .pd-crumbs strong { max-width: 160px; }
+  .pd-price { font-size: 24px; }
+  .pd-spectable th { width: 44%; white-space: normal; }
+  /* روی گوشی دکمه‌ی خرید نوار پایین است، پس بالایی جا نگیرد */
+  .pd-top { padding-bottom: 20px; }
+  body { padding-bottom: 74px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-mini, .pd-mini-thumb img, .pd-add, .pd-dot, .pd-size,
+  .pd-toast, .pd-bar, .pd-zoom { transition: none; }
+  .pd-mini:hover, .pd-add:hover, .pd-dot:hover, .pd-size:hover { transform: none; }
+  .pd-mini:hover .pd-mini-thumb img { scale: 1; }
+  .pd-spin { animation: none; }
+  .pd-lightbox, .pd-guidebox { animation: none; }
+}
+
+/* عنوان حالت «پیدا نشد» — نقش سرتیتر دارد ولی تگ h1 نیست،
+   چون h1 واقعی صفحه نام کالاست و نباید دو تا باشد */
+.pd-missing-title {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--pd-ink);
+}
+
+/* ============================================================
+   جزئیات نوار پیشنهاد
+   ============================================================ */
+
+.pd-strip-title { min-width: 0; }
+
+/* شمارنده‌ی کنار عنوان — مشتری می‌داند چند کالا هست */
+.pd-strip-n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 6px;
+  margin-inline-start: 8px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 700;
+  vertical-align: 2px;
+  /* تیره‌تر از --pd-gold-text — روی زمینه‌ی طلایی کم‌رنگ
+     باید ۴٫۵:۱ را بگذراند وگرنه خوانا نیست */
+  color: #6f571a;
+  background: rgba(201, 168, 76, 0.14);
+}
+
+/* ---------- ریز‌چینی موبایل ---------- */
+@media (max-width: 640px) {
+  .pd-mini { flex: 0 0 138px; }
+  .pd-mini-body { padding: 8px 9px 9px; }
+  .pd-mini-name { font-size: 11.5px; }
+  .pd-mini-price { font-size: 12px; }
+  .pd-strip { padding-block: 20px; }
+  .pd-strip-head h2 { font-size: 15px; }
+}
+
+/* ---------- صفحه‌ی خیلی کوچک ---------- */
+@media (max-width: 360px) {
+  .pd-mini { flex: 0 0 126px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-mini-add { transition: none; }
+}
+
+/* ============================================================
+   استایلیست — پیشنهاد ست بر پایه‌ی قاعده‌های واقعی مد
+   ============================================================ */
+
+/* ---------- نوار استایلیست ---------- */
+.pd-strip--style .pd-strip-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pd-strip--style .pd-strip-head h2 > .ico {
+  width: 19px; height: 19px;
+  color: var(--pd-gold);
+}
+/* آیکون جای خط طلایی را می‌گیرد */
+.pd-strip--style .pd-strip-head h2 { padding-inline-start: 0; }
+.pd-strip--style .pd-strip-head h2::before { display: none; }
+.pd-strip--style .pd-strip-head p { padding-inline-start: 27px; }
+
+/* کارت به‌علاوه‌ی توضیح، در یک ستون */
+.pd-styled {
+  flex: 0 0 158px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  scroll-snap-align: start;
+}
+.pd-styled .pd-mini { flex: 1 1 auto; }
+
+/* ---------- جمله‌ی «چرا این ست می‌شود» ---------- */
+.pd-why {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 7px 9px;
+  border-radius: 10px;
+  background: rgba(201, 168, 76, 0.07);
+  border: 1px dashed rgba(201, 168, 76, 0.26);
+}
+.pd-why-slot {
+  align-self: flex-start;
+  padding: 1px 7px;
+  border-radius: 99px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #6f571a;
+  background: rgba(201, 168, 76, 0.2);
+}
+.pd-why-txt {
+  font-size: 10.5px;
+  line-height: 1.75;
+  color: var(--pd-body);
+}
+
+/* ============================================================
+   پنل «این تیپ را کامل کنید»
+   ============================================================ */
+.pd-outfit {
+  margin-block: 8px 30px;
+  padding: 20px 22px;
+  border-radius: 20px;
+  background:
+    radial-gradient(120% 140% at 92% 0%, rgba(201, 168, 76, 0.14), transparent 58%),
+    var(--pd-white);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  box-shadow: 0 14px 38px -28px rgba(26, 26, 26, 0.55);
+}
+
+.pd-outfit-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.pd-outfit-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pd-gold-text);
+}
+.pd-outfit-eyebrow .ico-s { width: 13px; height: 13px; }
+
+.pd-outfit-head h2 {
+  margin: 5px 0 3px;
+  font-size: clamp(17px, 2.1vw, 20px);
+  font-weight: 800;
+  color: var(--pd-ink);
+}
+.pd-outfit-head p { margin: 0; font-size: 12px; color: var(--pd-gray); }
+
+/* امتیاز هماهنگی ست */
+.pd-outfit-score {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  color: #1a1a1a;
+  box-shadow: 0 8px 20px -10px rgba(201, 168, 76, 0.9);
+}
+.pd-outfit-score b { font-size: 19px; font-weight: 800; line-height: 1; }
+.pd-outfit-score small { font-size: 8.5px; opacity: 0.75; }
+
+/* ---------- ردیف قطعه‌ها ---------- */
+.pd-outfit-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 16px;
+  scrollbar-width: thin;
+}
+.pd-outfit-row::-webkit-scrollbar { height: 5px; }
+.pd-outfit-row::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: rgba(201, 168, 76, 0.3);
+}
+
+.pd-piece {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 84px;
+}
+
+.pd-piece-img {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 84px; height: 84px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--pd-cream), #ece5d8);
+  border: 1.5px solid var(--pd-line-soft);
+  font-size: 22px;
+  font-weight: 800;
+  color: rgba(201, 168, 76, 0.42);
+  text-decoration: none;
+  transition: border-color 0.22s var(--pd-ease), transform 0.22s var(--pd-ease);
+}
+.pd-piece-img img { width: 100%; height: 100%; object-fit: cover; }
+.pd-piece-img:hover { transform: translateY(-3px); border-color: var(--pd-gold); }
+
+.pd-piece.is-self .pd-piece-img {
+  border-color: var(--pd-gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.18);
+}
+.pd-piece-tag {
+  position: absolute;
+  bottom: 0; inset-inline: 0;
+  padding: 2px 0;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+}
+
+.pd-piece-slot {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--pd-gray);
+}
+.pd-piece-price {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pd-ink);
+}
+
+.pd-piece-plus {
+  flex: none;
+  align-self: center;
+  margin-top: -18px;
+  font-size: 16px;
+  font-weight: 800;
+  color: rgba(201, 168, 76, 0.62);
+}
+
+/* ---------- پای پنل ---------- */
+.pd-outfit-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.3);
+}
+
+.pd-outfit-sum span {
+  display: block;
+  font-size: 11px;
+  color: var(--pd-gray);
+}
+.pd-outfit-sum b {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--pd-ink);
+}
+.pd-outfit-sum small {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--pd-gray);
+  margin-inline-start: 4px;
+}
+
+.pd-outfit-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  border: 0;
+  box-shadow: 0 10px 24px -12px rgba(201, 168, 76, 0.9);
+  transition: transform 0.22s var(--pd-ease), filter 0.22s var(--pd-ease);
+}
+.pd-outfit-add svg { width: 18px; height: 18px; }
+.pd-outfit-add:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.pd-outfit-add.done {
+  color: #fff;
+  background: linear-gradient(135deg, #4a9f74, var(--pd-good));
+}
+
+/* ---------- موبایل ---------- */
+@media (max-width: 640px) {
+  .pd-outfit { padding: 16px 15px; border-radius: 16px; }
+  .pd-outfit-head { gap: 10px; }
+  .pd-outfit-score { width: 48px; height: 48px; }
+  .pd-outfit-score b { font-size: 16px; }
+  .pd-piece, .pd-piece-img { width: 70px; }
+  .pd-piece-img { height: 70px; }
+  .pd-outfit-add { width: 100%; justify-content: center; }
+  .pd-styled { flex: 0 0 138px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-piece-img, .pd-outfit-add { transition: none; }
+  .pd-piece-img:hover, .pd-outfit-add:hover { transform: none; }
+}
+
+/* ============================================================
+   پنل «این قیمت منصفانه است؟»
+   ------------------------------------------------------------
+   جای «اخیراً دیده‌اید» را گرفت. آن بخش فقط گذشته را تکرار
+   می‌کرد؛ این یکی به تصمیم خرید کمک می‌کند.
+
+   مشتری در بازار واقعی چند مغازه می‌گردد تا مطمئن شود گران
+   نخریده. این پنل همان کار را در یک نگاه انجام می‌دهد — با
+   داده‌ی واقعی همین بازارگاه، نه حدس.
+   ============================================================ */
+.pd-price-panel {
+  margin-bottom: 20px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background:
+    radial-gradient(110% 130% at 8% 0%, rgba(201, 168, 76, 0.1), transparent 55%),
+    var(--pd-white);
+  border: 1px solid var(--pd-line-soft);
+  box-shadow: 0 6px 26px -20px rgba(26, 26, 26, 0.45);
+}
+
+.pd-pp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.pd-pp-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--pd-ink);
+}
+.pd-pp-head h2 svg { width: 18px; height: 18px; color: var(--pd-gold); }
+
+/* حکم کوتاه — چهار حالت با رنگ متفاوت */
+.pd-pp-verdict {
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.pd-pp-verdict.good { color: #2b5f45; background: rgba(61, 122, 89, 0.14); }
+.pd-pp-verdict.ok   { color: #6f571a; background: rgba(201, 168, 76, 0.18); }
+.pd-pp-verdict.warn { color: #8a5a20; background: rgba(200, 130, 40, 0.16); }
+.pd-pp-verdict.high { color: #8e3b37; background: rgba(163, 61, 56, 0.13); }
+
+.pd-pp-note {
+  margin: 0 0 18px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--pd-gray);
+}
+.pd-pp-note b { color: var(--pd-ink); font-weight: 700; }
+
+/* ---------- نوار جایگاه قیمت ---------- */
+.pd-pp-bar {
+  position: relative;
+  height: 8px;
+  margin-bottom: 32px;
+}
+.pd-pp-track {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 8px;
+  border-radius: 99px;
+  /* سبز (ارزان) → طلایی (متعادل) → قرمز (گران) */
+  background: linear-gradient(90deg, #3d7a59 0%, #c9a84c 52%, #a33d38 100%);
+  opacity: 0.55;
+}
+
+/* نشانگر قیمت این کالا */
+.pd-pp-mark {
+  position: absolute;
+  top: -5px;
+  translate: 50% 0;           /* در صفحه‌ی راست‌به‌چپ، وسط‌چین */
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--pd-white);
+  border: 4px solid var(--pd-ink);
+  box-shadow: 0 3px 10px -3px rgba(26, 26, 26, 0.6);
+}
+.pd-pp-mark b {
+  position: absolute;
+  top: 24px;
+  inset-inline-start: 50%;
+  translate: 50% 0;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  box-shadow: 0 4px 12px -6px rgba(201, 168, 76, 0.95);
+}
+
+/* ---------- سه نقطه‌ی مرجع ---------- */
+.pd-pp-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--pd-line-soft);
+}
+.pd-pp-scale span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pd-ink);
+}
+.pd-pp-scale span:nth-child(2) { align-items: center; text-align: center; }
+.pd-pp-scale span:last-child { align-items: flex-end; text-align: end; }
+.pd-pp-scale em {
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--pd-gray);
+}
+.pd-pp-scale .mid em { color: var(--pd-gold-text); font-weight: 600; }
+
+@media (max-width: 560px) {
+  .pd-price-panel { padding: 15px 14px; }
+  .pd-pp-scale { font-size: 11px; }
+  .pd-pp-scale span { font-size: 11px; }
+}
+
+/* ============================================================
+   نگارخانه — بازطراحی حرفه‌ای
+   ------------------------------------------------------------
+   عکس مهم‌ترین چیز صفحه‌ی کالاست. مشتری با چشم می‌خرد.
+   ============================================================ */
+
+/* ---------- ذره‌بین روی هاور ----------
+   موشواره را روی عکس ببرید، همان نقطه بزرگ می‌شود.
+   دوخت و بافت پارچه دیده می‌شود — مثل لمس کردن در مغازه. */
+.pd-stage img {
+  transition: transform 0.28s var(--pd-ease);
+  will-change: transform;
+}
+
+.pd-stage.is-lens {
+  cursor: zoom-in;
+}
+.pd-stage.is-lens img {
+  transition: transform 0.12s linear;
+}
+
+/* راهنمای کوچک گوشه — تا مشتری بداند می‌تواند بزرگ کند */
+.pd-stage::after {
+  content: "برای بزرگ‌نمایی، موشواره را روی عکس ببرید";
+  position: absolute;
+  bottom: 16px;
+  inset-inline-end: 16px;
+  padding: 6px 13px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--pd-body);
+  background: rgba(253, 251, 247, 0.94);
+  border: 1px solid var(--pd-line-soft);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  translate: 0 6px;
+  pointer-events: none;
+  transition: opacity 0.25s var(--pd-ease), translate 0.25s var(--pd-ease);
+}
+.pd-stage:hover::after { opacity: 1; translate: 0 0; }
+.pd-stage.is-lens::after { opacity: 0; }
+
+/* روی صفحه‌ی لمسی راهنما بی‌معناست */
+@media (hover: none) {
+  .pd-stage::after { display: none; }
+}
+
+/* ---------- دکمه‌ی بزرگ‌نمایی با متن ---------- */
+.pd-zoom span { white-space: nowrap; }
+
+/* ---------- بندانگشتی‌ها ---------- */
+.pd-thumbs {
+  scrollbar-color: rgba(201, 168, 76, 0.4) transparent;
+}
+.pd-thumbs::-webkit-scrollbar { height: 6px; }
+.pd-thumbs::-webkit-scrollbar-track { background: transparent; }
+.pd-thumbs::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: rgba(201, 168, 76, 0.32);
+}
+
+/* شماره‌ی هر عکس — کمک می‌کند بدانید کجای گالری هستید */
+.pd-thumb { position: relative; }
+.pd-thumb::after {
+  content: attr(data-n);
+  position: absolute;
+  bottom: 4px;
+  inset-inline-end: 4px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 99px;
+  display: grid;
+  place-items: center;
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #1a1a1a;
+  background: rgba(253, 251, 247, 0.92);
+  opacity: 0;
+  transition: opacity 0.2s var(--pd-ease);
+}
+.pd-thumbs:hover .pd-thumb::after,
+.pd-thumb.on::after { opacity: 1; }
+.pd-thumb.on::after {
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+}
+
+/* ---------- نمای بزرگ: عکس تمام‌قد ---------- */
+.pd-lightbox img {
+  max-width: min(1000px, 100%);
+  max-height: calc(100vh - 90px);
+}
+
+/* ---------- گوشی ---------- */
+@media (max-width: 640px) {
+  .pd-gallery { max-width: 100%; }
+  .pd-stage {
+    border-radius: 16px;
+    max-height: 78vh;
+  }
+  .pd-thumb { width: 66px; height: 82px; }
+  .pd-zoom { height: 38px; padding: 0 12px; font-size: 12px; }
+  .pd-zoom span { display: none; }
+  .pd-zoom { width: 38px; padding: 0; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-stage img,
+  .pd-stage::after { transition: none; }
+  .pd-stage.is-lens img { transform: none !important; }
+}
+
+/* ============================================================
+   نمای کامل عکس‌ها — مثل دیجی‌کالا
+   ------------------------------------------------------------
+   کلیک روی عکس ← گالری تمام‌صفحه با نوار بندانگشتی پایین،
+   بزرگ‌نمایی دوباره، و کشیدن با انگشت روی گوشی.
+   ============================================================ */
+.pd-lightbox {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  place-items: stretch;
+  padding: 0;
+  gap: 0;
+}
+
+/* ---------- نوار بالا ---------- */
+.pd-lb-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.pd-lb-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f2eee6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pd-lb-tools {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex: none;
+}
+
+.pd-lbcount {
+  padding: 5px 13px;
+  border-radius: 99px;
+  font-size: 12.5px;
+  color: #f2eee6;
+  background: rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+}
+.pd-lbcount b { font-weight: 800; color: var(--pd-gold-lite); }
+
+.pd-lb-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #f2eee6;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: background 0.2s var(--pd-ease);
+}
+.pd-lb-btn svg { width: 19px; height: 19px; }
+.pd-lb-btn:hover { background: rgba(255, 255, 255, 0.24); }
+
+/* دکمه‌ی بستن قرمز می‌شود */
+.pd-lb-btn.pd-lbx {
+  position: static;
+  inset: auto;
+  width: 40px;
+  height: 40px;
+}
+.pd-lb-btn.pd-lbx:hover { background: #a33d38; border-color: #a33d38; }
+
+/* ---------- صحنه ---------- */
+.pd-lb-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 20px;
+  min-height: 0;
+}
+
+.pd-lb-stage img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  cursor: zoom-in;
+  transition: transform 0.3s var(--pd-ease);
+}
+.pd-lb-stage.is-zoom { cursor: zoom-out; }
+.pd-lb-stage.is-zoom img {
+  cursor: zoom-out;
+  transition: transform 0.12s linear;
+}
+
+/* دکمه‌های چپ و راست */
+.pd-lbnav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #f2eee6;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  transition: background 0.2s var(--pd-ease), scale 0.2s var(--pd-ease);
+}
+.pd-lbnav svg { width: 22px; height: 22px; }
+.pd-lbnav:hover { background: rgba(0, 0, 0, 0.72); scale: 1.06; }
+.pd-lbnav.prev { inset-inline-end: 18px; }
+.pd-lbnav.next { inset-inline-start: 18px; }
+
+/* ---------- نوار بندانگشتی پایین ---------- */
+.pd-lb-strip {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  overflow-x: auto;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+}
+.pd-lb-strip::-webkit-scrollbar { height: 6px; }
+.pd-lb-strip::-webkit-scrollbar-track { background: transparent; }
+.pd-lb-strip::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.pd-lb-thumb {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 80px;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid transparent;
+  opacity: 0.55;
+  transition: opacity 0.22s var(--pd-ease), border-color 0.22s var(--pd-ease),
+              scale 0.22s var(--pd-ease);
+}
+.pd-lb-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pd-lb-thumb:hover { opacity: 0.9; scale: 1.05; }
+.pd-lb-thumb.on {
+  opacity: 1;
+  border-color: var(--pd-gold);
+  scale: 1.05;
+}
+
+/* ---------- عکس اصلی صفحه: کلیک‌پذیر ---------- */
+.pd-stage { cursor: zoom-in; }
+
+/* ---------- گوشی ---------- */
+@media (max-width: 640px) {
+  .pd-lb-top { padding: 11px 14px; }
+  .pd-lb-name { font-size: 12.5px; }
+  .pd-lb-btn { width: 36px; height: 36px; }
+  .pd-lb-btn svg { width: 17px; height: 17px; }
+  .pd-lb-stage { padding: 12px; }
+  .pd-lbnav { width: 40px; height: 40px; }
+  .pd-lbnav.prev { inset-inline-end: 10px; }
+  .pd-lbnav.next { inset-inline-start: 10px; }
+  .pd-lb-strip { padding: 11px 14px; justify-content: flex-start; }
+  .pd-lb-thumb { width: 52px; height: 65px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-lb-stage img, .pd-lb-thumb, .pd-lbnav { transition: none; }
+  .pd-lb-thumb:hover, .pd-lb-thumb.on, .pd-lbnav:hover { scale: 1; }
+}
+
+/* ============================================================
+   پنل «پیشنهاد دیجی AI»
+   ------------------------------------------------------------
+   جانشین پنل قدیمی «این تیپ را کامل کنید».
+   خواسته‌ی کاربر: عکس‌های بزرگ‌تر، دسترسی مستقیم به سایز،
+   و اطلاعات بیشتر و کاربردی‌تر روی هر قطعه.
+
+   کارت‌های ۸۴ پیکسلی قبلی جای خود را به شبکه‌ای از کارت‌های
+   کامل داده‌اند که عکسشان با نسبت ۴:۵ (استاندارد عکاسی مد)
+   رندر می‌شود.
+   ============================================================ */
+.pd-ai {
+  margin-block: 8px 30px;
+  padding: 22px 22px 20px;
+  border-radius: 22px;
+  background:
+    radial-gradient(130% 120% at 96% 0%, rgba(201, 168, 76, 0.16), transparent 56%),
+    var(--pd-white);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  box-shadow: 0 18px 46px -30px rgba(26, 26, 26, 0.55);
+}
+
+/* ---------- سربرگ ---------- */
+.ai-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  box-shadow: 0 5px 14px -8px rgba(201, 168, 76, 0.9);
+}
+.ai-badge .ico-s { width: 13px; height: 13px; }
+
+.ai-brand h2 {
+  margin: 9px 0 3px;
+  font-size: clamp(18px, 2.3vw, 22px);
+  font-weight: 800;
+  color: var(--pd-ink);
+}
+.ai-brand p { margin: 0; font-size: 12.5px; color: var(--pd-gray); }
+
+/* ---------- امتیاز و حکم ---------- */
+.ai-verdict {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+}
+
+.ai-score {
+  display: grid;
+  place-items: center;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+  color: #1a1a1a;
+  box-shadow: 0 9px 22px -11px rgba(201, 168, 76, 0.95);
+}
+.ai-score b { font-size: 21px; font-weight: 800; line-height: 1; }
+.ai-score small { font-size: 8.5px; opacity: 0.78; }
+
+.ai-vtxt { display: block; max-width: 20ch; }
+.ai-vtxt b { display: block; font-size: 13px; font-weight: 800; color: var(--pd-ink); }
+.ai-vtxt small { display: block; font-size: 11px; line-height: 1.6; color: var(--pd-gray); }
+.ai-vtxt.is-top b  { color: #3d7a59; }
+.ai-vtxt.is-good b { color: #6f571a; }
+.ai-vtxt.is-risk b { color: #8a5a20; }
+
+/* ---------- نشان‌های تحلیلی ---------- */
+.pdai-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 16px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.3);
+}
+
+.pdai-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6f571a;
+  background: rgba(201, 168, 76, 0.13);
+  border: 1px solid rgba(201, 168, 76, 0.26);
+}
+.pdai-chip i {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--pd-gold);
+}
+.pdai-chip.is-ok i, .pdai-chip.is-ideal i { background: #3d7a59; }
+.pdai-chip.is-busy { color: #8a5a20; background: rgba(138, 90, 32, 0.1); }
+.pdai-chip.is-busy i { background: #8a5a20; }
+
+/* ============================================================
+   شبکه‌ی کارت‌ها — عکس‌های بزرگ
+   ------------------------------------------------------------
+   `auto-fit` با کف ۱۹۰ پیکسل: روی مانیتور بزرگ چهار یا پنج
+   ستون، روی گوشی دو ستون. `minmax(0, …)` لازم است وگرنه
+   نام‌های بلند ستون را پهن می‌کنند.
+   ============================================================ */
+.pdai-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.pdai-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--pd-white);
+  border: 1px solid var(--pd-line-soft);
+  transition: border-color 0.22s var(--pd-ease),
+              transform 0.22s var(--pd-ease),
+              box-shadow 0.22s var(--pd-ease);
+}
+.pdai-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 168, 76, 0.55);
+  box-shadow: 0 16px 34px -22px rgba(26, 26, 26, 0.45);
+}
+
+/* کالای جاری با قاب طلایی مشخص می‌شود */
+.pdai-card.is-self {
+  border-color: var(--pd-gold);
+  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.18);
+}
+
+/* ---------- عکس بزرگ ---------- */
+.ai-shot {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(150deg, var(--pd-cream), #ece5d8);
+  overflow: hidden;
+  text-decoration: none;
+}
+.ai-shot img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: scale 0.4s var(--pd-ease);
+}
+.pdai-card:hover .ai-shot img { scale: 1.05; }
+
+.ai-noimg {
+  display: grid;
+  place-items: center;
+  width: 100%; height: 100%;
+  font-size: 44px;
+  font-weight: 800;
+  color: rgba(201, 168, 76, 0.4);
+}
+
+/* نقش قطعه در تیپ */
+.ai-slot {
+  position: absolute;
+  top: 8px;
+  inset-inline-start: 8px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: rgba(250, 248, 245, 0.94);
+  backdrop-filter: blur(3px);
+}
+
+.ai-self {
+  position: absolute;
+  bottom: 0; inset-inline: 0;
+  padding: 4px 0;
+  font-size: 10px;
+  font-weight: 800;
+  text-align: center;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--pd-gold-lite), var(--pd-gold));
+}
+
+.ai-stock {
+  position: absolute;
+  top: 8px;
+  inset-inline-end: 8px;
+  padding: 3px 8px;
+  border-radius: 99px;
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #fff;
+}
+.ai-stock.is-red   { background: #a33d38; }
+.ai-stock.is-amber { background: #8a5a20; }
+.ai-stock.is-gray  { background: #75695f; }
+
+/* ---------- بدنه‌ی کارت ---------- */
+.ai-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 11px 12px 13px;
+  min-width: 0;
+}
+
+.ai-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--pd-ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ai-name:hover { color: #6f571a; }
+
+.ai-price {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--pd-ink);
+}
+.ai-price small { font-size: 10px; font-weight: 600; color: var(--pd-gray); }
+.ai-off {
+  margin-inline-start: auto;
+  padding: 2px 7px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 800;
+  color: #fff;
+  background: #a33d38;
+}
+
+/* ---------- سایزها، مستقیم روی کارت ---------- */
+.ai-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.ai-sz {
+  min-width: 30px;
+  padding: 4px 7px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  color: var(--pd-ink);
+  background: var(--pd-cream);
+  border: 1px solid var(--pd-line-soft);
+  transition: background 0.18s var(--pd-ease), border-color 0.18s var(--pd-ease);
+}
+.ai-sz:hover {
+  background: rgba(201, 168, 76, 0.2);
+  border-color: var(--pd-gold);
+}
+.ai-sz.is-free {
+  color: var(--pd-gray);
+  font-weight: 600;
+  background: transparent;
+  border-style: dashed;
+}
+
+/* ---------- ریزنشان‌های اطلاعاتی ---------- */
+.ai-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ai-fact {
+  padding: 2.5px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #6f571a;
+  background: rgba(201, 168, 76, 0.12);
+  cursor: help;
+}
+
+/* ---------- دلیل انتخاب و نکته ---------- */
+.ai-why {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0;
+  font-size: 10.5px;
+  line-height: 1.7;
+  color: #3d7a59;
+}
+.ai-why .ico-s { width: 12px; height: 12px; flex: none; margin-top: 3px; }
+
+.pdai-tip {
+  margin: 0;
+  padding-top: 7px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.26);
+  font-size: 10px;
+  line-height: 1.75;
+  color: var(--pd-gray);
+}
+
+/* ---------- نکته‌ی کلی استایلیست ---------- */
+.ai-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 15px;
+  padding: 11px 14px;
+  border-radius: 13px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #6f571a;
+  background: rgba(201, 168, 76, 0.1);
+  border-inline-start: 3px solid var(--pd-gold);
+}
+.ai-note .ico-s { width: 16px; height: 16px; flex: none; }
+
+/* ---------- پای پنل ---------- */
+.ai-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.3);
+}
+
+.pdai-sum span { display: block; font-size: 11px; color: var(--pd-gray); }
+.pdai-sum b { font-size: 20px; font-weight: 800; color: var(--pd-ink); }
+.pdai-sum small {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--pd-gray);
+  margin-inline-start: 4px;
+}
+
+/* ---------- گوشی ---------- */
+@media (max-width: 560px) {
+  .pd-ai { padding: 17px 15px 16px; }
+  .pdai-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .ai-verdict { width: 100%; }
+  .ai-vtxt { max-width: none; }
+  .pdai-tip { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pdai-card, .ai-shot img { transition: none; }
+  .pdai-card:hover { transform: none; }
+  .pdai-card:hover .ai-shot img { scale: 1; }
+}
+
+/* ---------- نقطه‌های رنگ روی کارت دیجی AI ---------- */
+.ai-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: help;
+}
+.ai-swatch i {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(26, 26, 26, 0.18);
+}
+
+/* ---------- دکمه‌ی رفتن به دیجی AI ---------- */
+.ai-foot-acts {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pd-outfit-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #6f571a;
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  transition: background 0.18s var(--pd-ease);
+}
+.pd-outfit-more:hover { background: rgba(201, 168, 76, 0.12); }
+
+@media (max-width: 560px) {
+  .ai-foot-acts { width: 100%; }
+  .ai-foot-acts > * { flex: 1; justify-content: center; }
+}
+
+/* ============================================================
+   نشان برند و شمار فروش
+   ------------------------------------------------------------
+   این دو کلاس در جاوااسکریپت ساخته می‌شدند ولی هیچ استایلی
+   نداشتند — یعنی متن لخت کنار امتیاز می‌نشست. بازبینی
+   خودکار کلاس‌های بی‌استایل پیدایشان کرد.
+   ============================================================ */
+.pd-brand,
+.pd-sold {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pd-brand {
+  color: var(--pd-gold-text);
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.24);
+}
+
+.pd-sold {
+  color: #3d7a59;
+  background: rgba(61, 122, 89, 0.1);
+  font-variant-numeric: tabular-nums;
+}
+
+.pd-brand .ico-s,
+.pd-sold .ico-s { width: 13px; height: 13px; }
+
+@media (max-width: 480px) {
+  .pd-brand,
+  .pd-sold { font-size: 11px; padding: 3px 8px; }
+}

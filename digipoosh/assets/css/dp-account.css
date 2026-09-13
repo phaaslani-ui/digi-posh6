@@ -1,0 +1,385 @@
+/* ============================================================
+   دیجی‌پوش — دکمه و منوی حساب کاربری در نوار بالا
+   ------------------------------------------------------------
+   رنگ‌ها از متغیرهای هر صفحه می‌آیند، پس در همه‌جا جا می‌افتد.
+   ============================================================ */
+
+.dp-acc {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- دکمه‌ی دعوت (مهمان) ---------- */
+.dp-join {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 17px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c, #b8943c);
+  background-size: 200% 200%;
+  box-shadow: 0 8px 22px -10px rgba(201, 168, 76, 0.95);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-position 0.6s ease;
+}
+
+.dp-join svg { width: 17px; height: 17px; }
+
+.dp-join:hover {
+  transform: translateY(-2px);
+  background-position: 100% 50%;
+  box-shadow: 0 14px 30px -10px rgba(201, 168, 76, 1);
+}
+
+.dp-signin {
+  padding: 9px 13px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: currentColor;
+  opacity: 0.82;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+
+.dp-signin:hover { opacity: 1; background: rgba(201, 168, 76, 0.14); }
+
+/* ---------- تراشه‌ی کاربر (واردشده) ---------- */
+.dp-menu { position: relative; }
+
+.dp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 13px 6px 7px;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 999px;
+  background: rgba(201, 168, 76, 0.1);
+  color: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.dp-chip:hover { background: rgba(201, 168, 76, 0.2); border-color: rgba(201, 168, 76, 0.7); }
+
+.dp-ava {
+  width: 30px; height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 800;
+  color: #faf8f5;
+  background: linear-gradient(135deg, #c9a84c, #b8943c);
+  flex: none;
+}
+
+.dp-ava-lg { width: 42px; height: 42px; font-size: 18px; }
+
+.dp-hi { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.dp-caret {
+  width: 15px; height: 15px;
+  opacity: 0.7;
+  transition: transform 0.28s ease;
+}
+
+.dp-chip[aria-expanded="true"] .dp-caret { transform: rotate(180deg); }
+
+/* ---------- منوی کشویی ----------
+   ------------------------------------------------------------
+   چرا `fixed` و نه `absolute`؟
+
+   نوار ناوبری همه‌ی صفحه‌ها `backdrop-filter` دارد (شیشه‌ی مات).
+   این ویژگی در CSS یک «زمینه‌ی چینش» تازه می‌سازد؛ یعنی هر
+   عنصری داخلش، هر قدر هم z-index بالا بگیرد، نمی‌تواند از
+   مرز نوار بیرون بزند. منوی حساب داخل همان نوار بود و
+   نیمه‌ی پایینش بریده و محو می‌شد.
+
+   با `fixed` منو روی خودِ پنجره می‌نشیند و از هر برشی آزاد
+   است. جای دقیقش را جاوااسکریپت در `--dpa-x` و `--dpa-y`
+   می‌گذارد — دقیقاً همان روشی که برای زیرمنوی «فروشندگان»
+   به کار رفت.
+   ------------------------------------------------------------ */
+/*
+ * چرا `left` و نه `inset-inline-start`؟
+ * ------------------------------------------------------------
+ * جاوااسکریپت مقدار --dpa-x را با getBoundingClientRect حساب
+ * می‌کند، و آن همیشه فاصله از لبه‌ی **چپ** پنجره است.
+ *
+ * ولی صفحه راست‌به‌چپ است و در چنین صفحه‌ای
+ * `inset-inline-start` یعنی «از راست». پس مرورگر عددِ
+ * چپ را از سمت راست می‌شمرد و منو به آن‌سوی صفحه می‌پرید.
+ *
+ * واحد فیزیکی `left` این ابهام را ندارد.
+ */
+.dp-pop {
+  position: fixed;
+  top: var(--dpa-y, 70px);
+  left: var(--dpa-x, 16px);
+  inset-inline-end: auto;
+  min-width: 244px;
+  max-width: min(300px, calc(100vw - 24px));
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  box-shadow: 0 20px 48px rgba(26, 26, 26, 0.22);
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 8px;
+  transition: opacity 0.24s ease, translate 0.24s ease, visibility 0.24s;
+  z-index: 1450;
+}
+
+.dp-pop.open { opacity: 1; visibility: visible; translate: 0 0; }
+
+/* روی صفحه‌های تیره، منو هم تیره می‌شود */
+[data-dp-page="man"] .dp-pop,
+[data-dp-page="teen"] .dp-pop {
+  background: rgba(23, 23, 23, 0.98);
+  border-color: rgba(201, 168, 76, 0.38);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+.dp-pop-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 11px 13px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+}
+
+.dp-pop-head strong {
+  display: block;
+  font-size: 13.5px;
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+
+.dp-pop-head small {
+  display: block;
+  font-size: 11px;
+  color: #796e64;
+  overflow-wrap: anywhere;
+}
+
+.dp-pop a,
+.dp-pop button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-align: start;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dp-pop a::after { display: none; }
+.dp-pop svg { width: 18px; height: 18px; color: #b8943c; flex: none; }
+
+.dp-pop a:hover,
+.dp-pop button:hover { background: rgba(201, 168, 76, 0.14); color: #b8943c; }
+
+.dp-pop .dp-out { color: #b4544f; }
+.dp-pop .dp-out svg { color: #b4544f; }
+.dp-pop .dp-out:hover { background: rgba(180, 84, 79, 0.12); color: #8e3b37; }
+
+.dp-count {
+  margin-inline-start: auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: #d4b85a;
+}
+
+/* ============================================================
+   صفحات تیره — مردانه و تینیجر
+   ============================================================ */
+[data-dp-page="man"] .dp-pop,
+[data-dp-page="teen"] .dp-pop {
+  background: rgba(20, 20, 20, 0.98);
+  border-color: rgba(201, 168, 76, 0.4);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+}
+
+[data-dp-page="man"] .dp-pop a,
+[data-dp-page="man"] .dp-pop button,
+[data-dp-page="teen"] .dp-pop a,
+[data-dp-page="teen"] .dp-pop button { color: #ede8e0; }
+
+[data-dp-page="man"] .dp-pop-head strong,
+[data-dp-page="teen"] .dp-pop-head strong { color: #faf8f5; }
+
+[data-dp-page="man"] .dp-pop a:hover,
+[data-dp-page="teen"] .dp-pop a:hover { color: #d4b85a; }
+
+/* ---------- رنگ دکمه در صفحات ویژه ---------- */
+[data-dp-page="woman"] .dp-join {
+  background-image: linear-gradient(135deg, #d4b85a, #c9a0b8, #c9a84c);
+  color: #1a1a1a;
+}
+
+[data-dp-page="kids"] .dp-join {
+  background-image: linear-gradient(135deg, #d4b85a, #6ec8d9, #f5a0a0, #c9a84c);
+}
+
+[data-dp-page="teen"] .dp-join {
+  background-image: linear-gradient(135deg, #d4b85a, #8b5cf6, #00d4ff, #c9a84c);
+  color: #ffffff;
+  box-shadow: 0 8px 26px -10px rgba(139, 92, 246, 0.9);
+}
+
+[data-dp-page="teen"] .dp-join:hover { box-shadow: 0 14px 34px -10px rgba(0, 212, 255, 0.85); }
+
+/* ============================================================
+   واکنش‌گرا
+   ============================================================ */
+@media (max-width: 1180px) {
+  .dp-join span { display: none; }
+  .dp-join { padding: 9px 11px; }
+}
+
+@media (max-width: 900px) {
+  .dp-signin { display: none; }
+  .dp-hi { display: none; }
+  .dp-chip { padding: 5px 8px 5px 6px; }
+}
+
+@media (max-width: 560px) {
+  .dp-pop {
+    position: fixed;
+    inset-inline: 12px;
+    top: auto;
+    bottom: 12px;
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-join, .dp-pop, .dp-caret { transition: none; }
+}
+
+/* صفحه‌ی مردانه — جعبه‌ی آیکون‌ها نام دیگری دارد */
+.icons-m .dp-acc { display: flex; align-items: center; gap: 8px; }
+
+/* ============================================================
+   دکمه‌ی سبد خرید در نوار بالا
+   ============================================================ */
+.dp-cart {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: inherit;
+  border: 1px solid rgba(201, 168, 76, 0.34);
+  background: rgba(201, 168, 76, 0.08);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.dp-cart:hover { background: rgba(201, 168, 76, 0.2); transform: translateY(-2px); }
+.dp-cart svg { width: 20px; height: 20px; }
+
+.dp-cart-n {
+  position: absolute;
+  inset-block-start: -4px;
+  inset-inline-start: -4px;
+  min-width: 20px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+  text-align: center;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 560px) {
+  .dp-cart { width: 38px; height: 38px; }
+}
+
+/* ============================================================
+   بخش‌بندی صفحه‌ی حساب کاربری — تب‌ها
+   ============================================================ */
+.acc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  background: rgba(201, 168, 76, 0.09);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.acc-tab {
+  flex: 1 1 140px;
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #796e64;
+  cursor: pointer;
+  transition: background 0.24s ease, color 0.24s ease;
+}
+
+.acc-tab:hover { color: #1a1a1a; background: rgba(201, 168, 76, 0.12); }
+
+.acc-tab.is-on {
+  color: #faf8f5;
+  background: linear-gradient(135deg, #c9a84c, #b8943c);
+  box-shadow: 0 8px 20px -12px rgba(184, 148, 60, 0.9);
+}
+
+.acc-tab:focus-visible { outline: 2px solid #c9a84c; outline-offset: 2px; }
+
+.acc-sec[hidden] { display: none; }
+
+/* ---------- فهرست اطلاعات حساب ---------- */
+.acc-info { list-style: none; margin: 0; padding: 0; }
+
+.acc-info li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 2px;
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.22);
+}
+
+.acc-info li:last-child { border-bottom: 0; }
+.acc-info span { font-size: 13px; color: #796e64; }
+.acc-info b { font-size: 14px; font-weight: 700; overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+  .acc-tab { flex: 1 1 100%; }
+}

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>دیجی‌پوش — معرفی فنی</title>
+  <meta name="description" content="دیجی‌پوش — بازارگاه لوکس مد ایرانی." />
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --gold:#C9A84C; --gold-l:#D4B85A; --bronze:#B8943C;
+    --cream:#F5F0E8; --off:#FAF8F5; --beige:#EDE8E0;
+    --ink:#1A1A1A; --gray:#8A7E72;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  body{
+    font-family:Vazirmatn,system-ui,sans-serif;
+    background:var(--off); color:var(--ink);
+    line-height:1.85; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+
+  /* ---------- سربرگ ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    padding:84px 0 70px; text-align:center;
+    background:linear-gradient(150deg,#1A1A1A 0%,#252525 55%,#1A1A1A 100%);
+    color:var(--off);
+  }
+  .hero::after{
+    content:"";position:absolute;inset-inline:0;bottom:0;height:2.5px;
+    background:linear-gradient(90deg,transparent,var(--gold),var(--gold-l),var(--gold),transparent);
+  }
+  .glow{
+    position:absolute;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(201,168,76,.16),transparent 68%);
+    top:-230px;inset-inline-start:-140px;pointer-events:none;
+  }
+  .mark{
+    width:82px;height:82px;margin:0 auto 22px;
+    display:grid;place-items:center;border-radius:24px;
+    font-size:38px;font-weight:900;color:#14100a;
+    background:linear-gradient(135deg,var(--gold-l),var(--bronze));
+    box-shadow:0 20px 46px -18px rgba(201,168,76,.85);
+  }
+  .hero h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-.5px}
+  .hero .sub{
+    display:inline-block;margin-top:8px;padding:6px 20px;border-radius:999px;
+    font-size:14px;font-weight:600;color:var(--gold-l);
+    background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);
+  }
+  .hero p.lead{
+    max-width:620px;margin:22px auto 0;font-size:16.5px;
+    color:#c9c2b8;line-height:2.1;
+  }
+
+  /* ---------- نوار آمار ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px;margin:0;background:rgba(201,168,76,.22);
+  }
+  .stat{padding:26px 16px;text-align:center;background:#1f1f1f}
+  .stat b{
+    display:block;font-size:30px;font-weight:900;
+    background:linear-gradient(135deg,var(--gold-l),var(--bronze));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .stat span{font-size:12.5px;color:#a49a8e}
+
+  /* ---------- بخش‌ها ---------- */
+  section{padding:64px 0}
+  section:nth-of-type(even){background:var(--cream)}
+
+  .eyebrow{
+    display:block;font-size:11.5px;font-weight:800;letter-spacing:.18em;
+    color:var(--bronze);margin-bottom:6px;
+  }
+  h2{
+    font-size:clamp(23px,3.6vw,30px);font-weight:800;margin-bottom:8px;
+    display:flex;align-items:center;gap:11px;
+  }
+  h2 svg{width:26px;height:26px;color:var(--gold);flex:none}
+  .desc{color:var(--gray);font-size:15px;margin-bottom:28px;max-width:640px}
+
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+
+  .card{
+    padding:22px 24px;border-radius:18px;background:var(--off);
+    border:1px solid rgba(201,168,76,.2);
+    transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+  }
+  section:nth-of-type(even) .card{background:#fff}
+  .card:hover{transform:translateY(-5px);box-shadow:0 22px 44px -26px rgba(0,0,0,.26)}
+  .card h3{
+    font-size:16px;font-weight:800;margin-bottom:9px;
+    display:flex;align-items:center;gap:9px;
+  }
+  .card h3 svg{width:19px;height:19px;color:var(--bronze);flex:none}
+  .card p{font-size:13.8px;color:var(--gray);line-height:2}
+  .card ul{list-style:none;margin-top:9px}
+  .card li{
+    font-size:13.5px;color:var(--gray);padding:5px 0 5px 0;
+    padding-inline-start:19px;position:relative;
+  }
+  .card li::before{
+    content:"";position:absolute;inset-inline-start:0;top:14px;
+    width:6px;height:6px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),var(--bronze));
+  }
+
+  .tag{
+    display:inline-block;padding:4px 13px;margin:3px 3px 3px 0;
+    border-radius:999px;font-size:12.5px;font-weight:700;
+    color:var(--bronze);background:rgba(201,168,76,.13);
+    border:1px solid rgba(201,168,76,.26);
+  }
+  .tag.no{
+    color:#a06a6a;background:rgba(190,110,110,.1);
+    border-color:rgba(190,110,110,.24);text-decoration:line-through;
+  }
+  .tag.big{font-size:14px;padding:8px 18px;font-weight:800}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+  th,td{padding:12px 14px;text-align:right;border-bottom:1px solid rgba(201,168,76,.18)}
+  th{font-weight:800;font-size:12.5px;color:var(--bronze);background:rgba(201,168,76,.07)}
+  td:last-child{font-weight:700;color:var(--ink);white-space:nowrap}
+  tbody tr:hover{background:rgba(201,168,76,.05)}
+
+  .arch{
+    padding:24px;border-radius:18px;overflow-x:auto;
+    background:#1c1c1c;color:#d8d0c4;
+    font-family:ui-monospace,monospace;font-size:13px;line-height:2.15;
+    border:1px solid rgba(201,168,76,.24);
+  }
+  .arch b{color:var(--gold-l);font-weight:700}
+  .arch i{color:#8d8d8d;font-style:normal}
+
+  .bars{display:grid;gap:13px;margin-top:6px}
+  .bar-row{display:grid;grid-template-columns:96px 1fr 78px;align-items:center;gap:13px}
+  .bar-row span{font-size:13.5px;font-weight:700}
+  .bar-row em{font-size:13px;font-style:normal;color:var(--gray);text-align:left}
+  .bar{height:11px;border-radius:999px;background:rgba(201,168,76,.14);overflow:hidden}
+  .bar i{
+    display:block;height:100%;border-radius:999px;
+    background:linear-gradient(90deg,var(--gold-l),var(--bronze));
+  }
+
+  .swatches{display:flex;flex-wrap:wrap;gap:13px;margin-top:6px}
+  .sw{text-align:center;font-size:11px;color:var(--gray)}
+  .sw i{
+    display:block;width:56px;height:56px;border-radius:16px;margin-bottom:6px;
+    border:1px solid rgba(0,0,0,.09);
+  }
+  .sw b{display:block;font-size:10.5px;font-family:monospace;color:var(--ink)}
+
+  .note{
+    padding:18px 22px;border-radius:15px;margin-top:22px;font-size:14px;
+    color:#6d6357;background:rgba(201,168,76,.09);
+    border-inline-start:3px solid var(--gold);
+  }
+
+  footer{
+    padding:44px 0;text-align:center;font-size:13.5px;
+    color:#a49a8e;background:#1A1A1A;
+    border-top:2.5px solid transparent;
+    border-image:linear-gradient(90deg,transparent,var(--gold),transparent) 1;
+  }
+  footer strong{color:var(--gold-l);font-size:16px;display:block;margin-bottom:6px}
+
+  @media(max-width:640px){
+    .bar-row{grid-template-columns:78px 1fr 64px;gap:9px}
+    table{font-size:12.5px}
+    th,td{padding:9px 8px}
+  }
+  @media print{
+    .card:hover{transform:none;box-shadow:none}
+    section{padding:34px 0;break-inside:avoid}
+  }
+</style>
+  <link rel="stylesheet" href="assets/css/dp-cursor.css" />
+</head>
+<body>
+<main id="main">
+
+<div class="hero">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="mark">د</div>
+    <h1>دیجی‌پوش</h1>
+    <span class="sub">بازارگاه لوکس مد ایرانی</span>
+    <p class="lead">
+      یک بازارگاه چندفروشنده‌ای کامل، ساخته‌شده با فناوری‌های پایه‌ی وب —
+      بدون هیچ فریم‌ورک، کتابخانه یا وابستگی خارجی.
+    </p>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><b>۴۴٬۰۰۰+</b><span>خط کد</span></div>
+  <div class="stat"><b>۳۴</b><span>صفحه</span></div>
+  <div class="stat"><b>۳۱</b><span>ماژول جاوااسکریپت</span></div>
+  <div class="stat"><b>۳۳</b><span>مسیر API</span></div>
+  <div class="stat"><b>۱۰</b><span>جدول دیتابیس</span></div>
+  <div class="stat"><b>۰</b><span>وابستگی خارجی</span></div>
+</div>
+
+<!-- ============ فناوری ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">پشته‌ی فنی</span>
+    <h2>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 16-4-4 4-4"/><path d="m16 8 4 4-4 4"/><path d="M13.5 5 10.5 19"/></svg>
+      با چه چیزهایی ساخته شده
+    </h2>
+    <p class="desc">سه فناوری پایه‌ی وب، بدون هیچ لایه‌ی واسط.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <h3><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16l-1.5 16.5L12 21.5l-6.5-2z"/><path d="M8.5 8h7l-.4 4.5-3.1 1-3.1-1"/></svg>HTML5</h3>
+        <p>ساختار معنایی استاندارد با پشتیبانی کامل دسترس‌پذیری.</p>
+        <ul>
+          <li>عناصر معنایی (<code>section</code>، <code>article</code>)</li>
+          <li>برچسب‌های ARIA برای صفحه‌خوان</li>
+          <li>راست‌به‌چپ کامل با <code>dir="rtl"</code></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16l-1.5 16.5L12 21.5l-6.5-2z"/><path d="M16 8H9l.3 3.5h6L15 15l-3 1-3-1"/></svg>CSS3</h3>
+        <p>تمام طراحی و انیمیشن با CSS خالص، بدون هیچ چارچوبی.</p>
+        <ul>
+          <li>Grid و Flexbox برای چیدمان</li>
+          <li>متغیرهای CSS برای پالت رنگ</li>
+          <li><code>clamp()</code> برای اندازه‌های سیال</li>
+          <li>انیمیشن ۶۰ فریم بر ثانیه</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9.5 9v5.5a1.8 1.8 0 0 1-3.2 1.1"/><path d="M17.8 10.2a2.2 2.2 0 0 0-3.8 1.4c0 2.4 3.8 1.6 3.8 3.6a2.1 2.1 0 0 1-3.7 1.2"/></svg>JavaScript ES6+</h3>
+        <p>تمام منطق برنامه با جاوااسکریپت مدرن و ماژولار.</p>
+        <ul>
+          <li>ماژول‌های مستقل و قابل جایگزینی</li>
+          <li>رمزنگاری واقعی با Web Crypto</li>
+          <li>رویدادهای سفارشی بین ماژول‌ها</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>تنها منبع خارجی پروژه:</strong> فونت فارسی Vazirmatn — یک فونت متن‌باز.
+      هیچ کتابخانه، فریم‌ورک یا بسته‌ی دیگری استفاده نشده است.
+    </div>
+  </div>
+</section>
+
+<!-- ============ آنچه استفاده نشد ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">تصمیم معمارانه</span>
+    <h2>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></svg>
+      آنچه عمداً استفاده نشد
+    </h2>
+    <p class="desc">این یک انتخاب آگاهانه بود، نه محدودیت.</p>
+
+    <div style="margin-bottom:26px">
+      <span class="tag no big">React</span>
+      <span class="tag no big">Next.js</span>
+      <span class="tag no big">Vue</span>
+      <span class="tag no big">Angular</span>
+      <span class="tag no big">Svelte</span>
+      <span class="tag no big">Bootstrap</span>
+      <span class="tag no big">Tailwind</span>
+      <span class="tag no big">jQuery</span>
+      <span class="tag no big">GSAP</span>
+      <span class="tag no big">Three.js</span>
+      <span class="tag no big">Swiper</span>
+      <span class="tag no big">Font Awesome</span>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>چرا بدون فریم‌ورک؟</h3>
+        <ul>
+          <li><b>سرعت</b> — صفحه بدون بارگذاری مگابایت‌ها کد باز می‌شود</li>
+          <li><b>سادگی میزبانی</b> — روی هر هاست اشتراکی ساده اجرا می‌شود</li>
+          <li><b>بدون کهنگی</b> — فریم‌ورک‌ها نسخه عوض می‌کنند، HTML و CSS نه</li>
+          <li><b>کنترل کامل</b> — هر پیکسل دقیقاً همان است که خواسته شده</li>
+          <li><b>امنیت</b> — صفر وابستگی یعنی صفر ریسک زنجیره‌ی تأمین</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>جایگزین چه شد؟</h3>
+        <ul>
+          <li>به‌جای Font Awesome → بیش از <b>۱۲۰ آیکون SVG خطی دست‌ساز</b></li>
+          <li>به‌جای Swiper → اسلایدر با <code>@keyframes</code> و <code>transition</code></li>
+          <li>به‌جای GSAP → انیمیشن CSS با <code>IntersectionObserver</code></li>
+          <li>به‌جای jQuery → <code>querySelector</code> و رویدادهای مدرن</li>
+          <li>به‌جای ایموجی → SVG یکسان روی همه‌ی سیستم‌عامل‌ها</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ معماری ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">ساختار</span>
+    <h2>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      معماری پروژه
+    </h2>
+    <p class="desc">چهار لایه‌ی مستقل روی یک هسته‌ی مشترک.</p>
+
+    <div class="arch">دیجی‌پوش/
+│
+├── <b>لایه‌ی عمومی</b> <i>........ ۵ صفحه — اصلی، زنانه، مردانه، بچگانه، تینیجر</i>
+├── <b>لایه‌ی مشتری</b> <i>........ حساب کاربری، سبد خرید، فروشگاه، نظرها</i>
+├── <b>پنل فروشندگان</b> <i>...... ۱۱ صفحه</i>
+├── <b>پنل مدیریت</b> <i>......... ۹ صفحه</i>
+│
+├── <b>هسته‌ی مشترک</b> <i>........ ۱۹ ماژول JavaScript</i>
+│   ├── dp-store.js <i>....... داده و رمزنگاری SHA-256</i>
+│   ├── dp-cart.js <i>........ سبد چندفروشنده‌ای</i>
+│   ├── dp-reviews.js <i>..... نظر، امتیاز، پاسخ فروشنده</i>
+│   ├── dp-taxonomy.js <i>.... ۴ بخش × ۳۶ سبک × ۲۱۱ کالا</i>
+│   ├── dp-colors.js <i>...... ۳۳ رنگ با طرح بافت‌دار</i>
+│   └── <i>… و ۱۴ ماژول دیگر</i>
+│
+└── <b>بک‌اند</b> <i>............... ۳۳ مسیر API + ۱۰ جدول PostgreSQL</i></div>
+  </div>
+</section>
+
+<!-- ============ آمار ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">اندازه</span>
+    <h2>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+      آمار پروژه
+    </h2>
+    <p class="desc">توزیع خطوط کد میان سه فناوری.</p>
+
+    <div class="bars">
+      <div class="bar-row"><span>HTML</span><div class="bar"><i style="width:100%"></i></div><em>۱۸٬۰۵۹</em></div>
+      <div class="bar-row"><span>CSS</span><div class="bar"><i style="width:96%"></i></div><em>۱۷٬۳۷۸</em></div>
+      <div class="bar-row"><span>JavaScript</span><div class="bar"><i style="width:52%"></i></div><em>۹٬۴۱۸</em></div>
+    </div>
+
+    <table style="margin-top:30px">
+      <thead><tr><th>شاخص</th><th>مقدار</th></tr></thead>
+      <tbody>
+        <tr><td>صفحه‌ی HTML</td><td>۳۴</td></tr>
+        <tr><td>فایل CSS</td><td>۱۹</td></tr>
+        <tr><td>ماژول JavaScript</td><td>۳۱</td></tr>
+        <tr><td>مسیر API</td><td>۳۳</td></tr>
+        <tr><td>جدول دیتابیس</td><td>۱۰</td></tr>
+        <tr><td>آیکون SVG دست‌ساز</td><td>بیش از ۱۲۰</td></tr>
+        <tr><td>رنگ در پالت محصول</td><td>۳۳</td></tr>
+        <tr><td>دسته‌بندی سه‌سطحی</td><td>۴ بخش × ۳۶ سبک × ۲۱۱ کالا</td></tr>
+        <tr><td>آزمون خودکار موفق</td><td>بیش از ۳۰۰</td></tr>
+        <tr><td>لینک داخلی بررسی‌شده</td><td>۶۶۶ — صفر شکسته</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ قابلیت‌ها ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">امکانات</span>
+    <h2>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 13.8 9l5.7 1.8-5.7 1.8L12 18l-1.8-5.4L4.5 10.8 10.2 9z"/></svg>
+      قابلیت‌های کلیدی
+    </h2>
+    <p class="desc">سه نقش کاربری، هرکدام با پنل اختصاصی.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <h3><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>مشتری</h3>
+        <ul>
+          <li>ورود با رمز رمزنگاری‌شده SHA-256</li>
+          <li>سبد خرید از چند فروشگاه همزمان</li>
+          <li>کشوی سبد بدون ترک صفحه</li>
+          <li>افزودن سریع با انتخاب رنگ و سایز</li>
+          <li>نظر و امتیاز</li>
+          <li>درخواست مرجوعی</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg>فروشنده</h3>
+        <ul>
+          <li>ثبت‌نام چهارمرحله‌ای</li>
+          <li>مدیریت محصول با آپلود تصویر</li>
+          <li>سفارش‌ها و مرجوعی‌ها</li>
+          <li>پاسخ به نظرها</li>
+          <li>تخفیف زمان‌دار با ماشین‌حساب زنده</li>
+          <li>گزارش درآمد و کمیسیون</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5.2c0 4.6 3.4 8.4 8 9.3 4.6-.9 8-4.7 8-9.3V6.5z"/><path d="m9 12 2.2 2.2L15 10.5"/></svg>مدیر</h3>
+        <ul>
+          <li>تأیید یا رد فروشگاه‌ها</li>
+          <li>انتشار خودکار پس از تأیید</li>
+          <li>مدیریت نظرهای گزارش‌شده</li>
+          <li>سیاست کمیسیون اختصاصی</li>
+          <li>مشاهده‌ی همه‌ی سفارش‌ها</li>
+          <li>سیاهه‌ی رخدادها</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ نکات فنی ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">جزئیات</span>
+    <h2>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5a4 4 0 0 0-5.4 5.4L4 15v5h5l5.1-5.1a4 4 0 0 0 5.4-5.4l-2.8 2.8-2.4-2.4z"/></svg>
+      نکات فنی قابل توجه
+    </h2>
+    <p class="desc">تصمیم‌هایی که کیفیت را تعیین کردند.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>سفارش جداگانه برای هر فروشنده</h3>
+        <p>سبدی که از سه فروشگاه پر شده، به سه سفارش مستقل تبدیل می‌شود — چون هر فروشنده باید فقط سفارش خودش را ببیند.</p>
+      </div>
+      <div class="card">
+        <h3>رمزنگاری واقعی</h3>
+        <p>گذرواژه‌ها با <code>crypto.subtle.digest</code> و الگوریتم SHA-256 رمز می‌شوند. متن ساده هرگز ذخیره نمی‌شود.</p>
+      </div>
+      <div class="card">
+        <h3>نرمال‌سازی فارسی</h3>
+        <p>«ی» و «ي»، «ک» و «ك»، و اعداد فارسی و انگلیسی در جست‌وجو یکسان‌سازی می‌شوند تا نتیجه همیشه پیدا شود.</p>
+      </div>
+      <div class="card">
+        <h3>بهینه‌سازی کارایی</h3>
+        <p>پس از پایان انیمیشن، <code>will-change</code> با رویداد <code>transitionend</code> آزاد می‌شود تا لایه‌ی گرافیکی دائمی روی کارت گرافیک نماند.</p>
+      </div>
+      <div class="card">
+        <h3>دسترس‌پذیری</h3>
+        <p>تله‌ی فوکوس در همه‌ی پنجره‌ها، پیمایش کامل با صفحه‌کلید، و احترام به <code>prefers-reduced-motion</code>.</p>
+      </div>
+      <div class="card">
+        <h3>اعداد فارسی سراسری</h3>
+        <p>تمام اعداد سایت — قیمت، تعداد، تاریخ — با ارقام فارسی ۰۱۲۳۴۵۶۷۸۹ نمایش داده می‌شوند.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ رنگ ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">هویت بصری</span>
+    <h2>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="9.5" r="1.2" fill="currentColor"/><circle cx="15" cy="9.5" r="1.2" fill="currentColor"/><circle cx="9.5" cy="15" r="1.2" fill="currentColor"/></svg>
+      پالت رنگ
+    </h2>
+    <p class="desc">طلا و کرم به‌عنوان پایه، با هویت رنگی مستقل برای هر بخش.</p>
+
+    <div class="swatches">
+      <div class="sw"><i style="background:#C9A84C"></i><b>#C9A84C</b>طلا</div>
+      <div class="sw"><i style="background:#D4B85A"></i><b>#D4B85A</b>طلای روشن</div>
+      <div class="sw"><i style="background:#B8943C"></i><b>#B8943C</b>برنز</div>
+      <div class="sw"><i style="background:#F5F0E8"></i><b>#F5F0E8</b>کرم گرم</div>
+      <div class="sw"><i style="background:#FAF8F5"></i><b>#FAF8F5</b>سفید مایل</div>
+      <div class="sw"><i style="background:#1A1A1A"></i><b>#1A1A1A</b>مشکی مات</div>
+      <div class="sw"><i style="background:#8A7E72"></i><b>#8A7E72</b>خاکستری گرم</div>
+    </div>
+
+    <div class="note">
+      <strong>هویت هر بخش:</strong>
+      زنانه رز-بنفش · مردانه نقره و برنز تیره · بچگانه پنج‌رنگ شاد · تینیجر نئون روی مشکی
+    </div>
+  </div>
+</section>
+
+<!-- ============ بک‌اند ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">سمت سرور</span>
+    <h2>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="2.8"/><path d="M4 5.5v13c0 1.5 3.6 2.8 8 2.8s8-1.3 8-2.8v-13"/><path d="M4 12c0 1.5 3.6 2.8 8 2.8s8-1.3 8-2.8"/></svg>
+      بک‌اند — آماده، منتظر اتصال
+    </h2>
+    <p class="desc">ساختار کامل نوشته شده؛ فقط باید به سرویس واقعی وصل شود.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3>فناوری</h3>
+        <div>
+          <span class="tag">Next.js API Routes</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Row Level Security</span>
+        </div>
+        <p style="margin-top:12px">۳۳ مسیر سرویس برای احراز هویت، محصول، سفارش، نظر و کمیسیون.</p>
+      </div>
+      <div class="card">
+        <h3>۱۰ جدول دیتابیس</h3>
+        <ul style="columns:2;column-gap:20px">
+          <li>users</li><li>seller_profiles</li><li>products</li>
+          <li>cart</li><li>orders</li><li>order_items</li>
+          <li>wishlist</li><li>reviews</li><li>commissions</li><li>notifications</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <strong>دیجی‌پوش</strong>
+    ساخته‌شده با HTML5، CSS3 و JavaScript خالص<br />
+    بدون هیچ فریم‌ورکی — ۱۴۰۴
+  </div>
+</footer>
+
+</main>
+</body>
+</html>

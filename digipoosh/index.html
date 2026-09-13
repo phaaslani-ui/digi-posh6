@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="دیجی‌پوش | بازارگاه لوکس مد ایران — اتصال خریداران به فروشندگان معتبر پوشاک زنانه، مردانه و بچگانه." />
+  <meta name="theme-color" content="#f5f0e8" />
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./favicon.svg" />
+  <link rel="manifest" href="./manifest.json" />
+  <title>دیجی‌پوش | بازارگاه لوکس مد ایران</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style-clean.css" />
+  <link rel="stylesheet" href="./dp-navbar.css" />
+  <link rel="stylesheet" href="./club-toast.css" />
+  <link rel="stylesheet" href="./assets/css/dp-cart-drawer.css" />
+  <link rel="preload" as="image" href="https://images.pexels.com/photos/36168977/pexels-photo-36168977.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1400&w=2000" fetchpriority="high" />
+</head>
+<body>
+
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<main id="main">
+
+  <!-- ============= HERO SLIDER ============= -->
+  <section class="hero-slider" id="heroSlider" aria-label="مجموعه‌های برگزیده">
+    <div class="slides-wrap">
+      <div class="slide active">
+        <img src="https://images.pexels.com/photos/36168977/pexels-photo-36168977.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1400&w=2000" alt="مدل ایرانی با پوشش محجبه و شیک" fetchpriority="high" />
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><path d="M12 4v16M4 12h16M7 7l10 10M17 7 7 17"/></svg>
+            مجموعه‌ی بهار و تابستان
+          </span>
+          <h1>زیبایی در هر پوشش <span class="highlight">طلایی</span></h1>
+          <p>خریدی متفاوت، تجربه‌ای لوکس از فروشندگان منتخب سراسر ایران</p>
+          <a class="btn-slider" href="./woman/index.html">
+            مشاهده مجموعه
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1400&w=2000" alt="استایل مردانه‌ی کلاسیک" loading="lazy" />
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><path d="M12 4v16M4 12h16M7 7l10 10M17 7 7 17"/></svg>
+            استایل مدرن
+          </span>
+          <h2>قدرت پوشش <span class="highlight">نقره‌ای</span></h2>
+          <p>استایلی که نشان‌دهنده‌ی شخصیت و اعتماد به نفس شماست</p>
+          <a class="btn-slider" href="./man/index.html">
+            مشاهده مجموعه
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1400&w=2000" alt="کودک با لباس شاد و باکیفیت" loading="lazy" />
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><path d="M12 4v16M4 12h16M7 7l10 10M17 7 7 17"/></svg>
+            لبخند کودکان
+          </span>
+          <h2>شادی در هر قدم <span class="highlight">رنگارنگ</span></h2>
+          <p>لباس‌هایی که کودک شما عاشقش می‌شود و والدین آسوده‌خاطرند</p>
+          <a class="btn-slider" href="./kids/index.html">
+            مشاهده مجموعه
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1400&w=2000" alt="استایل نوجوانانه و امروزی" loading="lazy" />
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><path d="M12 4v16M4 12h16M7 7l10 10M17 7 7 17"/></svg>
+            استایل نوجوانان
+          </span>
+          <h2>انرژی دیجیتال <span class="highlight">نئون</span></h2>
+          <p>همراه با جدیدترین ترندهای روز دنیای مد نوجوانان</p>
+          <a class="btn-slider" href="./teen/index.html">
+            مشاهده مجموعه
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <button class="slider-arrow slider-arrow--prev" type="button" aria-label="اسلاید قبلی">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="slider-arrow slider-arrow--next" type="button" aria-label="اسلاید بعدی">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
+    <div class="slider-progress" aria-hidden="true">
+      <div class="slider-progress-bar" id="sliderProgressBar"></div>
+    </div>
+
+    <div class="slider-dots" id="sliderDots">
+      <button class="dot active" type="button" aria-label="اسلاید 1"></button>
+      <button class="dot" type="button" aria-label="اسلاید 2"></button>
+      <button class="dot" type="button" aria-label="اسلاید 3"></button>
+      <button class="dot" type="button" aria-label="اسلاید 4"></button>
+    </div>
+  </section>
+
+  <!-- ============= LIVE STATS BAR (جدید) ============= -->
+  <section class="dpm-live-stats">
+    <div class="container">
+      <div class="dpm-live-stats-grid">
+        <div class="dpm-live-stat">
+          <div class="dpm-live-stat-icon">🛍️</div>
+          <div class="dpm-live-stat-info">
+            <strong><span class="dpm-counter" data-counter="1247" data-counter-suffix="">۱٬۲۴۷</span></strong>
+            <span>سفارش امروز</span>
+          </div>
+        </div>
+        <div class="dpm-live-stat">
+          <div class="dpm-live-stat-icon">👥</div>
+          <div class="dpm-live-stat-info">
+            <strong><span class="dpm-counter" data-counter="58" data-counter-suffix="">۵۸</span></strong>
+            <span>نفر آنلاین الان</span>
+          </div>
+        </div>
+        <div class="dpm-live-stat">
+          <div class="dpm-live-stat-icon">⭐</div>
+          <div class="dpm-live-stat-info">
+            <strong><span class="dpm-counter" data-counter="486" data-counter-suffix="">۴۸۶</span></strong>
+            <span>امتیاز ثبت‌شده امروز</span>
+          </div>
+        </div>
+        <div class="dpm-live-stat">
+          <div class="dpm-live-stat-icon">🎁</div>
+          <div class="dpm-live-stat-info">
+            <strong><span class="dpm-counter" data-counter="32" data-counter-suffix="٪">۳۲٪</span></strong>
+            <span>تخفیف فعال</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= TRENDING PRODUCTS (جدید) ============= -->
+  <section class="dpm-products-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">پیشنهاد ویژه</span>
+        <h2>🔥 محصولات ترند این هفته</h2>
+        <p>۱۲ محصول برتر که توسط AI از بین هزاران گزینه برای شما انتخاب شده</p>
+      </div>
+      <div data-products-feed></div>
+    </div>
+  </section>
+
+  <!-- ============= FOR YOUR PERSONALITY (جدید - ترکیب شخصیت + فروش) ============= -->
+  <section class="dpm-personality-section" id="personalitySection" style="display:none">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">برای شخصیت شما</span>
+        <h2>🪞 <span id="personalitySectionTitle">محصولات متناسب با شخصیت شما</span></h2>
+        <p id="personalitySectionSubtitle">ترکیب هوشمند شخصیت + سلیقه + محبوبیت فروشندگان</p>
+      </div>
+      <div class="dpm-personality-grid" id="personalitySectionGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============= WHY DIGIPOOSH ============= -->
+  <section class="why-section" id="why">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">چرا دیجی‌پوش</span>
+        <h2>بازارگاه لوکس، با ضمانت اعتماد</h2>
+        <p>هر خرید در دیجی‌پوش با اطمینان کامل انجام می‌شود؛ از انتخاب فروشنده تا لحظه‌ی تحویل.</p>
+      </div>
+      <div class="why-grid">
+        <article class="why-card">
+          <div class="why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.2 4.9L19 8l-3.6 3.5.9 5L12 14.7 7.7 16.5l.9-5L5 8l4.8-1.1L12 2Z"/></svg>
+          </div>
+          <h3>محصولات اصل</h3>
+          <p>اصالت و شفافیت معرفی کالاها، ستون اصلی تجربه‌ی خرید در بازارگاه دیجی‌پوش است.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v5c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V7l-8-4Z"/><path d="m9.5 12.5 1.8 1.8 3.7-4.1"/></svg>
+          </div>
+          <h3>فروشندگان معتبر</h3>
+          <p>فروشنده‌هایی که به دیجی‌پوش وارد می‌شوند، پیش از حضور از نظر کیفیت و اعتبار بررسی می‌شوند.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="17" cy="14.5" r="1.5" fill="currentColor"/></svg>
+          </div>
+          <h3>پرداخت امن</h3>
+          <p>پرداخت‌ها در بستری شفاف، امن و قابل پیگیری انجام می‌شوند تا خیال شما آسوده باشد.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v9Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
+          </div>
+          <h3>پشتیبانی ۲۴/۷</h3>
+          <p>همراهی انسانی و سریع برای پاسخ‌گویی به پرسش‌ها، سفارش‌ها و نیازهای خریداران.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13a4 4 0 1 1 0 8H8"/><path d="m6 4-3 3 3 3"/><path d="m18 14 3 3-3 3"/></svg>
+          </div>
+          <h3>بازگشت آسان</h3>
+          <p>اگر انتخاب شما مطابق انتظار نبود، فرایند بازگشت روشن و قابل اتکا در اختیارتان است.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h13"/><path d="m13 5 7 7-7 7"/><circle cx="5" cy="12" r="1.5" fill="currentColor"/></svg>
+          </div>
+          <h3>ارسال سریع</h3>
+          <p>فروشگاه‌های منتخب متعهدند کالاها را در زمان‌بندی شفاف و با بسته‌بندی حرفه‌ای ارسال کنند.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= BENEFITS ============= -->
+  <section class="benefits-section" id="benefits">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">مزایای بازارگاه</span>
+        <h2>دیجی‌پوش، بستری برای رشد فروشندگان و اعتماد خریداران</h2>
+        <p>ما تجربه‌ای ساخته‌ایم که در آن خریدار با اطمینان بیشتری تصمیم می‌گیرد و فروشنده با کیفیت واقعی‌اش بهتر دیده می‌شود.</p>
+      </div>
+      <div class="benefits-grid">
+        <article class="benefit-column">
+          <img src="https://images.pexels.com/photos/33393823/pexels-photo-33393823.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=640" alt="انتخاب دقیق فروشندگان" loading="lazy" />
+          <h3>انتخاب دقیق فروشندگان</h3>
+          <p>فقط فروشگاه‌هایی که استاندارد تصویر، بسته‌بندی و پاسخ‌گویی را رعایت کنند، دیده می‌شوند.</p>
+        </article>
+        <article class="benefit-column">
+          <img src="https://images.pexels.com/photos/9218392/pexels-photo-9218392.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=640" alt="تجربه یکپارچه خرید" loading="lazy" />
+          <h3>تجربه‌ی یکپارچه خرید</h3>
+          <p>از کشف فروشگاه تا پرداخت، همه‌چیز با یک زبان بصری آرام و منسجم ارائه می‌شود.</p>
+        </article>
+        <article class="benefit-column">
+          <img src="https://images.pexels.com/photos/17907027/pexels-photo-17907027.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=800&w=640" alt="رشد فروشندگان با هویت" loading="lazy" />
+          <h3>رشد فروشندگان با هویت</h3>
+          <p>هر فروشنده می‌تواند ویترینی داشته باشد که شخصیت برندش را به‌وضوح منتقل می‌کند.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SELECT SELLERS ============= -->
+  <section class="select-sellers-section" id="select-sellers">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">انتخاب فروشندگان</span>
+        <h2>انتخاب دقیق فروشندگان</h2>
+        <p>هر فروشنده پیش از حضور در دیجی‌پوش، از نظر کیفیت ویترین، بسته‌بندی و پاسخ‌گویی بررسی می‌شود.</p>
+      </div>
+      <div class="select-sellers">
+        <ul>
+          <li>
+            <span class="select-sellers__dot"></span>
+            <div>
+              <strong>بررسی پیش از حضور</strong>
+              <p>هویت تجاری، کیفیت محصول و ثبات عملکرد پیش از ورود به بازارگاه ارزیابی می‌شود.</p>
+            </div>
+          </li>
+          <li>
+            <span class="select-sellers__dot"></span>
+            <div>
+              <strong>نظارت بر رضایت</strong>
+              <p>امتیاز، بازخورد و نرخ بازگشت به‌صورت مستمر برای حفظ استانداردهای دیجی‌پوش پایش می‌شود.</p>
+            </div>
+          </li>
+          <li>
+            <span class="select-sellers__dot"></span>
+            <div>
+              <strong>شفافیت کامل</strong>
+              <p>تمامی اطلاعات هر فروشگاه از زمان پاسخ‌گویی تا سیاست بازگشت برای خریدار قابل مشاهده است.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= RESPONSE STATS ============= -->
+  <section class="response-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">ساعات پاسخگویی</span>
+        <h2>زمان پاسخ‌گویی فروشندگان</h2>
+        <p>شفافیت و سرعت، دو اصل مهم در دیجی‌پوش هستند.</p>
+      </div>
+      <div class="response-grid">
+        <article class="response-stat" data-tilt>
+          <span>میانگین زمان پاسخ</span>
+          <strong><span class="dpm-counter" data-counter="2" data-counter-suffix="">۲</span> ساعت</strong>
+          <p>پاسخ‌گویی سریع و مؤثر در تمام روزهای هفته</p>
+        </article>
+        <article class="response-stat" data-tilt>
+          <span>نرخ رضایت خریداران</span>
+          <strong><span class="dpm-counter" data-counter="96" data-counter-suffix="٪">۹۶</span></strong>
+          <p>مشتریان از تجربه‌ی خرید و خدمات فروشندگان رضایت کامل دارند</p>
+        </article>
+        <article class="response-stat" data-tilt>
+          <span>نرخ بازگشت موفق</span>
+          <strong><span class="dpm-counter" data-counter="98" data-counter-suffix="٪">۹۸</span></strong>
+          <p>فرایند بازگشت سریع، شفاف و بدون پیچیدگی</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FEATURED SELLERS ============= -->
+  <section class="featured-sellers-section" id="featured-sellers">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">فروشندگان منتخب</span>
+        <h2>فروشگاه‌هایی با هویت، سلیقه و امضای روشن</h2>
+        <p>هر ویترین در دیجی‌پوش قرار است بیشتر از یک صفحه‌ی فروش باشد؛ یک تجربه‌ی برندسازی و اعتمادسازی است.</p>
+      </div>
+      <div class="sellers-grid">
+        <p class="dp-empty-stores">هنوز فروشگاهی ثبت نشده است. <a href="./seller/seller-signup.html">اولین فروشنده‌ی دیجی‌پوش شوید</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= HOW IT WORKS ============= -->
+  <section class="how-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">چطور کار می‌کند</span>
+        <h2>سه قدم تا خریدی مطمئن</h2>
+        <p>فرایند خرید در دیجی‌پوش برای سرعت، وضوح و حس اعتماد طراحی شده است.</p>
+      </div>
+      <div class="how-grid">
+        <article class="how-card">
+          <div class="how-card__number">۰۱</div>
+          <h3>ثبت‌نام</h3>
+          <p>در چند ثانیه حساب خود را بسازید و به فروشگاه‌های محبوب و پیشنهادهای اختصاصی دسترسی پیدا کنید.</p>
+        </article>
+        <article class="how-card">
+          <div class="how-card__number">۰۲</div>
+          <h3>انتخاب</h3>
+          <p>فروشندگان منتخب، سبک‌های متفاوت و اطلاعات شفاف باعث می‌شوند انتخابی آگاهانه‌تر داشته باشید.</p>
+        </article>
+        <article class="how-card">
+          <div class="how-card__number">۰۳</div>
+          <h3>دریافت</h3>
+          <p>از ثبت سفارش تا تحویل، همه‌چیز قابل رهگیری و با پشتیبانی حرفه‌ای همراه است.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= TRUST ============= -->
+  <section class="trust-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow eyebrow--center">اعتماد و تضمین</span>
+        <h2>زیرساختی برای اعتماد، نه فقط زیبایی</h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-badge"><span>پرداخت امن</span><strong>تراکنش محافظت‌شده</strong></div>
+        <div class="trust-badge"><span>اصالت</span><strong>فروشندگان راستی‌آزمایی‌شده</strong></div>
+        <div class="trust-badge"><span>ارسال</span><strong>رهگیری شفاف و زمان‌بندی دقیق</strong></div>
+        <div class="trust-badge"><span>بازگشت</span><strong>تا ۷ روز بدون پیچیدگی</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA ============= -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <span class="eyebrow eyebrow--center">ساخت حساب</span>
+        <h2>برای ورود به تجربه‌ای دقیق‌تر، حساب خود را در دیجی‌پوش بسازید.</h2>
+        <p>ویترین‌های محبوب را ذخیره کنید، سریع‌تر خرید کنید و زودتر از دیگران به مجموعه‌های جدید دسترسی داشته باشید.</p>
+        <form class="cta-form" id="ctaForm">
+          <input type="email" placeholder="ایمیل خود را برای شروع وارد کنید" required />
+          <button class="button button--primary" type="submit">ساخت حساب</button>
+        </form>
+        <div class="cta-tags">
+          <span>دسترسی زودهنگام</span>
+          <span>فروشندگان منتخب</span>
+          <span>پیگیری ساده سفارش</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SELLER INVITE ============= -->
+  <section class="seller-invite">
+    <div class="container">
+      <div class="invite-box">
+        <div class="invite-text">
+          <span class="eyebrow">همکاری با دیجی‌پوش</span>
+          <h2>فروشگاه خود را در دیجی‌پوش راه بیندازید</h2>
+          <p>اگر تولیدکننده یا فروشنده‌ی پوشاک هستید، ویترین اختصاصی خود را بسازید و محصولاتتان را به هزاران خریدار در سراسر ایران معرفی کنید.</p>
+          <ul class="invite-points">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+              <span>ثبت‌نام رایگان، بدون هزینه‌ی ماهانه</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+              <span>کمیسیون شفاف ۱۰٪ فقط روی فروش موفق</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+              <span>پنل کامل مدیریت محصول، سفارش و درآمد</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+              <span>تسویه‌ی هفتگی به حساب بانکی شما</span>
+            </li>
+          </ul>
+          <div class="invite-actions">
+            <a class="button button--primary" href="./seller/seller-signup.html">ثبت‌نام به عنوان فروشنده</a>
+            <a class="button button--outline" href="./seller/seller-login.html">ورود فروشندگان</a>
+          </div>
+        </div>
+        <div class="invite-stats">
+          <div class="invite-stat" data-tilt>
+            <strong><span class="dpm-counter" data-counter="180" data-counter-suffix="+">۱۸۰+</span></strong>
+            <span>فروشگاه فعال</span>
+          </div>
+          <div class="invite-stat" data-tilt>
+            <strong><span class="dpm-counter" data-counter="10" data-counter-suffix="٪">۱۰٪</span></strong>
+            <span>کمیسیون پلتفرم</span>
+          </div>
+          <div class="invite-stat" data-tilt>
+            <strong><span class="dpm-counter" data-counter="48" data-counter-suffix="">۴۸</span> ساعت</strong>
+            <span>زمان بررسی درخواست</span>
+          </div>
+          <div class="invite-stat" data-tilt>
+            <strong><span class="dpm-counter" data-counter="12000" data-counter-suffix="+">۱۲٬۰۰۰+</span></strong>
+            <span>خریدار فعال</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============= FOOTER ============= -->
+<footer class="footer" id="footer">
+  <div class="footer__grid">
+    <div class="footer__story">
+      <div class="footer__logo">
+        <span class="nav-logo__mark">د</span>
+        <span><strong>دیجی‌پوش</strong><small>بازارگاه ممتاز فروشندگان مد</small></span>
+      </div>
+      <p>دیجی‌پوش، بازارگاه لوکس مد ایران؛ اتصال خریداران به فروشندگان معتبر پوشاک زنانه، مردانه و بچگانه.</p>
+      <form class="footer-newsletter">
+        <input type="email" placeholder="برای دریافت خبرهای ویژه، ایمیل خود را وارد کنید" required />
+        <button type="submit">عضویت</button>
+      </form>
+    </div>
+    <div class="footer__col">
+      <h3>بخش‌های دیجی‌پوش</h3>
+      <a href="./woman/index.html">زنانه</a>
+      <a href="./man/index.html">مردانه</a>
+      <a href="./kids/index.html">بچگانه</a>
+      <a href="./teen/index.html">تینیجر</a>
+      <a href="#featured-sellers">فروشندگان</a>
+    </div>
+    <div class="footer__col">
+      <h3>فروشندگان</h3>
+      <a href="./seller/seller-signup.html">ثبت‌نام فروشنده</a>
+      <a href="./seller/seller-login.html">ورود به پنل</a>
+      <a href="./admin/admin-login.html">ورود مدیریت</a>
+      <a href="#select-sellers">شرایط پذیرش</a>
+    </div>
+    <div class="footer__col">
+      <h3>پشتیبانی</h3>
+      <a href="#why">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h11a4.5 4.5 0 0 1 0 9H9"/><path d="m7.5 6 -3.5 3.5L7.5 13"/></svg>
+        راهنمای خرید
+      </a>
+      <a href="./account.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5.5c0 4.2 2.9 8.1 7 9.5 4.1-1.4 7-5.3 7-9.5V6z"/><path d="m9.2 12 1.9 1.9 3.7-3.8"/></svg>
+        شرایط بازگشت کالا
+      </a>
+      <a href="./account.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><path d="M6.5 14.5h3"/></svg>
+        پیگیری سفارش
+      </a>
+      <a href="#why">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>
+        پرسش‌های متداول
+      </a>
+    </div>
+    <div class="footer__col">
+      <h3>ارتباط با ما</h3>
+      <a href="tel:02100000000">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4h3l1.5 4-2 1.4a11 11 0 0 0 5.6 5.6l1.4-2 4 1.5v3a1.8 1.8 0 0 1-2 1.8A15.5 15.5 0 0 1 4.7 6a1.8 1.8 0 0 1 1.8-2Z"/></svg>
+        ۰۲۱ ـ ۰۰۰۰ ۰۰۰۰
+      </a>
+      <a href="mailto:hello@digipoosh.ir">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 5.5L20 7"/></svg>
+        hello@digipoosh.ir
+      </a>
+      <span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-5.6 6.5-10.3A6.5 6.5 0 0 0 5.5 10.7C5.5 15.4 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.4"/></svg>
+        تهران، خیابان ولیعصر
+      </span>
+      <span>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg>
+        هر روز، ۹ صبح تا ۹ شب
+      </span>
+      <div class="footer__socials">
+        <a href="#" class="social-icon" aria-label="اینستاگرام">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><path d="M16.9 7.2h.01"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="تلگرام">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 4 3.8 10.6l5.9 2.2 2.2 5.9z"/><path d="m9.7 12.8 4.6-4.6"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="گفت‌وگو">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12.5c0 3.6-3.6 6.5-8 6.5a9.6 9.6 0 0 1-2.6-.35L5 20.5l1.2-3.1A6.3 6.3 0 0 1 4 12.5C4 8.9 7.6 6 12 6s8 2.9 8 6.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© ۱۴۰۵ دیجی‌پوش — تمامی حقوق محفوظ است.</span>
+    <div class="footer__badges">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><path d="M6.5 14.5h3"/></svg>
+        پرداخت امن
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M12 3.5 14 6l3.4-.3-.3 3.4L19.5 12l-2.4 2.9.3 3.4L14 18l-2 2.5L10 18l-3.4.3.3-3.4L4.5 12l2.4-2.9-.3-3.4L10 6z"/><path d="m9.5 12 1.8 1.8 3.4-3.5"/></svg>
+        ضمانت اصالت
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M12 3 5 6v5.5c0 4.2 2.9 8.1 7 9.5 4.1-1.4 7-5.3 7-9.5V6z"/><path d="m9.2 12 1.9 1.9 3.7-3.8"/></svg>
+        فروشندگان معتبر
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M4 9.5h11a4.5 4.5 0 0 1 0 9H9"/><path d="m7.5 6 -3.5 3.5L7.5 13"/></svg>
+        ۷ روز مهلت بازگشت
+      </span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span class="toast__icon">✨</span>
+  <span class="toast__text" id="toastText">عملیات موفق</span>
+</div>
+
+<!-- استایل‌های اضافی برای جزئیات خفن -->
+<style>
+  /* ═══ نوار آمار زنده ═══ */
+  .dpm-live-stats {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    padding: 24px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .dpm-live-stats::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 600px 200px at 50% 50%, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+  }
+  .dpm-live-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .dpm-live-stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+  }
+  .dpm-live-stat-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  }
+  .dpm-live-stat-info { color: #fff; }
+  .dpm-live-stat-info strong {
+    display: block;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 2px;
+    color: var(--gold);
+  }
+  .dpm-live-stat-info span {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  @media (max-width: 768px) {
+    .dpm-live-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  }
+
+  /* ═══ تایپ افکت روی h1 ═══ */
+  .hero h1 .highlight {
+    display: inline-block;
+    position: relative;
+  }
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 8px;
+    background: var(--gold);
+    opacity: 0.3;
+    border-radius: 2px;
+    z-index: -1;
+    animation: dpm-underline 2s ease-out;
+  }
+  @keyframes dpm-underline {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* ═══ Tilt effect ═══ */
+  [data-tilt] {
+    transform-style: preserve-3d;
+    transition: transform 0.2s;
+  }
+  [data-tilt]:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateZ(10px);
+  }
+
+  /* ═══ Hover glow for cards ═══ */
+  .why-card, .response-stat, .invite-stat, .benefit-column, .how-card, .trust-badge {
+    transition: all 0.3s;
+  }
+  .why-card:hover, .how-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(212, 175, 55, 0.2);
+  }
+
+  /* ═══ سکشن محصولات ترند ═══ */
+  .dpm-products-section {
+    padding: 60px 0;
+    background: linear-gradient(180deg, var(--bg-soft) 0%, #fff 100%);
+  }
+
+  /* ═══ سرچ‌بار حرفه‌ای ═══ */
+  .nav-search {
+    flex: 1;
+    max-width: 480px;
+    min-width: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .nav-search-icon {
+    position: absolute;
+    right: 14px;
+    width: 16px;
+    height: 16px;
+    color: var(--text-soft);
+    pointer-events: none;
+  }
+  .nav-search input {
+    flex: 1;
+    width: 100%;
+    padding: 10px 40px 10px 80px;
+    border: 1.5px solid var(--border-soft, #eee);
+    border-radius: 24px;
+    background: var(--bg-soft, #f5f0e8);
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text, #1a1a1a);
+    transition: all 0.2s;
+  }
+  .nav-search input::placeholder {
+    color: var(--text-soft, #888);
+  }
+  .nav-search input:focus {
+    outline: none;
+    border-color: var(--gold, #d4af37);
+    background: var(--bg-card, #fff);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+  }
+  .nav-search button {
+    position: absolute;
+    left: 6px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold, #d4af37), var(--gold-light, #f0d97b));
+    color: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+  .nav-search button:hover {
+    transform: scale(1.05);
+  }
+  .nav-search button svg {
+    width: 14px;
+    height: 14px;
+  }
+  @media (max-width: 968px) {
+    .nav-search { display: none; }
+  }
+</style>
+
+<!-- اسلایدر و نوار پیشرفت - v2.0 روان -->
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const progressBar = document.getElementById('sliderProgressBar');
+  const prevBtn = document.querySelector('.slider-arrow--prev');
+  const nextBtn = document.querySelector('.slider-arrow--next');
+  
+  if (slides.length === 0) return;
+  
+  let current = 0;
+  const total = slides.length;
+  const duration = 5000;
+  let progress = 0;
+  let lastTime = Date.now();
+  let paused = false;
+  let animFrameId = null;
+  let isTransitioning = false;
+
+  function preloadAdjacent() {
+    const next = (current + 1) % total;
+    const prev = (current - 1 + total) % total;
+    [next, prev].forEach(idx => {
+      const img = slides[idx]?.querySelector('img');
+      if (img && !img.complete) {
+        const tmp = new Image();
+        tmp.src = img.src;
+      }
+    });
+  }
+
+  function go(i){
+    if (isTransitioning) return;
+    isTransitioning = true;
+    
+    if (slides[current]) slides[current].classList.remove('active');
+    if (dots[current]) dots[current].classList.remove('active');
+    
+    current = (i + total) % total;
+    
+    if (slides[current]) slides[current].classList.add('active');
+    if (dots[current]) dots[current].classList.add('active');
+    
+    progress = 0;
+    lastTime = Date.now();
+    
+    preloadAdjacent();
+    
+    setTimeout(() => { isTransitioning = false; }, 750);
+  }
+
+  function tick(){
+    if(paused){ 
+      lastTime = Date.now(); 
+      animFrameId = requestAnimationFrame(tick); 
+      return; 
+    }
+    const now = Date.now();
+    const dt = Math.min(now - lastTime, 100);
+    lastTime = now;
+    progress += dt;
+    
+    if(progress >= duration){ 
+      go(current + 1); 
+    }
+    if(progressBar) {
+      const pct = Math.min(100, (progress / duration * 100));
+      progressBar.style.width = pct + '%';
+    }
+    animFrameId = requestAnimationFrame(tick);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      paused = true;
+    } else {
+      paused = false;
+      lastTime = Date.now();
+    }
+  });
+
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  if(prevBtn) prevBtn.addEventListener('click', () => go(current - 1));
+  if(nextBtn) nextBtn.addEventListener('click', () => go(current + 1));
+
+  const slider = document.getElementById('heroSlider');
+  if(slider){
+    slider.addEventListener('mouseenter', () => { paused = true; });
+    slider.addEventListener('mouseleave', () => { paused = false; lastTime = Date.now(); });
+    slider.setAttribute('tabindex', '0');
+    slider.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') go(current - 1);
+      if (e.key === 'ArrowRight') go(current + 1);
+    });
+  }
+
+  let touchStartX = 0;
+  if (slider) {
+    slider.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      paused = true;
+    }, { passive: true });
+    slider.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) {
+        if (dx > 0) go(current - 1);
+        else go(current + 1);
+      }
+      paused = false;
+      lastTime = Date.now();
+    });
+  }
+
+  if(slides.length) {
+    preloadAdjacent();
+    tick();
+  }
+})();
+</script>
+
+<!-- 💬 ویجت چت دیجی AI (آفلاین + حافظه بی‌نهایت) -->
+<script src="./dp-products-hub.js"></script>
+  <script src="./dp-products-feed-v2.js"></script>
+  <script src="./dp-auth.js"></script>
+<script src="./dp-memory.js"></script>
+<script src="./dp-ai-engine.js"></script>
+<script src="./dp-ai-engine-ultra.js"></script>
+<script src="./dp-ai-nlu.js"></script>
+<script src="./dp-chat-ai.js"></script>
+  <script src="./assets/js/dp-ai-widget.js"></script>
+<script src="./dp-chat-widget.js"></script>
+
+<!-- 🛍️ محصولات نمونه با افکت 3D -->
+<script src="./dp-seller-seed.js"></script>
+
+
+<script src="./dp-behavior-tracker.js"></script>
+<script src="./dp-hybrid-scorer.js"></script>
+<script src="./dp-personality-section.js"></script>
+<script src="./dp-real-match.js"></script>
+
+<!-- 🎤 Voice Input -->
+<script src="./dp-voice.js"></script>
+
+<!-- 🛒 کشوی سبد خرید -->
+<script src="./assets/js/dp-cart.js"></script>
+<script src="./assets/js/dp-cart-drawer.js"></script>
+
+<!-- 🧭 منوی استاندارد دیجی‌پوش -->
+<script src="./club-tracker.js"></script>
+<script src="./dp-referral-sync.js"></script>
+<script src="./club-referral.js"></script>
+<script src="./dp-navbar.js"></script>
+
+</body>
+</html>

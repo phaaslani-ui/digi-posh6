@@ -1,0 +1,379 @@
+/* ============================================================
+   دیجی‌پوش — پابرگ کامل و یکسان
+   ------------------------------------------------------------
+   همه‌ی صفحه‌های دسته‌بندی همان پابرگ کامل صفحه‌ی اصلی را
+   دارند: نشان، معرفی، شبکه‌های اجتماعی، پنج ستون لینک،
+   اطلاعات تماس، خبرنامه و نشان‌های اعتماد.
+
+   رنگ‌ها از متغیرهای خود هر صفحه می‌آید تا هویت بصری
+   زنانه / مردانه / بچگانه / تینیجر حفظ شود.
+   ============================================================ */
+
+:root {
+  --dpf-gold: #c9a84c;
+  --dpf-gold-l: #d4b85a;
+  --dpf-bronze: #b8943c;
+  --dpf-ink: #1a1a1a;
+  --dpf-gray: #8a7e72;
+  --dpf-line: rgba(201, 168, 76, 0.2);
+  --dpf-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-dp-page="man"],
+[data-dp-page="teen"] {
+  --dpf-ink: #ede8e0;
+  --dpf-gray: #9a9088;
+  --dpf-line: rgba(201, 168, 76, 0.26);
+}
+
+/* ============================================================
+   شبکه‌ی پنج‌ستونی
+   ------------------------------------------------------------
+   ستون نخست پهن‌تر است چون معرفی و نشان را دارد.
+   ============================================================ */
+.footer-grid,
+.footer-grid-m {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr 1fr 1.4fr;
+  gap: 30px 26px;
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+@media (max-width: 1080px) {
+  .footer-grid,
+  .footer-grid-m { grid-template-columns: 1.6fr 1fr 1fr; }
+}
+
+@media (max-width: 720px) {
+  .footer-grid,
+  .footer-grid-m { grid-template-columns: 1fr 1fr; gap: 26px 20px; }
+}
+
+@media (max-width: 480px) {
+  .footer-grid,
+  .footer-grid-m { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   نشان و نام در ستون نخست
+   ============================================================ */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 13px;
+}
+
+.footer-mark {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  font-size: 22px;
+  font-weight: 900;
+  color: #14100a;
+  background: linear-gradient(135deg, var(--dpf-gold-l), var(--dpf-bronze));
+  box-shadow: 0 10px 24px -12px rgba(201, 168, 76, 0.8);
+}
+
+.footer-brand-txt { display: flex; flex-direction: column; line-height: 1.5; }
+
+.footer-brand-txt strong {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--dpf-ink);
+}
+
+.footer-brand-txt small {
+  font-size: 11.5px;
+  color: var(--dpf-gray);
+}
+
+/* ============================================================
+   ستون‌ها
+   ============================================================ */
+.footer-col ul,
+.fcol ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-col li,
+.fcol li { margin-bottom: 9px; }
+
+.footer-col li a,
+.fcol li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: var(--dpf-gray);
+  text-decoration: none;
+  transition: color 0.22s var(--dpf-ease), transform 0.22s var(--dpf-ease);
+}
+
+.footer-col li a:hover,
+.fcol li a:hover {
+  color: var(--dpf-gold-l);
+  transform: translateX(-4px);
+}
+
+.footer-col li a .ico,
+.fcol li a .ico {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--dpf-bronze);
+}
+
+/* ============================================================
+   اطلاعات تماس
+   ============================================================ */
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--dpf-gray);
+}
+
+.footer-contact li .ico {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--dpf-bronze);
+}
+
+.footer-contact li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.22s var(--dpf-ease);
+}
+
+.footer-contact li a:hover { color: var(--dpf-gold-l); }
+
+/* عدد و ایمیل همیشه چپ‌به‌راست خوانده می‌شوند */
+.footer-contact a[href^="tel"] span,
+.footer-contact a[href^="mailto"] span {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* ============================================================
+   نشان‌های اعتماد در نوار پایین
+   ============================================================ */
+.fbottom,
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.footer-badges,
+.footer__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.footer-badges span,
+.footer__badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--dpf-bronze);
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid var(--dpf-line);
+}
+
+.footer-badges .ico,
+.footer__badges svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
+@media (max-width: 640px) {
+  .fbottom,
+  .footer-bottom { justify-content: center; text-align: center; }
+  .footer-badges,
+  .footer__badges { justify-content: center; }
+}
+
+/* ============================================================
+   خبرنامه — کمی جمع‌وجورتر چون حالا هم‌ستون تماس است
+   ============================================================ */
+.news,
+.news-m,
+.newsletter-form {
+  display: flex;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.news input,
+.news-m input,
+.newsletter-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--dpf-ink);
+  background: rgba(201, 168, 76, 0.07);
+  border: 1px solid var(--dpf-line);
+  outline: none;
+  transition: border-color 0.22s var(--dpf-ease);
+}
+
+.news input:focus,
+.news-m input:focus,
+.newsletter-form input:focus { border-color: var(--dpf-gold); }
+
+.news button,
+.news-m button,
+.newsletter-form button {
+  flex: none;
+  padding: 10px 17px;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #14100a;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--dpf-gold-l), var(--dpf-bronze));
+  transition: transform 0.22s var(--dpf-ease);
+}
+
+.news button:hover,
+.news-m button:hover,
+.newsletter-form button:hover { transform: translateY(-2px); }
+
+/* ============================================================
+   شبکه‌های اجتماعی زیر معرفی
+   ============================================================ */
+.socials,
+.socials-m,
+.social-icons {
+  display: flex;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.socials a,
+.socials-m a,
+.social-icons a {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: var(--dpf-bronze);
+  background: rgba(201, 168, 76, 0.09);
+  border: 1px solid var(--dpf-line);
+  transition: background 0.22s var(--dpf-ease), transform 0.22s var(--dpf-ease),
+              color 0.22s var(--dpf-ease);
+}
+
+.socials a:hover,
+.socials-m a:hover,
+.social-icons a:hover {
+  transform: translateY(-3px);
+  color: #14100a;
+  background: linear-gradient(135deg, var(--dpf-gold-l), var(--dpf-bronze));
+}
+
+.socials .ico,
+.socials-m .ico,
+.social-icons .ico { width: 19px; height: 19px; }
+
+/* یادداشت کوتاه زیر ستون */
+.fnote,
+.footer-note {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--dpf-gray);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-col li a, .fcol li a, .socials a, .socials-m a,
+  .social-icons a, .news button, .news-m button, .newsletter-form button {
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   صفحه‌ی اصلی — سازگاری با نام‌گذاری دو‌زیرخطی
+   ============================================================ */
+.footer__hours {
+  display: block;
+  margin: 4px 0 2px;
+  font-size: 12.5px;
+  color: var(--dpf-gray);
+}
+
+.footer__socials a {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: var(--dpf-bronze);
+  background: rgba(201, 168, 76, 0.09);
+  border: 1px solid var(--dpf-line);
+  transition: background 0.22s var(--dpf-ease), transform 0.22s var(--dpf-ease),
+              color 0.22s var(--dpf-ease);
+}
+
+.footer__socials a:hover {
+  transform: translateY(-3px);
+  color: #14100a;
+  background: linear-gradient(135deg, var(--dpf-gold-l), var(--dpf-bronze));
+}
+
+.footer__socials svg { width: 19px; height: 19px; }
+
+@media (max-width: 1080px) {
+  .footer__grid { grid-template-columns: 1.6fr 1fr 1fr; }
+}
+
+/* آیکون‌های ستون‌های صفحه‌ی اصلی */
+.footer__col a,
+.footer__col > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.footer__col .ico,
+.footer__hours .ico {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  color: var(--dpf-bronze);
+}
+
+.footer__col a[href^="tel"] span,
+.footer__col a[href^="mailto"] span {
+  direction: ltr;
+  unicode-bidi: embed;
+}

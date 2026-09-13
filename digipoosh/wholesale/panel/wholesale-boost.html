@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="robots" content="noindex" />
+  <title>نردبان بازار | پنل عمده‌فروشی دیجی‌پوش</title>
+
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="./css/wholesale-panel.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-stock.css" />
+</head>
+<body data-dp-page="wholesale-panel">
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="wp-side" id="wpSide"></aside>
+
+<main class="wp-main" id="main">
+
+  <header class="wp-top">
+    <button class="wp-burger" type="button" id="wpBurger" aria-label="منو">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="wp-title">
+      <h1>نردبان بازار</h1>
+      <span>دیده شدن بیشتر در بازار عمده</span>
+    </div>
+    <div class="wp-top-acts"></div>
+  </header>
+
+  <div class="wp-content">
+    <div class="wp-note">
+      <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+      <div><b>این نردبان فقط در «بازار عمده‌فروشان» کار می‌کند.</b>
+        ویترین اصلی سایت (زنانه، مردانه، بچگانه، نوجوان) جای تک‌فروشان است
+        و بسته‌های اینجا هیچ اثری آنجا ندارند. خریداران شما حرفه‌ای‌اند،
+        پس این بسته‌ها روی دیده شدن در جست‌وجوی بازار عمده تمرکز دارند.</div>
+    </div>
+
+    <div id="trialNote"></div>
+
+    <div class="wp-kpis" id="kpis"></div>
+
+    <div class="wp-card" id="liveCard" hidden>
+      <div class="wp-card-head">
+        <h2>بسته‌های فعال شما</h2>
+        <span class="sub spacer">هم‌اکنون در بازار عمده اثر دارند</span>
+      </div>
+      <div id="liveBox"></div>
+    </div>
+
+    <div class="wp-card" id="perfCard" hidden>
+      <div class="wp-card-head">
+        <h2>کارایی بسته‌ها</h2>
+        <span class="sub spacer">۱۴ روز اخیر</span>
+      </div>
+      <div id="perfBox"></div>
+    </div>
+
+    <div class="wp-card">
+      <div class="wp-card-head">
+        <h2>انتخاب بسته</h2>
+        <span class="sub spacer">هرچه بالاتر، دیده شدن بیشتر</span>
+      </div>
+
+      <div class="wp-plan-grid" id="planGrid"></div>
+
+      <form id="bForm" novalidate style="margin-top:20px">
+        <div class="wp-grid">
+          <div class="wp-field">
+            <label for="bPlan">بسته</label>
+            <select class="wp-input" id="bPlan"></select>
+          </div>
+          <div class="wp-field">
+            <label for="bDays">مدت</label>
+            <select class="wp-input" id="bDays"></select>
+          </div>
+          <div class="wp-field full">
+            <label for="bNote">یادداشت (اختیاری)</label>
+            <input class="wp-input" id="bNote" placeholder="مثلاً: شماره پیگیری واریز" />
+          </div>
+        </div>
+
+        <div id="planHint"></div>
+
+        <div class="wp-calc" id="calc"></div>
+
+        <button class="wp-btn wp-btn-gold" type="submit" id="bBtn" style="margin-top:16px">
+          <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5 13.5h6L11 21l8-10.5h-6z"/></svg> <span id="bBtnTxt">فعال‌سازی بسته</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="wp-card">
+      <div class="wp-card-head">
+        <h2>تاریخچه</h2>
+        <span class="sub spacer" id="hCount">—</span>
+      </div>
+      <div id="histBox"></div>
+    </div>
+  </div>
+
+</main>
+
+
+
+<script src="../../seller/js/dp-config.js"></script>
+<script src="../../seller/js/dp-store.js"></script>
+<script src="../../assets/js/dp-guard.js"></script>
+<script src="../../assets/js/dp-safe.js"></script>
+<script src="../../assets/js/dp-stock.js"></script>
+<script src="../../assets/js/dp-taxonomy.js"></script>
+<script src="../../assets/js/dp-moderation.js"></script>
+<script src="../../assets/js/dp-reviews.js"></script>
+<script src="../../assets/js/dp-user.js"></script>
+<script src="./js/dpw-store.js"></script>
+<script src="./js/dpw-boost.js"></script>
+<script src="./js/dpw-ui.js"></script>
+<script>
+
+requireWholesale(function () {
+  var S = DPWStore, U = DPWUi, B = window.DPWBoost, esc = U.esc;
+  if (!B) { U.toast('موتور نردبان بارگذاری نشد.', 'error'); return; }
+  var fa = B.fa, money = B.money;
+  var $ = function (s) { return document.querySelector(s); };
+  var IC = { box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg>', money: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>', quote: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg>', truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>', users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c0-3.3 2.5-5.4 5.5-5.4s5.5 2.1 5.5 5.4"/><path d="M16 6.5a3 3 0 0 1 0 6"/></svg>', chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V15M9 19.5V9M14 19.5v-7M19 19.5V5"/></svg>', warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5 21 19H3z"/><path d="M12 10v4M12 16.5h.01"/></svg>', check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>', x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>', info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>', clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>', store: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg>', bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5 13.5h6L11 21l8-10.5h-6z"/></svg>' };
+
+  var ART = {
+    ladder:    '<path d="M7 21V5M17 21V5"/><path d="M7 8h10M7 12.5h10M7 17h10"/>',
+    highlight: '<path d="m12 3.6 2.5 5.1 5.6.8-4 3.9 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4-3.9 5.6-.8z"/>',
+    featured:  '<path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/>',
+    hero:      '<path d="m4 17 1.5-9 4 4L12 5l2.5 7 4-4L20 17z"/><path d="M4.5 20h15"/>',
+  };
+  var SWX = 'fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true";'
+    .replace(';', '');
+
+  /* ---------- کارت‌های بسته ---------- */
+  function paintPlans() {
+    var g = $('#planGrid'), sel = $('#bPlan');
+    g.innerHTML = ''; sel.innerHTML = '';
+    var active = {};
+    B.activeOf().forEach(function (r) { active[r.plan] = r; });
+
+    Object.keys(B.PLANS).forEach(function (k) {
+      var p = B.PLANS[k];
+      var busy = p.exclusive && !B.slotFree(k);
+      var owned = !!active[k];
+
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'wp-plan' + (busy ? ' is-busy' : '') + (owned ? ' is-owned' : '');
+      card.dataset.plan = k;
+      card.style.setProperty('--pc', p.color);
+
+      card.innerHTML =
+        (owned ? '<span class="wp-plan-flag own">فعال است</span>'
+               : (busy ? '<span class="wp-plan-flag busy">اشغال</span>' : '')) +
+        '<span class="wp-plan-head">' +
+          '<span class="wp-plan-ico"><svg viewBox="0 0 24 24" ' + SWX + '>' +
+            (ART[k] || '') + '</svg></span>' +
+          '<span class="wp-plan-name"><strong>' + esc(p.fa) + '</strong>' +
+            '<em>' + esc(p.tone) + '</em></span>' +
+        '</span>' +
+        '<span class="wp-plan-power" title="قدرت دیده شدن">' +
+          '<span class="wp-plan-track"><i style="width:' + p.weight + '%"></i></span>' +
+          '<b>' + fa(p.weight) + '</b></span>' +
+        '<ul class="wp-plan-perks">' +
+          p.perks.map(function (x) {
+            return '<li><svg viewBox="0 0 24 24" ' + SWX +
+              '><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>' + esc(x) + '</li>';
+          }).join('') +
+        '</ul>' +
+        (busy
+          ? '<span class="wp-plan-busy">در اختیار تأمین‌کننده‌ی دیگری — <b>' +
+            fa(B.slotFreeIn(k)) + '</b> روز دیگر آزاد می‌شود</span>'
+          : '<span class="wp-plan-price">' + (B.FREE_TRIAL
+              ? '<b class="free">رایگان</b><small class="strike">' +
+                money(p.price) + ' / روز</small>'
+              : '<b>از ' + money(p.price) + '</b><small>تومان / روز</small>') + '</span>');
+
+      g.appendChild(card);
+
+      var o = document.createElement('option');
+      o.value = k; o.textContent = p.fa;
+      sel.appendChild(o);
+    });
+
+    g.addEventListener('click', function (e) {
+      var c = e.target.closest('.wp-plan');
+      if (!c) return;
+      sel.value = c.dataset.plan;
+      sel.dispatchEvent(new Event('change'));
+    });
+  }
+
+  function markPlan() {
+    var v = $('#bPlan').value;
+    document.querySelectorAll('.wp-plan').forEach(function (c) {
+      c.classList.toggle('on', c.dataset.plan === v);
+    });
+    var p = B.PLANS[v];
+    var hint = $('#planHint');
+    if (p && p.exclusive) {
+      var free = B.slotFree(v);
+      hint.innerHTML = '<div class="wp-note ' + (free ? 'ok' : 'warn') + '">' +
+        (free ? IC.check : IC.clock) + '<div>' +
+        (free
+          ? '<b>این جایگاه آزاد است.</b> بنر شما بالای بازار عمده، پیش از همه‌ی کالاها، ' +
+            'با نمایش قیمت پلکانی دیده می‌شود.'
+          : '<b>این جایگاه اکنون اشغال است.</b> ' + fa(B.slotFreeIn(v)) +
+            ' روز دیگر آزاد می‌شود.') + '</div></div>';
+    } else {
+      hint.innerHTML = '';
+    }
+  }
+
+  function paintDays() {
+    var p = B.PLANS[$('#bPlan').value];
+    var sel = $('#bDays');
+    sel.innerHTML = '';
+    (p ? p.days : [7]).forEach(function (d) {
+      var o = document.createElement('option');
+      o.value = d; o.textContent = fa(d) + ' روز';
+      sel.appendChild(o);
+    });
+  }
+
+  function calc() {
+    try {
+      var q = B.quote($('#bPlan').value, $('#bDays').value);
+      $('#calc').innerHTML = q.free
+        ? '<div class="wp-calc-row"><span>ارزش این بسته</span>' +
+          '<b class="strike">' + money(q.listGross) + ' تومان</b></div>' +
+          '<div class="wp-calc-row total"><span>مبلغ پرداختی شما</span>' +
+          '<b class="free">رایگان</b></div>'
+        : '<div class="wp-calc-row"><span>هزینه‌ی پایه</span><b>' + money(q.gross) + '</b></div>' +
+          (q.offPercent
+            ? '<div class="wp-calc-row"><span>تخفیف بلندمدت ٪' + fa(q.offPercent) +
+              '</span><b class="minus">−' + money(q.discount) + '</b></div>' : '') +
+          '<div class="wp-calc-row"><span>هزینه‌ی هر روز</span><b>' + money(q.perDay) + '</b></div>' +
+          '<div class="wp-calc-row total"><span>مبلغ پرداختی</span><b>' +
+            money(q.total) + ' تومان</b></div>';
+    } catch (e) { $('#calc').innerHTML = ''; }
+  }
+
+  /* ---------- آمار ---------- */
+  function paintKpis() {
+    var s = B.summary();
+    var rows = [
+      { c: '#c9a84c', i: IC.bolt, t: 'بسته‌های فعال', v: fa(s.active),
+        s: s.active ? 'در حال نمایش' : 'بسته‌ای فعال نیست' },
+      { c: '#7a96c8', i: IC.box, t: 'بازدید', v: fa(s.views), s: 'در بازار عمده' },
+      { c: '#4caf50', i: IC.quote, t: 'استعلام از نردبان', v: fa(s.rfqs),
+        s: 'نرخ کلیک ٪' + fa(s.ctr) },
+      B.FREE_TRIAL
+        ? { c: '#d4b85a', i: IC.money, t: 'صرفه‌جویی', v: money(s.saved), s: 'در دوره‌ی آزمایشی' }
+        : { c: '#d4b85a', i: IC.money, t: 'هزینه', v: money(s.spent), s: fa(s.days) + ' روز' },
+    ];
+    $('#kpis').innerHTML = rows.map(function (r) {
+      return '<div class="wp-kpi" style="--kc:' + r.c + '">' +
+        '<div class="wp-kpi-top">' + r.i + '<span>' + r.t + '</span></div>' +
+        '<b>' + r.v + '</b><small>' + r.s + '</small></div>';
+    }).join('');
+  }
+
+  function paintTrial() {
+    $('#trialNote').innerHTML = B.FREE_TRIAL
+      ? '<div class="wp-note ok">' + IC.check + '<div><b>دوره‌ی آزمایشی رایگان.</b> ' +
+        'همه‌ی بسته‌ها بدون پرداخت فعال می‌شوند تا نتیجه‌شان را ببینید.</div></div>'
+      : '';
+  }
+
+  function paintLive() {
+    var list = B.activeOf();
+    $('#liveCard').hidden = !list.length;
+    if (!list.length) return;
+
+    $('#liveBox').innerHTML = list.map(function (r) {
+      var p = B.PLANS[r.plan] || {};
+      var left = B.daysLeft(r);
+      var pct = Math.max(0, Math.min(100, Math.round(left / r.days * 100)));
+      return '<div class="wp-live" style="--pc:' + (p.color || '#c9a84c') + '">' +
+        '<div class="wp-live-head">' +
+          '<strong>' + esc(p.fa || r.plan) + '</strong>' +
+          '<span class="wp-tag gold">' +
+            (B.timeLeft && B.timeLeft(r) ? B.timeLeft(r).fa + ' مانده'
+                                         : fa(left) + ' روز مانده') + '</span></div>' +
+        (r.endDateTime || r.endDate
+          ? '<div class="wp-live-until">پایان: <b>' +
+            esc(r.endDateTime || r.endDate) + '</b></div>' : '') +
+        '<div class="wp-live-bar"><i style="width:' + pct + '%"></i></div>' +
+        '<div class="wp-live-foot">' +
+          '<span>' + fa(r.views || 0) + ' بازدید · ' + fa(r.clicks || 0) + ' کلیک · ' +
+            fa(r.rfqs || 0) + ' استعلام</span>' +
+          '<span class="wp-row-acts">' +
+            '<button class="wp-btn wp-btn-ghost wp-btn-sm" type="button" data-renew="' +
+              esc(r.id) + '" data-plan="' + esc(r.plan) + '">تمدید</button>' +
+            '<button class="wp-btn wp-btn-bad wp-btn-sm" type="button" data-stop="' +
+              esc(r.id) + '">پایان</button>' +
+          '</span></div>' +
+        (left <= 2 ? '<div class="wp-note warn" style="margin:10px 0 0">' + IC.warn +
+          '<div>کمتر از ' + fa(left + 1) + ' روز مانده — برای قطع نشدن تمدید کنید.</div></div>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  function paintPerf() {
+    var list = B.mine().filter(function (r) { return (r.views || 0) > 0; }).slice(0, 3);
+    $('#perfCard').hidden = !list.length;
+    if (!list.length) return;
+
+    $('#perfBox').innerHTML = list.map(function (r) {
+      var p = B.PLANS[r.plan] || {};
+      var ins = B.insight(r);
+      var series = ins.series.slice(-14);
+      var max = 1;
+      series.forEach(function (d) { if (d.v > max) max = d.v; });
+
+      var bars = series.length
+        ? series.map(function (d) {
+            var h = Math.max(4, Math.round(d.v / max * 100));
+            return '<span class="wp-spark" style="--h:' + h + '%" title="' +
+              esc(d.day) + ' — ' + fa(d.v) + ' بازدید"></span>';
+          }).join('')
+        : '<span style="font-size:12px;color:var(--wp-dim)">هنوز داده‌ای نیست</span>';
+
+      var arrow = ins.trend > 5 ? '↑' : ins.trend < -5 ? '↓' : '→';
+      var tc = ins.trend > 5 ? 'var(--wp-ok)' : ins.trend < -5 ? 'var(--wp-bad)' : 'var(--wp-gray)';
+
+      return '<div class="wp-live" style="--pc:' + (p.color || '#c9a84c') + '">' +
+        '<div class="wp-live-head"><strong>' + esc(p.fa || r.plan) + '</strong>' +
+          '<span style="color:' + tc + ';font-weight:700;font-size:12.5px">' +
+          arrow + ' ٪' + fa(Math.abs(ins.trend)) + '</span></div>' +
+        '<div class="wp-sparkline">' + bars + '</div>' +
+        '<div class="wp-live-foot" style="gap:14px;flex-wrap:wrap">' +
+          '<span><b style="color:var(--wp-gold-l)">' + fa(ins.views) + '</b> بازدید</span>' +
+          '<span><b style="color:var(--wp-gold-l)">' + fa(ins.clicks) + '</b> کلیک</span>' +
+          '<span><b style="color:var(--wp-gold-l)">' + fa(ins.rfqs) + '</b> استعلام</span>' +
+          '<span><b style="color:var(--wp-gold-l)">٪' + fa(ins.ctr) + '</b> نرخ کلیک</span>' +
+          '<span><b style="color:var(--wp-gold-l)">' + fa(ins.perDay) + '</b> روزانه</span>' +
+        '</div></div>';
+    }).join('');
+  }
+
+  function paintHist() {
+    var list = B.mine();
+    $('#hCount').textContent = list.length ? fa(list.length) + ' سفارش' : '—';
+    if (!list.length) {
+      $('#histBox').innerHTML = U.emptyBox('هنوز بسته‌ای نخریده‌اید',
+        'با نخستین بسته، کالاهایتان بالاتر دیده می‌شوند.');
+      return;
+    }
+    var C = { awaiting: 'warn', active: 'ok', expired: 'mute', rejected: 'bad', paused: 'warn' };
+    $('#histBox').innerHTML = '<div class="wp-table-wrap"><table class="wp-table"><thead><tr>' +
+      '<th>بسته</th><th>مدت</th><th>مبلغ</th><th>بازدید</th><th>وضعیت</th><th>تاریخ</th><th></th>' +
+      '</tr></thead><tbody>' +
+      list.map(function (r) {
+        var p = B.PLANS[r.plan] || {};
+        var st = B.live(r) ? 'active' : r.status;
+        return '<tr><td><b>' + esc(p.fa || r.plan) + '</b></td>' +
+          '<td class="num">' + fa(r.days) + ' روز' +
+            (r.renewals ? '<span class="wp-tiny">' + fa(r.renewals) + ' بار تمدید</span>' : '') + '</td>' +
+          '<td class="num">' + (r.price ? money(r.price) + ' تومان'
+            : (r.trial ? '<span class="wp-tag ok">آزمایشی</span>' : 'رایگان')) + '</td>' +
+          '<td class="num">' + fa(r.views || 0) +
+            '<span class="wp-tiny">' + fa(r.rfqs || 0) + ' استعلام</span></td>' +
+          '<td><span class="wp-tag ' + (C[st] || 'mute') + '">' +
+            (B.STATUS_FA[st] || st) + '</span></td>' +
+          '<td class="muted">' + esc(r.date) + '</td>' +
+          '<td>' + (r.status === 'awaiting'
+            ? '<button class="wp-btn wp-btn-ghost wp-btn-sm" type="button" data-cancel="' +
+              esc(r.id) + '">لغو</button>' : '') + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ---------- رویدادها ---------- */
+  $('#bPlan').addEventListener('change', function () { markPlan(); paintDays(); calc(); });
+  $('#bDays').addEventListener('change', calc);
+
+  $('#bForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    try {
+      B.order($('#bPlan').value, $('#bDays').value, $('#bNote').value);
+      $('#bNote').value = '';
+      U.toast(B.FREE_TRIAL
+        ? 'بسته فعال شد — از حالا در بازار عمده بالاتر دیده می‌شوید.'
+        : 'سفارش ثبت شد. پس از تأیید مدیر فعال می‌شود.', 'success');
+      all();
+    } catch (err) { U.toast(err.message, 'error'); }
+  });
+
+  document.addEventListener('click', function (e) {
+    var rn = e.target.closest('[data-renew]');
+    if (rn) {
+      var pl = B.PLANS[rn.dataset.plan] || { days: [7] };
+      var ans = prompt('چند روز تمدید شود؟ (' + pl.days.join(' یا ') + ')', String(pl.days[0]));
+      if (ans === null) return;
+      var d = Number(String(ans).replace(/[۰-۹]/g, function (x) {
+        return '۰۱۲۳۴۵۶۷۸۹'.indexOf(x);
+      }));
+      try { B.renew(rn.dataset.renew, d); U.toast('بسته ' + fa(d) + ' روز تمدید شد.', 'success'); all(); }
+      catch (err) { U.toast(err.message, 'error'); }
+      return;
+    }
+    var sp = e.target.closest('[data-stop]');
+    if (sp) {
+      if (!confirm('این بسته همین حالا پایان یابد؟')) return;
+      try { B.stop(sp.dataset.stop); U.toast('بسته پایان یافت.', 'success'); all(); }
+      catch (err) { U.toast(err.message, 'error'); }
+      return;
+    }
+    var cn = e.target.closest('[data-cancel]');
+    if (cn) {
+      if (!confirm('این سفارش لغو شود؟')) return;
+      try { B.cancel(cn.dataset.cancel); U.toast('سفارش لغو شد.', 'success'); all(); }
+      catch (err) { U.toast(err.message, 'error'); }
+    }
+  });
+
+  function all() {
+    paintTrial(); paintKpis(); paintLive(); paintPerf(); paintHist();
+    paintPlans(); markPlan();
+  }
+
+  document.addEventListener('dpw:boost', all);
+
+  paintPlans(); markPlan(); paintDays(); calc();
+  paintTrial(); paintKpis(); paintLive(); paintPerf(); paintHist();
+  $('#bBtnTxt').textContent = B.FREE_TRIAL ? 'فعال‌سازی رایگان بسته' : 'ثبت سفارش';
+});
+</script>
+</body>
+</html>

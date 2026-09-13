@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="پنل فروشندگان دیجی‌پوش — افزودن محصول" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <title>دیجی‌پوش | افزودن محصول</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="css/seller-style.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-colors.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+</head>
+<body data-dp-panel>
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a href="../index.html" style="display:flex;flex-direction:column;gap:2px" title="بازگشت به سایت اصلی">
+      <div class="sb-logo">دیجی‌پوش</div>
+      <span class="sb-sub">پنل فروشندگان</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="منوی پنل">
+    <div class="sb-label">مدیریت</div>
+      <a class="sb-link" href="seller-dashboard.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3" y="3" width="7.5" height="8.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="5" rx="2"/><rect x="13.5" y="11" width="7.5" height="10" rx="2"/><rect x="3" y="14.5" width="7.5" height="6.5" rx="2"/></svg><span>داشبورد</span></a>
+      <a class="sb-link active" href="seller-products.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg><span>محصولات</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-orders.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M3.5 4.5h2.2l2.3 10.2h10L20 8H7"/></svg><span>سفارش‌ها</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-returns.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.6h-4.6"/></svg><span>مرجوعی‌ها</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-reviews.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg><span>نظرها</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-promos.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m6 18 12-12"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg><span>سیاست فروش</span></a>
+      <a class="sb-link" href="seller-boost.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13.5 3.5c3 0 6 3 6 6 0 4.5-5 8-5 8l-4-4s3.5-5 8-5"/><path d="M9.5 14.5 6 18l-1.5-1.5L8 13"/><path d="M5 19l-1.5 1.5"/></svg><span>نردبان و برجسته‌سازی</span><span class="sb-badge" hidden></span></a>
+      <a class="sb-link" href="seller-earnings.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M3.5 7.5A2 2 0 0 1 5.5 5.5h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M16.5 12.5h4"/><circle cx="16.8" cy="12.5" r="1"/></svg><span>درآمد و تسویه</span></a>
+      <a class="sb-link" href="seller-theme.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 1 0 0 17c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.4-1.1a1.6 1.6 0 0 1 1.2-2.6h1.9A4.2 4.2 0 0 0 20.5 11c0-4.1-3.8-7.5-8.5-7.5Z"/><circle cx="7.8" cy="10.3" r="1.1"/><circle cx="11" cy="7.2" r="1.1"/><circle cx="15.2" cy="8.6" r="1.1"/></svg><span>تم‌ساز ویترین</span></a>
+      <a class="sb-link" href="seller-profile.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.8"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>پروفایل فروشگاه</span></a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <div class="sb-user">
+      <span class="sb-avatar" data-dp="letter">&nbsp;</span>
+      <div>
+        <div class="sb-user-name" data-dp="fullName">&nbsp;</div>
+        <div class="sb-user-role" data-dp="storeName">&nbsp;</div>
+      </div>
+    </div>
+    <a class="sb-link" href="../index.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7V20a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 20z"/><path d="M9.5 21.5v-7h5v7"/></svg><span>بازگشت به سایت</span></a>
+    <a class="sb-link logout" href="seller-login.html" data-logout><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15 4.5h3.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M10 8.5 6 12l4 3.5M6 12h9"/></svg><span>خروج از حساب</span></a>
+  </div>
+</aside>
+
+<div class="backdrop" id="backdrop"></div>
+
+<main class="main" id="main">
+  <header class="topbar">
+    <button class="burger" type="button" aria-label="منو"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div>
+      <h1 class="page-title">افزودن محصول</h1>
+      <div class="page-sub">اطلاعات محصول را کامل کنید</div>
+    </div>
+    <div class="topbar-actions">
+      
+      <button class="icon-btn" type="button" aria-label="اعلان‌ها"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 1 0-12 0c0 5-2 6.5-2 6.5h16S18 14 18 9Z"/><path d="M13.7 19a2 2 0 0 1-3.4 0"/></svg><span class="dot-alert"></span></button>
+    </div>
+  </header>
+
+  <div class="content">
+    <form id="productForm" novalidate>
+      <div class="split">
+        <div>
+          <!-- دسته‌بندی سه‌مرحله‌ای -->
+          <div class="card mb-18" id="catCard">
+            <div class="card-head">
+              <h2>این محصول در کدام دسته است؟</h2>
+              <span class="sub spacer" id="catTrail"></span>
+            </div>
+
+            <!-- گام ۱: بخش -->
+            <div class="cat-step" id="step1">
+              <p class="cat-q">۱. محصول شما برای کدام گروه است؟</p>
+              <div class="cat-grid" id="secGrid"></div>
+            </div>
+
+            <!-- گام ۲: سبک -->
+            <div class="cat-step" id="step2" hidden>
+              <p class="cat-q">
+                ۲. در چه سبکی جای می‌گیرد؟
+                <button class="cat-back" type="button" data-back="1">تغییر گروه</button>
+              </p>
+              <div class="cat-chips" id="grpGrid"></div>
+            </div>
+
+            <!-- گام ۳: نوع کالا -->
+            <div class="cat-step" id="step3" hidden>
+              <p class="cat-q">
+                ۳. دقیقاً چه کالایی است؟
+                <button class="cat-back" type="button" data-back="2">تغییر سبک</button>
+              </p>
+              <div class="cat-chips" id="itemGrid"></div>
+            </div>
+
+            <!-- نتیجه -->
+            <div class="cat-done" id="catDone" hidden>
+              <svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+              <div>
+                <strong id="catPicked">—</strong>
+                <span id="catWhere">—</span>
+              </div>
+              <button class="cat-change" type="button" id="catReset">تغییر دسته‌بندی</button>
+            </div>
+
+            <input type="hidden" id="pSection" data-rules="required" />
+            <input type="hidden" id="pGroup" />
+            <input type="hidden" id="pcat" />
+            <span class="err-msg" id="catErr">لطفاً دسته‌بندی محصول را کامل انتخاب کنید.</span>
+          </div>
+
+          <!-- ویژگی‌های کالا — منوهای کشویی -->
+          <div class="card mb-18" id="attrCard">
+            <div class="card-head">
+              <h2>ویژگی‌های کالا</h2>
+              <span class="sub spacer">نام محصول از روی همین انتخاب‌ها ساخته می‌شود</span>
+            </div>
+
+            <div class="form-grid" id="attrGrid">
+              <p class="hint" id="attrLoading">در حال خواندن فهرست ویژگی‌ها…</p>
+            </div>
+          </div>
+
+          <!-- اطلاعات پایه -->
+          <div class="card mb-18">
+            <div class="card-head"><h2>اطلاعات محصول</h2></div>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="pname">نام محصول <span class="hint">— خودکار ساخته می‌شود</span></label>
+                <input class="input dp-autoname" id="pname" readonly aria-describedby="pnameNote"
+                       placeholder="پس از انتخاب ویژگی‌ها ساخته می‌شود" />
+                <span class="hint dp-name-note" id="pnameNote">
+                  نام از روی دسته‌بندی و ویژگی‌های زیر ساخته می‌شود تا همه‌ی
+                  کالاهای بازارگاه یکدست باشند و در جست‌وجو پیدا شوند.
+                </span>
+
+                <!-- کارگاه نام: نشان می‌دهد هر تکه از کجا آمده -->
+                <div class="nm-lab" id="nmLab" hidden>
+                  <div class="nm-bar">
+                    <span class="nm-meter"><i id="nmFill"></i></span>
+                    <span class="nm-len" id="nmLen">۰</span>
+                  </div>
+                  <div class="nm-chips" id="nmChips"></div>
+                  <p class="nm-tip" id="nmTip" hidden></p>
+                </div>
+
+                <span class="err-msg"></span>
+              </div>
+
+              <div class="field full">
+                <label for="pdesc">توضیحات
+                  <span class="hint">— نحوه‌ی شست‌وشو و جزئیات دوخت (حداکثر ۳۰۰ نویسه)</span>
+                </label>
+                <textarea class="textarea" id="pdesc" maxlength="300" rows="3"
+                          placeholder="توضیح کوتاه محصول…"></textarea>
+                <span class="hint dp-count"><b id="pdescN">۰</b> از ۳۰۰</span>
+              </div>
+
+              <div class="field">
+                <label for="pprice">قیمت (تومان) <span class="req">*</span></label>
+                <input class="input" id="pprice" inputmode="numeric" data-rules="required|positive" placeholder="۱۲۵۰۰۰۰" />
+                <span class="err-msg"></span>
+              </div>
+
+              <div class="field">
+                <label for="pstock">موجودی <span class="req">*</span></label>
+                <input class="input" id="pstock" inputmode="numeric" data-rules="required|notneg" placeholder="۱۵" />
+                <span class="err-msg"></span>
+              </div>
+
+              <div class="field full">
+                <label for="pbudget">سطح بودجه‌ی این کالا <span class="hint">— کمک می‌کنه به مشتری‌های هم‌سطح پیشنهاد بشه</span></label>
+                <select class="select" id="pbudget">
+                  <option value="low">اقتصادی — تا ۵۰۰ هزار تومان</option>
+                  <option value="medium" selected>متوسط — ۵۰۰ هزار تا ۱.۵ میلیون</option>
+                  <option value="high">بالا — ۱.۵ تا ۳ میلیون</option>
+                  <option value="luxury">لوکس — بالای ۳ میلیون</option>
+                </select>
+                <span class="hint">هوش مصنوعی ما بر اساس این مقدار، کالای شما رو به مشتری‌هایی که بودجه‌شون با این سطح هماهنگه پیشنهاد می‌ده.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- تصاویر -->
+          <div class="card mb-18">
+            <div class="card-head"><h2>تصاویر محصول</h2></div>
+            <label class="uploader" for="pimg">
+              <svg class="ico ico-lg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20 15.5V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19v-3.5"/><path d="M8 8.5 12 4.5l4 4M12 4.5V15"/></svg>
+              <strong style="color:var(--ink);font-size:13.5px">تصاویر را انتخاب کنید</strong>
+              <span style="font-size:12px">فرمت JPG، PNG یا WebP — حداکثر ۵ مگابایت برای هر عکس</span>
+            </label>
+            <input type="file" id="pimg" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden />
+            <div class="previews" id="previews"></div>
+          </div>
+
+          <!-- تنوع -->
+          <div class="card">
+            <div class="card-head"><h2>سایز و رنگ</h2></div>
+            <div class="field mb-18">
+              <label>سایزهای موجود</label>
+              <div class="chips" data-group="size">
+                <button class="chip" type="button">XS</button>
+                <button class="chip on" type="button">S</button>
+                <button class="chip on" type="button">M</button>
+                <button class="chip on" type="button">L</button>
+                <button class="chip" type="button">XL</button>
+                <button class="chip" type="button">XXL</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>رنگ‌های موجود</label>
+              <div class="dp-swatches" id="colorPicker"></div>
+              <div class="dp-sw-name" id="colorName">
+                <span class="hint">روی رنگ‌های موجود بزنید — می‌توانید چند رنگ انتخاب کنید</span>
+              </div>
+
+              <!-- ساخت رنگ تازه، وقتی رنگ کالا در فهرست نیست -->
+              <button class="dp-addcolor-btn" type="button" id="addColorBtn"
+                      aria-expanded="false" aria-controls="addColorBox">
+                <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" fill="none" aria-hidden="true"><path d="M12 5.5v13M5.5 12h13"/></svg>
+                رنگ کالای من در فهرست نیست
+              </button>
+
+              <div class="dp-addcolor" id="addColorBox" hidden>
+                <p class="hint dp-addcolor-note">
+                  نام رنگ را همان‌طور بنویسید که می‌خواهید مشتری ببیند —
+                  مثلاً «آبی نفتی» یا «سبز خزه‌ای». همین نام در نام کالا و
+                  فیلتر مشتری به کار می‌رود.
+                </p>
+
+                <div class="dp-addcolor-row">
+                  <label class="dp-addcolor-pick" for="newColorHex">
+                    <input type="color" id="newColorHex" value="#c9a84c"
+                           aria-label="انتخاب کد رنگ" />
+                    <span class="dp-addcolor-chip" id="newColorPrev" aria-hidden="true"></span>
+                  </label>
+
+                  <input class="input" id="newColorName" maxlength="24"
+                         placeholder="نام رنگ — مثلاً آبی نفتی" aria-label="نام رنگ" />
+
+                  <button class="btn btn-primary dp-addcolor-go" type="button" id="newColorGo">
+                    افزودن
+                  </button>
+                </div>
+
+                <!-- ===== رنگ ترکیبی ===== -->
+                <button class="dp-mix-toggle" type="button" id="mixToggle"
+                        aria-expanded="false" aria-controls="mixBox">
+                  <span class="dp-mix-dot" aria-hidden="true"></span>
+                  <span>رنگ کالایم ترکیب دو رنگ است</span>
+                  <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor"
+                       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                       fill="none" aria-hidden="true"><path d="m6 9.5 6 6 6-6"/></svg>
+                </button>
+
+                <div class="dp-mix" id="mixBox" hidden>
+                  <p class="hint">
+                    رنگ دوم را انتخاب کنید و بگویید چطور با هم ترکیب شوند.
+                    مثلاً «قهوه‌ای آبی» با طیف نرم، یا «سرمه‌ای سفید» راه‌راه.
+                  </p>
+
+                  <div class="dp-mix-row">
+                    <label class="dp-addcolor-pick" for="newColorHex2">
+                      <input type="color" id="newColorHex2" value="#2e6fd9"
+                             aria-label="انتخاب رنگ دوم" />
+                      <span class="dp-addcolor-chip" id="newColorPrev2" aria-hidden="true"></span>
+                    </label>
+                    <span class="dp-mix-plus" aria-hidden="true">+</span>
+                    <span class="dp-mix-hint">رنگ دوم</span>
+                  </div>
+
+                  <div class="dp-mix-modes" id="mixModes" role="radiogroup"
+                       aria-label="نوع ترکیب"></div>
+
+                  <div class="dp-mix-ratio" id="mixRatio" hidden>
+                    <label for="mixRange">سهم هر رنگ</label>
+                    <div class="dp-mix-slider">
+                      <span class="dp-mix-end" id="mixEndA" aria-hidden="true"></span>
+                      <input type="range" id="mixRange" min="10" max="90" step="5" value="50"
+                             aria-label="سهم رنگ دوم در ترکیب" />
+                      <span class="dp-mix-end" id="mixEndB" aria-hidden="true"></span>
+                    </div>
+                    <span class="hint" id="mixRatioTxt">نصف‌نصف</span>
+                  </div>
+
+                  <div class="dp-mix-preview">
+                    <span class="dp-mix-big" id="mixBig" aria-hidden="true"></span>
+                    <div>
+                      <b id="mixBigName">پیش‌نمایش رنگ</b>
+                      <span class="hint" id="mixBigNote">همان‌طور که مشتری می‌بیند</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="dp-addcolor-live" id="newColorLive" aria-live="polite"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ستون کناری -->
+        <div>
+          <div class="card mb-18">
+            <div class="card-head"><h2>انتشار</h2></div>
+            <div class="field mb-18">
+              <label for="pstatus">وضعیت</label>
+              <div class="draft-hint" id="draftHint" hidden>
+                <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+                <span>فروشگاه شما هنوز تأیید نشده، پس این محصول <b>پیش‌نویس</b> ذخیره می‌شود.
+                به‌محض تأیید مدیر، خودکار منتشر می‌شود.</span>
+              </div>
+              <select class="select" id="pstatus">
+                <option value="draft">پیش‌نویس</option>
+                <option value="active" selected>فعال (نمایش در ویترین)</option>
+                <option value="archived">بایگانی</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-block mb-18" type="submit" id="saveBtn">
+              <span class="spinner"></span>
+              <span class="btn-label">ذخیره‌ی محصول</span>
+            </button>
+            <a class="btn btn-secondary btn-block" href="seller-products.html">انصراف</a>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h2 style="font-size:14px">راهنما</h2></div>
+            <ul style="display:grid;gap:10px;font-size:12.5px;color:var(--gray);line-height:1.9">
+              <li><svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> نام محصول را دقیق و بدون اغراق بنویسید.</li>
+              <li><svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> جنس پارچه را حتماً در توضیحات ذکر کنید.</li>
+              <li><svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> تصویر با نور طبیعی، کیفیت فروش را بالا می‌برد.</li>
+              <li><svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> کمیسیون پلتفرم ۱۰٪ از مبلغ فروش است.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+
+<div class="toast-wrap"></div>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="../assets/js/dp-taxonomy.js"></script>
+<script src="../assets/js/dp-attributes.js"></script>
+<script src="../assets/js/dp-palette.js"></script>
+<script src="../assets/js/dp-colors.js"></script>
+<script src="../assets/js/dp-promo.js"></script>
+<script src="../assets/js/dp-boost.js"></script>
+<script src="../assets/js/dp-boost-pro.js"></script>
+<script src="../assets/js/dp-moderation.js"></script>
+<script src="js/dp-config.js"></script>
+<script src="js/dp-store.js"></script>
+<script src="../assets/js/dp-mod-hook.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="../assets/js/dp-rate-pop.js"></script>
+<script src="../assets/js/dp-returns.js"></script>
+<script src="js/seller-script.js"></script>
+<script src="js/dp-ui.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+onDPReady(async (me) => {
+  const form = document.getElementById('productForm');
+  const btn  = document.getElementById('saveBtn');
+  const previews = document.getElementById('previews');
+  const images = [];        // تصاویر به صورت متن (data URL) ذخیره می‌شوند
+
+  initValidation(form);
+
+  /* ---------- وضعیت انتشار، بسته به تأیید فروشگاه ---------- */
+  const rule = DPStore.rulesFor(me.status);
+
+  if (!rule.canPublish) {
+    document.getElementById('draftHint').hidden = false;
+    const sel = document.getElementById('pstatus');
+    // کشو قفل می‌شود ولی مقدارش «فعال» می‌ماند تا بعد از تأیید منتشر شود
+    sel.value = 'active';
+    sel.disabled = true;
+    sel.title = 'تا تأیید فروشگاه، محصول پیش‌نویس می‌ماند و بعد خودکار منتشر می‌شود';
+
+    const btn = document.getElementById('saveBtn');
+    const lab = btn.querySelector('.btn-label') || btn;
+    lab.textContent = 'ذخیره به‌صورت پیش‌نویس';
+  }
+
+  /* ============================================================
+     انتخاب رنگ — دایره‌های رنگی
+     ============================================================ */
+  const C = window.DPColors;
+  const chosen = new Set();
+
+  /** رنگ روشن است؟ (تا تیک تیره بگذاریم) */
+  function isLight(hex) {
+    const h = String(hex || '').replace('#', '');
+    if (h.length !== 6) return false;
+    const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
+    return (r * 299 + g * 587 + b * 114) / 1000 > 175;
+  }
+
+  const picker = document.getElementById('colorPicker');
+  const nameBox = document.getElementById('colorName');
+
+  /* فهرست از C.all() می‌آید نه C.COLORS — تا رنگ‌های سفارشی
+     فروشنده هم دیده شوند */
+  function drawPicker() {
+    picker.innerHTML = C.all().map((c) => `
+      <button class="dp-sw ${isLight(c.hex) && !c.pattern ? 'light' : ''}${
+                c.custom ? ' is-custom' : ''}" type="button"
+              data-color="${c.id}" title="${c.name}${c.custom ? ' — رنگ ساخته‌ی شما' : ''}"
+              aria-label="${c.name}" aria-pressed="false">
+        <i style="background:${C.background(c)}"></i>
+        ${c.custom ? `<em class="dp-sw-x" data-del="${c.id}" role="button" tabindex="0"
+                          aria-label="حذف رنگ ${c.name}">&times;</em>` : ''}
+      </button>`).join('');
+  }
+  drawPicker();
+
+  function paintColors() {
+    picker.querySelectorAll('.dp-sw').forEach((b) => {
+      const on = chosen.has(b.dataset.color);
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+
+    nameBox.innerHTML = chosen.size
+      ? `<span class="dp-sw-count">${toFa(chosen.size)} رنگ:</span>
+         <b>${C.names([...chosen])}</b>`
+      : '<span class="hint">روی رنگ‌های موجود بزنید — می‌توانید چند رنگ انتخاب کنید</span>';
+  }
+
+  picker.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-color]');
+    if (!b) return;
+    const id = b.dataset.color;
+    chosen.has(id) ? chosen.delete(id) : chosen.add(id);
+    paintColors();
+
+  /* ============================================================
+     ساخت رنگ سفارشی
+     ------------------------------------------------------------
+     فهرست رنگ هرچقدر کامل باشد، همیشه رنگی هست که در آن نیست.
+     تا حالا فروشنده مجبور بود نزدیک‌ترین رنگ را بزند و مشتری
+     چیز دیگری تحویل می‌گرفت. حالا خودش می‌سازد.
+     ============================================================ */
+  });
+
+  // نام رنگ زیر انگشت، هنگام حرکت ماوس
+  picker.addEventListener('mouseover', (e) => {
+    const b = e.target.closest('[data-color]');
+    if (b && !chosen.size) nameBox.innerHTML = `<b>${C.find(b.dataset.color).name}</b>`;
+  });
+  picker.addEventListener('mouseleave', paintColors);
+
+  paintColors();
+
+  /* ============================================================
+     انتخاب دسته‌بندی — سه گام
+     ============================================================ */
+  const T = window.DPTaxonomy;
+
+  /* ============================================================
+     موتور ویژگی‌ها و حالت انتخاب‌ها
+     ------------------------------------------------------------
+     این سه تا پیش‌تر پایین‌تر تعریف شده بودند، ولی حالت
+     «ویرایش کالا» زودتر از آنها اجرا می‌شد و مرورگر خطای
+     «Cannot access before initialization» می‌داد — فرم ویرایش
+     نیمه‌کاره می‌ماند و نام کالا بازسازی نمی‌شد.
+
+     در جاوااسکریپت `const` بالا برده نمی‌شود؛ تا خط تعریفش
+     اجرا نشود، دست زدن به آن خطاست. پس تعریف باید پیش از
+     نخستین استفاده باشد.
+     ============================================================ */
+  const A = window.DPAttributes;
+
+  /** انتخاب‌های جاری ویژگی‌ها */
+  const attrs = {};
+
+  /** گزینه‌های روشن یک گروه تراشه (مثلاً سایز) */
+  const picked = (g) => Array.from(
+    document.querySelectorAll(`.chips[data-group="${g}"] .chip.on`),
+    (c) => c.textContent.trim());
+
+  /** سقف نرم طول نام — باید با موتور `dp-attributes.js` یکی باشد */
+  const NM_SOFT = 46;
+
+  const pick = { section: '', group: '', item: '' };
+
+  const el = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  /* گام ۱ — بخش‌ها */
+  /* ---------- گام ۱: بخش ----------
+     توضیح ریز زیر هر کارت برداشته شد. فروشنده «پوشاک زنانه»
+     را می‌شناسد و «مانتو، مجلسی، روزمره…» فقط شلوغی می‌کرد.
+     کارت‌ها حالا هم‌اندازه و مرتب‌اند. */
+  el('secGrid').innerHTML = T.sections().map((s) => `
+    <button class="cat-card" type="button" data-sec="${s.key}">
+      ${T.sectionIcon(s.key, 'ico ico-lg')}
+      <strong>${esc(s.label)}</strong>
+      <em>${toFa(s.itemCount)} نوع</em>
+    </button>`).join('');
+
+  function showStep(n) {
+    el('step1').hidden = n !== 1;
+    el('step2').hidden = n !== 2;
+    el('step3').hidden = n !== 3;
+    el('catDone').hidden = n !== 0;
+    el('catCard').classList.toggle('is-done', n === 0);
+  }
+
+  function trailText() {
+    el('catTrail').textContent =
+      [T.sectionLabel(pick.section), T.groupLabel(pick.section, pick.group), pick.item]
+        .filter(Boolean).join(' › ');
+  }
+
+  /* انتخاب بخش */
+  el('secGrid').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-sec]');
+    if (!b) return;
+    pick.section = b.dataset.sec;
+    pick.group = ''; pick.item = '';
+
+    /* توضیح ریز زیر هر سبک برداشته شد — تعداد کالا مفیدتر است */
+    el('grpGrid').innerHTML = T.groups(pick.section).map((g) => `
+      <button class="cat-chip" type="button" data-grp="${g.key}">
+        <strong>${esc(g.label)}</strong>
+        <em>${toFa(T.items(pick.section, g.key).length)}</em>
+      </button>`).join('') + missingBtn('grp');
+
+    trailText();
+    showStep(2);
+  });
+
+  /* انتخاب سبک */
+  el('grpGrid').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-grp]');
+    if (!b) return;
+    pick.group = b.dataset.grp;
+    pick.item = '';
+
+    el('itemGrid').innerHTML = itemListHtml();
+
+    trailText();
+    showStep(3);
+  });
+
+  /* ============================================================
+     «کالای من در این فهرست نیست»
+     ------------------------------------------------------------
+     درخت دسته‌بندی هرقدر هم کامل باشد، همیشه کالایی هست که
+     جا نمانده باشد — مثلاً «پانچو» یا «کیف کمری». پیش‌تر
+     فروشنده گیر می‌کرد و کالا را در دسته‌ی اشتباه می‌گذاشت
+     که فیلتر مشتری را خراب می‌کرد.
+
+     حالا خودش نام کالا را می‌نویسد. آن نام کنار نزدیک‌ترین
+     سبک ثبت می‌شود، پس فیلتر و مسیر صفحه سالم می‌ماند.
+     ============================================================ */
+  const CUSTOM_KEY = 'dp_custom_items';
+
+  function customAll() {
+    try {
+      const v = JSON.parse(localStorage.getItem(CUSTOM_KEY));
+      return (v && typeof v === 'object' && !Array.isArray(v)) ? v : {};
+    } catch (e) { return {}; }
+  }
+
+  /** کالاهای دست‌ساز یک سبک */
+  function customFor(sec, grp) {
+    const m = customAll();
+    const list = m[sec + '/' + grp];
+    return Array.isArray(list)
+      ? list.filter((x) => typeof x === 'string' && x.trim()) : [];
+  }
+
+  function customAdd(sec, grp, name) {
+    const m = customAll();
+    const k = sec + '/' + grp;
+    const list = Array.isArray(m[k]) ? m[k] : [];
+    if (list.indexOf(name) < 0) list.push(name);
+    m[k] = list.slice(0, 60);
+    try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(m)); } catch (e) { /* حافظه پر */ }
+  }
+
+  /** دکمه‌ی «نیست» ته هر فهرست */
+  function missingBtn(kind) {
+    return `<button class="cat-miss" type="button" data-miss="${kind}">
+      <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"
+           stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true">
+        <path d="M12 5.5v13M5.5 12h13"/></svg>
+      <span>${kind === 'grp' ? 'سبک محصولم اینجا نیست' : 'محصول من در این فهرست نیست'}</span>
+    </button>`;
+  }
+
+  /** کالاهای دست‌ساز را هم به فهرست گام ۳ می‌چسباند */
+  function itemListHtml() {
+    const base = T.items(pick.section, pick.group);
+    const mine = customFor(pick.section, pick.group)
+      .filter((x) => base.indexOf(x) < 0);
+
+    return base.map((it) => `
+        <button class="cat-chip is-item" type="button" data-item="${esc(it)}">${esc(it)}</button>`
+      ).join('')
+      + mine.map((it) => `
+        <button class="cat-chip is-item is-mine" type="button" data-item="${esc(it)}"
+                title="کالایی که خودتان اضافه کرده‌اید">${esc(it)}</button>`
+      ).join('')
+      + missingBtn('item');
+  }
+
+  /* پنجره‌ی نوشتن نام کالای تازه */
+  function askCustom(kind) {
+    const box = document.createElement('div');
+    box.className = 'cat-ask';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', 'افزودن دسته‌ی تازه');
+
+    const where = kind === 'grp'
+      ? T.sectionLabel(pick.section)
+      : `${T.sectionLabel(pick.section)} › ${T.groupLabel(pick.section, pick.group)}`;
+
+    box.innerHTML = `
+      <div class="cat-ask-card">
+        <div class="cat-ask-head">
+          <h3>${kind === 'grp' ? 'سبک محصولتان اینجا نیست؟' : 'محصولتان در فهرست نیست؟'}</h3>
+          <button type="button" data-ask-x aria-label="بستن">
+            <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" fill="none" aria-hidden="true">
+              <path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        ${kind === 'grp'
+          ? `<p class="cat-ask-tip">اول نزدیک‌ترین سبک را از فهرست بالا انتخاب کنید،
+             بعد در گام بعد نام دقیق کالایتان را بنویسید. اینطور مشتری
+             راحت‌تر پیدایتان می‌کند.</p>
+             <div class="cat-ask-foot">
+               <button class="btn btn-primary" type="button" data-ask-x>فهمیدم</button>
+             </div>`
+          : `<p class="cat-ask-tip">نام کالا را بنویسید. در
+             <b>${esc(where)}</b> ثبت می‌شود.</p>
+             <div class="field">
+               <label for="askName">نام کالا</label>
+               <input class="input" id="askName" maxlength="28" autocomplete="off"
+                      placeholder="مثلاً: پانچو" />
+               <span class="hint">دو تا ۲۸ حرف فارسی. نام کوتاه و روشن بنویسید —
+                 «پانچو» بله، «پانچوی خیلی شیک زمستانی» نه.</span>
+               <span class="err-msg" id="askErr" hidden></span>
+             </div>
+             <div class="cat-ask-foot">
+               <button class="btn btn-ghost" type="button" data-ask-x>انصراف</button>
+               <button class="btn btn-primary" type="button" data-ask-ok>افزودن و انتخاب</button>
+             </div>`}
+      </div>`;
+
+    box.addEventListener('click', (ev) => { if (ev.target === box) box.remove(); });
+    document.body.appendChild(box);
+
+    const inp = box.querySelector('#askName');
+    if (inp) inp.focus();
+
+    box.addEventListener('click', (ev) => {
+      if (ev.target.closest('[data-ask-x]')) { box.remove(); return; }
+      if (ev.target.closest('[data-ask-ok]')) saveCustom(box);
+    });
+    box.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' && inp) { ev.preventDefault(); saveCustom(box); }
+      if (ev.key === 'Escape') box.remove();
+    });
+  }
+
+  function saveCustom(box) {
+    const inp = box.querySelector('#askName');
+    const err = box.querySelector('#askErr');
+    const raw = String(inp.value || '').replace(/[<>&"'\\]/g, '').trim();
+
+    const fail = (m) => {
+      err.textContent = m; err.hidden = false;
+      inp.classList.add('invalid'); inp.focus();
+    };
+
+    if (raw.length < 2) return fail('نام کالا دست‌کم دو حرف باشد.');
+    if (raw.length > 28) return fail('نام کالا خیلی بلند است.');
+    /* فقط حرف فارسی، فاصله و نیم‌فاصله — عدد و لاتین نه */
+    if (!/^[\u0600-\u06FF\s\u200C]+$/.test(raw)) {
+      return fail('فقط حروف فارسی بنویسید.');
+    }
+
+    /* ---------- بررسی تکراری در کل درخت، نه فقط همین سبک ----------
+       اگر «پانچو» در سبک «پاییزه و زمستانه» باشد و فروشنده
+       دوباره در «رسمی و اداری» بسازدش، دو کالای هم‌نام در دو
+       جای مختلف می‌ماند و فیلتر مشتری گیج می‌شود. */
+    const here = T.items(pick.section, pick.group)
+      .concat(customFor(pick.section, pick.group));
+    if (here.some((x) => x === raw)) {
+      return fail('این نام همین‌جا در فهرست هست — از خود فهرست انتخابش کنید.');
+    }
+
+    const elsewhere = T.findByItem(raw);
+    if (elsewhere) {
+      return fail('«' + raw + '» از قبل در «'
+        + T.sectionLabel(elsewhere.section) + ' › '
+        + T.groupLabel(elsewhere.section, elsewhere.group)
+        + '» هست. همان‌جا انتخابش کنید.');
+    }
+
+    customAdd(pick.section, pick.group, raw);
+    box.remove();
+
+    pick.item = raw;
+    el('itemGrid').innerHTML = itemListHtml();
+    applyPick();
+    if (typeof toast === 'function') toast(`«${raw}» به فهرست شما اضافه شد.`, 'success');
+  }
+
+  /* انتخاب نوع کالا */
+  el('itemGrid').addEventListener('click', (e) => {
+    const miss = e.target.closest('[data-miss]');
+    if (miss) { askCustom(miss.dataset.miss); return; }
+
+    const b = e.target.closest('[data-item]');
+    if (!b) return;
+    pick.item = b.dataset.item;
+    applyPick();
+  });
+
+  /* دکمه‌ی «نیست» در گام ۲ */
+  el('grpGrid').addEventListener('click', (e) => {
+    const miss = e.target.closest('[data-miss]');
+    if (miss) { askCustom('grp'); return; }
+  });
+
+  function applyPick() {
+    pSection.value = pick.section;
+    pGroup.value = pick.group;
+    pcat.value = pick.item;
+
+    el('catPicked').textContent = pick.item;
+    el('catWhere').textContent =
+      `${T.sectionLabel(pick.section)} › ${T.groupLabel(pick.section, pick.group)}`;
+
+    trailText();
+    el('catCard').classList.remove('invalid');
+    showStep(0);
+    if (typeof refreshName === 'function') refreshName();
+  }
+
+  /* بازگشت به گام قبل */
+  el('catCard').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-back]');
+    if (b) { showStep(Number(b.dataset.back)); el('catTrail').textContent = ''; }
+  });
+
+  el('catReset').addEventListener('click', () => {
+    showStep(1);
+    el('catTrail').textContent = '';
+  });
+
+  showStep(1);
+
+  /* شناسه‌ی کالا در حالت ویرایش — در ثبت نهایی هم لازم است */
+  const id = new URLSearchParams(location.search).get('id');
+
+  /* ---------- بارگذاری کالا برای ویرایش ----------
+     این بلوک عمداً *پس از* ساخته شدن منوهای ویژگی صدا زده
+     می‌شود. پیش‌تر بالاتر بود و وقتی می‌خواست منوها را پر
+     کند، هنوز ساخته نشده بودند — ویژگی‌های ذخیره‌شده گم
+     می‌شدند و نام کالا ناقص بازسازی می‌شد. */
+  async function loadForEdit() {
+    const p = await DPStore.products.get(id);
+    if (p) {
+      document.querySelector('.page-title').textContent = 'ویرایش محصول';
+      document.querySelector('.page-sub') && (document.querySelector('.page-sub').textContent = p.name);
+      pname.value   = p.autoName || p.name;
+      pdesc.value   = p.description || '';
+      pprice.value  = toFa(p.price);
+      pstock.value  = toFa(p.stock);
+      pstatus.value = p.status === 'out_of_stock' ? 'active' : p.status;
+      /* بارگذاری سطح بودجه (پیش‌فرض: متوسط) */
+      if (p.budget) document.getElementById('pbudget').value = p.budget;
+
+      /* ویژگی‌های ذخیره‌شده را در منوها برمی‌گردانیم */
+      if (A) {
+        A.GROUPS.forEach((g) => {
+          const v = p[g.key];
+          if (!v) return;
+          const box = el('attr-' + g.key);
+          if (box && [...box.options].some((o) => o.value === v)) {
+            box.value = v;
+            attrs[g.key] = v;
+          }
+        });
+      }
+
+      // دسته‌بندی ذخیره‌شده را برگردان
+      let found = null;
+      if (p.section && p.group) found = { section: p.section, group: p.group, item: p.category };
+      else found = T.findByItem(p.category);
+
+      if (found) {
+        pick.section = found.section; pick.group = found.group; pick.item = found.item;
+        applyPick();
+      } else if (p.category) {
+        // کالای قدیمی که در درخت نیست — همان را نگه می‌داریم
+        pcat.value = p.category;
+        el('catPicked').textContent = p.category;
+        el('catWhere').textContent = 'دسته‌بندی قدیمی — برای به‌روزرسانی، دوباره انتخاب کنید';
+        pSection.value = 'legacy';
+        showStep(0);
+      }
+
+      document.querySelectorAll('.chips[data-group="size"] .chip').forEach(c =>
+        c.classList.toggle('on', (p.sizes || []).includes(c.textContent.trim())));
+      // رنگ‌های ذخیره‌شده (هم شناسه‌ی تازه، هم نام فارسی قدیمی)
+      (p.colors || []).forEach((k) => {
+        const c = C.find(k);
+        if (c) chosen.add(c.id);
+      });
+      paintColors();
+
+      (p.images || []).forEach(src => { images.push(src); addPreview(src); });
+
+      /* نام را از روی همان انتخاب‌های بازگردانده‌شده بساز */
+      refreshName();
+    }
+  }
+
+  function addPreview(src, file) {
+    const box = document.createElement('div');
+    box.className = 'preview';
+    box.innerHTML =
+      `<img src="${src}" alt="" />` +
+      (file ? `<span class="preview-size">${fileSize(file.size)}</span>` : '') +
+      `<button type="button" aria-label="حذف این عکس">&times;</button>`;
+    box.querySelector('button').onclick = () => {
+      const i = images.indexOf(src);
+      if (i > -1) images.splice(i, 1);
+      box.remove();
+    };
+    previews.appendChild(box);
+  }
+
+  document.addEventListener('click', (e) => {
+    const chip = e.target.closest('.chips .chip');
+    if (chip) chip.classList.toggle('on');
+  });
+
+  /* ---------- آپلود تصویر — تا ۵ مگابایت برای هر عکس ---------- */
+  const MAX_MB = 5;
+  const MAX_BYTES = MAX_MB * 1024 * 1024;
+  const MAX_IMAGES = 6;
+  const OK_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+  /** حجم را به شکل خوانا و فارسی نشان می‌دهد */
+  const fileSize = (b) => b >= 1024 * 1024
+    ? toFa((b / 1024 / 1024).toFixed(1)) + ' مگابایت'
+    : toFa(Math.round(b / 1024)) + ' کیلوبایت';
+
+  function handleFiles(fileList) {
+    const files = Array.from(fileList || []);
+    if (!files.length) return;
+
+    let added = 0;
+
+    for (const file of files) {
+      if (images.length + added >= MAX_IMAGES) {
+        toast(`حداکثر ${toFa(MAX_IMAGES)} عکس می‌توانید بگذارید.`, 'warning');
+        break;
+      }
+
+      if (!OK_TYPES.includes(file.type)) {
+        toast(`«${file.name}» تصویر معتبری نیست. فقط JPG، PNG، WebP یا GIF.`, 'error');
+        continue;
+      }
+
+      if (file.size > MAX_BYTES) {
+        toast(
+          `«${file.name}» حجمش ${fileSize(file.size)} است؛ بیشتر از ${toFa(MAX_MB)} مگابایت مجاز نیست.`,
+          'error'
+        );
+        continue;
+      }
+
+      added++;
+      const fr = new FileReader();
+      fr.onload = () => { images.push(fr.result); addPreview(fr.result, file); };
+      fr.onerror = () => toast(`خواندن «${file.name}» ناموفق بود.`, 'error');
+      fr.readAsDataURL(file);
+    }
+
+    if (added) toast(`${toFa(added)} عکس اضافه شد.`, 'success');
+  }
+
+  document.getElementById('pimg').addEventListener('change', (e) => {
+    handleFiles(e.target.files);
+    e.target.value = '';   // تا بشود همان فایل را دوباره انتخاب کرد
+  });
+
+  /* کشیدن و رها کردن عکس روی کادر */
+  const dropZone = document.querySelector('.uploader');
+  if (dropZone) {
+    ['dragenter', 'dragover'].forEach((ev) =>
+      dropZone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drag');
+      }));
+
+    ['dragleave', 'drop'].forEach((ev) =>
+      dropZone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drag');
+      }));
+
+    dropZone.addEventListener('drop', (e) => handleFiles(e.dataTransfer?.files));
+  }
+
+
+  /* ============================================================
+     ویژگی‌های کالا — منوهای کشویی
+     ------------------------------------------------------------
+     فروشنده نام نمی‌نویسد؛ از منو انتخاب می‌کند و نام ساخته
+     می‌شود. این کار نام‌ها را در کل بازارگاه یکدست می‌کند و
+     فیلتر مشتری را واقعاً کاربردی می‌سازد.
+     ============================================================ */
+  /* `A`، `attrs` و `picked` بالاتر تعریف شده‌اند */
+
+  (function buildAttrForm() {
+    const grid = el('attrGrid');
+    if (!grid || !A) return;
+
+    grid.innerHTML = A.GROUPS.map((g) => {
+      const opts = A.OPTIONS[g.key] || [];
+      return `
+        <div class="field${g.key === 'fabric' || g.key === 'color' ? '' : ''}">
+          <label for="attr-${g.key}">${esc(g.label)}${
+            g.required ? ' <span class="req">*</span>' : ''}</label>
+          <select class="select" id="attr-${g.key}" data-attr="${g.key}">
+            <option value="">${g.required ? 'انتخاب کنید…' : '— مهم نیست —'}</option>
+            ${opts.map((o) =>
+              `<option value="${esc(o.name)}">${esc(o.label)}</option>`).join('')}
+          </select>
+          <span class="err-msg"></span>
+        </div>`;
+    }).join('');
+
+    grid.addEventListener('change', (e) => {
+      const sel = e.target.closest('[data-attr]');
+      if (!sel) return;
+      attrs[sel.dataset.attr] = sel.value;
+      sel.closest('.field')?.classList.remove('invalid');
+      refreshName();
+    });
+  })();
+
+  /* ---------- حالا که همه‌چیز آماده است، کالا را بارگذاری کن ----------
+     ترتیب مهم است: منوهای ویژگی باید ساخته شده باشند تا
+     `loadForEdit` بتواند مقدارهای ذخیره‌شده را در آنها بگذارد. */
+  if (id) loadForEdit();
+
+  /* ---------- پیش‌نمایش زنده‌ی نام ---------- */
+  function refreshName() {
+    if (!A) return;
+
+    const sel = Object.assign({}, attrs, {
+      section: pick.section,
+      itemType: pick.item,
+      sizes: picked('size'),
+    });
+
+    /* اگر فروشنده رنگ سفارشی ساخته و انتخابش کرده، همان در نام
+       می‌آید — نه رنگ منوی بالا. رنگی که خودش نام گذاشته،
+       دقیق‌تر از «آبی» عمومی است. */
+    const myColor = [...chosen].map((k) => C.find(k)).find((c) => c && c.custom);
+    if (myColor) {
+      sel.color = myColor.id;
+      sel.colorLabel = myColor.name;
+    }
+
+    /* ============================================================
+       ساخت نام + گزارش
+       ------------------------------------------------------------
+       `nameReport` می‌گوید کدام ویژگی‌ها در نام آمدند و کدام‌ها
+       جا نشدند. اینطور فروشنده گیج نمی‌شود که «چرا آستین را
+       انتخاب کردم ولی در نام نیست؟»
+       ============================================================ */
+    const rep = A.nameReport ? A.nameReport(sel) : null;
+    const name = rep ? rep.name : A.buildName(sel);
+    pname.value = name;
+
+    paintNameLab(rep);
+
+    const gaps = A.missingOf(sel);
+    const note = el('pnameNote');
+
+    if (!note) return;
+
+    if (gaps.length) {
+      note.innerHTML = 'برای کامل شدن نام، این‌ها را انتخاب کنید: <b>' +
+        esc(gaps.join('، ')) + '</b>';
+      note.classList.add('is-gap');
+    } else {
+      note.innerHTML = 'نام کالا آماده است. پس از ثبت، مشتری کالا را با همین نام می‌بیند.';
+      note.classList.remove('is-gap');
+    }
+  }
+
+  /* ============================================================
+     کارگاه نام
+     ------------------------------------------------------------
+     سه چیز را نشان می‌دهد:
+
+       ۱. نوار طول — چقدر از فضای خوش‌خوان پر شده
+       ۲. تراشه‌ی هر ویژگی — سبز یعنی در نام هست،
+          خاکستری یعنی جا نشد
+       ۳. راهنمای کوتاه وقتی چیزی حذف شده
+
+     چرا مهم است؟ چون نام بلند در کارت کالا بریده می‌شود و
+     مشتری نمی‌فهمد چه می‌خرد. کوتاه بودن نام یعنی فروش بیشتر.
+     ============================================================ */
+  function paintNameLab(rep) {
+    const lab = el('nmLab');
+    if (!lab) return;
+
+    if (!rep || !rep.name) { lab.hidden = true; return; }
+    lab.hidden = false;
+
+    /* ---------- نوار طول ---------- */
+    const pct = Math.min(100, Math.round(rep.len / NM_SOFT * 100));
+    const fill = el('nmFill');
+    if (fill) {
+      fill.style.width = pct + '%';
+      fill.className = rep.len > NM_SOFT ? 'is-over'
+        : rep.len > NM_SOFT - 8 ? 'is-tight' : '';
+    }
+    const lenEl = el('nmLen');
+    if (lenEl) lenEl.textContent = toFa(rep.len) + ' نویسه';
+
+    /* ---------- تراشه‌ی هر ویژگی ---------- */
+    const chips = el('nmChips');
+    if (chips) {
+      const inName = rep.kept.map((c) =>
+        `<span class="nm-chip on" title="در نام آمده">
+           <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true">
+             <path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+           <b>${esc(c.src)}</b><span>${esc(c.text)}</span></span>`).join('');
+
+      const out = rep.dropped.map((c) =>
+        `<span class="nm-chip off" title="جا نشد — ولی در مشخصات کالا ثبت می‌شود">
+           <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" fill="none" aria-hidden="true">
+             <path d="M18 6 6 18M6 6l12 12"/></svg>
+           <b>${esc(c.src)}</b><span>${esc(c.text)}</span></span>`).join('');
+
+      chips.innerHTML = inName + out;
+    }
+
+    /* ---------- راهنما ---------- */
+    const tip = el('nmTip');
+    if (tip) {
+      if (rep.dropped.length) {
+        tip.innerHTML =
+          '<b>' + esc(rep.dropped.map((c) => c.src).join('، ')) + '</b> در نام جا نشد — '
+          + 'ولی نگران نباشید: در <b>جدول مشخصات</b> صفحه‌ی کالا و در '
+          + '<b>فیلتر مشتری</b> کاملاً ثبت می‌شود. نام کوتاه در کارت کالا '
+          + 'بریده نمی‌شود و بهتر فروش می‌رود.';
+        tip.hidden = false;
+      } else if (rep.len > NM_SOFT - 8) {
+        tip.innerHTML = 'نام به بلندترین حالت خوش‌خوان رسیده. '
+          + 'ویژگی بعدی که انتخاب کنید، کم‌اهمیت‌ترین تکه جایش را می‌دهد.';
+        tip.hidden = false;
+      } else {
+        tip.hidden = true;
+      }
+    }
+  }
+
+  /* شمارنده‌ی نویسه‌های توضیح */
+  const descN = el('pdescN');
+  if (descN) {
+    const upd = () => { descN.textContent = toFa(pdesc.value.length); };
+    pdesc.addEventListener('input', upd);
+    upd();
+  }
+
+  /* انتخاب سایز هم روی نام اثر دارد (کامل بودن) */
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.chips[data-group="size"] .chip')) {
+      setTimeout(refreshName, 0);
+    }
+  });
+
+  (function customColor() {
+    const openBtn = el('addColorBtn');
+    const box     = el('addColorBox');
+    const hexIn   = el('newColorHex');
+    const nameIn  = el('newColorName');
+    const goBtn   = el('newColorGo');
+    const prev    = el('newColorPrev');
+    const live    = el('newColorLive');
+
+    if (!openBtn || !box) return;
+
+    /* ---------- باز و بسته ---------- */
+    openBtn.addEventListener('click', () => {
+      const open = box.hidden;
+      box.hidden = !open;
+      openBtn.setAttribute('aria-expanded', String(open));
+      if (open) nameIn.focus();
+    });
+
+    /* ============================================================
+       رنگ ترکیبی — دو رنگ با هم
+       ------------------------------------------------------------
+       پارچه‌ی واقعی همیشه تک‌رنگ نیست. فروشنده می‌تواند دو رنگ
+       را با پنج حالت مختلف ترکیب کند و نتیجه را همان لحظه
+       ببیند — همان‌طور که مشتری خواهد دید.
+       ============================================================ */
+    const mixToggle = el('mixToggle');
+    const mixBox    = el('mixBox');
+    const hex2In    = el('newColorHex2');
+    const prev2     = el('newColorPrev2');
+    const mixModes  = el('mixModes');
+    const mixRatio  = el('mixRatio');
+    const mixRange  = el('mixRange');
+    const mixBig    = el('mixBig');
+
+    let useMix = false;
+    let mixKind = 'gradient';
+
+    /* شرح هر حالت — تا فروشنده بداند کدام به کار کالایش می‌آید */
+    const MIX_NOTE = {
+      gradient: 'رنگ آرام‌آرام از یکی به دیگری می‌رود',
+      half:     'نیمی از کالا یک رنگ، نیم دیگر رنگ دوم',
+      stripe2:  'نوارهای موازی از دو رنگ',
+      dots2:    'زمینه‌ی رنگ اول با خال‌های رنگ دوم',
+      blend:    'دو رنگ واقعاً مخلوط می‌شوند و رنگ سومی می‌سازند',
+    };
+
+    /* آیکون کوچک هر حالت — نمونه‌ی واقعی همان طرح */
+    function modeSwatch(kind) {
+      const fake = { hex: hexIn.value, hex2: hex2In.value, mix: kind };
+      if (kind === 'blend') {
+        return C.mixHex(hexIn.value, hex2In.value, Number(mixRange.value) / 100);
+      }
+      return C.background(fake);
+    }
+
+    function paintModes() {
+      if (!mixModes) return;
+      mixModes.innerHTML = C.MIXES.map(function (k) {
+        const on = k === mixKind;
+        return '<button class="dp-mix-mode' + (on ? ' on' : '') + '" type="button"'
+          + ' data-mix="' + k + '" role="radio" aria-checked="' + on + '"'
+          + ' title="' + esc(MIX_NOTE[k]) + '">'
+          + '<span class="dp-mix-sw" style="background:' + modeSwatch(k) + '"></span>'
+          + '<b>' + esc(C.MIX_FA[k]) + '</b></button>';
+      }).join('');
+
+      /* سهم رنگ‌ها فقط در حالت «آمیخته» معنا دارد */
+      if (mixRatio) mixRatio.hidden = mixKind !== 'blend';
+    }
+
+    function paintBig() {
+      if (!mixBig) return;
+      if (!useMix) { mixBig.style.background = hexIn.value; return; }
+
+      if (mixKind === 'blend') {
+        mixBig.style.background =
+          C.mixHex(hexIn.value, hex2In.value, Number(mixRange.value) / 100);
+      } else {
+        mixBig.style.background =
+          C.background({ hex: hexIn.value, hex2: hex2In.value, mix: mixKind });
+      }
+
+      const note = el('mixBigNote');
+      if (note) note.textContent = MIX_NOTE[mixKind] || '';
+    }
+
+    function paintRatioTxt() {
+      const t = el('mixRatioTxt');
+      if (!t) return;
+      const v = Number(mixRange.value);
+      t.textContent = v === 50 ? 'نصف‌نصف'
+        : v < 50 ? 'بیشتر رنگ اول (' + toFa(100 - v) + '٪)'
+        : 'بیشتر رنگ دوم (' + toFa(v) + '٪)';
+    }
+
+    if (mixToggle && mixBox) {
+      mixToggle.addEventListener('click', function () {
+        useMix = mixBox.hidden;
+        mixBox.hidden = !useMix;
+        mixToggle.setAttribute('aria-expanded', String(useMix));
+        mixToggle.classList.toggle('on', useMix);
+        if (useMix) { paintModes(); paintBig(); paintRatioTxt(); }
+        paintPrev();
+      });
+    }
+
+    if (mixModes) {
+      mixModes.addEventListener('click', function (e) {
+        const b = e.target.closest('[data-mix]');
+        if (!b) return;
+        mixKind = b.dataset.mix;
+        paintModes();
+        paintBig();
+      });
+    }
+
+    if (hex2In) {
+      hex2In.addEventListener('input', function () {
+        if (prev2) prev2.style.background = hex2In.value;
+        paintModes();
+        paintBig();
+      });
+    }
+
+    if (mixRange) {
+      mixRange.addEventListener('input', function () {
+        paintRatioTxt();
+        paintModes();
+        paintBig();
+      });
+    }
+
+    /* ---------- پیش‌نمایش زنده ---------- */
+    function paintPrev() {
+      if (prev) prev.style.background = hexIn.value;
+      if (prev2) prev2.style.background = hex2In ? hex2In.value : '';
+
+      const endA = el('mixEndA'), endB = el('mixEndB');
+      if (endA) endA.style.background = hexIn.value;
+      if (endB && hex2In) endB.style.background = hex2In.value;
+
+      if (useMix) { paintModes(); paintBig(); }
+
+      const nm = nameIn.value.trim();
+      const big = el('mixBigName');
+      if (big) big.textContent = nm || 'پیش‌نمایش رنگ';
+
+      if (!live) return;
+      live.textContent = nm ? 'پیش‌نمایش: «' + nm + '»' : '';
+      live.classList.remove('is-bad');
+    }
+    hexIn.addEventListener('input', paintPrev);
+    nameIn.addEventListener('input', paintPrev);
+    paintPrev();
+
+    /* ---------- افزودن ---------- */
+    function add() {
+      const opt = useMix
+        ? { hex2: hex2In.value, mix: mixKind, ratio: Number(mixRange.value) / 100 }
+        : null;
+
+      const r = C.addCustom(nameIn.value, hexIn.value, opt);
+
+      if (!r.ok) {
+        live.textContent = r.error;
+        live.classList.add('is-bad');
+        nameIn.focus();
+        return;
+      }
+
+      /* رنگ تازه بلافاصله انتخاب می‌شود — فروشنده برای همین ساختش */
+      chosen.add(r.color.id);
+      drawPicker();
+      paintColors();
+      refreshName();
+
+      nameIn.value = '';
+
+      /* بخش ترکیب بسته می‌شود تا رنگ بعدی از نو شروع شود */
+      if (useMix && mixBox) {
+        useMix = false;
+        mixBox.hidden = true;
+        mixToggle.setAttribute('aria-expanded', 'false');
+        mixToggle.classList.remove('on');
+      }
+
+      live.textContent = '«' + r.color.name + '» ساخته و انتخاب شد.';
+      live.classList.remove('is-bad');
+      toast('رنگ «' + r.color.name + '» اضافه شد.', 'success');
+      nameIn.focus();
+    }
+
+    goBtn.addEventListener('click', add);
+
+    /* کلید Enter داخل کادر نام هم اضافه می‌کند */
+    nameIn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); add(); }
+    });
+
+    /* ---------- حذف رنگ سفارشی ---------- */
+    picker.addEventListener('click', (e) => {
+      const x = e.target.closest('[data-del]');
+      if (!x) return;
+      e.stopPropagation();          // وگرنه رنگ هم انتخاب می‌شود
+
+      const id = x.dataset.del;
+      const c = C.find(id);
+      if (!c) return;
+      if (!confirm('رنگ «' + c.name + '» حذف شود؟')) return;
+
+      C.removeCustom(id);
+      chosen.delete(id);
+      drawPicker();
+      paintColors();
+      refreshName();
+      toast('رنگ حذف شد.', 'success');
+    });
+
+    /* دسترسی با صفحه‌کلید برای دکمه‌ی حذف */
+    picker.addEventListener('keydown', (e) => {
+      const x = e.target.closest('[data-del]');
+      if (x && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        x.click();
+      }
+    });
+  })();
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!pcat.value) {
+      el('catCard').classList.add('invalid');
+      toast('لطفاً دسته‌بندی محصول را انتخاب کنید.', 'error');
+      el('catCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    if (!validateForm(form)) {
+      toast('لطفاً فیلدهای الزامی را کامل کنید.', 'error');
+      form.querySelector('.field.invalid .input, .field.invalid .select')?.focus();
+      return;
+    }
+
+    /* ---------- ویژگی‌های اجباری ---------- */
+    const sizes = picked('size');
+    const sel = Object.assign({}, attrs, {
+      section: pick.section, itemType: pick.item, sizes,
+    });
+
+    const myC = [...chosen].map((k) => C.find(k)).find((c) => c && c.custom);
+    if (myC) { sel.color = myC.id; sel.colorLabel = myC.name; }
+
+    const gaps = A ? A.missingOf(sel) : [];
+    if (gaps.length) {
+      /* منوی ناقص را قرمز می‌کنیم تا فروشنده دنبالش نگردد */
+      A.GROUPS.forEach((g) => {
+        if (!g.required || attrs[g.key]) return;
+        el('attr-' + g.key)?.closest('.field')?.classList.add('invalid');
+      });
+      toast('برای ساخته‌شدن نام کالا، این‌ها را انتخاب کنید: ' + gaps.join('، '), 'error');
+      el('attrCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    const data = {
+      /* نام از روی انتخاب‌ها ساخته می‌شود، نه از دست فروشنده */
+      name: A ? A.buildName(sel) : pname.value.trim(),
+      autoName: A ? A.buildName(sel) : '',
+      description: pdesc.value.trim().slice(0, 300),
+      category: pcat.value,
+      section: pSection.value,
+      group: pGroup.value,
+      /* برند = نام فروشگاه؛ فروشنده جدا وارد نمی‌کند */
+      brand: (window.ME && ME.storeName) || '',
+      price: Number(toEn(pprice.value).replace(/[^\d]/g, '')),
+      stock: Number(toEn(pstock.value).replace(/[^\d]/g, '')),
+      budget: document.getElementById('pbudget').value,
+      status: pstatus.value,
+      wanted: pstatus.value,
+      sizes,
+      colors: [...chosen],
+      images,
+      /* ویژگی‌های تازه — پایه‌ی فیلتر مشتری */
+      colorLabel: (function () {
+        const m = [...chosen].map((k) => C.find(k)).find((c) => c && c.custom);
+        return m ? m.name : '';
+      })(),
+      fabric:  attrs.fabric  || '',
+      color:   attrs.color   || '',
+      style:   attrs.style   || '',
+      sleeve:  attrs.sleeve  || '',
+      collar:  attrs.collar  || '',
+      length:  attrs.length  || '',
+      fit:     attrs.fit     || '',
+      pattern: attrs.pattern || '',
+      season:  attrs.season  || '',
+    };
+
+    try {
+      if (id) await DPStore.products.update(id, data);
+      else    await DPStore.products.add(data);
+      toast(id ? 'محصول به‌روز شد.' : 'محصول با موفقیت ثبت شد.', 'success');
+      setTimeout(() => (location.href = 'seller-products.html'), 700);
+    } catch (err) {
+      toast(err.message || 'ذخیره ناموفق بود.', 'error');
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  });
+});
+</script>
+</body>
+</html>

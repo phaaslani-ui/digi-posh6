@@ -1,0 +1,241 @@
+/* ============================================================
+   دیجی‌پوش — پوسته‌ی مشترک صفحه‌های مشتری
+   ------------------------------------------------------------
+   نوار بالا، مسیر صفحه و پابرگ. این سه در صفحه‌ی فروشگاه و
+   صفحه‌ی کالا یکی هستند، پس یک بار نوشته می‌شوند.
+
+   پیش‌تر داخل `store.css` بودند و صفحه‌ی کالا مجبور بود کل
+   آن فایل را بار کند — با ۱۶۲ قانون بی‌ربط و قانون‌های
+   عمومی که با `product.css` بر سر ترتیب می‌جنگیدند.
+   ============================================================ */
+
+/* ============================================================
+   نوار بالا
+   ============================================================ */
+.sh {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  padding: 14px 0;
+  background: rgba(245, 240, 232, 0.9);
+  backdrop-filter: blur(14px);
+}
+
+.sh-bar {
+  width: var(--wrap);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 22px;
+}
+
+.sh-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex: none;
+}
+
+.sh-mark {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 13px;
+  font-size: 19px; font-weight: 800;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+}
+
+.sh-stack { display: flex; flex-direction: column; line-height: 1.35; }
+.sh-stack strong { font-size: 16px; letter-spacing: 0.03em; }
+.sh-stack small { font-size: 10.5px; color: var(--gray); }
+
+/* منوی افقی
+   ------------------------------------------------------------
+   پیش‌تر `margin: 0 auto 0 0` همه‌ی فضای خالی را یک‌طرفه
+   می‌بلعید. وقتی «dp-nav.js» جعبه‌ی آیکون‌ها را به نوار
+   اضافه کرد، چیدمان به هم ریخت و منو به سمت چپ پرت شد.
+
+   حالا منو وسط می‌ماند و دو سرِ نوار (لوگو و دکمه‌ها)
+   با `margin-inline-start: auto` روی دکمه‌ی فروشنده
+   از هم جدا می‌شوند — چیدمانی که با هر تعداد آیکون
+   پایدار می‌ماند. */
+.sh-menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+/* ⚠️ خانه‌های منو — قانونی که کاملاً جا افتاده بود
+   ------------------------------------------------------------
+   `list-style: none` روی <ul> فقط نشانه‌ی بولت را برمی‌دارد،
+   ولی <li> همچنان `display: list-item` می‌ماند.
+
+   در فلکس‌باکس این حالت رفتار غیرقابل پیش‌بینی دارد: مرورگر
+   جعبه‌ی نشانه می‌سازد، ارتفاع خط را جور دیگری حساب می‌کند و
+   گزینه‌ها به‌جای اینکه کنار هم بنشینند، بزرگ و درهم می‌شوند.
+
+   همین باعث «منو کلاً بزرگ شده و به هم ریخته» بود. */
+.sh-menu > li {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* لینک‌ها هرگز شکسته نشوند */
+.sh-menu > li > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.sh-menu a {
+  position: relative;
+  padding: 8px 3px;
+  font-size: 14.5px;
+  font-weight: 500;
+  transition: color 0.3s var(--ease);
+}
+
+.sh-menu a::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 2px;
+  inset-inline-end: 50%;
+  transform: translateX(50%);
+  width: 0; height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  transition: width 0.32s var(--ease);
+}
+
+.sh-menu a:hover { color: var(--bronze); }
+.sh-menu a:hover::after { width: 70%; }
+
+.sh-seller {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 17px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  box-shadow: 0 10px 24px -12px rgba(201, 168, 76, 0.9);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  white-space: nowrap;
+}
+
+.sh-seller svg { width: 17px; height: 17px; }
+.sh-seller:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -12px rgba(201, 168, 76, 0.95); }
+
+/* دکمه‌ها همیشه ته نوار — چه جعبه‌ی آیکون‌ها ساخته شود چه نه */
+.sh-bar > .dp-navbox { flex: none; }
+.sh-bar > .sh-seller { flex: none; }
+
+/* وقتی منو پنهان است، دکمه‌ها به ته نوار می‌چسبند */
+@media (max-width: 1000px) {
+  .sh-menu { display: none; }
+  .sh-bar > .sh-seller,
+  .sh-bar > .dp-navbox:last-child { margin-inline-start: auto; }
+  .sh-bar > .dp-navbox:not(:last-child) { margin-inline-start: auto; }
+  .sh-bar > .dp-navbox + .sh-seller { margin-inline-start: 0; }
+}
+
+@media (max-width: 620px)  { .sh-seller span { display: none; } .sh-seller { padding: 9px 11px; } }
+
+/* ============================================================
+   مسیر صفحه
+   ============================================================ */
+.crumbs { padding: 20px 0 6px; font-size: 13px; color: var(--gray); }
+.crumbs .wrap { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.crumbs a { transition: color 0.25s var(--ease); }
+.crumbs a:hover { color: var(--bronze); }
+.crumbs strong { color: var(--ink); font-weight: 600; }
+
+
+/* ============================================================
+   پابرگ
+   ============================================================ */
+.sf { margin-top: 40px; padding: 44px 0 0; background: var(--ink); color: var(--beige); }
+
+.sf-in {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+}
+
+.sf-logo {
+  font-size: 20px;
+  font-weight: 800;
+  background-image: linear-gradient(135deg, var(--gold), var(--gold-bright));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sf-in p { margin: 6px 0 0; font-size: 13.5px; color: #a79c90; max-width: 44ch; }
+.sf-links { display: flex; gap: 22px; flex-wrap: wrap; font-size: 13.5px; }
+.sf-links a { color: #c8bdb1; transition: color 0.25s var(--ease); }
+.sf-links a:hover { color: var(--gold-bright); }
+
+.sf-bottom {
+  padding: 16px 0;
+  text-align: center;
+  font-size: 12.5px;
+  color: #796e64;
+  border-top: 1px solid rgba(201, 168, 76, 0.18);
+}
+
+/* ---------- ظهور نرم کارت‌ها ----------
+   ------------------------------------------------------------
+   پیش‌تر انیمیشن روی خودِ `.pcard` بود با حالت `both` و
+   `transform` را حرکت می‌داد. یعنی `transform` آخرین فریم
+   برای همیشه روی کارت قفل می‌ماند و `transform` هاور را
+   خنثی می‌کرد — کارت‌ها با موش بالا نمی‌آمدند.
+
+   حالا انیمیشن ورود فقط `transform` را حرکت می‌دهد و هاور
+   از `translate` استفاده می‌کند. این دو خاصیت جدا از هم‌اند
+   و روی هم اثر نمی‌گذارند، پس هر دو با هم کار می‌کنند.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  .pcard { animation: rise 0.5s var(--ease) both; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+
+
+/* ---------- لینک دیجی AI در ناوبری ---------- */
+.sh-ai {
+  position: relative;
+  font-weight: 700;
+  color: #6f571a !important;
+}
+.sh-ai::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  inset-inline-end: -9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+}

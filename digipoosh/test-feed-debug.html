@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="UTF-8"><title>Debug Feed</title>
+<style>
+body { font-family: monospace; padding: 20px; background: #000; color: #0f0; }
+.box { background: #111; padding: 16px; border-radius: 8px; margin: 8px 0; border: 1px solid #0f0; }
+.err { color: #f55; border-color: #f55; }
+.ok { color: #0f0; }
+.warn { color: #ff0; }
+button { padding: 12px 24px; background: #d4af37; color: #000; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; margin: 8px 4px; }
+pre { white-space: pre-wrap; word-break: break-all; }
+</style>
+</head>
+<body>
+<h1>🔍 Debug: data-products-feed</h1>
+
+<div class="box">
+  <h3>۱) وضعیت فعلی localStorage</h3>
+  <div id="step1"></div>
+</div>
+
+<div class="box">
+  <h3>۲) sync از سرور</h3>
+  <div id="step2"></div>
+</div>
+
+<div class="box">
+  <h3>۳) محصولات بعد از sync</h3>
+  <div id="step3"></div>
+</div>
+
+<div class="box">
+  <h3>۴) رندر feed</h3>
+  <div id="step4"></div>
+</div>
+
+<div class="box">
+  <h3>۵) پاکسازی کامل</h3>
+  <button onclick="fullClear()">🧹 پاک کن همه چی + reload</button>
+</div>
+
+<script src="./seller/js/dp-config.js"></script>
+<script src="./dp-products.js"></script>
+<script src="./dp-product-loader.js"></script>
+<script src="./dp-products-feed.js"></script>
+<script src="./dp-ai-nlu.js"></script>
+<script src="./dp-chat-ai.js"></script>
+
+<script>
+async function step1() {
+  const out = document.getElementById('step1');
+  const local = localStorage.getItem('dp_products');
+  const products = local ? JSON.parse(local) : [];
+  const ids = products.map(p => p.id);
+  const unique = new Set(ids);
+  
+  let html = `<pre>`;
+  html += `محصولات در localStorage: ${products.length}\n`;
+  html += `یونیک: ${unique.size}\n`;
+  html += `تکراری: ${ids.length - unique.size}\n\n`;
+  
+  if (products.length > 0) {
+    html += `نمونه ۱۰ محصول اول:\n`;
+    products.slice(0, 10).forEach(p => {
+      html += `  ${p.id}: ${p.name} (${p.price})\n`;
+    });
+  }
+  html += `</pre>`;
+  out.innerHTML = html;
+}
+
+async function step2() {
+  const out = document.getElementById('step2');
+  out.innerHTML = '⏳ در حال sync...';
+  try {
+    if (window.DPProductLoader && window.DPProductLoader.syncWithServer) {
+      const result = await window.DPProductLoader.syncWithServer();
+      out.innerHTML = `<span class="ok">✓ sync انجام شد. تعداد: ${result.length}</span>`;
+    } else {
+      out.innerHTML = `<span class="err">❌ syncWithServer موجود نیست</span>`;
+    }
+  } catch (e) {
+    out.innerHTML = `<span class="err">❌ خطا: ${e.message}</span>`;
+  }
+}
+
+async function step3() {
+  const out = document.getElementById('step3');
+  const local = localStorage.getItem('dp_products');
+  const products = local ? JSON.parse(local) : [];
+  const ids = products.map(p => p.id);
+  const unique = new Set(ids);
+  
+  let html = `<pre>`;
+  html += `محصولات در localStorage: ${products.length}\n`;
+  html += `یونیک: ${unique.size}\n`;
+  html += `تکراری: ${ids.length - unique.size}\n\n`;
+  
+  if (products.length > 0) {
+    html += `نمونه ۵ محصول اول:\n`;
+    products.slice(0, 5).forEach(p => {
+      html += `  ${p.id}: ${p.name} (${p.price})\n`;
+    });
+  }
+  html += `</pre>`;
+  out.innerHTML = html;
+}
+
+async function step4() {
+  const out = document.getElementById('step4');
+  // ساخت یه feed موقت و render
+  const container = document.createElement('div');
+  container.setAttribute('data-products-feed', '');
+  container.style.cssText = 'background:#222;padding:16px;border-radius:8px;margin-top:8px;max-height:400px;overflow-y:auto';
+  document.body.appendChild(container);
+  
+  try {
+    if (window.DPProductsFeed && window.DPProductsFeed.render) {
+      window.DPProductsFeed.render(container);
+      const cards = container.querySelectorAll('.dp-prod');
+      out.innerHTML = `<span class="ok">✓ رندر شد: ${cards.length} کارت</span>`;
+      
+      // نمایش ID محصولات render شده
+      let html = '<pre>';
+      cards.forEach((card, i) => {
+        const name = card.querySelector('.dp-prod-name')?.textContent || '?';
+        html += `${i+1}. ${name}\n`;
+      });
+      html += '</pre>';
+      out.innerHTML += html;
+    } else {
+      out.innerHTML = `<span class="err">❌ DPProductsFeed.render موجود نیست</span>`;
+    }
+  } catch (e) {
+    out.innerHTML = `<span class="err">❌ خطا: ${e.message}</span>`;
+  }
+}
+
+function fullClear() {
+  // پاک کردن همه چی
+  localStorage.clear();
+  sessionStorage.clear();
+  setTimeout(() => location.reload(), 500);
+}
+
+(async () => {
+  await new Promise(r => setTimeout(r, 500));
+  await step1();
+  await step2();
+  await new Promise(r => setTimeout(r, 500));
+  await step3();
+  await step4();
+})();
+</script>
+</body>
+</html>

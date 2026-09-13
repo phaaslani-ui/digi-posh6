@@ -1,0 +1,900 @@
+[
+  {
+    "id": "sp001",
+    "name": "پیراهن مجلسی طلایی پلیسه",
+    "brand": "لوکس بانو",
+    "seller": "گالری ملکه",
+    "sellerId": "s001",
+    "category": "پیراهن",
+    "subcategory": "پیراهن",
+    "section": "woman",
+    "price": 1850000,
+    "originalPrice": 2400000,
+    "discount": 23,
+    "color": "طلایی",
+    "colors": [
+      "طلایی",
+      "کرم"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "پیراهن مجلسی پلیسه با پارچه ساتن ترک، مناسب مجالس و عروسی",
+    "tags": [
+      "مجلسی",
+      "پلیسه",
+      "ساتن"
+    ],
+    "image": "https://images.pexels.com/photos/36168977/pexels-photo-36168977.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 12,
+    "sold": 524,
+    "rating": 4.8,
+    "reviews": 142,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-11"
+  },
+  {
+    "id": "sp002",
+    "name": "کت بلیزر طوسی زنانه",
+    "brand": "استایل پرشیا",
+    "seller": "بوتیک نیکان",
+    "sellerId": "s002",
+    "category": "کت",
+    "subcategory": "کت",
+    "section": "woman",
+    "price": 2400000,
+    "originalPrice": 2900000,
+    "discount": 17,
+    "color": "طوسی",
+    "colors": [
+      "طوسی",
+      "سرمه‌ای"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "کت بلیزر زنانه با پارچه ترک، مناسب محل کار و مجالس",
+    "tags": [
+      "کت",
+      "اداری",
+      "مجلسی"
+    ],
+    "image": "https://images.pexels.com/photos/33393823/pexels-photo-33393823.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 8,
+    "sold": 89,
+    "rating": 4.6,
+    "reviews": 45,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-26"
+  },
+  {
+    "id": "sp003",
+    "name": "شلوار جین مردانه اسلیم فیت",
+    "brand": "اکتیو وُر",
+    "seller": "اکتیو وُر",
+    "sellerId": "s003",
+    "category": "شلوار",
+    "subcategory": "جین",
+    "section": "man",
+    "price": 890000,
+    "originalPrice": 1200000,
+    "discount": 26,
+    "color": "سرمه‌ای",
+    "colors": [
+      "سرمه‌ای",
+      "مشکی"
+    ],
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "description": "شلوار جین اسلیم فیت، راحت و شیک",
+    "tags": [
+      "جین",
+      "مردانه",
+      "اسلیم"
+    ],
+    "image": "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 25,
+    "sold": 412,
+    "rating": 4.7,
+    "reviews": 187,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-07-11"
+  },
+  {
+    "id": "sp004",
+    "name": "کیف دستی چرم طبیعی",
+    "brand": "چرم طبیعت",
+    "seller": "چرم طبیعت",
+    "sellerId": "s004",
+    "category": "کیف",
+    "subcategory": "دستی",
+    "section": "woman",
+    "price": 3200000,
+    "originalPrice": 3800000,
+    "discount": 16,
+    "color": "قهوه‌ای",
+    "colors": [
+      "قهوه‌ای",
+      "مشکی"
+    ],
+    "sizes": [
+      "Free"
+    ],
+    "description": "کیف دستی چرم طبیعی، با کیفیت بالا و دوخت دستی",
+    "tags": [
+      "کیف",
+      "چرم طبیعی",
+      "دستی"
+    ],
+    "image": "https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 5,
+    "sold": 67,
+    "rating": 4.9,
+    "reviews": 34,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-21"
+  },
+  {
+    "id": "sp005",
+    "name": "پیراهن مردانه کلاسیک",
+    "brand": "لوکس مردانه",
+    "seller": "بوتیک آقایان",
+    "sellerId": "s005",
+    "category": "پیراهن",
+    "subcategory": "پیراهن",
+    "section": "man",
+    "price": 980000,
+    "originalPrice": 1250000,
+    "discount": 22,
+    "color": "سفید",
+    "colors": [
+      "سفید",
+      "آبی"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "description": "پیراهن مردانه کلاسیک با پارچه نخی، مناسب محل کار",
+    "tags": [
+      "پیراهن",
+      "مردانه",
+      "اداری"
+    ],
+    "image": "https://images.pexels.com/photos/1306248/pexels-photo-1306248.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 20,
+    "sold": 167,
+    "rating": 4.8,
+    "reviews": 78,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-07-21"
+  },
+  {
+    "id": "sp006",
+    "name": "پیراهن نخی تابستانی آبی",
+    "brand": "گل‌بانو",
+    "seller": "بوتیک نیکان",
+    "sellerId": "s002",
+    "category": "پیراهن",
+    "subcategory": "پیراهن",
+    "section": "woman",
+    "price": 580000,
+    "originalPrice": 750000,
+    "discount": 23,
+    "color": "آبی",
+    "colors": [
+      "آبی",
+      "سفید"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "پیراهن نخی خنک با طرح گل، مناسب روزهای گرم تابستان",
+    "tags": [
+      "نخی",
+      "تابستانی",
+      "گلدار"
+    ],
+    "image": "https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 18,
+    "sold": 342,
+    "rating": 4.5,
+    "reviews": 156,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-21"
+  },
+  {
+    "id": "sp007",
+    "name": "مانتو مشکی مجلسی بلند",
+    "brand": "استایل پلاس",
+    "seller": "بوتیک سارا",
+    "sellerId": "s006",
+    "category": "مانتو",
+    "subcategory": "بلند",
+    "section": "woman",
+    "price": 1650000,
+    "originalPrice": 2100000,
+    "discount": 21,
+    "color": "مشکی",
+    "colors": [
+      "مشکی",
+      "سرمه‌ای"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "مانتو مشکی مجلسی، مناسب مجالس و مراسم رسمی",
+    "tags": [
+      "مشکی",
+      "مجلسی",
+      "بلند"
+    ],
+    "image": "https://images.pexels.com/photos/3621189/pexels-photo-3621189.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 15,
+    "sold": 287,
+    "rating": 4.7,
+    "reviews": 124,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-16"
+  },
+  {
+    "id": "sp008",
+    "name": "تیشرت مردانه سفید ساده",
+    "brand": "اکتیو وُر",
+    "seller": "اکتیو وُر",
+    "sellerId": "s003",
+    "category": "تیشرت",
+    "subcategory": "تیشرت",
+    "section": "man",
+    "price": 320000,
+    "originalPrice": 420000,
+    "discount": 24,
+    "color": "سفید",
+    "colors": [
+      "سفید",
+      "مشکی",
+      "طوسی"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "description": "تیشرت نخی مردانه، راحت و مناسب استفاده روزانه",
+    "tags": [
+      "تیشرت",
+      "مردانه",
+      "نخی"
+    ],
+    "image": "https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 50,
+    "sold": 1245,
+    "rating": 4.4,
+    "reviews": 432,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-29"
+  },
+  {
+    "id": "sp009",
+    "name": "پالتو زمستانی زرشکی",
+    "brand": "لوکس بانو",
+    "seller": "گالری ملکه",
+    "sellerId": "s001",
+    "category": "پالتو",
+    "subcategory": "بلند",
+    "section": "woman",
+    "price": 3200000,
+    "originalPrice": 3950000,
+    "discount": 19,
+    "color": "زرشکی",
+    "colors": [
+      "زرشکی",
+      "مشکی",
+      "قهوه‌ای"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "پالتو زمستانی پشمی با آستر، گرم و شیک",
+    "tags": [
+      "پالتو",
+      "زمستانی",
+      "پشمی"
+    ],
+    "image": "https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 7,
+    "sold": 156,
+    "rating": 4.8,
+    "reviews": 67,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-06"
+  },
+  {
+    "id": "sp010",
+    "name": "کفش ورزشی مردانه مشکی",
+    "brand": "اکتیو وُر",
+    "seller": "اکتیو وُر",
+    "sellerId": "s003",
+    "category": "کفش",
+    "subcategory": "ورزشی",
+    "section": "man",
+    "price": 1250000,
+    "originalPrice": 1580000,
+    "discount": 21,
+    "color": "مشکی",
+    "colors": [
+      "مشکی",
+      "سرمه‌ای",
+      "سفید"
+    ],
+    "sizes": [
+      "40",
+      "41",
+      "42",
+      "43",
+      "44"
+    ],
+    "description": "کفش ورزشی راحت برای دویدن و استفاده روزانه",
+    "tags": [
+      "کفش",
+      "ورزشی",
+      "مردانه"
+    ],
+    "image": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 22,
+    "sold": 567,
+    "rating": 4.7,
+    "reviews": 234,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-09-02"
+  },
+  {
+    "id": "sp011",
+    "name": "شال و روسری ابریشمی کرم",
+    "brand": "گل‌بانو",
+    "seller": "بوتیک نیکان",
+    "sellerId": "s002",
+    "category": "اکسسوری",
+    "subcategory": "شال",
+    "section": "woman",
+    "price": 450000,
+    "originalPrice": 580000,
+    "discount": 22,
+    "color": "کرم",
+    "colors": [
+      "کرم",
+      "صورتی",
+      "طلایی"
+    ],
+    "sizes": [
+      "Free"
+    ],
+    "description": "شال ابریشمی با طرح گل، نرم و شیک",
+    "tags": [
+      "شال",
+      "ابریشم",
+      "اکسسوری"
+    ],
+    "image": "https://images.pexels.com/photos/1078958/pexels-photo-1078958.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 25,
+    "sold": 432,
+    "rating": 4.6,
+    "reviews": 178,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-19"
+  },
+  {
+    "id": "sp012",
+    "name": "کت جین مردانه آبی",
+    "brand": "لوکس مردانه",
+    "seller": "بوتیک آقایان",
+    "sellerId": "s005",
+    "category": "کت",
+    "subcategory": "جین",
+    "section": "man",
+    "price": 1480000,
+    "originalPrice": 1850000,
+    "discount": 20,
+    "color": "آبی",
+    "colors": [
+      "آبی",
+      "سرمه‌ای"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "کت جین مردانه، اسپرت و شیک",
+    "tags": [
+      "کت",
+      "جین",
+      "مردانه"
+    ],
+    "image": "https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 14,
+    "sold": 198,
+    "rating": 4.5,
+    "reviews": 89,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-27"
+  },
+  {
+    "id": "sp013",
+    "name": "پیراهن زنانه گلدار بهاری",
+    "brand": "گل‌بانو",
+    "seller": "بوتیک نیکان",
+    "sellerId": "s002",
+    "category": "پیراهن",
+    "subcategory": "پیراهن",
+    "section": "woman",
+    "price": 720000,
+    "originalPrice": 920000,
+    "discount": 22,
+    "color": "صورتی",
+    "colors": [
+      "صورتی",
+      "کرم",
+      "سبز"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "description": "پیراهن گلدار بهاری با پارچه نخی، شاد و راحت",
+    "tags": [
+      "پیراهن",
+      "گلدار",
+      "بهاری"
+    ],
+    "image": "https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 16,
+    "sold": 234,
+    "rating": 4.6,
+    "reviews": 112,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-13"
+  },
+  {
+    "id": "sp014",
+    "name": "عینک آفتابی طلایی",
+    "brand": "ایتالیا استایل",
+    "seller": "کفش ملک",
+    "sellerId": "s007",
+    "category": "اکسسوری",
+    "subcategory": "عینک",
+    "section": "woman",
+    "price": 680000,
+    "originalPrice": 850000,
+    "discount": 20,
+    "color": "طلایی",
+    "colors": [
+      "طلایی",
+      "مشکی",
+      "قهوه‌ای"
+    ],
+    "sizes": [
+      "Free"
+    ],
+    "description": "عینک آفتابی شیک با فریم طلایی، محافظ چشم",
+    "tags": [
+      "عینک",
+      "آفتابی",
+      "اکسسوری"
+    ],
+    "image": "https://images.pexels.com/photos/46710/pexels-photo-46710.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 20,
+    "sold": 345,
+    "rating": 4.7,
+    "reviews": 156,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-09-01"
+  },
+  {
+    "id": "sp015",
+    "name": "ساعت مچی مردانه نقره‌ای",
+    "brand": "ایتالیا استایل",
+    "seller": "کفش ملک",
+    "sellerId": "s007",
+    "category": "اکسسوری",
+    "subcategory": "ساعت",
+    "section": "man",
+    "price": 1850000,
+    "originalPrice": 2300000,
+    "discount": 20,
+    "color": "نقره‌ای",
+    "colors": [
+      "نقره‌ای",
+      "مشکی",
+      "طلایی"
+    ],
+    "sizes": [
+      "Free"
+    ],
+    "description": "ساعت مچی مردانه با بند چرم و صفحه نقره‌ای",
+    "tags": [
+      "ساعت",
+      "مردانه",
+      "مچی"
+    ],
+    "image": "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 8,
+    "sold": 123,
+    "rating": 4.8,
+    "reviews": 67,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-25"
+  },
+  {
+    "id": "sp016",
+    "name": "گردنبند طلایی ظریف",
+    "brand": "جواهری ملک",
+    "seller": "جواهری ملک",
+    "sellerId": "s008",
+    "category": "اکسسوری",
+    "subcategory": "گردنبند",
+    "section": "woman",
+    "price": 1450000,
+    "originalPrice": 1800000,
+    "discount": 19,
+    "color": "طلایی",
+    "colors": [
+      "طلایی",
+      "نقره‌ای"
+    ],
+    "sizes": [
+      "Free"
+    ],
+    "description": "گردنبند طلایی ظریف با آویز، مناسب مجالس",
+    "tags": [
+      "گردنبند",
+      "طلا",
+      "اکسسوری"
+    ],
+    "image": "https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 12,
+    "sold": 234,
+    "rating": 4.9,
+    "reviews": 98,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-09-05"
+  },
+  {
+    "id": "sp017",
+    "name": "بلوز زنانه نخی سفید",
+    "brand": "اکتیو",
+    "seller": "اکتیو وُر",
+    "sellerId": "s003",
+    "category": "بلوز",
+    "subcategory": "بلوز",
+    "section": "woman",
+    "price": 380000,
+    "originalPrice": 490000,
+    "discount": 22,
+    "color": "سفید",
+    "colors": [
+      "سفید",
+      "کرم",
+      "صورتی"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "بلوز نخی ساده، خنک و مناسب تابستان",
+    "tags": [
+      "بلوز",
+      "نخی",
+      "سفید"
+    ],
+    "image": "https://images.pexels.com/photos/1139743/pexels-photo-1139743.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 30,
+    "sold": 678,
+    "rating": 4.4,
+    "reviews": 245,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-09-03"
+  },
+  {
+    "id": "sp018",
+    "name": "شلوار پارچه‌ای مردانه مشکی",
+    "brand": "لوکس مردانه",
+    "seller": "بوتیک آقایان",
+    "sellerId": "s005",
+    "category": "شلوار",
+    "subcategory": "پارچه‌ای",
+    "section": "man",
+    "price": 980000,
+    "originalPrice": 1250000,
+    "discount": 22,
+    "color": "مشکی",
+    "colors": [
+      "مشکی",
+      "سرمه‌ای",
+      "طوسی"
+    ],
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "description": "شلوار پارچه‌ای اداری، مناسب محل کار",
+    "tags": [
+      "شلوار",
+      "اداری",
+      "مردانه"
+    ],
+    "image": "https://images.pexels.com/photos/1082529/pexels-photo-1082529.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 18,
+    "sold": 312,
+    "rating": 4.6,
+    "reviews": 145,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-22"
+  },
+  {
+    "id": "sp019",
+    "name": "مانتو تابستانی نخی",
+    "brand": "بوتیک نورا",
+    "seller": "بوتیک نورا",
+    "sellerId": "s009",
+    "category": "مانتو",
+    "subcategory": "جلوباز",
+    "section": "woman",
+    "price": 750000,
+    "originalPrice": 950000,
+    "discount": 21,
+    "color": "کرم",
+    "colors": [
+      "کرم",
+      "سفید",
+      "صورتی"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "مانتو نخی جلو باز، خنک و راحت برای تابستان",
+    "tags": [
+      "مانتو",
+      "تابستانی",
+      "نخی"
+    ],
+    "image": "https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 14,
+    "sold": 287,
+    "rating": 4.5,
+    "reviews": 132,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-30"
+  },
+  {
+    "id": "sp020",
+    "name": "پیراهن مردانه طرح‌دار",
+    "brand": "تین استایل",
+    "seller": "تین استایل",
+    "sellerId": "s010",
+    "category": "پیراهن",
+    "subcategory": "پیراهن",
+    "section": "man",
+    "price": 620000,
+    "originalPrice": 780000,
+    "discount": 21,
+    "color": "آبی",
+    "colors": [
+      "آبی",
+      "سفید",
+      "مشکی"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "پیراهن مردانه با طرح مدرن، مناسب جوانان",
+    "tags": [
+      "پیراهن",
+      "مردانه",
+      "طرح‌دار"
+    ],
+    "image": "https://images.pexels.com/photos/1306248/pexels-photo-1306248.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 25,
+    "sold": 423,
+    "rating": 4.5,
+    "reviews": 198,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-28"
+  },
+  {
+    "id": "sp021",
+    "name": "گوشواره مروارید کلاسیک",
+    "brand": "جواهری ملک",
+    "seller": "جواهری ملک",
+    "sellerId": "s008",
+    "category": "اکسسوری",
+    "subcategory": "گوشواره",
+    "section": "woman",
+    "price": 580000,
+    "originalPrice": 720000,
+    "discount": 19,
+    "color": "سفید",
+    "colors": [
+      "سفید",
+      "کرم",
+      "طلایی"
+    ],
+    "sizes": [
+      "Free"
+    ],
+    "description": "گوشواره مروارید کلاسیک، شیک و مناسب مجالس",
+    "tags": [
+      "گوشواره",
+      "مروارید",
+      "کلاسیک"
+    ],
+    "image": "https://images.pexels.com/photos/1413412/pexels-photo-1413412.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 18,
+    "sold": 156,
+    "rating": 4.7,
+    "reviews": 89,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-20"
+  },
+  {
+    "id": "sp022",
+    "name": "کمربند چرم مردانه مشکی",
+    "brand": "چرم طبیعت",
+    "seller": "چرم طبیعت",
+    "sellerId": "s004",
+    "category": "اکسسوری",
+    "subcategory": "کمربند",
+    "section": "man",
+    "price": 650000,
+    "originalPrice": 820000,
+    "discount": 21,
+    "color": "مشکی",
+    "colors": [
+      "مشکی",
+      "قهوه‌ای"
+    ],
+    "sizes": [
+      "Free"
+    ],
+    "description": "کمربند چرم طبیعی مردانه با سگک فلزی",
+    "tags": [
+      "کمربند",
+      "چرم",
+      "مردانه"
+    ],
+    "image": "https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 20,
+    "sold": 234,
+    "rating": 4.6,
+    "reviews": 123,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-18"
+  },
+  {
+    "id": "sp023",
+    "name": "دامن میدی چین‌دار کرم",
+    "brand": "استایل پلاس",
+    "seller": "بوتیک نیکان",
+    "sellerId": "s002",
+    "category": "دامن",
+    "subcategory": "میدی",
+    "section": "woman",
+    "price": 680000,
+    "originalPrice": 850000,
+    "discount": 20,
+    "color": "کرم",
+    "colors": [
+      "کرم",
+      "مشکی",
+      "زرشکی"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "description": "دامن میدی چین‌دار، راحت و شیک برای مجالس",
+    "tags": [
+      "دامن",
+      "میدی",
+      "چین‌دار"
+    ],
+    "image": "https://images.pexels.com/photos/985857/pexels-photo-985857.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 12,
+    "sold": 178,
+    "rating": 4.5,
+    "reviews": 87,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-24"
+  },
+  {
+    "id": "sp024",
+    "name": "کاپشن اسپرت مردانه",
+    "brand": "اکتیو وُر",
+    "seller": "اکتیو وُر",
+    "sellerId": "s003",
+    "category": "کاپشن",
+    "subcategory": "اسپرت",
+    "section": "man",
+    "price": 1450000,
+    "originalPrice": 1850000,
+    "discount": 22,
+    "color": "مشکی",
+    "colors": [
+      "مشکی",
+      "سرمه‌ای",
+      "طوسی"
+    ],
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "description": "کاپشن اسپرت مردانه، مناسب فصل پاییز و زمستان",
+    "tags": [
+      "کاپشن",
+      "اسپرت",
+      "مردانه"
+    ],
+    "image": "https://images.pexels.com/photos/1182825/pexels-photo-1182825.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "stock": 16,
+    "sold": 298,
+    "rating": 4.6,
+    "reviews": 134,
+    "status": "active",
+    "approved": true,
+    "createdAt": "2025-08-17"
+  }
+]

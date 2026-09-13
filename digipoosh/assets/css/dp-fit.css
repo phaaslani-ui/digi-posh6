@@ -1,0 +1,713 @@
+/* ============================================================
+   dp-fit.css — ابزارک یافتن سایز
+   ------------------------------------------------------------
+   ⚠️ پنجره مستقیم روی body ساخته می‌شود، نه داخل کارت‌ها.
+   دلیلش: هر عنصری که `backdrop-filter` دارد یک بلوک
+   دربرگیرنده می‌سازد و `position: fixed` داخلش حبس می‌شود.
+   ============================================================ */
+
+:root {
+  --f-gold: #c9a84c;
+  --f-gold-lite: #d4b85a;
+  --f-gold-text: #6f571a;
+  --f-ink: #1a1a1a;
+  --f-gray: #75695f;
+  --f-cream: #f5f0e8;
+  --f-white: #faf8f5;
+  --f-line: rgba(201, 168, 76, 0.24);
+  --f-ok: #3d7a59;
+  --f-warn: #8a5a20;
+  --f-bad: #a33d38;
+  --f-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   پنجره
+   ============================================================ */
+.fit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  opacity: 0;
+  transition: opacity 0.24s var(--f-ease);
+}
+.fit-modal.is-on { opacity: 1; }
+
+.fit-veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 22, 16, 0.52);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  cursor: pointer;
+}
+
+.fit-in {
+  position: relative;
+  width: min(760px, 100%);
+  max-width: calc(100vw - 36px);
+  max-height: min(88vh, 900px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--f-white);
+  border: 1px solid var(--f-line);
+  box-shadow: 0 30px 70px -28px rgba(26, 26, 26, 0.6);
+  transform: translateY(14px);
+  transition: transform 0.28s var(--f-ease);
+}
+.fit-modal.is-on .fit-in { transform: none; }
+
+.fit-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: none;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--f-line);
+  background:
+    radial-gradient(120% 200% at 96% 0%, rgba(201, 168, 76, 0.14), transparent 60%),
+    var(--f-white);
+}
+.fit-head h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  min-width: 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--f-ink);
+}
+.fit-head h3 .ico { width: 19px; height: 19px; color: var(--f-gold); }
+
+.fit-head button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px; height: 32px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--f-gray);
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.18s var(--f-ease), color 0.18s var(--f-ease);
+}
+.fit-head button:hover { background: rgba(163, 61, 56, 0.11); color: var(--f-bad); }
+
+.fit-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 18px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 168, 76, 0.38) transparent;
+}
+.fit-body::-webkit-scrollbar { width: 7px; }
+.fit-body::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: rgba(201, 168, 76, 0.32);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* ============================================================
+   نشانگر گام
+   ============================================================ */
+.fit-steps {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.fit-steps i {
+  flex: 1;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(201, 168, 76, 0.18);
+  transition: background 0.3s var(--f-ease);
+}
+.fit-steps i.on   { background: linear-gradient(90deg, var(--f-gold-lite), var(--f-gold)); }
+.fit-steps i.done { background: rgba(201, 168, 76, 0.55); }
+
+.fit-intro {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--f-gray);
+}
+
+.fit-sec {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--f-gold-text);
+}
+
+/* ============================================================
+   گام یک — اندازه‌ها
+   ============================================================ */
+.fit-grid {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* ---------- پیکره‌ی راهنما ---------- */
+.fit-diagram {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 10px;
+  border-radius: 16px;
+  background: var(--f-cream);
+  border: 1px solid var(--f-line);
+}
+
+.fitd {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  color: rgba(26, 26, 26, 0.3);
+}
+
+.fitd-marks line {
+  stroke: rgba(201, 168, 76, 0.28);
+  transition: stroke 0.2s var(--f-ease), stroke-width 0.2s var(--f-ease);
+}
+.fitd-marks line.on {
+  stroke: var(--f-gold);
+  stroke-width: 3.4;
+}
+
+.fit-dtip {
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--f-gray);
+  min-height: 2.6em;
+}
+
+/* ---------- ورودی‌ها ---------- */
+.fit-fields { min-width: 0; }
+
+.fit-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 118px;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 9px 11px;
+  margin-bottom: 6px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  transition: background 0.18s var(--f-ease), border-color 0.18s var(--f-ease);
+  cursor: pointer;
+}
+.fit-row:hover,
+.fit-row:focus-within {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: var(--f-line);
+}
+
+.fit-lbl {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--f-ink);
+}
+
+.fit-star {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--f-gold);
+}
+
+.fit-inwrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.fit-inwrap input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 11px;
+  border-radius: 9px;
+  border: 1px solid var(--f-line);
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--f-ink);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.18s var(--f-ease);
+}
+.fit-inwrap input:focus { border-color: var(--f-gold); }
+/* فلش‌های عدد را بردار — جا می‌گیرند */
+.fit-inwrap input::-webkit-outer-spin-button,
+.fit-inwrap input::-webkit-inner-spin-button { appearance: none; margin: 0; }
+.fit-inwrap input[type="number"] { -moz-appearance: textfield; }
+
+.fit-inwrap em {
+  flex: none;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--f-gray);
+}
+
+.fit-hint {
+  grid-column: 1 / -1;
+  font-size: 10.5px;
+  line-height: 1.7;
+  color: var(--f-gray);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.2s var(--f-ease), max-height 0.2s var(--f-ease);
+}
+.fit-row:hover .fit-hint,
+.fit-row:focus-within .fit-hint { opacity: 1; max-height: 3em; }
+
+.fit-more {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--f-line);
+}
+.fit-more summary {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--f-gold-text);
+  cursor: pointer;
+  padding: 5px 0;
+  list-style: none;
+}
+.fit-more summary::-webkit-details-marker { display: none; }
+.fit-more summary::before { content: "+ "; }
+.fit-more[open] summary::before { content: "− "; }
+
+/* ---------- پیام ---------- */
+.fit-msg {
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: 11px;
+  font-size: 12.5px;
+  line-height: 1.85;
+}
+.fit-msg[hidden] { display: none; }
+.fit-msg.is-bad {
+  color: var(--f-bad);
+  background: rgba(163, 61, 56, 0.09);
+  border-inline-start: 3px solid var(--f-bad);
+}
+.fit-msg.is-warn {
+  color: var(--f-warn);
+  background: rgba(138, 90, 32, 0.09);
+  border-inline-start: 3px solid var(--f-warn);
+}
+
+/* ============================================================
+   گام دو — سلیقه
+   ============================================================ */
+.fit-prefs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+  gap: 9px;
+  margin-bottom: 18px;
+}
+
+.fit-pref {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 13px;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  background: var(--f-cream);
+  border: 1.5px solid transparent;
+  transition: background 0.18s var(--f-ease), border-color 0.18s var(--f-ease),
+              transform 0.18s var(--f-ease);
+}
+.fit-pref:hover { background: rgba(201, 168, 76, 0.13); }
+.fit-pref:active { transform: scale(0.985); }
+.fit-pref.is-on {
+  background: rgba(201, 168, 76, 0.18);
+  border-color: var(--f-gold);
+}
+.fit-pref b { font-size: 14px; font-weight: 800; color: var(--f-ink); }
+.fit-pref small { font-size: 11.5px; line-height: 1.7; color: var(--f-gray); }
+
+.fit-name {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.fit-name span { font-size: 11.5px; font-weight: 700; color: var(--f-gray); }
+.fit-name input {
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid var(--f-line);
+  background: #fff;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--f-ink);
+  outline: none;
+}
+.fit-name input:focus { border-color: var(--f-gold); }
+
+/* ============================================================
+   گام سه — نتیجه
+   ============================================================ */
+.fit-result {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 18px;
+  margin-bottom: 16px;
+  border-radius: 18px;
+  background: var(--f-cream);
+  border: 1.5px solid var(--f-line);
+}
+.fit-result.is-perfect { border-color: var(--f-ok); background: rgba(61, 122, 89, 0.07); }
+.fit-result.is-great   { border-color: var(--f-gold); background: rgba(201, 168, 76, 0.1); }
+.fit-result.is-good    { border-color: rgba(138, 90, 32, 0.4); }
+.fit-result.is-poor    { border-color: var(--f-bad); background: rgba(163, 61, 56, 0.06); }
+
+.fit-big {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  flex: none;
+}
+.fit-big b {
+  display: grid;
+  place-items: center;
+  width: 76px; height: 76px;
+  border-radius: 20px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold));
+  box-shadow: 0 10px 26px -12px rgba(201, 168, 76, 0.95);
+}
+
+.fit-dots { display: flex; gap: 4px; }
+.fit-dots i {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.25);
+}
+.fit-dots i.on { background: var(--f-gold); }
+
+.fit-verdict { flex: 1; min-width: 0; }
+.fit-verdict strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--f-ink);
+}
+.fit-pct {
+  display: inline-block;
+  margin: 3px 0 6px;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--f-gold-text);
+  background: rgba(201, 168, 76, 0.16);
+}
+.fit-verdict p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: var(--f-gray);
+  overflow-wrap: anywhere;
+}
+
+.fit-warn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 10px 13px;
+  border-radius: 11px;
+  font-size: 12px;
+  color: var(--f-warn);
+  background: rgba(138, 90, 32, 0.08);
+}
+.fit-warn .ico-s { width: 15px; height: 15px; flex: none; }
+
+/* ---------- نمودار مقایسه ---------- */
+.fit-compare { margin-bottom: 16px; }
+
+.fit-cmp {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr) 62px;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+}
+.fit-cmp-name { font-size: 11.5px; color: var(--f-gray); }
+
+.fit-cmp-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.fit-cmp-bars i {
+  position: relative;
+  display: block;
+  height: 15px;
+  min-width: 34px;
+  border-radius: 4px;
+  transition: width 0.5s var(--f-ease);
+}
+.fit-cmp-bars .b1 { background: rgba(117, 105, 95, 0.4); }
+.fit-cmp-bars .b2 { background: linear-gradient(90deg, var(--f-gold-lite), var(--f-gold)); }
+.fit-cmp-bars em {
+  position: absolute;
+  inset-inline-end: 5px;
+  top: 50%;
+  translate: 0 -50%;
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #1a1a1a;
+}
+
+.fit-cmp-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.fit-cmp.is-ok    .fit-cmp-tag { color: var(--f-ok); background: rgba(61, 122, 89, 0.11); }
+.fit-cmp.is-tight .fit-cmp-tag { color: var(--f-bad); background: rgba(163, 61, 56, 0.1); }
+.fit-cmp.is-loose .fit-cmp-tag { color: var(--f-warn); background: rgba(138, 90, 32, 0.1); }
+
+.fit-legend {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--f-line);
+  font-size: 11px;
+  color: var(--f-gray);
+}
+.fit-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.fit-legend i { width: 14px; height: 9px; border-radius: 3px; }
+.fit-legend .b1 { background: rgba(117, 105, 95, 0.4); }
+.fit-legend .b2 { background: linear-gradient(90deg, var(--f-gold-lite), var(--f-gold)); }
+
+/* ---------- جایگزین‌ها ---------- */
+.fit-alts { margin-bottom: 16px; }
+
+.fit-alt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 13px;
+  margin-bottom: 6px;
+  border-radius: 11px;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  background: var(--f-cream);
+  border: 1px solid transparent;
+  transition: background 0.18s var(--f-ease), border-color 0.18s var(--f-ease);
+}
+.fit-alt:hover { background: rgba(201, 168, 76, 0.14); border-color: var(--f-gold); }
+.fit-alt b {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--f-ink);
+  background: #fff;
+  border: 1px solid var(--f-line);
+}
+.fit-alt span {
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+  color: var(--f-gray);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- ضمانت ---------- */
+.fit-guarantee {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  margin-bottom: 16px;
+  border-radius: 11px;
+  font-size: 12.5px;
+  color: var(--f-ok);
+  background: rgba(61, 122, 89, 0.08);
+  border-inline-start: 3px solid var(--f-ok);
+}
+.fit-guarantee .ico-s { width: 16px; height: 16px; flex: none; }
+
+/* ---------- پایان ---------- */
+.fit-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  padding: 32px 18px;
+  text-align: center;
+}
+.fit-bigico { width: 46px; height: 46px; color: var(--f-gold); }
+.fit-done strong { font-size: 16px; font-weight: 800; color: var(--f-ink); }
+.fit-done span {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--f-gray);
+  max-width: 40ch;
+}
+
+/* ============================================================
+   دکمه‌ها
+   ============================================================ */
+.fit-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px dashed var(--f-line);
+}
+
+.fit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 20px;
+  border-radius: 11px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: filter 0.18s var(--f-ease), transform 0.18s var(--f-ease),
+              background 0.18s var(--f-ease);
+}
+.fit-btn:active { transform: scale(0.97); }
+.fit-btn:focus-visible { outline: 2px solid var(--f-gold); outline-offset: 2px; }
+.fit-btn .ico-s { width: 15px; height: 15px; }
+
+.fit-btn.gold {
+  color: #1a1a1a;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold));
+  box-shadow: 0 9px 22px -13px rgba(201, 168, 76, 0.95);
+}
+.fit-btn.gold:hover { filter: brightness(1.06); }
+
+.fit-btn.ghost {
+  color: var(--f-gold-text);
+  background: transparent;
+  border-color: var(--f-line);
+}
+.fit-btn.ghost:hover { background: rgba(201, 168, 76, 0.11); }
+
+/* ============================================================
+   دکمه‌ی «سایز من» در صفحه‌ی کالا
+   ============================================================ */
+.fit-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: 11px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--f-gold-text);
+  cursor: pointer;
+  background: rgba(201, 168, 76, 0.11);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  transition: background 0.18s var(--f-ease);
+}
+.fit-trigger:hover { background: rgba(201, 168, 76, 0.2); }
+.fit-trigger .ico-s { width: 15px; height: 15px; }
+
+/* نشان سایز پیشنهادی کنار دکمه‌های سایز */
+.fit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--f-gold-lite), var(--f-gold));
+}
+
+/* ============================================================
+   واکنش‌گرا
+   ============================================================ */
+@media (max-width: 700px) {
+  .fit-grid { grid-template-columns: minmax(0, 1fr); }
+  .fit-diagram {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+  }
+  .fitd { max-width: 96px; }
+  .fit-dtip { text-align: start; max-width: 60%; }
+}
+
+@media (max-width: 520px) {
+  .fit-modal { padding: 10px; }
+  .fit-in { max-width: calc(100vw - 20px); max-height: 92vh; }
+  .fit-body { padding: 14px; }
+  .fit-row { grid-template-columns: minmax(0, 1fr) 100px; padding: 8px; }
+  .fit-big b { width: 62px; height: 62px; font-size: 24px; }
+  .fit-cmp { grid-template-columns: 62px minmax(0, 1fr) 54px; gap: 7px; }
+  .fit-cmp-name { font-size: 10.5px; }
+  .fit-nav { flex-direction: column-reverse; }
+  .fit-nav .fit-btn { width: 100%; justify-content: center; }
+  /* روی گوشی ورودی زیر ۱۶px زوم خودکار می‌سازد */
+  .fit-inwrap input, .fit-name input { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fit-modal, .fit-in, .fit-pref, .fit-btn,
+  .fit-cmp-bars i, .fitd-marks line { transition: none; }
+  .fit-pref:active, .fit-btn:active { transform: none; }
+}
+
+@media print {
+  .fit-modal { display: none !important; }
+}

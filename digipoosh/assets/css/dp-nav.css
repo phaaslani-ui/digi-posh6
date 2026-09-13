@@ -1,0 +1,367 @@
+/* ============================================================
+   دیجی‌پوش — منوی موبایل مشترک
+   ------------------------------------------------------------
+   روی همه‌ی صفحه‌ها کار می‌کند و رنگش با هر صفحه هماهنگ است.
+   ============================================================ */
+
+:root {
+  --dnv-gold: #c9a84c;
+  --dnv-gold-b: #d4b85a;
+  --dnv-bronze: #b8943c;
+  --dnv-bg: #faf8f5;
+  --dnv-bg2: #f5f0e8;
+  --dnv-ink: #1a1a1a;
+  --dnv-gray: #8a7e72;
+  --dnv-line: rgba(201, 168, 76, 0.22);
+  --dnv-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* صفحات تیره — مردانه و تینیجر */
+[data-dp-page="man"], [data-dp-page="teen"] {
+  --dnv-bg: #141414;
+  --dnv-bg2: #0e0e0e;
+  --dnv-ink: #f0f0f0;
+  --dnv-gray: #9a9088;
+  --dnv-line: rgba(201, 168, 76, 0.28);
+}
+
+/* ============================================================
+   دکمه‌ی سه‌خط
+   ============================================================ */
+.dnv-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--dnv-line);
+  border-radius: 13px;
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--dnv-ink);
+  cursor: pointer;
+  transition: background 0.24s var(--dnv-ease), transform 0.24s var(--dnv-ease);
+}
+
+.dnv-btn:hover { background: rgba(201, 168, 76, 0.18); }
+.dnv-btn:active { transform: scale(0.94); }
+.dnv-btn:focus-visible { outline: 2px solid var(--dnv-gold); outline-offset: 3px; }
+
+.dnv-i { width: 21px; height: 21px; flex: none; }
+.dnv-i-lg { width: 24px; height: 24px; }
+
+/* ============================================================
+   پرده
+   ============================================================ */
+.dnv-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(10, 10, 10, 0.58);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.34s var(--dnv-ease), visibility 0.34s;
+}
+
+.dnv-veil.is-on { opacity: 1; visibility: visible; }
+
+/* قفل پیمایش هنگام باز بودن — روی html، نه body.
+   اگر روی body باشد، خودِ همین کشو (که position: fixed است)
+   جایگاهش را از دست می‌دهد و ته صفحه می‌افتد. */
+html:has(body.dnv-lock) { overflow: hidden; }
+body.dnv-lock { overflow: hidden; }
+
+/* ============================================================
+   کشو
+   ============================================================ */
+.dnv-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: auto;
+  z-index: 950;
+  width: min(330px, 88vw);
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background: var(--dnv-bg);
+  border-inline-start: 1px solid var(--dnv-line);
+  box-shadow: -18px 0 50px rgba(0, 0, 0, 0.28);
+  transform: translate3d(100%, 0, 0);
+  transition: transform 0.34s var(--dnv-ease);
+  will-change: transform;
+  overscroll-behavior: contain;
+}
+
+.dnv-panel.is-open { transform: translate3d(0, 0, 0); }
+.dnv-panel[hidden] { display: none; }
+
+/* ============================================================
+   محافظ — هیچ قاعده‌ای نباید کشو را از پنجره جدا کند
+   ------------------------------------------------------------
+   بعضی صفحه‌ها قاعده‌ی عمومی مثل `body > * { position: relative }`
+   دارند تا محتوا روی پس‌زمینه‌ی تزئینی بنشیند. آن قاعده
+   ناخواسته کشو را هم می‌گرفت و `fixed` را می‌شکست — کشو
+   ته صفحه کنار پابرگ باز می‌شد.
+
+   این دو خط تضمین می‌کنند که هر جای سایت، کشو و پرده‌اش
+   روی پنجره ثابت بمانند.
+   ============================================================ */
+body > .dnv-panel,
+.dnv-panel {
+  position: fixed !important;
+  z-index: 950 !important;
+}
+
+body > .dnv-veil,
+.dnv-veil {
+  position: fixed !important;
+  z-index: 940 !important;
+}
+
+/* ---------- سربرگ کشو ---------- */
+.dnv-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 18px 16px;
+  border-bottom: 1px solid var(--dnv-line);
+}
+
+.dnv-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; }
+
+.dnv-mark {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  font-size: 19px;
+  font-weight: 800;
+  color: #faf8f5;
+  background: linear-gradient(135deg, var(--dnv-gold), var(--dnv-bronze));
+  box-shadow: 0 8px 18px -10px rgba(201, 168, 76, 0.95);
+}
+
+.dnv-brand strong { display: block; font-size: 16px; color: var(--dnv-ink); }
+.dnv-brand small { display: block; font-size: 10.5px; color: var(--dnv-gray); }
+
+.dnv-x {
+  margin-inline-start: auto;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--dnv-line);
+  border-radius: 11px;
+  background: none;
+  color: var(--dnv-gray);
+  cursor: pointer;
+  transition: background 0.22s var(--dnv-ease), transform 0.28s var(--dnv-ease), color 0.22s;
+}
+
+.dnv-x:hover { background: rgba(201, 168, 76, 0.14); color: var(--dnv-ink); transform: rotate(90deg); }
+.dnv-x:focus-visible { outline: 2px solid var(--dnv-gold); outline-offset: 2px; }
+
+/* ---------- بدنه ---------- */
+.dnv-body {
+  flex: 1;
+  padding: 12px 12px 18px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dnv-label {
+  display: block;
+  padding: 14px 12px 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--dnv-gray);
+}
+
+.dnv-body > .dnv-label:first-child { padding-top: 4px; }
+
+.dnv-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 13px;
+  margin-bottom: 3px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--dnv-ink);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.22s var(--dnv-ease), color 0.22s var(--dnv-ease),
+              padding-inline-start 0.22s var(--dnv-ease);
+}
+
+.dnv-link svg { color: var(--dnv-bronze); }
+.dnv-link span { flex: 1; white-space: nowrap; }
+
+.dnv-link:hover {
+  background: rgba(201, 168, 76, 0.12);
+  padding-inline-start: 17px;
+}
+
+.dnv-link:focus-visible { outline: 2px solid var(--dnv-gold); outline-offset: -2px; }
+
+/* صفحه‌ی فعلی */
+.dnv-link.is-on {
+  color: var(--dnv-bronze);
+  font-weight: 700;
+  background: linear-gradient(90deg, rgba(201, 168, 76, 0.2), rgba(201, 168, 76, 0.04));
+}
+
+.dnv-dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--dnv-gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.22);
+}
+
+/* شمارنده‌ی سبد */
+.dnv-n {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-style: normal;
+  font-weight: 800;
+  text-align: center;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--dnv-gold-b), var(--dnv-gold));
+}
+
+/* خروج */
+.dnv-out { color: #b4544f; }
+.dnv-out svg { color: #b4544f; }
+.dnv-out:hover { background: rgba(180, 84, 79, 0.12); }
+
+/* ---------- کارت کاربر ---------- */
+.dnv-me {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 13px;
+  margin-bottom: 6px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.15), rgba(201, 168, 76, 0.04));
+  border: 1px solid var(--dnv-line);
+}
+
+.dnv-ava {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 800;
+  color: #faf8f5;
+  background: linear-gradient(135deg, var(--dnv-gold), var(--dnv-bronze));
+}
+
+.dnv-me strong { display: block; font-size: 13.5px; color: var(--dnv-ink); }
+.dnv-me small { display: block; font-size: 11px; color: var(--dnv-gray); overflow-wrap: anywhere; }
+
+/* ---------- پاورقی کشو ---------- */
+.dnv-foot {
+  padding: 14px 14px 18px;
+  border-top: 1px solid var(--dnv-line);
+  background: var(--dnv-bg2);
+}
+
+.dnv-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, var(--dnv-gold-b), var(--dnv-gold), var(--dnv-bronze));
+  background-size: 200% 100%;
+  box-shadow: 0 10px 24px -12px rgba(201, 168, 76, 0.95);
+  transition: transform 0.28s var(--dnv-ease), background-position 0.5s ease;
+}
+
+.dnv-cta:hover { transform: translateY(-2px); background-position: 100% 0; }
+.dnv-cta svg { width: 18px; height: 18px; }
+
+.dnv-foot small {
+  display: block;
+  margin-top: 11px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--dnv-gray);
+}
+
+/* رنگ ویژه‌ی دکمه در صفحات مختلف */
+[data-dp-page="woman"] .dnv-cta { background-image: linear-gradient(135deg, #d4b85a, #c9a0b8, #c9a84c); }
+[data-dp-page="kids"]  .dnv-cta { background-image: linear-gradient(135deg, #d4b85a, #6ec8d9, #f5a0a0, #c9a84c); }
+[data-dp-page="teen"]  .dnv-cta { background-image: linear-gradient(135deg, #d4b85a, #8b5cf6, #00d4ff); color: #fff; }
+[data-dp-page="man"]   .dnv-cta { background-image: linear-gradient(135deg, #d4b85a, #c0c0c0, #b8943c); }
+
+/* ============================================================
+   نقطه‌ی شکست — زیر ۹۰۰ پیکسل
+   ============================================================ */
+@media (max-width: 900px) {
+  .dnv-btn { display: grid; }
+
+  /* منوی افقی پنهان می‌شود */
+  .nav-menu,
+  .menu,
+  .menu-m,
+  .sh-menu { display: none !important; }
+
+  /* کشوی قدیمی صفحه‌ی اصلی هم کنار می‌رود */
+  .mobile-drawer,
+  .mobile-drawer-backdrop,
+  .nav-toggle { display: none !important; }
+
+  /* دکمه‌های متنی نوار بالا فقط آیکون می‌شوند تا جا باز شود */
+  .seller-entry span,
+  .dp-join span,
+  .sh-seller span { display: none; }
+
+  .seller-entry,
+  .dp-join,
+  .sh-seller { padding-inline: 11px; }
+
+  .dp-signin { display: none; }
+}
+
+@media (max-width: 560px) {
+  .dnv-panel { width: min(310px, 90vw); }
+  .dnv-btn { width: 42px; height: 42px; }
+}
+
+/* ============================================================
+   احترام به کاهش حرکت
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .dnv-panel, .dnv-veil, .dnv-link, .dnv-cta, .dnv-x, .dnv-btn {
+    transition-duration: 0.001ms !important;
+  }
+}

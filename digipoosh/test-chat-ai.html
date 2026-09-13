@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>تست چت AI</title>
+</head>
+<body>
+<h1>تست چت AI</h1>
+<button onclick="testChat()">تست</button>
+<div id="result"></div>
+<script src="./dp-products.js"></script>
+<script src="./dp-product-loader.js"></script>
+<script src="./dp-ai-nlu.js"></script>
+<script src="./dp-chat-ai.js"></script>
+<script>
+async function testChat() {
+  document.getElementById('result').innerHTML = 'در حال تست...';
+  
+  // صبر کن برای sync
+  await new Promise(r => setTimeout(r, 1500));
+  
+  const products = window.DPProducts ? window.DPProducts.all() : [];
+  document.getElementById('result').innerHTML = `محصولات در DPProducts.all(): ${products.length}`;
+  
+  // تست generateResponse
+  if (window.DPChatAI && window.DPChatAI.generateResponse) {
+    const response = window.DPChatAI.generateResponse('یه پیراهن قرمز بپوشم', {});
+    let info = '<br>پاسخ: ' + (response.text || 'NO TEXT');
+    if (response.products && response.products.length > 0) {
+      info += '<br>تعداد محصولات: ' + response.products.length;
+      info += '<br>نمونه: ' + response.products[0].name + ' (id=' + response.products[0].id + ')';
+      info += '<br>محصولات یونیک: ' + new Set(response.products.map(p => p.id)).size;
+    } else {
+      info += '<br>محصولی ندارد';
+    }
+    document.getElementById('result').innerHTML += info;
+  } else {
+    document.getElementById('result').innerHTML += '<br>DPChatAI موجود نیست!';
+  }
+}
+</script>
+</body>
+</html>

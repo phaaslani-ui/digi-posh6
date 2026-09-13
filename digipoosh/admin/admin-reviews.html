@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <title>مدیریت دیجی‌پوش | نظرها</title>
+  <meta name="description" content="پنل مدیریت دیجی‌پوش — نظارت بر فروشگاه‌ها، سفارش‌ها و کالاها." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../assets/css/dp-polish.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost.css" />
+  <link rel="stylesheet" href="../assets/css/dp-boost-pro.css" />
+  <link rel="stylesheet" href="../assets/css/dp-stock.css" />
+</head>
+<body data-dp-panel>
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <a href="../index.html" title="بازگشت به سایت">
+      <div class="sb-logo">دیجی‌پوش</div>
+      <span class="sb-sub">پنل مدیریت</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="منوی مدیریت">
+    <div class="sb-label">مدیریت</div>
+      <a class="sb-link" href="admin-dashboard.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="3" y="3" width="7.5" height="8.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="5" rx="2"/><rect x="13.5" y="11" width="7.5" height="10" rx="2"/><rect x="3" y="14.5" width="7.5" height="6.5" rx="2"/></svg><span>داشبورد</span></a>
+      <a class="sb-link" href="admin-sellers.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg><span>فروشگاه‌ها</span><span class="sb-badge" id="badgeAll" hidden></span></a>
+      <a class="sb-link" href="admin-pending.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg><span>در انتظار تأیید</span><span class="sb-badge" id="badgePending" hidden></span></a>
+      <a class="sb-link" href="admin-moderation.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15.5 4.5 19.5 8.5 9 19H5v-4z"/><path d="m14 6 4 4"/></svg><span>بازبینی پروفایل</span><span class="sb-badge" id="badgeMod" hidden></span></a>
+      <a class="sb-link" href="admin-boost.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M13.5 3.5c3 0 6 3 6 6 0 4.5-5 8-5 8l-4-4s3.5-5 8-5"/><path d="M9.5 14.5 6 18l-1.5-1.5L8 13"/><path d="M5 19l-1.5 1.5"/></svg><span>نردبان و ارتقا</span><span class="sb-badge" id="badgeBoost" hidden></span></a>
+      <a class="sb-link" href="admin-wholesale.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span>بازار عمده</span><span class="sb-badge" id="badgeWhole" hidden></span></a>
+      <a class="sb-link" href="admin-catalog.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg><span>همه‌ی محصولات</span></a>
+      <a class="sb-link" href="admin-orders.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><span>همه‌ی سفارش‌ها</span></a>
+      <a class="sb-link active" href="admin-reviews.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg><span>نظرها</span><span class="sb-badge" id="badgeFlag" hidden></span></a>
+      <a class="sb-link" href="admin-policy.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m6 18 12-12"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg><span>سیاست کمیسیون</span></a>
+      <a class="sb-link" href="admin-settings.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></svg><span>تنظیمات</span></a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <a class="sb-link" href="../index.html"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m3.5 10.5 8.5-7 8.5 7V20a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 20z"/><path d="M9.5 21.5v-7h5v7"/></svg><span>بازگشت به سایت</span></a>
+    <a class="sb-link logout" href="admin-login.html" data-logout><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M15 4.5h3.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M10 8.5 6 12l4 3.5M6 12h9"/></svg><span>خروج</span></a>
+  </div>
+</aside>
+
+<div class="backdrop" id="backdrop"></div>
+
+<main class="main" id="main">
+  <header class="topbar">
+    <button class="burger" type="button" aria-label="منو"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div>
+      <h1 class="page-title">نظرها</h1>
+      <div class="page-sub">بررسی نظرهای مشتریان و گزارش‌های فروشندگان</div>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="notice">
+      <svg class="ico ico-sm" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16h.01"/></svg>
+      <span>همه‌ی نظرهای سایت اینجاست. اگر فروشنده‌ای نظری را گزارش کند،
+      با نشان قرمز بالای فهرست می‌آید. می‌توانید نظر را از سایت بردارید،
+      یا گزارش را رد کنید تا نظر سر جایش بماند.</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon si-gold"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg></span>
+          <span class="stat-label">کل نظرها</span>
+        </div>
+        <span class="stat-number num" id="rAll">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon si-red"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M5 21V4.5h13l-2.4 4.2L18 13H5"/></svg></span>
+          <span class="stat-label">گزارش‌شده</span>
+        </div>
+        <span class="stat-number num" id="rFlag">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon si-green"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="m12 3.6 2.5 5.1 5.6.8-4 3.9 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4-3.9 5.6-.8z"/></svg></span>
+          <span class="stat-label">میانگین امتیاز</span>
+        </div>
+        <span class="stat-number num" id="rAvg">۰</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <span class="stat-icon si-blue"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+          <span class="stat-label">برداشته‌شده</span>
+        </div>
+        <span class="stat-number num" id="rHide">۰</span>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.3"/><path d="m15.6 15.6 3.9 3.9"/></svg>
+        <input class="input" type="search" id="search" placeholder="نام مشتری، فروشگاه یا متن نظر…" / aria-label="نام مشتری، فروشگاه یا متن نظر">
+      </div>
+      <select class="select" id="fMarket" style="max-width:180px" aria-label="فیلتر نوع بازار">
+        <option value="">هر دو بازار</option>
+        <option value="retail">تک‌فروشی</option>
+        <option value="wholesale">عمده‌فروشی</option>
+      </select>
+      <select class="select" id="fShop" style="max-width:210px" aria-label="فیلتر فروشگاه">
+        <option value="">همه‌ی فروشگاه‌ها</option>
+      </select>
+      <select class="select" id="fType" style="max-width:190px" aria-label="همه‌ی نظرها">
+        <option value="">همه‌ی نظرها</option>
+        <option value="flag">گزارش‌شده</option>
+        <option value="low">امتیاز پایین (۱ و ۲)</option>
+        <option value="hidden">برداشته‌شده</option>
+        <option value="noreply">بدون پاسخ فروشنده</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <div id="revList"></div>
+    </div>
+
+    <div class="modal-overlay" id="actModal">
+      <div class="modal">
+        <div class="modal-head">
+          <h3 id="actTitle">بررسی نظر</h3>
+          <button type="button" data-close aria-label="بستن"><svg class="ico" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="modal-body">
+          <div class="rq" id="actQuote"></div>
+          <div class="field">
+            <label for="actNote">یادداشت شما <span class="hint">(برای فروشنده دیده می‌شود)</span></label>
+            <textarea class="textarea" id="actNote" placeholder="مثلاً: نظر بررسی شد و مشکلی نداشت."></textarea>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-close>انصراف</button>
+          <button class="btn btn-primary" type="button" id="actOk">تأیید</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="toast-wrap"></div>
+
+<script src="../assets/js/dp-guard.js"></script>
+<script src="../assets/js/dp-safe.js"></script>
+<script src="../assets/js/dp-stock.js"></script>
+<script src="../assets/js/dp-reset.js"></script>
+<script src="../assets/js/dp-taxonomy.js"></script>
+<script src="../assets/js/dp-promo.js"></script>
+<script src="../assets/js/dp-boost.js"></script>
+<script src="../assets/js/dp-boost-pro.js"></script>
+<script src="../assets/js/dp-moderation.js"></script>
+<script src="../assets/js/dp-returns.js"></script>
+<script src="../assets/js/dp-reviews.js"></script>
+<script src="../assets/js/dp-rate-pop.js"></script>
+<script src="../seller/js/dp-config.js"></script>
+<script src="js/admin-store.js"></script>
+<script src="js/admin-script.js"></script>
+<script src="../assets/js/dp-cursor.js"></script>
+<script src="../assets/js/dp-polish.js"></script>
+<script>
+requireAdmin(async () => {
+  const V = window.DPReviews;
+  const el = (i) => document.getElementById(i);
+  let current = null, mode = '';
+
+  const shops = await DPAdmin.sellers.list();
+  const byId = {};
+  shops.forEach(s => byId[s.id] = s);
+
+  el('fShop').innerHTML = '<option value="">همه‌ی فروشگاه‌ها</option>' +
+    shops.map(s => `<option value="${esc(s.id)}">${esc(s.storeName)}</option>`).join('');
+
+  const prods = (() => {
+    try { return JSON.parse(localStorage.getItem('dp_products')) || []; } catch { return []; }
+  })();
+  const pName = {};
+  prods.forEach(p => pName[String(p.id)] = p.name);
+
+  function stars(n) {
+    let s = '';
+    for (let i = 1; i <= 5; i++) {
+      s += `<svg class="st ${i <= n ? 'st-full' : 'st-empty'}" viewBox="0 0 24 24"
+            aria-hidden="true"><path d="m12 3.6 2.5 5.1 5.6.8-4 3.9 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4-3.9 5.6-.8z"/></svg>`;
+    }
+    return `<span class="stars">${s}</span>`;
+  }
+
+  function draw() {
+    const q = toEn(el('search').value).trim().toLowerCase();
+    const sh = el('fShop').value;
+    const ft = el('fType').value;
+
+    const mk = el('fMarket') ? el('fMarket').value : '';
+
+    let rows = V.admin.all().map(r => ({
+      ...r,
+      shopName: byId[r.sellerId] ? byId[r.sellerId].storeName : '—',
+      sellerType: byId[r.sellerId]
+        ? (byId[r.sellerId].sellerType === 'wholesale' ? 'wholesale' : 'retail')
+        : 'retail',
+      about: r.kind === 'store' ? 'فروشگاه' : (pName[String(r.targetId)] || 'محصول'),
+    }));
+
+    const total = rows.length;
+    const flagged = rows.filter(r => r.flagged && !r.reviewed).length;
+    const hidden = rows.filter(r => r.hidden).length;
+    const sum = rows.reduce((a, r) => a + r.rating, 0);
+
+    setNum('rAll', total);
+    setNum('rFlag', flagged);
+    setNum('rHide', hidden);
+    el('rAvg').textContent = total
+      ? fa(Math.round(sum / total * 10) / 10).replace('.', '٫') : '—';
+
+    const bf = el('badgeFlag');
+    if (bf) { flagged ? (bf.textContent = fa(flagged), bf.hidden = false) : (bf.hidden = true); }
+
+    if (mk) rows = rows.filter(r => r.sellerType === mk);
+    if (sh) rows = rows.filter(r => r.sellerId === sh);
+    if (ft === 'flag') rows = rows.filter(r => r.flagged);
+    if (ft === 'low') rows = rows.filter(r => r.rating <= 2);
+    if (ft === 'hidden') rows = rows.filter(r => r.hidden);
+    if (ft === 'noreply') rows = rows.filter(r => !r.reply);
+    if (q) rows = rows.filter(r =>
+      toEn(`${r.userName} ${r.text} ${r.shopName}`).toLowerCase().includes(q));
+
+    /* گزارش‌های بررسی‌نشده اول بیایند */
+    rows.sort((a, b) => (b.flagged && !b.reviewed ? 1 : 0) - (a.flagged && !a.reviewed ? 1 : 0));
+
+    el('revList').innerHTML = rows.length ? rows.map(r => `
+      <div class="rev-row${r.hidden ? ' is-hidden' : ''}${
+        r.flagged && !r.reviewed ? ' is-flag' : ''}">
+        <span class="rev-ava">${esc((r.userName || '؟').charAt(0))}</span>
+
+        <div class="rev-main">
+          <div class="rev-top">
+            <strong>${esc(r.userName)}</strong>
+            ${stars(Math.round(r.rating))}
+            <span class="rev-about">${esc(r.shopName)} › ${esc(r.about)}</span>
+            ${r.sellerType === 'wholesale'
+              ? '<span class="badge b-gold" style="font-size:9.5px;padding:1px 7px">عمده</span>' : ''}
+            <time>${esc(r.date)}</time>
+          </div>
+
+          ${r.text ? `<p class="rev-txt">${esc(r.text)}</p>` : '<p class="rev-txt dim">— بدون متن —</p>'}
+
+          ${r.flagged ? `<div class="rev-flag${r.reviewed ? '' : ' bad'}">
+            <b>گزارش فروشنده:</b> ${esc(r.flagReason)}
+            ${r.reviewed ? ' · بررسی شد' : ' · در انتظار بررسی شما'}</div>` : ''}
+
+          ${r.adminNote ? `<div class="rev-flag">یادداشت شما: ${esc(r.adminNote)}</div>` : ''}
+          ${r.hidden ? '<div class="rev-flag bad">این نظر از سایت برداشته شده است</div>' : ''}
+
+          ${r.reply ? `<div class="rev-rep">
+            <div class="rev-rep-top"><b>پاسخ فروشنده</b><time>${esc(r.replyDate || '')}</time></div>
+            <p>${esc(r.reply)}</p></div>` : ''}
+
+          <div class="rev-acts">
+            ${r.hidden
+              ? `<button class="btn btn-secondary btn-sm" type="button" data-un="${esc(r.id)}">برگرداندن به سایت</button>`
+              : `<button class="btn btn-secondary btn-sm" type="button" data-hd="${esc(r.id)}">برداشتن از سایت</button>`}
+            ${r.flagged && !r.reviewed
+              ? `<button class="btn btn-secondary btn-sm" type="button" data-ds="${esc(r.id)}">رد گزارش</button>` : ''}
+            <button class="btn btn-danger btn-sm" type="button" data-rm="${esc(r.id)}">حذف کامل</button>
+          </div>
+        </div>
+      </div>`).join('')
+      : '<div class="empty">نظری با این فیلتر پیدا نشد.</div>';
+  }
+
+  el('revList').addEventListener('click', (e) => {
+    const hd = e.target.closest('[data-hd]');
+    const un = e.target.closest('[data-un]');
+    const ds = e.target.closest('[data-ds]');
+    const rm = e.target.closest('[data-rm]');
+
+    if (un) { V.admin.unhide(un.dataset.un); toast('نظر به سایت برگشت.', 'success'); draw(); return; }
+
+    if (rm) {
+      /* حذف نظر بازگشت‌ناپذیر است — یک بار پرسیده می‌شود */
+      if (!confirm('این نظر برای همیشه حذف شود؟ این کار برگشت‌پذیر نیست.')) return;
+      V.admin.remove(rm.dataset.rm);
+      toast('نظر برای همیشه حذف شد.', 'success');
+      draw();
+      return;
+    }
+
+    if (hd || ds) {
+      current = (hd || ds).dataset.hd || (hd || ds).dataset.ds;
+      mode = hd ? 'hide' : 'dismiss';
+
+      const r = V.admin.all().find(x => x.id === current);
+      el('actTitle').textContent = hd ? 'برداشتن نظر از سایت' : 'رد کردن گزارش';
+      el('actQuote').innerHTML = `<b>${esc(r.userName)}:</b> ${esc(r.text || '— بدون متن —')}`;
+      el('actNote').value = '';
+      el('actOk').textContent = hd ? 'برداشتن از سایت' : 'رد گزارش';
+      el('actOk').className = hd ? 'btn btn-danger' : 'btn btn-primary';
+      openModal('actModal');
+    }
+  });
+
+  el('actOk').addEventListener('click', () => {
+    const note = el('actNote').value;
+    if (mode === 'hide') { V.admin.hide(current, note); toast('نظر از سایت برداشته شد.', 'success'); }
+    else { V.admin.dismiss(current, note); toast('گزارش رد شد — نظر سر جایش ماند.', 'success'); }
+    closeModal('actModal');
+    draw();
+  });
+
+  let t;
+  el('search').addEventListener('input', () => { clearTimeout(t); t = setTimeout(draw, 260); });
+  ['fShop', 'fType', 'fMarket'].forEach(i => {
+    const e2 = el(i);
+    if (e2) e2.addEventListener('change', draw);
+  });
+
+  draw();
+});
+</script>
+</body>
+</html>

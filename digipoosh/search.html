@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="نتایج جستجو | دیجی‌پوش" />
+  <meta name="theme-color" content="#f5f0e8" />
+  <title>نتایج جستجو | دیجی‌پوش</title>
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style-clean.css" />
+  <link rel="stylesheet" href="./dp-navbar.css" />
+  <link rel="stylesheet" href="./club-toast.css" />
+  <link rel="stylesheet" href="./assets/css/dp-cart-drawer.css" />
+  <link rel="stylesheet" href="./club.css" />
+  <link rel="stylesheet" href="./search.css" />
+</head>
+<body>
+
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- NAVBAR -->
+
+
+<main id="main" class="search-page">
+  <div class="container">
+
+    <!-- سربرگ جستجو -->
+    <div class="search-header">
+      <h1>
+        نتایج جستجو برای:
+        <span class="search-query" id="searchQuery">...</span>
+      </h1>
+      <p class="search-count" id="searchCount">در حال جستجو...</p>
+    </div>
+
+    <!-- فیلترها -->
+    <div class="search-filters">
+      <div class="search-filter-group">
+        <label>دسته‌بندی:</label>
+        <div class="search-filter-chips">
+          <button class="search-filter-chip is-active" data-filter="category" data-value="all">همه</button>
+          <button class="search-filter-chip" data-filter="category" data-value="پیراهن">پیراهن</button>
+          <button class="search-filter-chip" data-filter="category" data-value="کت">کت</button>
+          <button class="search-filter-chip" data-filter="category" data-value="شلوار">شلوار</button>
+          <button class="search-filter-chip" data-filter="category" data-value="کفش">کفش</button>
+          <button class="search-filter-chip" data-filter="category" data-value="اکسسوری">اکسسوری</button>
+          <button class="search-filter-chip" data-filter="category" data-value="تی‌شرت">تی‌شرت</button>
+          <button class="search-filter-chip" data-filter="category" data-value="مانتو">مانتو</button>
+        </div>
+      </div>
+
+      <div class="search-filter-group">
+        <label>مرتب‌سازی:</label>
+        <select class="search-sort" id="searchSort">
+          <option value="relevance">مرتبط‌ترین</option>
+          <option value="price-low">ارزان‌ترین</option>
+          <option value="price-high">گران‌ترین</option>
+          <option value="rating">بهترین امتیاز</option>
+          <option value="popular">پرفروش‌ترین</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- نتایج -->
+    <div class="search-results" id="searchResults"></div>
+
+    <!-- پیشنهاد (اگه نتیجه‌ای نبود) -->
+    <div class="search-suggestions" id="searchSuggestions" style="display:none">
+      <h3>💡 پیشنهاد ما</h3>
+      <p>شاید این کلمات رو جستجو کنی:</p>
+      <div class="search-suggestion-chips" id="suggestionChips"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__bottom">
+    <span>© ۱۴۰۵ دیجی‌پوش — تمامی حقوق محفوظ است.</span>
+  </div>
+</footer>
+
+<script src="./dp-auth.js"></script>
+<script src="./dp-seller-seed.js"></script>
+<script src="./dp-product-loader.js"></script>
+<script src="./dp-products.js"></script>
+<script src="./dp-behavior-tracker.js"></script>
+<script src="./dp-hybrid-scorer.js"></script>
+<script src="./dp-products-feed.js"></script>
+<script src="./search.js"></script>
+
+<script>
+(function(){
+  const u = window.DPAuth.currentUser();
+  const area = document.getElementById('navAuthArea');
+  if(!area) return;
+  if(u){
+    const firstName = (u.name || 'کاربر').split(' ')[0];
+    area.innerHTML = '<a class="seller-entry" href="./profile.html" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a1a1a;font-weight:700"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span>' + firstName + '</span></a>';
+  } else {
+    area.innerHTML = '<a class="seller-entry" href="./auth.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg><span>ورود / ثبت‌نام</span></a>';
+  }
+})();
+</script>
+
+<!-- 🛒 سبد خرید -->
+<script src="./assets/js/dp-cart.js"></script>
+<script src="./assets/js/dp-cart-drawer.js"></script>
+<!-- 🧭 منوی استاندارد -->
+<script src="./club-tracker.js"></script>
+<script src="./club-referral.js"></script>
+<script src="./dp-navbar.js"></script>
+
+</body>
+</html>

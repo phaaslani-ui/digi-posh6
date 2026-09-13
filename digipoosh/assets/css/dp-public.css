@@ -1,0 +1,216 @@
+/* ============================================================
+   دیجی‌پوش — استایل کارت فروشگاه‌های واقعی
+   ------------------------------------------------------------
+   هم‌سبک با کارت‌های موجود هر صفحه؛ فقط چند جزئیات اضافه.
+   ============================================================ */
+
+/* نشان «فروشگاه جدید» */
+.dp-new-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  margin: 4px 0 10px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #8A6D1F;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.2), rgba(212, 184, 90, 0.08));
+  border: 1px solid rgba(201, 168, 76, 0.36);
+}
+
+/* آواتار حرفی — وقتی فروشگاه هنوز عکس ندارد */
+.dp-avatar-letter {
+  display: grid !important;
+  place-items: center;
+  background: linear-gradient(135deg, #C9A84C, #B8943C);
+  overflow: visible;
+}
+
+.dp-avatar-letter > span {
+  font-size: 30px;
+  font-weight: 800;
+  color: #FAF8F5;
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+}
+
+/* ---------- صفحه‌ی اصلی ---------- */
+.seller-card__cover--blank {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(201, 168, 76, 0.22), transparent 60%),
+    linear-gradient(135deg, #F5F0E8, #EDE8E0);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.seller-card__mono {
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1;
+  background-image: linear-gradient(135deg, #C9A84C, #D4B85A, #B8943C);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.seller-card__new {
+  position: absolute;
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  font-style: normal;
+  color: #FAF8F5;
+  background: linear-gradient(135deg, #C9A84C, #B8943C);
+  box-shadow: 0 6px 16px -6px rgba(201, 168, 76, 0.7);
+}
+
+.seller-badge--pending {
+  color: #8A7E72 !important;
+  background: rgba(138, 126, 114, 0.12) !important;
+  border-color: rgba(138, 126, 114, 0.3) !important;
+}
+
+.seller-rate--new {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #796e64;
+  font-size: 12.5px;
+}
+
+.seller-rate--new svg { width: 15px; height: 15px; }
+
+/* کارت‌های واقعی همیشه دیده شوند (بدون وابستگی به انیمیشن ظهور) */
+.store-card--real,
+.seller-card--real {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+.store-card--real {
+  display: flex;
+  flex-direction: column;
+}
+
+/* در صفحات تیره، متن نشان روشن‌تر باشد */
+.stores-grid-m .dp-new-tag,
+.stores-section .store-card.gold-neon-border .dp-new-tag {
+  color: #E6CE86;
+  background: rgba(201, 168, 76, 0.14);
+  border-color: rgba(201, 168, 76, 0.42);
+}
+
+/* ============================================================
+   پیام «هنوز فروشگاهی ثبت نشده»
+   ------------------------------------------------------------
+   وقتی اولین فروشنده ثبت‌نام کند، این پیام خودکار برداشته
+   می‌شود و جایش کارت فروشگاه واقعی می‌آید.
+   ============================================================ */
+.dp-empty-stores {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 46px 26px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 2.1;
+  color: #796e64;
+  border-radius: 20px;
+  border: 1.5px dashed rgba(201, 168, 76, 0.42);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.09), transparent 65%),
+    rgba(250, 248, 245, 0.55);
+}
+
+.dp-empty-stores a {
+  display: inline-block;
+  margin-inline-start: 6px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #FAF8F5;
+  background: linear-gradient(135deg, #C9A84C, #B8943C);
+  box-shadow: 0 10px 24px -12px rgba(201, 168, 76, 0.9);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dp-empty-stores a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px -12px rgba(201, 168, 76, 0.95);
+}
+
+/* صفحات تیره (مردانه و تینیجر) */
+[data-dp-page="man"] .dp-empty-stores,
+[data-dp-page="teen"] .dp-empty-stores {
+  color: #B9AFA3;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.12), transparent 65%),
+    rgba(20, 20, 20, 0.45);
+}
+
+/* ============================================================
+   دکمه‌ی «مشاهده فروشگاه» روی کارت‌های واقعی
+   ------------------------------------------------------------
+   چون به پیوند تبدیل شد، باید مثل دکمه دیده شود.
+   ============================================================ */
+a.btn-store,
+a.btn-store-m,
+a.btn-arena {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.store-card--real .dp-new-tag { margin-inline-end: auto; }
+
+
+/* ============================================================
+   لوگوی فروشگاه روی کارت‌ها
+   ============================================================ */
+.seller-avatar img,
+.store-card--real .store-avatar img,
+.store-card--real .store-avatar-m img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.seller-avatar:has(img) { padding: 0; overflow: hidden; }
+
+.seller-card__cover img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ============================================================
+   امتیاز روی کارت فروشگاه‌ها
+   ============================================================ */
+.dp-rate-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+  font-size: 12.5px;
+}
+
+.dp-rate-num { font-weight: 800; color: #b8943c; }
+.dp-rate-c { color: #796e64; font-size: 11px; }
+
+.seller-rate--has {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+/* در صفحات تیره */
+[data-dp-page="man"] .dp-rate-num,
+[data-dp-page="teen"] .dp-rate-num { color: #d4b85a; }

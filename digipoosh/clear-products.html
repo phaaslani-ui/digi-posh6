@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>پاک کردن محصولات الکی</title>
+  <style>
+    body { font-family: 'Vazirmatn', sans-serif; padding: 40px; max-width: 600px; margin: auto; background: #fafafa; }
+    .box { background: #fff; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 16px 0; }
+    h1 { color: #1a1a1a; }
+    .success { color: #16a34a; font-weight: 800; padding: 12px; background: #f0fdf4; border-radius: 8px; margin: 12px 0; }
+    .error { color: #dc2626; padding: 12px; background: #fef2f2; border-radius: 8px; margin: 12px 0; }
+    button { padding: 12px 24px; background: #d4af37; color: #1a1a1a; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; font-family: inherit; }
+    button:hover { background: #b8941f; }
+    pre { background: #f5f5f5; padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>🧹 پاک کردن محصولات الکی</h1>
+  
+  <div class="box">
+    <h3>۱) پاک کردن localStorage</h3>
+    <p>محصولات SAMPLE قدیمی از localStorage پاک میشن. بعد محصولات واقعی از سرور sync میشن.</p>
+    <button onclick="clearAndReload()">🧹 پاک کن و reload</button>
+    <div id="result"></div>
+  </div>
+
+  <div class="box">
+    <h3>۲) وضعیت فعلی</h3>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    function checkStatus() {
+      const before = localStorage.getItem('dp_products');
+      const products = before ? JSON.parse(before) : [];
+      const ids = products.map(p => p.id);
+      const unique = new Set(ids);
+      document.getElementById('status').innerHTML = `
+        <p><strong>تعداد محصولات در localStorage:</strong> ${products.length}</p>
+        <p><strong>تعداد یونیک:</strong> ${unique.size}</p>
+        <p><strong>تکراری:</strong> ${products.length - unique.size}</p>
+        <p><strong>نمونه:</strong></p>
+        <pre>${JSON.stringify(products.slice(0, 3).map(p => ({id: p.id, name: p.name})), null, 2)}</pre>
+      `;
+    }
+
+    function clearAndReload() {
+      try {
+        localStorage.removeItem('dp_products');
+        localStorage.removeItem('dp_seed_version');
+        localStorage.removeItem('dp_products_cleared');
+        // صبر کن و reload
+        setTimeout(() => {
+          window.location.href = './index.html';
+        }, 500);
+        document.getElementById('result').innerHTML = '<div class="success">✅ پاک شد! در حال بارگذاری مجدد...</div>';
+      } catch (e) {
+        document.getElementById('result').innerHTML = '<div class="error">❌ خطا: ' + e.message + '</div>';
+      }
+    }
+
+    checkStatus();
+  </script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+/* ============================================================
+   دیجی‌پوش — صفحه‌ی حساب کاربری مشتری
+   (کنار store.css استفاده می‌شود)
+   ============================================================ */
+
+/* ---------- کارت ورود / ثبت‌نام ---------- */
+.auth-wrap {
+  min-height: 74vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px 60px;
+}
+
+/* به‌محض ورود یا عضویت، این بخش با صفت `hidden` پنهان می‌شود.
+   بدون این قانون، `display: grid` بالا بر `hidden` غلبه می‌کرد
+   و فرم روی صفحه می‌ماند — کاربر گیج می‌شد که وارد شده یا نه. */
+.auth-wrap[hidden],
+#panelView[hidden] { display: none !important; }
+
+.auth-card {
+  width: min(460px, 100%);
+  padding: 32px 30px;
+}
+
+.auth-brand { text-align: center; margin-bottom: 22px; }
+
+.auth-mark {
+  width: 62px; height: 62px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  box-shadow: 0 12px 28px -12px rgba(201, 168, 76, 0.9);
+}
+
+.auth-mark svg { width: 28px; height: 28px; }
+.auth-brand h1 { margin: 0; font-size: 22px; font-weight: 800; }
+.auth-brand p { margin: 4px 0 0; font-size: 13.5px; color: var(--gray); }
+
+/* ---------- زبانه‌ها ---------- */
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: 5px;
+  margin-bottom: 22px;
+  border-radius: 13px;
+  background: var(--beige);
+}
+
+.tab {
+  padding: 10px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--gray);
+  cursor: pointer;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.tab.on {
+  color: var(--ink);
+  background: var(--off-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+/* ---------- فیلدها ---------- */
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 15px; }
+.field label { font-size: 12.5px; font-weight: 600; }
+.field label small { font-weight: 400; color: var(--gray); }
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 11px;
+  background: var(--off-white);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.24s var(--ease), box-shadow 0.24s var(--ease);
+}
+
+.input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.16); }
+
+.field.bad .input { border-color: var(--danger); }
+.err { font-size: 11.5px; color: var(--danger); min-height: 1px; }
+
+/* ---------- سنجه‌ی رمز ---------- */
+.pw-bar { display: flex; gap: 4px; margin-top: 3px; }
+
+.pw-bar i {
+  flex: 1;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(138, 126, 114, 0.24);
+  transition: background 0.3s var(--ease);
+}
+
+.pw-bar.w1 i:nth-child(1) { background: var(--danger); }
+.pw-bar.w2 i:nth-child(-n+2) { background: #d99a3c; }
+.pw-bar.w3 i:nth-child(-n+3) { background: #8bc34a; }
+.pw-bar.w4 i { background: var(--success); }
+
+/* ---------- دکمه‌ها ---------- */
+.btn-block { width: 100%; margin-top: 6px; }
+.btn[disabled] { opacity: 0.6; pointer-events: none; }
+.btn-sm { padding: 8px 15px; font-size: 12.5px; margin: 0; }
+
+.btn-ghost {
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  background: transparent;
+  color: var(--ink);
+  margin: 0;
+}
+
+.btn-ghost:hover { background: rgba(201, 168, 76, 0.12); transform: translateY(-1px); }
+
+.auth-alt { margin: 16px 0 0; text-align: center; font-size: 13px; color: var(--gray); }
+
+.link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--bronze);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.auth-seller {
+  margin: 20px 0 0;
+  padding-top: 16px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--gray);
+  border-top: 1px dashed rgba(201, 168, 76, 0.28);
+}
+
+.auth-seller a { font-weight: 700; color: var(--bronze); }
+
+/* ============================================================
+   پنل «حساب من»
+   ============================================================ */
+#panelView { padding: 30px 0 60px; }
+#panelView[hidden] { display: none !important; }
+
+.acc-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 24px 26px;
+  margin-bottom: 18px;
+}
+
+.acc-ava {
+  width: 74px; height: 74px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  flex: none;
+}
+
+.acc-hero-txt { flex: 1; min-width: 180px; }
+/* نام کاربر — از h1 به h2 تغییر کرد تا هر صفحه فقط یک
+   عنوان اصلی داشته باشد. ظاهر دقیقاً همان می‌ماند. */
+.acc-hero-txt h1,
+.acc-hero-txt .acc-title { margin: 0; font-size: 23px; font-weight: 800; }
+.acc-hero-txt p { margin: 3px 0 0; font-size: 13.5px; color: var(--gray); overflow-wrap: anywhere; }
+
+.acc-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.acc-stat {
+  padding: 18px;
+  text-align: center;
+  border-radius: 16px;
+  background: var(--off-white);
+  border: 1px solid rgba(201, 168, 76, 0.24);
+}
+
+.acc-stat b { display: block; font-size: 24px; font-weight: 800; color: var(--bronze); }
+.acc-stat small { font-size: 12px; color: var(--gray); }
+
+.card {
+  padding: 22px;
+  margin-bottom: 18px;
+  border-radius: 18px;
+  background: var(--off-white);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.card-head {
+  padding-bottom: 13px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.card-head h2 { margin: 0; font-size: 16.5px; font-weight: 700; }
+
+.empty-inline {
+  padding: 26px 14px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--gray);
+}
+
+.empty-inline a { font-weight: 700; color: var(--bronze); text-decoration: underline; }
+
+/* ---------- ردیف فروشگاه دلخواه ---------- */
+.wish-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.22);
+}
+
+.wish-row:last-child { border-bottom: none; }
+
+.wish-ava {
+  width: 46px; height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  overflow: hidden;
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--off-white);
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  flex: none;
+}
+
+.wish-ava img { width: 100%; height: 100%; object-fit: cover; }
+.wish-txt { flex: 1; min-width: 0; }
+.wish-txt strong { display: block; font-size: 14.5px; }
+.wish-txt small { font-size: 12px; color: var(--gray); }
+
+.wish-x {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(180, 84, 79, 0.3);
+  border-radius: 9px;
+  background: none;
+  color: var(--danger);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  flex: none;
+  transition: background 0.22s var(--ease);
+}
+
+.wish-x:hover { background: rgba(180, 84, 79, 0.12); }
+
+/* ============================================================
+   پیام شناور
+   ============================================================ */
+.toast-wrap {
+  position: fixed;
+  inset-inline-start: 22px;
+  bottom: 22px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.toast {
+  min-width: 250px;
+  padding: 13px 18px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  color: var(--off-white);
+  background: var(--ink);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.toast.show { opacity: 1; transform: none; }
+.t-success { background: var(--success); }
+.t-error { background: var(--danger); }
+
+/* ============================================================
+   واکنش‌گرا
+   ============================================================ */
+@media (max-width: 600px) {
+  .auth-card { padding: 24px 18px; }
+  .acc-hero { padding: 20px 18px; justify-content: center; text-align: center; }
+  .acc-hero-txt { text-align: center; }
+  .acc-stats { grid-template-columns: 1fr; }
+  .wish-row { flex-wrap: wrap; }
+  .wish-txt { flex-basis: 60%; }
+  .toast-wrap { inset-inline: 14px; bottom: 14px; }
+  .toast { min-width: 0; }
+}
+
+/* ---------- سفارش‌های من ---------- */
+.ord-row {
+  padding: 14px 0;
+  border-bottom: 1px dashed rgba(201, 168, 76, 0.22);
+}
+
+.ord-row:last-child { border-bottom: none; }
+
+.ord-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 7px;
+}
+
+.ord-top strong { font-size: 14px; color: var(--bronze); }
+.ord-top time { margin-inline-start: auto; font-size: 11.5px; color: var(--gray); }
+
+.ord-badge {
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.b-warn { background: rgba(201, 168, 76, 0.18); color: #8a6d1f; }
+.b-info { background: rgba(74, 124, 159, 0.15); color: #35607d; }
+.b-ok   { background: rgba(74, 143, 107, 0.16); color: #2f6b4f; }
+.b-bad  { background: rgba(180, 84, 79, 0.14);  color: #8e3b37; }
+
+.ord-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--gray);
+}
+
+.ord-items span {
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: rgba(201, 168, 76, 0.09);
+}
+
+.ord-sum { margin-top: 7px; font-size: 13px; color: var(--gray); }
+.ord-sum b { color: var(--ink); font-weight: 800; }
+
+/* ---------- اقلام سفارش و مرجوعی ---------- */
+.ord-lines { display: grid; gap: 6px; }
+
+.ord-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 7px 11px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  background: rgba(201, 168, 76, 0.07);
+}
+
+.ol-name { flex: 1; min-width: 0; }
+
+.ol-ret {
+  padding: 5px 13px;
+  border: 1px solid rgba(201, 168, 76, 0.42);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--bronze);
+  cursor: pointer;
+  transition: background 0.22s var(--ease);
+}
+
+.ol-ret:hover { background: rgba(201, 168, 76, 0.16); }
+
+.ol-tag {
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.ol-tag.t-w { color: #8a6d1f; background: rgba(201, 168, 76, 0.2); }
+.ol-tag.t-k { color: #2f6b4f; background: rgba(74, 143, 107, 0.18); }
+.ol-tag.t-b { color: #8e3b37; background: rgba(180, 84, 79, 0.14); }
+
+/* دعوت به امتیازدهی — فقط روی سفارش تحویل‌شده */
+.ord-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 9px;
+  padding: 7px 14px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #b8943c;
+  background: rgba(201, 168, 76, 0.11);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ord-rate:hover { background: rgba(201, 168, 76, 0.2); color: #8a6d1f; }
+.ord-rate svg { width: 14px; height: 14px; flex: none; }

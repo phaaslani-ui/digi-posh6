@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Debug Chat AI</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #0f0; }
+    .ok { color: #0f0; }
+    .warn { color: #ff0; }
+    .err { color: #f55; }
+    .info { color: #0af; }
+    pre { background: #000; padding: 12px; border-radius: 8px; overflow-x: auto; }
+    button { padding: 10px 20px; margin: 5px; background: #d4af37; border: none; cursor: pointer; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>🧪 تست چت AI</h1>
+  <button onclick="runTests()">▶ اجرای تست</button>
+  <button onclick="location.reload()">🔄 reload</button>
+  <div id="out"></div>
+  
+  <script src="./seller/js/dp-config.js"></script>
+  <script src="./dp-products.js"></script>
+  <script src="./dp-product-loader.js"></script>
+  <script src="./dp-ai-nlu.js"></script>
+  <script src="./dp-chat-ai.js"></script>
+  <script src="./assets/js/dp-ai-widget.js"></script>
+  
+  <script>
+  const out = document.getElementById('out');
+  function log(html) { out.innerHTML += html + '<br>'; }
+  
+  async function runTests() {
+    out.innerHTML = '';
+    
+    // ۱) sync از سرور
+    log('<h2>۱) sync از سرور</h2>');
+    try {
+      const res = await fetch('http://localhost:8001/api/products', { cache: 'no-store' });
+      const serverProducts = await res.json();
+      log(`<span class="info">📦 محصولات در سرور: ${serverProducts.length}</span>`);
+      log(`<span class="info">نمونه: ${serverProducts[0].name} (id=${serverProducts[0].id})</span>`);
+    } catch (e) {
+      log(`<span class="err">❌ خطا در sync: ${e.message}</span>`);
+    }
+    
+    // ۲) بررسی DPProducts
+    log('<h2>۲) DPProducts.all()</h2>');
+    const products = window.DPProducts ? window.DPProducts.all() : [];
+    log(`<span class="info">📦 محصولات: ${products.length}</span>`);
+    if (products.length > 0) {
+      log(`<span class="info">نمونه: ${products[0].name} (id=${products[0].id})</span>`);
+      const ids = products.map(p => p.id);
+      const unique = new Set(ids);
+      log(`<span class="${ids.length === unique.size ? 'ok' : 'warn'}">یونیک: ${unique.size} | تکراری: ${ids.length - unique.size}</span>`);
+    }
+    
+    // ۳) تست generateResponse
+    log('<h2>۳) تست generateResponse</h2>');
+    const tests = [
+      'یه پیراهن قرمز بپوشم',
+      'یه ست کامل برای عروسی',
+      'کفش ورزشی',
+      'بهترین محصول'
+    ];
+    
+    for (const msg of tests) {
+      log(`<h3>💬 "${msg}"</h3>`);
+      if (window.DPChatAI && window.DPChatAI.generateResponse) {
+        const response = window.DPChatAI.generateResponse(msg, {});
+        log(`پاسخ: <span class="info">${(response.text || '').substring(0, 80)}</span>`);
+        if (response.products && response.products.length > 0) {
+          log(`محصولات (${response.products.length}):`);
+          response.products.slice(0, 3).forEach(p => {
+            log(`  - ${p.name} (id=${p.id}, price=${p.price})`);
+          });
+          // بررسی hardcode
+          const hardcodedIds = ['p1', 'p2', 'p3', 'test1', 'demo1', 'sample1'];
+          const isHardcode = response.products.some(p => hardcodedIds.includes(p.id));
+          if (isHardcode) {
+            log(`<span class="err">🚨 محصول hardcode پیدا شد!</span>`);
+          } else {
+            log(`<span class="ok">✅ محصولات واقعی (sp001+)</span>`);
+          }
+        } else {
+          log(`<span class="warn">⚠️ محصولی ندارد</span>`);
+        }
+      } else {
+        log(`<span class="err">❌ DPChatAI موجود نیست</span>`);
+      }
+    }
+  }
+  
+  // اجرای خودکار
+  setTimeout(runTests, 1500);
+  </script>
+</body>
+</html>

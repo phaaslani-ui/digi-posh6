@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="robots" content="noindex" />
+  <title>کالاهای عمده | پنل عمده‌فروشی دیجی‌پوش</title>
+
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../../assets/css/dp-font.css" />
+  <link rel="stylesheet" href="./css/wholesale-panel.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-cursor.css" />
+  <link rel="stylesheet" href="../../assets/css/dp-stock.css" />
+</head>
+<body data-dp-page="wholesale-panel">
+<a class="dp-skip" href="#main">پرش به محتوای اصلی</a>
+
+<aside class="wp-side" id="wpSide"></aside>
+
+<main class="wp-main" id="main">
+
+  <header class="wp-top">
+    <button class="wp-burger" type="button" id="wpBurger" aria-label="منو">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="wp-title">
+      <h1>کالاهای عمده</h1>
+      <span>قیمت پلکانی و حداقل سفارش</span>
+    </div>
+    <div class="wp-top-acts"></div>
+  </header>
+
+  <div class="wp-content">
+    <div id="gateNote"></div>
+
+    <div class="wp-toolbar">
+      <input class="wp-input" id="q" type="search" placeholder="جست‌وجوی نام یا کد…" aria-label="جست‌وجو" />
+      <div class="wp-seg" id="filter" role="tablist">
+        <button class="on" type="button" data-f="">همه</button>
+        <button type="button" data-f="active">فعال</button>
+        <button type="button" data-f="draft">پیش‌نویس</button>
+        <button type="button" data-f="low">رو به اتمام</button>
+        <button type="button" data-f="out">ناموجود</button>
+      </div>
+      <button class="wp-btn wp-btn-gold spacer" type="button" id="addBtn">
+        <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> افزودن کالای عمده
+      </button>
+    </div>
+
+    <div class="wp-card">
+      <div class="wp-card-head">
+        <h2>فهرست کالاها</h2>
+        <span class="sub spacer" id="count">—</span>
+      </div>
+      <div id="box"></div>
+    </div>
+  </div>
+
+</main>
+
+<div class="wp-modal" id="pModal" role="dialog" aria-modal="true" aria-label="کالای عمده">
+  <div class="wp-modal-card">
+    <button class="wp-x" type="button" data-wp-close aria-label="بستن"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <h2 id="pTitle">افزودن کالای عمده</h2>
+    <p>قیمت پلکانی مهم‌ترین بخش است — هرچه خریدار بیشتر بگیرد، ارزان‌تر.</p>
+
+    <form id="pForm" novalidate>
+      <input type="hidden" id="pId" />
+
+      <div class="wp-grid">
+        <div class="wp-field full">
+          <label for="pName">نام کالا <span class="req">*</span></label>
+          <input class="wp-input" id="pName" placeholder="مثلاً: مانتو کتان جلوبسته" />
+        </div>
+
+        <div class="wp-field">
+          <label for="pCode">کد کالا</label>
+          <input class="wp-input" id="pCode" placeholder="خودکار" />
+        </div>
+
+        <div class="wp-field">
+          <label for="pBrand">برند</label>
+          <input class="wp-input" id="pBrand" placeholder="نام برند" />
+        </div>
+
+        <div class="wp-field">
+          <label for="pSection">بخش <span class="req">*</span></label>
+          <select class="wp-input" id="pSection"></select>
+        </div>
+
+        <div class="wp-field">
+          <label for="pGroup">سبک <span class="req">*</span></label>
+          <select class="wp-input" id="pGroup"></select>
+          <span class="wp-hint">رسمی، اسپرت، ورزشی و…</span>
+        </div>
+
+        <div class="wp-field">
+          <label for="pItem">نوع کالا <span class="req">*</span></label>
+          <select class="wp-input" id="pItem"></select>
+        </div>
+
+        <div class="wp-field full">
+          <div class="wp-trail" id="pTrail" hidden></div>
+        </div>
+
+        <div class="wp-field">
+          <label for="pPrice">قیمت پایه هر عدد (تومان) <span class="req">*</span></label>
+          <input class="wp-input" id="pPrice" inputmode="numeric" placeholder="مثلاً ۴۵۰۰۰۰" />
+        </div>
+
+        <div class="wp-field">
+          <label for="pMoq">حداقل سفارش (عدد) <span class="req">*</span></label>
+          <input class="wp-input" id="pMoq" inputmode="numeric" value="۱۲" />
+        </div>
+
+        <div class="wp-field">
+          <label for="pStock">موجودی انبار <span class="req">*</span></label>
+          <input class="wp-input" id="pStock" inputmode="numeric" value="۰" />
+        </div>
+
+        <div class="wp-field">
+          <label for="pLowAt">هشدار کمبود در</label>
+          <input class="wp-input" id="pLowAt" inputmode="numeric" placeholder="خودکار" />
+          <span class="wp-hint">وقتی موجودی به این عدد رسید، هشدار می‌گیرید.</span>
+        </div>
+
+        <div class="wp-field">
+          <label for="pLead">زمان آماده‌سازی (روز)</label>
+          <input class="wp-input" id="pLead" inputmode="numeric" value="۳" />
+        </div>
+
+        <div class="wp-field">
+          <label for="pStatus">وضعیت</label>
+          <select class="wp-input" id="pStatus">
+            <option value="active">فعال — در بازار دیده شود</option>
+            <option value="draft">پیش‌نویس — فعلاً پنهان</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="wp-card-head" style="margin:18px 0 10px">
+        <h2 style="font-size:14px">پله‌های قیمت</h2>
+        <button class="wp-btn wp-btn-ghost wp-btn-sm spacer" type="button" id="autoTiers">
+          ساخت خودکار
+        </button>
+      </div>
+      <div class="wp-tiers" id="tiers"></div>
+      <button class="wp-btn wp-btn-ghost wp-btn-sm" type="button" id="addTier" style="margin-top:8px">
+        <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> پله‌ی تازه
+      </button>
+
+      <div class="wp-grid" style="margin-top:18px">
+        <div class="wp-field">
+          <label for="pMaterial">جنس</label>
+          <input class="wp-input" id="pMaterial" placeholder="مثلاً: کتان" />
+        </div>
+        <div class="wp-field">
+          <label for="pColors">رنگ‌بندی</label>
+          <input class="wp-input" id="pColors" placeholder="مشکی، کرم، سرمه‌ای" />
+        </div>
+        <div class="wp-field">
+          <label for="pSizes">سایزبندی</label>
+          <input class="wp-input" id="pSizes" placeholder="S تا XL" />
+        </div>
+        <div class="wp-field">
+          <label for="pPacking">بسته‌بندی</label>
+          <input class="wp-input" id="pPacking" placeholder="کارتن ۲۴ عددی" />
+        </div>
+        <div class="wp-field full">
+          <label for="pDesc">توضیح</label>
+          <textarea class="wp-input" id="pDesc" rows="3"
+            placeholder="جزئیاتی که خریدار عمده باید بداند…"></textarea>
+        </div>
+      </div>
+
+      <div class="wp-card-head" style="margin:18px 0 10px">
+        <h2 style="font-size:14px">عکس کالا</h2>
+        <span class="sub spacer">تا ۶ عکس — نخستین عکس، عکس اصلی است</span>
+      </div>
+
+      <div class="wp-drop" id="pDrop" tabindex="0" role="button"
+           aria-label="افزودن عکس کالا">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 15.5V4.5"/><path d="m8 8.5 4-4 4 4"/>
+          <path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15"/>
+        </svg>
+        <b>عکس را بکشید یا کلیک کنید</b>
+        <span>JPG، PNG یا WebP — هر عکس تا ۵ مگابایت</span>
+      </div>
+      <input aria-label="انتخاب تصاویر کالا" type="file" id="pFiles" accept="image/jpeg,image/png,image/webp" multiple hidden />
+      <div class="wp-shots" id="pShots"></div>
+
+      <div class="wp-modal-foot">
+        <button class="wp-btn wp-btn-gold" type="submit"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 4.5h10l3.5 3.5v11a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 19V6a1.5 1.5 0 0 1 1.5-1.5Z"/><path d="M8 4.5v5h7M8 20v-6h8v6"/></svg> ذخیره</button>
+        <button class="wp-btn wp-btn-ghost" type="button" data-wp-close>انصراف</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../../seller/js/dp-config.js"></script>
+<script src="../../seller/js/dp-store.js"></script>
+<script src="../../assets/js/dp-guard.js"></script>
+<script src="../../assets/js/dp-safe.js"></script>
+<script src="../../assets/js/dp-stock.js"></script>
+<script src="../../assets/js/dp-taxonomy.js"></script>
+<script src="../../assets/js/dp-moderation.js"></script>
+<script src="../../assets/js/dp-reviews.js"></script>
+<script src="../../assets/js/dp-user.js"></script>
+<script src="./js/dpw-store.js"></script>
+<script src="./js/dpw-boost.js"></script>
+<script src="./js/dpw-ui.js"></script>
+<script>
+
+requireWholesale(function () {
+  var S = DPWStore, U = DPWUi, esc = U.esc;
+  var fa = S.fa, money = S.money, toEn = S.toEn;
+  var $ = function (s) { return document.querySelector(s); };
+  var IC = { box: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 7.5 4v9l-7.5 4-7.5-4v-9z"/><path d="m4.5 7.5 7.5 4 7.5-4"/><path d="M12 11.5v9"/></svg>', money: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>', quote: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 12.5c0 4-3.8 7.2-8.5 7.2a10 10 0 0 1-2.6-.3L4.5 21l1.3-3.8a6.8 6.8 0 0 1-2.3-4.7c0-4 3.8-7.2 8.5-7.2s8.5 3.2 8.5 7.2Z"/></svg>', truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h10v9H3z"/><path d="M13 10.5h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>', users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c0-3.3 2.5-5.4 5.5-5.4s5.5 2.1 5.5 5.4"/><path d="M16 6.5a3 3 0 0 1 0 6"/></svg>', chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V15M9 19.5V9M14 19.5v-7M19 19.5V5"/></svg>', warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4.5 21 19H3z"/><path d="M12 10v4M12 16.5h.01"/></svg>', check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>', x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>', info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>', clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>', store: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M4.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M6 12v7.5h12V12"/></svg>', bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5 13.5h6L11 21l8-10.5h-6z"/></svg>' };
+
+  var filter = '', q = '';
+
+  /* ---------- پله‌های قیمت ---------- */
+  function tierRow(t) {
+    return '<div class="wp-tier-row">' +
+      '<input class="wp-input tier-from" inputmode="numeric" placeholder="از تعداد" value="' +
+        (t ? fa(t.from) : '') + '" aria-label="از تعداد" />' +
+      '<input class="wp-input tier-price" inputmode="numeric" placeholder="قیمت هر عدد" value="' +
+        (t ? fa(t.price) : '') + '" aria-label="قیمت" />' +
+      '<button class="wp-btn wp-btn-bad wp-btn-sm" type="button" data-deltier aria-label="حذف پله">' +
+        IC.x + '</button></div>';
+  }
+
+  function readTiers() {
+    return [].slice.call(document.querySelectorAll('.wp-tier-row')).map(function (r) {
+      return {
+        from: Number(toEn(r.querySelector('.tier-from').value)) || 0,
+        price: Number(toEn(r.querySelector('.tier-price').value)) || 0,
+      };
+    }).filter(function (t) { return t.from > 0 && t.price > 0; });
+  }
+
+  $('#addTier').addEventListener('click', function () {
+    $('#tiers').insertAdjacentHTML('beforeend', tierRow(null));
+  });
+
+  $('#autoTiers').addEventListener('click', function () {
+    var base = Number(toEn($('#pPrice').value));
+    var moq = Number(toEn($('#pMoq').value));
+    if (!base || !moq) { U.toast('اول قیمت پایه و حداقل سفارش را بنویسید.', 'error'); return; }
+    $('#tiers').innerHTML = S.defaultTiers(base, moq).map(tierRow).join('');
+    U.toast('چهار پله ساخته شد — می‌توانید دستی تغییرشان دهید.', 'success');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-deltier]')) e.target.closest('.wp-tier-row').remove();
+  });
+
+  /* ---------- فهرست ---------- */
+  function match(p) {
+    if (filter === 'active' && p.status !== 'active') return false;
+    if (filter === 'draft' && p.status !== 'draft') return false;
+    if (filter === 'low' && !(p.stock > 0 && p.stock <= (p.lowAt || p.moq * 3))) return false;
+    if (filter === 'out' && p.stock > 0) return false;
+    if (q) {
+      var s = (p.name + ' ' + p.code + ' ' + p.brand).toLowerCase();
+      if (s.indexOf(q.toLowerCase()) < 0) return false;
+    }
+    return true;
+  }
+
+  function paint() {
+    paintGate();
+    var list = S.products.list().filter(match);
+    $('#count').textContent = fa(list.length) + ' کالا';
+
+    if (!list.length) {
+      $('#box').innerHTML = U.emptyBox('کالایی نیست',
+        'با دکمه‌ی «افزودن کالای عمده» نخستین کالایتان را ثبت کنید.');
+      return;
+    }
+
+    $('#box').innerHTML = '<div class="wp-table-wrap"><table class="wp-table"><thead><tr>' +
+      '<th>کالا</th><th>قیمت پایه</th><th>کمترین پله</th><th>حداقل سفارش</th>' +
+      '<th>موجودی</th><th>فروش</th><th>وضعیت</th><th></th></tr></thead><tbody>' +
+      list.map(function (p) {
+        var low = p.stock > 0 && p.stock <= (p.lowAt || p.moq * 3);
+        var out = p.stock <= 0;
+        var off = S.maxDiscount(p);
+        var best = S.priceFor(p, (p.moq || 1) * 25);
+        return '<tr>' +
+          '<td><b>' + esc(p.name) + '</b>' +
+            '<span class="wp-tiny">کد ' + esc(p.code) +
+            (p.brand ? ' · ' + esc(p.brand) : '') + '</span></td>' +
+          '<td class="num">' + money(p.price) + '</td>' +
+          '<td class="num">' + money(best.unit) +
+            (off ? '<span class="wp-tiny">تا ٪' + fa(off) + ' ارزان‌تر</span>' : '') + '</td>' +
+          '<td class="num">' + fa(p.moq) + '</td>' +
+          '<td class="num">' + (out
+            ? '<span class="wp-tag bad">ناموجود</span>'
+            : (low ? '<span class="wp-tag warn">' + fa(p.stock) + '</span>' : fa(p.stock))) + '</td>' +
+          '<td class="num">' + fa(p.sold || 0) + '</td>' +
+          '<td>' + statusTag(p) + '</td>' +
+          '<td><div class="wp-row-acts">' +
+            '<button class="wp-btn wp-btn-ghost wp-btn-sm" type="button" data-edit="' + esc(p.id) + '">ویرایش</button>' +
+            '<button class="wp-btn wp-btn-bad wp-btn-sm" type="button" data-del="' + esc(p.id) + '">حذف</button>' +
+          '</div></td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
+  /* ============================================================
+     دروازه‌ی تأیید مدیر
+     ------------------------------------------------------------
+     تا وقتی مدیر فروشگاه را تأیید نکرده، هر کالایی که ثبت شود
+     پیش‌نویس می‌ماند و در بازار عمده دیده نمی‌شود. اینجا این
+     را روشن و بی‌ابهام به فروشنده می‌گوییم — نه اینکه بی‌صدا
+     پیش‌نویس کنیم و او سردرگم بماند.
+     ============================================================ */
+  function paintGate() {
+    var box = $('#gateNote');
+    if (!box) return;
+    var st = S.myStatus();
+    var rule = S.can();
+
+    if (st === 'approved') { box.innerHTML = ''; return; }
+
+    var drafts = S.products.list().filter(function (p) {
+      return p.status === 'draft' && (p.wanted || 'active') !== 'draft';
+    }).length;
+
+    if (st === 'pending') {
+      box.innerHTML =
+        '<div class="wp-note warn" style="margin-bottom:14px"><div>' +
+          '<b>فروشگاه شما هنوز تأیید نشده است.</b><br>' +
+          'می‌توانید کالا ثبت کنید، ولی تا تأیید مدیر <b>پیش‌نویس</b> می‌ماند ' +
+          'و خریداران آن را در بازار عمده نمی‌بینند. ' +
+          'به‌محض تأیید، همه‌ی پیش‌نویس‌ها یک‌جا منتشر می‌شوند — ' +
+          'لازم نیست دوباره کاری بکنید.' +
+          (drafts ? '<br><span style="color:var(--wp-gold-l)">' +
+            fa(drafts) + ' کالا در صف انتشار است.</span>' : '') +
+        '</div></div>';
+      return;
+    }
+
+    if (rule.locked) {
+      box.innerHTML =
+        '<div class="wp-note bad" style="margin-bottom:14px"><div>' +
+          '<b>دسترسی فروشگاه شما ' +
+          (st === 'rejected' ? 'رد شده' : 'معلق شده') + ' است.</b><br>' +
+          'فعلاً نمی‌توانید کالا ثبت یا ویرایش کنید. ' +
+          'برای پیگیری، از بخش «پروفایل» درخواست بررسی دوباره بدهید.' +
+        '</div></div>';
+    }
+  }
+
+  /** برچسب وضعیت هر کالا — پیش‌نویس دو معنی دارد، جدا می‌کنیم */
+  function statusTag(p) {
+    if (p.status === 'active') return '<span class="wp-tag ok">در بازار</span>';
+    /* پیش‌نویسی که خود فروشنده خواسته */
+    if ((p.wanted || 'active') === 'draft') {
+      return '<span class="wp-tag mute">پیش‌نویس</span>';
+    }
+    /* پیش‌نویسی که به‌خاطر نبود تأیید مانده */
+    return '<span class="wp-tag warn">در انتظار تأیید</span>';
+  }
+
+  /* ============================================================
+     دسته‌بندی سه‌سطحی
+     ------------------------------------------------------------
+     همان درختی که فروشنده‌ی معمولی می‌بیند: بخش ← سبک ← کالا.
+     پیش‌تر اینجا فقط شش گزینه‌ی کلی بود؛ خریدار نمی‌توانست
+     «پیراهن رسمی مردانه» را از «تی‌شرت اسپرت» جدا کند.
+     ============================================================ */
+  var T = window.DPTaxonomy;
+
+  function fillSections() {
+    if (!T) return;
+    $('#pSection').innerHTML = T.sections().map(function (x) {
+      return '<option value="' + x.key + '">' + esc(x.label) + '</option>';
+    }).join('');
+  }
+
+  function fillGroups(sec, want) {
+    if (!T) return;
+    var gs = T.groups(sec);
+    $('#pGroup').innerHTML = gs.map(function (g) {
+      return '<option value="' + g.key + '">' + esc(g.label) + '</option>';
+    }).join('');
+    if (want && gs.some(function (g) { return g.key === want; })) $('#pGroup').value = want;
+  }
+
+  function fillItems(sec, grp, want) {
+    if (!T) return;
+    var its = T.items(sec, grp);
+    $('#pItem').innerHTML = its.map(function (i) {
+      return '<option value="' + esc(i) + '">' + esc(i) + '</option>';
+    }).join('');
+    if (want && its.indexOf(want) > -1) $('#pItem').value = want;
+  }
+
+  function paintTrail() {
+    if (!T) return;
+    var el = $('#pTrail');
+    var t = T.trail($('#pSection').value, $('#pGroup').value, $('#pItem').value);
+    el.textContent = t;
+    el.hidden = !t;
+  }
+
+  if (T) {
+    fillSections();
+    $('#pSection').addEventListener('change', function () {
+      fillGroups(this.value);
+      fillItems(this.value, $('#pGroup').value);
+      paintTrail();
+    });
+    $('#pGroup').addEventListener('change', function () {
+      fillItems($('#pSection').value, this.value);
+      paintTrail();
+    });
+    $('#pItem').addEventListener('change', paintTrail);
+  }
+
+  /* ============================================================
+     عکس کالا
+     ------------------------------------------------------------
+     عکس‌ها به شکل متن (data URL) در حافظه‌ی مرورگر می‌نشینند —
+     همان روشی که فروشنده‌ی معمولی دارد.
+     ============================================================ */
+  var shots = [];
+  var MAX_SHOTS = 6;
+  var MAX_BYTES = 5 * 1024 * 1024;
+  var OK_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+  function paintShots() {
+    $('#pShots').innerHTML = shots.map(function (src, i) {
+      return '<div class="wp-shot' + (i === 0 ? ' is-main' : '') + '">' +
+        '<img src="' + esc(src) + '" alt="عکس ' + fa(i + 1) + '" />' +
+        (i === 0 ? '<em class="wp-shot-main">اصلی</em>' : '') +
+        '<button class="wp-shot-x" type="button" data-shot="' + i +
+          '" aria-label="حذف عکس ' + fa(i + 1) + '">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+          'stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>' +
+        '</button></div>';
+    }).join('');
+  }
+
+  function addFiles(list) {
+    var files = [].slice.call(list || []);
+    if (!files.length) return;
+    var added = 0;
+
+    files.forEach(function (f) {
+      if (shots.length + added >= MAX_SHOTS) return;
+      if (OK_TYPES.indexOf(f.type) < 0) {
+        U.toast('«' + f.name + '» عکس معتبری نیست.', 'error');
+        return;
+      }
+      if (f.size > MAX_BYTES) {
+        U.toast('«' + f.name + '» بیش از ۵ مگابایت است.', 'error');
+        return;
+      }
+      added++;
+      var fr = new FileReader();
+      fr.onload = function () { shots.push(fr.result); paintShots(); };
+      fr.onerror = function () { U.toast('خواندن عکس ناموفق بود.', 'error'); };
+      fr.readAsDataURL(f);
+    });
+
+    if (shots.length + added > MAX_SHOTS) {
+      U.toast('بیشتر از ' + fa(MAX_SHOTS) + ' عکس نمی‌شود.', 'warn');
+    }
+  }
+
+  $('#pDrop').addEventListener('click', function () { $('#pFiles').click(); });
+  $('#pDrop').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('#pFiles').click(); }
+  });
+  $('#pFiles').addEventListener('change', function (e) {
+    addFiles(e.target.files);
+    e.target.value = '';
+  });
+
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    $('#pDrop').addEventListener(ev, function (e) {
+      e.preventDefault(); $('#pDrop').classList.add('over');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    $('#pDrop').addEventListener(ev, function (e) {
+      e.preventDefault(); $('#pDrop').classList.remove('over');
+    });
+  });
+  $('#pDrop').addEventListener('drop', function (e) {
+    addFiles(e.dataTransfer && e.dataTransfer.files);
+  });
+
+  $('#pShots').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-shot]');
+    if (!b) return;
+    shots.splice(Number(b.dataset.shot), 1);
+    paintShots();
+  });
+
+  /* ---------- فرم ---------- */
+  function openForm(p) {
+    $('#pTitle').textContent = p ? 'ویرایش کالا' : 'افزودن کالای عمده';
+    $('#pId').value = p ? p.id : '';
+    $('#pName').value = p ? p.name : '';
+    $('#pCode').value = p ? p.code : '';
+    $('#pBrand').value = p ? p.brand : '';
+    /* دسته‌بندی — برای کالاهای قدیمی از روی نام کالا حدس می‌زنیم */
+    if (T) {
+      var sec = (p && p.section) || 'women';
+      var grp = (p && p.group) || '';
+      var itm = (p && p.item) || '';
+      if (p && !p.section && p.category) {
+        var found = T.findByItem(p.category);
+        if (found) { sec = found.section; grp = found.group; itm = found.item; }
+      }
+      $('#pSection').value = sec;
+      fillGroups(sec, grp);
+      fillItems(sec, $('#pGroup').value, itm);
+      paintTrail();
+    }
+    $('#pPrice').value = p ? fa(p.price) : '';
+    $('#pMoq').value = p ? fa(p.moq) : '۱۲';
+    $('#pStock').value = p ? fa(p.stock) : '۰';
+    $('#pLowAt').value = p && p.lowAt ? fa(p.lowAt) : '';
+    $('#pLead').value = p ? fa(p.leadTime || 3) : '۳';
+    $('#pStatus').value = p ? p.status : 'active';
+    $('#pMaterial').value = p ? (p.material || '') : '';
+    $('#pColors').value = p ? (p.colors || '') : '';
+    $('#pSizes').value = p ? (p.sizes || '') : '';
+    $('#pPacking').value = p ? (p.packing || '') : '';
+    $('#pDesc').value = p ? (p.description || '') : '';
+    $('#tiers').innerHTML = (p && p.tiers && p.tiers.length ? p.tiers : []).map(tierRow).join('');
+
+    shots = (p && Array.isArray(p.images) ? p.images.slice(0, MAX_SHOTS) : []);
+    paintShots();
+
+    U.openModal('#pModal');
+  }
+
+  $('#addBtn').addEventListener('click', function () { openForm(null); });
+
+  $('#pForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = {
+      name: $('#pName').value, code: $('#pCode').value, brand: $('#pBrand').value,
+      section: T ? $('#pSection').value : '',
+      group: T ? $('#pGroup').value : '',
+      item: T ? $('#pItem').value : '',
+      category: T ? $('#pItem').value : '',
+      images: shots.slice(),
+      price: $('#pPrice').value, moq: $('#pMoq').value,
+      stock: $('#pStock').value, lowAt: $('#pLowAt').value, leadTime: $('#pLead').value,
+      status: $('#pStatus').value, material: $('#pMaterial').value,
+      colors: $('#pColors').value, sizes: $('#pSizes').value,
+      packing: $('#pPacking').value, description: $('#pDesc').value,
+      tiers: readTiers(),
+    };
+    try {
+      var id = $('#pId').value;
+      var okPub = S.can().canPublish;
+
+      if (id) {
+        S.products.update(id, data);
+        U.toast(okPub ? 'کالا به‌روز شد.'
+                      : 'کالا به‌روز شد — تا تأیید مدیر پیش‌نویس می‌ماند.',
+                okPub ? 'success' : 'warn');
+      } else {
+        S.products.add(data);
+        U.toast(okPub ? 'کالا افزوده شد و در بازار عمده دیده می‌شود.'
+                      : 'کالا ثبت شد — پس از تأیید مدیر در بازار منتشر می‌شود.',
+                okPub ? 'success' : 'warn');
+      }
+      U.closeModal($('#pModal'));
+      paint();
+    } catch (err) { U.toast(err.message, 'error'); }
+  });
+
+  document.addEventListener('click', function (e) {
+    var ed = e.target.closest('[data-edit]');
+    if (ed) { openForm(S.products.get(ed.dataset.edit)); return; }
+    var dl = e.target.closest('[data-del]');
+    if (dl) {
+      if (!confirm('این کالا حذف شود؟')) return;
+      S.products.remove(dl.dataset.del);
+      U.toast('کالا حذف شد.', 'success');
+      paint();
+    }
+  });
+
+  $('#q').addEventListener('input', function (e) { q = e.target.value.trim(); paint(); });
+
+  $('#filter').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-f]');
+    if (!b) return;
+    [].slice.call(this.children).forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    filter = b.dataset.f;
+    paint();
+  });
+
+  document.addEventListener('dpw:change', paint);
+  paint();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "digipoosh-ai-api",
+  "version": "1.0.0",
+  "description": "DigiPoosh AI Proxy - Vercel Serverless",
+  "main": "api/chat.js",
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}

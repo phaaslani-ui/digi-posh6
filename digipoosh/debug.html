@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔍 Debug کامل سیستم محصولات</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Vazirmatn', system-ui, monospace; padding: 20px; background: #0f172a; color: #e2e8f0; margin: 0; }
+  h1 { color: #d4af37; margin-bottom: 20px; }
+  h2 { margin: 0 0 10px; font-size: 18px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+  .card { background: #1e293b; padding: 18px; border-radius: 12px; border-right: 4px solid #d4af37; }
+  .success { color: #10b981; font-weight: bold; }
+  .error { color: #ef4444; font-weight: bold; }
+  .warning { color: #f59e0b; font-weight: bold; }
+  .info { color: #60a5fa; }
+  pre { white-space: pre-wrap; word-break: break-all; background: #0a0f1e; padding: 12px; border-radius: 6px; font-size: 11px; max-height: 250px; overflow-y: auto; border: 1px solid #334155; }
+  button { padding: 10px 16px; background: #d4af37; color: #000; border: none; border-radius: 8px; cursor: pointer; margin: 4px; font-weight: 600; transition: all 0.2s; }
+  button:hover { background: #b8961f; transform: translateY(-1px); }
+  button.danger { background: #dc2626; color: #fff; }
+  button.info { background: #3b82f6; color: #fff; }
+  .badge { display: inline-block; padding: 3px 10px; background: #334155; border-radius: 6px; font-size: 11px; margin: 2px; }
+  .product-row { display: flex; gap: 10px; padding: 8px; background: #0a0f1e; border-radius: 6px; margin: 4px 0; }
+  .product-row img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; }
+</style>
+</head>
+<body>
+<h1>🔍 Debug کامل سیستم محصولات - v17.0</h1>
+
+<div class="grid">
+  <div class="card">
+    <h2>📊 سرور API (پورت 8001)</h2>
+    <div id="server-status"></div>
+  </div>
+
+  <div class="card">
+    <h2>📦 محصولات در سرور</h2>
+    <div id="products-server"></div>
+  </div>
+
+  <div class="card">
+    <h2>💾 محصولات در localStorage</h2>
+    <div id="products-local"></div>
+  </div>
+
+  <div class="card">
+    <h2>🏪 فروشنده‌ها در سرور</h2>
+    <div id="sellers-server"></div>
+  </div>
+
+  <div class="card">
+    <h2>👤 کاربر فعلی</h2>
+    <div id="user-status"></div>
+  </div>
+
+  <div class="card">
+    <h2>🤖 موتورها</h2>
+    <div id="engines-status"></div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 15px;">
+  <h2>🔧 ابزارها</h2>
+  <button onclick="location.reload()">🔄 Reload</button>
+  <button class="info" onclick="testServer()">🌐 تست سرور</button>
+  <button class="info" onclick="syncAll()">⬇️ همگام‌سازی از سرور</button>
+  <button class="danger" onclick="clearLocal()">🗑️ پاک کردن localStorage</button>
+  <button class="danger" onclick="resetAll()">💥 ریست کامل (localStorage + سرور)</button>
+  <button class="info" onclick="addTestProduct()">➕ افزودن محصول تست</button>
+</div>
+
+<script src="./dp-product-loader.js"></script>
+<script src="./dp-auth.js"></script>
+
+<script>
+function log(id, msg, type = '') {
+  const el = document.getElementById(id);
+  if (typeof msg === 'object') msg = JSON.stringify(msg, null, 2);
+  const span = type ? `<span class="${type}">${msg}</span>` : msg;
+  el.innerHTML += span + '<br>';
+}
+
+async function testServer() {
+  document.getElementById('server-status').innerHTML = '<span class="info">در حال تست...</span>';
+  try {
+    const res = await fetch('http://localhost:8001/api/products');
+    const products = await res.json();
+    document.getElementById('server-status').innerHTML = 
+      '<span class="success">✅ سرور فعال</span><br>' +
+      '<span class="info">محصولات در سرور: ' + products.length + '</span>';
+  } catch (e) {
+    document.getElementById('server-status').innerHTML = 
+      '<span class="error">❌ سرور در دسترس نیست</span><br>' + e.message;
+  }
+}
+
+async function syncAll() {
+  if (window.DPProductLoader) {
+    await window.DPProductLoader.syncWithServer();
+    location.reload();
+  }
+}
+
+function clearLocal() {
+  if (confirm('localStorage پاک بشه؟')) {
+    localStorage.clear();
+    location.reload();
+  }
+}
+
+async function resetAll() {
+  if (!confirm('همه چیز ریست بشه؟ محصولات سرور هم پاک میشه!')) return;
+  // localStorage پاک
+  localStorage.clear();
+  // سرور هم پاک
+  try {
+    await fetch('http://localhost:8001/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ products: [] })
+    });
+    await fetch('http://localhost:8001/api/sellers', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sellers: [] })
+    });
+  } catch (e) {}
+  location.reload();
+}
+
+async function addTestProduct() {
+  const testProduct = {
+    id: 'sp_test_' + Date.now(),
+    name: 'محصول تست ' + new Date().toLocaleTimeString('fa-IR'),
+    brand: 'برند تست',
+    seller: 'فروشنده تست',
+    sellerId: 's_test',
+    category: 'تیشرت',
+    section: 'woman',
+    price: 500000,
+    originalPrice: 700000,
+    discount: 28,
+    color: 'آبی',
+    colors: ['آبی', 'سفید'],
+    sizes: ['M', 'L'],
+    description: 'این یک محصول تست است',
+    tags: ['تست'],
+    image: 'https://via.placeholder.com/300',
+    stock: 10,
+    sold: 0,
+    rating: 4.5,
+    reviews: 0,
+    status: 'active',
+    approved: true,
+    createdAt: new Date().toISOString()
+  };
+  
+  // به localStorage
+  const all = JSON.parse(localStorage.getItem('dp_products') || '[]');
+  all.push(testProduct);
+  localStorage.setItem('dp_products', JSON.stringify(all));
+  
+  // به سرور
+  try {
+    await fetch('http://localhost:8001/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ products: all })
+    });
+  } catch (e) {}
+  
+  alert('محصول تست اضافه شد! صفحه رفرش میشه');
+  location.reload();
+}
+
+// تست اولیه
+setTimeout(async () => {
+  // سرور
+  try {
+    const res = await fetch('http://localhost:8001/api/products');
+    const products = await res.json();
+    log('server-status', '<span class="success">✅ سرور فعال</span>', '');
+    log('server-status', '<span class="info">URL: http://localhost:8001</span>');
+    log('server-status', '<span class="info">CORS: ✅ فعال</span>');
+  } catch (e) {
+    log('server-status', '<span class="error">❌ سرور در دسترس نیست</span>', '');
+    log('server-status', '<span class="warning">راه‌حل: python3 data-api.py 8001</span>');
+  }
+  
+  // محصولات سرور
+  try {
+    const res = await fetch('http://localhost:8001/api/products');
+    const serverProducts = await res.json();
+    log('products-server', '<span class="success">' + serverProducts.length + ' محصول در سرور</span>');
+    if (serverProducts.length > 0) {
+      serverProducts.slice(0, 3).forEach(p => {
+        log('products-server', '• ' + p.name + ' (' + p.price.toLocaleString('fa-IR') + ' تومان)');
+      });
+    }
+  } catch (e) {
+    log('products-server', '<span class="error">خطا: ' + e.message + '</span>');
+  }
+  
+  // محصولات localStorage
+  const localRaw = localStorage.getItem('dp_products');
+  if (localRaw) {
+    try {
+      const localProducts = JSON.parse(localRaw);
+      const active = localProducts.filter(p => 
+        (p.status === 'active' || p.status === undefined) && p.price > 0
+      );
+      log('products-local', '<span class="success">' + active.length + ' محصول فعال (' + localProducts.length + ' کل)</span>');
+      if (active.length > 0) {
+        active.slice(0, 3).forEach(p => {
+          log('products-local', '• ' + p.name);
+        });
+      }
+    } catch (e) {
+      log('products-local', '<span class="error">JSON خراب</span>');
+    }
+  } else {
+    log('products-local', '<span class="warning">خالی - نیاز به seed</span>');
+  }
+  
+  // فروشنده‌ها
+  try {
+    const res = await fetch('http://localhost:8001/api/sellers');
+    const sellers = await res.json();
+    log('sellers-server', '<span class="success">' + sellers.length + ' فروشنده در سرور</span>');
+    if (sellers.length > 0) {
+      sellers.slice(0, 3).forEach(s => {
+        log('sellers-server', '• ' + s.shopName + ' (' + s.ownerName + ')');
+      });
+    }
+  } catch (e) {
+    log('sellers-server', '<span class="error">خطا</span>');
+  }
+  
+  // کاربر
+  try {
+    const userRaw = localStorage.getItem('dp_current_user');
+    if (userRaw) {
+      const user = JSON.parse(userRaw);
+      log('user-status', '<span class="success">✅ وارد شده</span>');
+      log('user-status', 'نام: ' + (user.name || user.phone || user.email));
+      log('user-status', 'نقش: ' + (user.role || 'user'));
+    } else {
+      log('user-status', '<span class="warning">وارد نشده</span>');
+    }
+  } catch (e) {
+    log('user-status', '<span class="error">خطا</span>');
+  }
+  
+  // موتورها
+  log('engines-status', 'DPProducts: ' + (window.DPProducts ? '✅' : '❌'));
+  log('engines-status', 'DPProductLoader: ' + (window.DPProductLoader ? '✅' : '❌'));
+  log('engines-status', 'DPAINLU: ' + (window.DPAINLU ? '✅' : '❌'));
+  log('engines-status', 'DPAIEngineUltra: ' + (window.DPAIEngineUltra ? '✅' : '❌'));
+  log('engines-status', 'DPTasteProfile: ' + (window.DPTasteProfile ? '✅' : '❌'));
+  log('engines-status', 'DPHybridScorer: ' + (window.DPHybridScorer ? '✅' : '❌'));
+  log('engines-status', 'DPRealMatch: ' + (window.DPRealMatch ? '✅' : '❌'));
+  log('engines-status', 'DPThemeBuilder: ' + (window.DPThemeBuilder ? '✅' : '❌'));
+  
+  // DPProducts.all()
+  if (window.DPProducts) {
+    try {
+      const all = window.DPProducts.all();
+      log('engines-status', '<span class="info">DPProducts.all(): ' + all.length + ' محصول</span>');
+    } catch (e) {}
+  }
+  
+}, 800);
+</script>
+</body>
+</html>

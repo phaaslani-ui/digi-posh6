@@ -1,0 +1,2114 @@
+[
+  {
+    "id": "UMED-00001",
+    "userId": "u001",
+    "medalId": "MED-001",
+    "earnedAt": "2025-10-31T00:00:00"
+  },
+  {
+    "id": "UMED-00002",
+    "userId": "u001",
+    "medalId": "MED-004",
+    "earnedAt": "2024-02-10T00:00:00"
+  },
+  {
+    "id": "UMED-00003",
+    "userId": "u001",
+    "medalId": "MED-002",
+    "earnedAt": "2024-09-22T00:00:00"
+  },
+  {
+    "id": "UMED-00004",
+    "userId": "u001",
+    "medalId": "MED-005",
+    "earnedAt": "2024-08-31T00:00:00"
+  },
+  {
+    "id": "UMED-00005",
+    "userId": "u001",
+    "medalId": "MED-040",
+    "earnedAt": "2026-02-08T00:00:00"
+  },
+  {
+    "id": "UMED-00006",
+    "userId": "u001",
+    "medalId": "MED-006",
+    "earnedAt": "2026-02-12T00:00:00"
+  },
+  {
+    "id": "UMED-00007",
+    "userId": "u001",
+    "medalId": "MED-025",
+    "earnedAt": "2025-07-27T00:00:00"
+  },
+  {
+    "id": "UMED-00008",
+    "userId": "u001",
+    "medalId": "MED-036",
+    "earnedAt": "2024-04-14T00:00:00"
+  },
+  {
+    "id": "UMED-00009",
+    "userId": "u001",
+    "medalId": "MED-027",
+    "earnedAt": "2025-09-11T00:00:00"
+  },
+  {
+    "id": "UMED-00010",
+    "userId": "u001",
+    "medalId": "MED-022",
+    "earnedAt": "2025-03-23T00:00:00"
+  },
+  {
+    "id": "UMED-00011",
+    "userId": "u001",
+    "medalId": "MED-051",
+    "earnedAt": "2024-02-17T00:00:00"
+  },
+  {
+    "id": "UMED-00012",
+    "userId": "u001",
+    "medalId": "MED-045",
+    "earnedAt": "2024-02-15T00:00:00"
+  },
+  {
+    "id": "UMED-00013",
+    "userId": "u001",
+    "medalId": "MED-046",
+    "earnedAt": "2024-04-20T00:00:00"
+  },
+  {
+    "id": "UMED-00014",
+    "userId": "u001",
+    "medalId": "MED-047",
+    "earnedAt": "2024-08-26T00:00:00"
+  },
+  {
+    "id": "UMED-00015",
+    "userId": "u001",
+    "medalId": "MED-048",
+    "earnedAt": "2024-09-10T00:00:00"
+  },
+  {
+    "id": "UMED-00016",
+    "userId": "u001",
+    "medalId": "MED-050",
+    "earnedAt": "2025-06-16T00:00:00"
+  },
+  {
+    "id": "UMED-00017",
+    "userId": "u002",
+    "medalId": "MED-001",
+    "earnedAt": "2023-08-04T00:00:00"
+  },
+  {
+    "id": "UMED-00018",
+    "userId": "u002",
+    "medalId": "MED-004",
+    "earnedAt": "2024-07-22T00:00:00"
+  },
+  {
+    "id": "UMED-00019",
+    "userId": "u002",
+    "medalId": "MED-002",
+    "earnedAt": "2024-09-04T00:00:00"
+  },
+  {
+    "id": "UMED-00020",
+    "userId": "u002",
+    "medalId": "MED-005",
+    "earnedAt": "2025-12-16T00:00:00"
+  },
+  {
+    "id": "UMED-00021",
+    "userId": "u002",
+    "medalId": "MED-040",
+    "earnedAt": "2023-06-24T00:00:00"
+  },
+  {
+    "id": "UMED-00022",
+    "userId": "u002",
+    "medalId": "MED-006",
+    "earnedAt": "2025-05-07T00:00:00"
+  },
+  {
+    "id": "UMED-00023",
+    "userId": "u002",
+    "medalId": "MED-025",
+    "earnedAt": "2024-08-24T00:00:00"
+  },
+  {
+    "id": "UMED-00024",
+    "userId": "u002",
+    "medalId": "MED-036",
+    "earnedAt": "2025-04-30T00:00:00"
+  },
+  {
+    "id": "UMED-00025",
+    "userId": "u002",
+    "medalId": "MED-027",
+    "earnedAt": "2024-01-06T00:00:00"
+  },
+  {
+    "id": "UMED-00026",
+    "userId": "u002",
+    "medalId": "MED-007",
+    "earnedAt": "2023-12-17T00:00:00"
+  },
+  {
+    "id": "UMED-00027",
+    "userId": "u002",
+    "medalId": "MED-018",
+    "earnedAt": "2025-07-28T00:00:00"
+  },
+  {
+    "id": "UMED-00028",
+    "userId": "u002",
+    "medalId": "MED-022",
+    "earnedAt": "2023-12-26T00:00:00"
+  },
+  {
+    "id": "UMED-00029",
+    "userId": "u002",
+    "medalId": "MED-037",
+    "earnedAt": "2025-06-15T00:00:00"
+  },
+  {
+    "id": "UMED-00030",
+    "userId": "u002",
+    "medalId": "MED-038",
+    "earnedAt": "2025-05-15T00:00:00"
+  },
+  {
+    "id": "UMED-00031",
+    "userId": "u002",
+    "medalId": "MED-026",
+    "earnedAt": "2024-12-03T00:00:00"
+  },
+  {
+    "id": "UMED-00032",
+    "userId": "u002",
+    "medalId": "MED-028",
+    "earnedAt": "2023-09-07T00:00:00"
+  },
+  {
+    "id": "UMED-00033",
+    "userId": "u002",
+    "medalId": "MED-051",
+    "earnedAt": "2026-01-06T00:00:00"
+  },
+  {
+    "id": "UMED-00034",
+    "userId": "u002",
+    "medalId": "MED-045",
+    "earnedAt": "2026-06-13T00:00:00"
+  },
+  {
+    "id": "UMED-00035",
+    "userId": "u002",
+    "medalId": "MED-046",
+    "earnedAt": "2024-02-21T00:00:00"
+  },
+  {
+    "id": "UMED-00036",
+    "userId": "u002",
+    "medalId": "MED-047",
+    "earnedAt": "2025-07-25T00:00:00"
+  },
+  {
+    "id": "UMED-00037",
+    "userId": "u002",
+    "medalId": "MED-048",
+    "earnedAt": "2023-11-19T00:00:00"
+  },
+  {
+    "id": "UMED-00038",
+    "userId": "u002",
+    "medalId": "MED-049",
+    "earnedAt": "2026-07-15T00:00:00"
+  },
+  {
+    "id": "UMED-00039",
+    "userId": "u002",
+    "medalId": "MED-050",
+    "earnedAt": "2025-01-31T00:00:00"
+  },
+  {
+    "id": "UMED-00040",
+    "userId": "u003",
+    "medalId": "MED-001",
+    "earnedAt": "2025-09-01T00:00:00"
+  },
+  {
+    "id": "UMED-00041",
+    "userId": "u003",
+    "medalId": "MED-004",
+    "earnedAt": "2024-01-12T00:00:00"
+  },
+  {
+    "id": "UMED-00042",
+    "userId": "u003",
+    "medalId": "MED-002",
+    "earnedAt": "2025-04-06T00:00:00"
+  },
+  {
+    "id": "UMED-00043",
+    "userId": "u003",
+    "medalId": "MED-005",
+    "earnedAt": "2024-02-02T00:00:00"
+  },
+  {
+    "id": "UMED-00044",
+    "userId": "u003",
+    "medalId": "MED-040",
+    "earnedAt": "2024-03-16T00:00:00"
+  },
+  {
+    "id": "UMED-00045",
+    "userId": "u003",
+    "medalId": "MED-006",
+    "earnedAt": "2026-03-08T00:00:00"
+  },
+  {
+    "id": "UMED-00046",
+    "userId": "u003",
+    "medalId": "MED-025",
+    "earnedAt": "2025-09-19T00:00:00"
+  },
+  {
+    "id": "UMED-00047",
+    "userId": "u003",
+    "medalId": "MED-036",
+    "earnedAt": "2025-08-19T00:00:00"
+  },
+  {
+    "id": "UMED-00048",
+    "userId": "u003",
+    "medalId": "MED-027",
+    "earnedAt": "2024-10-25T00:00:00"
+  },
+  {
+    "id": "UMED-00049",
+    "userId": "u003",
+    "medalId": "MED-007",
+    "earnedAt": "2025-02-19T00:00:00"
+  },
+  {
+    "id": "UMED-00050",
+    "userId": "u003",
+    "medalId": "MED-018",
+    "earnedAt": "2024-01-16T00:00:00"
+  },
+  {
+    "id": "UMED-00051",
+    "userId": "u003",
+    "medalId": "MED-022",
+    "earnedAt": "2024-08-07T00:00:00"
+  },
+  {
+    "id": "UMED-00052",
+    "userId": "u003",
+    "medalId": "MED-037",
+    "earnedAt": "2026-08-20T00:00:00"
+  },
+  {
+    "id": "UMED-00053",
+    "userId": "u003",
+    "medalId": "MED-038",
+    "earnedAt": "2025-01-05T00:00:00"
+  },
+  {
+    "id": "UMED-00054",
+    "userId": "u003",
+    "medalId": "MED-026",
+    "earnedAt": "2024-07-22T00:00:00"
+  },
+  {
+    "id": "UMED-00055",
+    "userId": "u003",
+    "medalId": "MED-033",
+    "earnedAt": "2026-03-26T00:00:00"
+  },
+  {
+    "id": "UMED-00056",
+    "userId": "u003",
+    "medalId": "MED-051",
+    "earnedAt": "2025-10-08T00:00:00"
+  },
+  {
+    "id": "UMED-00057",
+    "userId": "u003",
+    "medalId": "MED-045",
+    "earnedAt": "2025-02-25T00:00:00"
+  },
+  {
+    "id": "UMED-00058",
+    "userId": "u003",
+    "medalId": "MED-046",
+    "earnedAt": "2024-11-14T00:00:00"
+  },
+  {
+    "id": "UMED-00059",
+    "userId": "u003",
+    "medalId": "MED-047",
+    "earnedAt": "2025-06-17T00:00:00"
+  },
+  {
+    "id": "UMED-00060",
+    "userId": "u003",
+    "medalId": "MED-048",
+    "earnedAt": "2023-12-15T00:00:00"
+  },
+  {
+    "id": "UMED-00061",
+    "userId": "u003",
+    "medalId": "MED-050",
+    "earnedAt": "2024-12-04T00:00:00"
+  },
+  {
+    "id": "UMED-00062",
+    "userId": "u004",
+    "medalId": "MED-001",
+    "earnedAt": "2024-01-10T00:00:00"
+  },
+  {
+    "id": "UMED-00063",
+    "userId": "u004",
+    "medalId": "MED-004",
+    "earnedAt": "2026-02-04T00:00:00"
+  },
+  {
+    "id": "UMED-00064",
+    "userId": "u004",
+    "medalId": "MED-002",
+    "earnedAt": "2025-01-11T00:00:00"
+  },
+  {
+    "id": "UMED-00065",
+    "userId": "u004",
+    "medalId": "MED-005",
+    "earnedAt": "2025-08-11T00:00:00"
+  },
+  {
+    "id": "UMED-00066",
+    "userId": "u004",
+    "medalId": "MED-040",
+    "earnedAt": "2026-08-24T00:00:00"
+  },
+  {
+    "id": "UMED-00067",
+    "userId": "u004",
+    "medalId": "MED-006",
+    "earnedAt": "2024-08-24T00:00:00"
+  },
+  {
+    "id": "UMED-00068",
+    "userId": "u004",
+    "medalId": "MED-025",
+    "earnedAt": "2025-03-25T00:00:00"
+  },
+  {
+    "id": "UMED-00069",
+    "userId": "u004",
+    "medalId": "MED-036",
+    "earnedAt": "2025-04-27T00:00:00"
+  },
+  {
+    "id": "UMED-00070",
+    "userId": "u004",
+    "medalId": "MED-027",
+    "earnedAt": "2026-04-01T00:00:00"
+  },
+  {
+    "id": "UMED-00071",
+    "userId": "u004",
+    "medalId": "MED-018",
+    "earnedAt": "2026-01-31T00:00:00"
+  },
+  {
+    "id": "UMED-00072",
+    "userId": "u004",
+    "medalId": "MED-022",
+    "earnedAt": "2025-11-16T00:00:00"
+  },
+  {
+    "id": "UMED-00073",
+    "userId": "u004",
+    "medalId": "MED-038",
+    "earnedAt": "2025-01-28T00:00:00"
+  },
+  {
+    "id": "UMED-00074",
+    "userId": "u004",
+    "medalId": "MED-026",
+    "earnedAt": "2024-08-15T00:00:00"
+  },
+  {
+    "id": "UMED-00075",
+    "userId": "u004",
+    "medalId": "MED-051",
+    "earnedAt": "2026-08-12T00:00:00"
+  },
+  {
+    "id": "UMED-00076",
+    "userId": "u004",
+    "medalId": "MED-045",
+    "earnedAt": "2024-05-10T00:00:00"
+  },
+  {
+    "id": "UMED-00077",
+    "userId": "u004",
+    "medalId": "MED-046",
+    "earnedAt": "2024-02-10T00:00:00"
+  },
+  {
+    "id": "UMED-00078",
+    "userId": "u004",
+    "medalId": "MED-047",
+    "earnedAt": "2024-06-17T00:00:00"
+  },
+  {
+    "id": "UMED-00079",
+    "userId": "u004",
+    "medalId": "MED-048",
+    "earnedAt": "2024-09-14T00:00:00"
+  },
+  {
+    "id": "UMED-00080",
+    "userId": "u004",
+    "medalId": "MED-050",
+    "earnedAt": "2024-09-28T00:00:00"
+  },
+  {
+    "id": "UMED-00081",
+    "userId": "u005",
+    "medalId": "MED-001",
+    "earnedAt": "2026-05-10T00:00:00"
+  },
+  {
+    "id": "UMED-00082",
+    "userId": "u005",
+    "medalId": "MED-004",
+    "earnedAt": "2025-04-26T00:00:00"
+  },
+  {
+    "id": "UMED-00083",
+    "userId": "u005",
+    "medalId": "MED-002",
+    "earnedAt": "2025-03-19T00:00:00"
+  },
+  {
+    "id": "UMED-00084",
+    "userId": "u005",
+    "medalId": "MED-005",
+    "earnedAt": "2025-03-15T00:00:00"
+  },
+  {
+    "id": "UMED-00085",
+    "userId": "u005",
+    "medalId": "MED-040",
+    "earnedAt": "2025-06-12T00:00:00"
+  },
+  {
+    "id": "UMED-00086",
+    "userId": "u005",
+    "medalId": "MED-006",
+    "earnedAt": "2025-09-07T00:00:00"
+  },
+  {
+    "id": "UMED-00087",
+    "userId": "u005",
+    "medalId": "MED-025",
+    "earnedAt": "2026-01-15T00:00:00"
+  },
+  {
+    "id": "UMED-00088",
+    "userId": "u005",
+    "medalId": "MED-036",
+    "earnedAt": "2026-02-26T00:00:00"
+  },
+  {
+    "id": "UMED-00089",
+    "userId": "u005",
+    "medalId": "MED-027",
+    "earnedAt": "2024-06-15T00:00:00"
+  },
+  {
+    "id": "UMED-00090",
+    "userId": "u005",
+    "medalId": "MED-018",
+    "earnedAt": "2026-01-17T00:00:00"
+  },
+  {
+    "id": "UMED-00091",
+    "userId": "u005",
+    "medalId": "MED-022",
+    "earnedAt": "2026-08-13T00:00:00"
+  },
+  {
+    "id": "UMED-00092",
+    "userId": "u005",
+    "medalId": "MED-038",
+    "earnedAt": "2025-08-21T00:00:00"
+  },
+  {
+    "id": "UMED-00093",
+    "userId": "u005",
+    "medalId": "MED-026",
+    "earnedAt": "2026-03-28T00:00:00"
+  },
+  {
+    "id": "UMED-00094",
+    "userId": "u005",
+    "medalId": "MED-051",
+    "earnedAt": "2024-11-18T00:00:00"
+  },
+  {
+    "id": "UMED-00095",
+    "userId": "u005",
+    "medalId": "MED-045",
+    "earnedAt": "2026-04-16T00:00:00"
+  },
+  {
+    "id": "UMED-00096",
+    "userId": "u005",
+    "medalId": "MED-046",
+    "earnedAt": "2025-12-06T00:00:00"
+  },
+  {
+    "id": "UMED-00097",
+    "userId": "u005",
+    "medalId": "MED-047",
+    "earnedAt": "2025-02-01T00:00:00"
+  },
+  {
+    "id": "UMED-00098",
+    "userId": "u005",
+    "medalId": "MED-048",
+    "earnedAt": "2024-06-12T00:00:00"
+  },
+  {
+    "id": "UMED-00099",
+    "userId": "u005",
+    "medalId": "MED-049",
+    "earnedAt": "2024-12-15T00:00:00"
+  },
+  {
+    "id": "UMED-00100",
+    "userId": "u005",
+    "medalId": "MED-050",
+    "earnedAt": "2025-05-09T00:00:00"
+  },
+  {
+    "id": "UMED-00101",
+    "userId": "u006",
+    "medalId": "MED-001",
+    "earnedAt": "2024-08-21T00:00:00"
+  },
+  {
+    "id": "UMED-00102",
+    "userId": "u006",
+    "medalId": "MED-004",
+    "earnedAt": "2024-03-16T00:00:00"
+  },
+  {
+    "id": "UMED-00103",
+    "userId": "u006",
+    "medalId": "MED-002",
+    "earnedAt": "2026-03-19T00:00:00"
+  },
+  {
+    "id": "UMED-00104",
+    "userId": "u006",
+    "medalId": "MED-005",
+    "earnedAt": "2024-12-07T00:00:00"
+  },
+  {
+    "id": "UMED-00105",
+    "userId": "u006",
+    "medalId": "MED-040",
+    "earnedAt": "2026-05-02T00:00:00"
+  },
+  {
+    "id": "UMED-00106",
+    "userId": "u006",
+    "medalId": "MED-006",
+    "earnedAt": "2024-06-29T00:00:00"
+  },
+  {
+    "id": "UMED-00107",
+    "userId": "u006",
+    "medalId": "MED-025",
+    "earnedAt": "2025-12-13T00:00:00"
+  },
+  {
+    "id": "UMED-00108",
+    "userId": "u006",
+    "medalId": "MED-036",
+    "earnedAt": "2025-01-12T00:00:00"
+  },
+  {
+    "id": "UMED-00109",
+    "userId": "u006",
+    "medalId": "MED-027",
+    "earnedAt": "2026-07-22T00:00:00"
+  },
+  {
+    "id": "UMED-00110",
+    "userId": "u006",
+    "medalId": "MED-018",
+    "earnedAt": "2025-12-27T00:00:00"
+  },
+  {
+    "id": "UMED-00111",
+    "userId": "u006",
+    "medalId": "MED-022",
+    "earnedAt": "2025-08-14T00:00:00"
+  },
+  {
+    "id": "UMED-00112",
+    "userId": "u006",
+    "medalId": "MED-051",
+    "earnedAt": "2025-11-26T00:00:00"
+  },
+  {
+    "id": "UMED-00113",
+    "userId": "u006",
+    "medalId": "MED-045",
+    "earnedAt": "2024-10-02T00:00:00"
+  },
+  {
+    "id": "UMED-00114",
+    "userId": "u006",
+    "medalId": "MED-046",
+    "earnedAt": "2024-08-16T00:00:00"
+  },
+  {
+    "id": "UMED-00115",
+    "userId": "u006",
+    "medalId": "MED-047",
+    "earnedAt": "2025-03-30T00:00:00"
+  },
+  {
+    "id": "UMED-00116",
+    "userId": "u006",
+    "medalId": "MED-048",
+    "earnedAt": "2026-05-02T00:00:00"
+  },
+  {
+    "id": "UMED-00117",
+    "userId": "u006",
+    "medalId": "MED-050",
+    "earnedAt": "2024-08-25T00:00:00"
+  },
+  {
+    "id": "UMED-00118",
+    "userId": "u007",
+    "medalId": "MED-001",
+    "earnedAt": "2025-10-25T00:00:00"
+  },
+  {
+    "id": "UMED-00119",
+    "userId": "u007",
+    "medalId": "MED-004",
+    "earnedAt": "2025-10-16T00:00:00"
+  },
+  {
+    "id": "UMED-00120",
+    "userId": "u007",
+    "medalId": "MED-002",
+    "earnedAt": "2025-03-18T00:00:00"
+  },
+  {
+    "id": "UMED-00121",
+    "userId": "u007",
+    "medalId": "MED-005",
+    "earnedAt": "2025-09-03T00:00:00"
+  },
+  {
+    "id": "UMED-00122",
+    "userId": "u007",
+    "medalId": "MED-040",
+    "earnedAt": "2024-08-13T00:00:00"
+  },
+  {
+    "id": "UMED-00123",
+    "userId": "u007",
+    "medalId": "MED-006",
+    "earnedAt": "2026-07-26T00:00:00"
+  },
+  {
+    "id": "UMED-00124",
+    "userId": "u007",
+    "medalId": "MED-025",
+    "earnedAt": "2024-06-19T00:00:00"
+  },
+  {
+    "id": "UMED-00125",
+    "userId": "u007",
+    "medalId": "MED-036",
+    "earnedAt": "2024-12-23T00:00:00"
+  },
+  {
+    "id": "UMED-00126",
+    "userId": "u007",
+    "medalId": "MED-027",
+    "earnedAt": "2025-11-22T00:00:00"
+  },
+  {
+    "id": "UMED-00127",
+    "userId": "u007",
+    "medalId": "MED-018",
+    "earnedAt": "2024-07-10T00:00:00"
+  },
+  {
+    "id": "UMED-00128",
+    "userId": "u007",
+    "medalId": "MED-022",
+    "earnedAt": "2024-07-17T00:00:00"
+  },
+  {
+    "id": "UMED-00129",
+    "userId": "u007",
+    "medalId": "MED-038",
+    "earnedAt": "2026-05-10T00:00:00"
+  },
+  {
+    "id": "UMED-00130",
+    "userId": "u007",
+    "medalId": "MED-026",
+    "earnedAt": "2025-08-31T00:00:00"
+  },
+  {
+    "id": "UMED-00131",
+    "userId": "u007",
+    "medalId": "MED-051",
+    "earnedAt": "2026-08-04T00:00:00"
+  },
+  {
+    "id": "UMED-00132",
+    "userId": "u007",
+    "medalId": "MED-045",
+    "earnedAt": "2024-06-30T00:00:00"
+  },
+  {
+    "id": "UMED-00133",
+    "userId": "u007",
+    "medalId": "MED-046",
+    "earnedAt": "2026-06-08T00:00:00"
+  },
+  {
+    "id": "UMED-00134",
+    "userId": "u007",
+    "medalId": "MED-047",
+    "earnedAt": "2025-10-18T00:00:00"
+  },
+  {
+    "id": "UMED-00135",
+    "userId": "u007",
+    "medalId": "MED-048",
+    "earnedAt": "2026-06-14T00:00:00"
+  },
+  {
+    "id": "UMED-00136",
+    "userId": "u007",
+    "medalId": "MED-050",
+    "earnedAt": "2024-08-27T00:00:00"
+  },
+  {
+    "id": "UMED-00137",
+    "userId": "u008",
+    "medalId": "MED-001",
+    "earnedAt": "2024-09-17T00:00:00"
+  },
+  {
+    "id": "UMED-00138",
+    "userId": "u008",
+    "medalId": "MED-004",
+    "earnedAt": "2025-09-07T00:00:00"
+  },
+  {
+    "id": "UMED-00139",
+    "userId": "u008",
+    "medalId": "MED-002",
+    "earnedAt": "2025-02-04T00:00:00"
+  },
+  {
+    "id": "UMED-00140",
+    "userId": "u008",
+    "medalId": "MED-005",
+    "earnedAt": "2025-10-31T00:00:00"
+  },
+  {
+    "id": "UMED-00141",
+    "userId": "u008",
+    "medalId": "MED-040",
+    "earnedAt": "2025-07-16T00:00:00"
+  },
+  {
+    "id": "UMED-00142",
+    "userId": "u008",
+    "medalId": "MED-006",
+    "earnedAt": "2026-06-21T00:00:00"
+  },
+  {
+    "id": "UMED-00143",
+    "userId": "u008",
+    "medalId": "MED-025",
+    "earnedAt": "2026-05-26T00:00:00"
+  },
+  {
+    "id": "UMED-00144",
+    "userId": "u008",
+    "medalId": "MED-036",
+    "earnedAt": "2026-04-15T00:00:00"
+  },
+  {
+    "id": "UMED-00145",
+    "userId": "u008",
+    "medalId": "MED-027",
+    "earnedAt": "2024-11-30T00:00:00"
+  },
+  {
+    "id": "UMED-00146",
+    "userId": "u008",
+    "medalId": "MED-051",
+    "earnedAt": "2026-05-09T00:00:00"
+  },
+  {
+    "id": "UMED-00147",
+    "userId": "u008",
+    "medalId": "MED-045",
+    "earnedAt": "2025-03-24T00:00:00"
+  },
+  {
+    "id": "UMED-00148",
+    "userId": "u008",
+    "medalId": "MED-046",
+    "earnedAt": "2025-06-21T00:00:00"
+  },
+  {
+    "id": "UMED-00149",
+    "userId": "u008",
+    "medalId": "MED-047",
+    "earnedAt": "2026-03-27T00:00:00"
+  },
+  {
+    "id": "UMED-00150",
+    "userId": "u008",
+    "medalId": "MED-048",
+    "earnedAt": "2026-03-05T00:00:00"
+  },
+  {
+    "id": "UMED-00151",
+    "userId": "u008",
+    "medalId": "MED-050",
+    "earnedAt": "2025-05-26T00:00:00"
+  },
+  {
+    "id": "UMED-00152",
+    "userId": "u009",
+    "medalId": "MED-001",
+    "earnedAt": "2025-09-07T00:00:00"
+  },
+  {
+    "id": "UMED-00153",
+    "userId": "u009",
+    "medalId": "MED-004",
+    "earnedAt": "2025-09-21T00:00:00"
+  },
+  {
+    "id": "UMED-00154",
+    "userId": "u009",
+    "medalId": "MED-002",
+    "earnedAt": "2025-02-01T00:00:00"
+  },
+  {
+    "id": "UMED-00155",
+    "userId": "u009",
+    "medalId": "MED-005",
+    "earnedAt": "2024-08-20T00:00:00"
+  },
+  {
+    "id": "UMED-00156",
+    "userId": "u009",
+    "medalId": "MED-040",
+    "earnedAt": "2024-07-07T00:00:00"
+  },
+  {
+    "id": "UMED-00157",
+    "userId": "u009",
+    "medalId": "MED-006",
+    "earnedAt": "2025-02-06T00:00:00"
+  },
+  {
+    "id": "UMED-00158",
+    "userId": "u009",
+    "medalId": "MED-025",
+    "earnedAt": "2025-01-27T00:00:00"
+  },
+  {
+    "id": "UMED-00159",
+    "userId": "u009",
+    "medalId": "MED-036",
+    "earnedAt": "2024-06-23T00:00:00"
+  },
+  {
+    "id": "UMED-00160",
+    "userId": "u009",
+    "medalId": "MED-027",
+    "earnedAt": "2024-08-27T00:00:00"
+  },
+  {
+    "id": "UMED-00161",
+    "userId": "u009",
+    "medalId": "MED-018",
+    "earnedAt": "2026-06-10T00:00:00"
+  },
+  {
+    "id": "UMED-00162",
+    "userId": "u009",
+    "medalId": "MED-022",
+    "earnedAt": "2026-03-24T00:00:00"
+  },
+  {
+    "id": "UMED-00163",
+    "userId": "u009",
+    "medalId": "MED-026",
+    "earnedAt": "2024-08-15T00:00:00"
+  },
+  {
+    "id": "UMED-00164",
+    "userId": "u009",
+    "medalId": "MED-033",
+    "earnedAt": "2025-02-05T00:00:00"
+  },
+  {
+    "id": "UMED-00165",
+    "userId": "u009",
+    "medalId": "MED-051",
+    "earnedAt": "2024-08-24T00:00:00"
+  },
+  {
+    "id": "UMED-00166",
+    "userId": "u009",
+    "medalId": "MED-045",
+    "earnedAt": "2024-07-18T00:00:00"
+  },
+  {
+    "id": "UMED-00167",
+    "userId": "u009",
+    "medalId": "MED-046",
+    "earnedAt": "2025-05-20T00:00:00"
+  },
+  {
+    "id": "UMED-00168",
+    "userId": "u009",
+    "medalId": "MED-047",
+    "earnedAt": "2024-08-27T00:00:00"
+  },
+  {
+    "id": "UMED-00169",
+    "userId": "u009",
+    "medalId": "MED-048",
+    "earnedAt": "2025-11-24T00:00:00"
+  },
+  {
+    "id": "UMED-00170",
+    "userId": "u009",
+    "medalId": "MED-050",
+    "earnedAt": "2025-02-14T00:00:00"
+  },
+  {
+    "id": "UMED-00171",
+    "userId": "u010",
+    "medalId": "MED-001",
+    "earnedAt": "2025-04-13T00:00:00"
+  },
+  {
+    "id": "UMED-00172",
+    "userId": "u010",
+    "medalId": "MED-004",
+    "earnedAt": "2025-11-11T00:00:00"
+  },
+  {
+    "id": "UMED-00173",
+    "userId": "u010",
+    "medalId": "MED-002",
+    "earnedAt": "2024-11-14T00:00:00"
+  },
+  {
+    "id": "UMED-00174",
+    "userId": "u010",
+    "medalId": "MED-005",
+    "earnedAt": "2026-07-12T00:00:00"
+  },
+  {
+    "id": "UMED-00175",
+    "userId": "u010",
+    "medalId": "MED-040",
+    "earnedAt": "2026-02-12T00:00:00"
+  },
+  {
+    "id": "UMED-00176",
+    "userId": "u010",
+    "medalId": "MED-006",
+    "earnedAt": "2026-09-13T00:00:00"
+  },
+  {
+    "id": "UMED-00177",
+    "userId": "u010",
+    "medalId": "MED-025",
+    "earnedAt": "2025-01-12T00:00:00"
+  },
+  {
+    "id": "UMED-00178",
+    "userId": "u010",
+    "medalId": "MED-036",
+    "earnedAt": "2024-10-06T00:00:00"
+  },
+  {
+    "id": "UMED-00179",
+    "userId": "u010",
+    "medalId": "MED-027",
+    "earnedAt": "2024-10-09T00:00:00"
+  },
+  {
+    "id": "UMED-00180",
+    "userId": "u010",
+    "medalId": "MED-007",
+    "earnedAt": "2026-05-07T00:00:00"
+  },
+  {
+    "id": "UMED-00181",
+    "userId": "u010",
+    "medalId": "MED-018",
+    "earnedAt": "2025-09-16T00:00:00"
+  },
+  {
+    "id": "UMED-00182",
+    "userId": "u010",
+    "medalId": "MED-020",
+    "earnedAt": "2025-06-29T00:00:00"
+  },
+  {
+    "id": "UMED-00183",
+    "userId": "u010",
+    "medalId": "MED-022",
+    "earnedAt": "2025-09-08T00:00:00"
+  },
+  {
+    "id": "UMED-00184",
+    "userId": "u010",
+    "medalId": "MED-037",
+    "earnedAt": "2025-08-26T00:00:00"
+  },
+  {
+    "id": "UMED-00185",
+    "userId": "u010",
+    "medalId": "MED-038",
+    "earnedAt": "2025-10-23T00:00:00"
+  },
+  {
+    "id": "UMED-00186",
+    "userId": "u010",
+    "medalId": "MED-026",
+    "earnedAt": "2026-07-18T00:00:00"
+  },
+  {
+    "id": "UMED-00187",
+    "userId": "u010",
+    "medalId": "MED-028",
+    "earnedAt": "2024-08-26T00:00:00"
+  },
+  {
+    "id": "UMED-00188",
+    "userId": "u010",
+    "medalId": "MED-033",
+    "earnedAt": "2026-05-22T00:00:00"
+  },
+  {
+    "id": "UMED-00189",
+    "userId": "u010",
+    "medalId": "MED-051",
+    "earnedAt": "2026-05-02T00:00:00"
+  },
+  {
+    "id": "UMED-00190",
+    "userId": "u010",
+    "medalId": "MED-045",
+    "earnedAt": "2026-04-24T00:00:00"
+  },
+  {
+    "id": "UMED-00191",
+    "userId": "u010",
+    "medalId": "MED-046",
+    "earnedAt": "2024-10-10T00:00:00"
+  },
+  {
+    "id": "UMED-00192",
+    "userId": "u010",
+    "medalId": "MED-047",
+    "earnedAt": "2024-09-02T00:00:00"
+  },
+  {
+    "id": "UMED-00193",
+    "userId": "u010",
+    "medalId": "MED-048",
+    "earnedAt": "2025-08-18T00:00:00"
+  },
+  {
+    "id": "UMED-00194",
+    "userId": "u010",
+    "medalId": "MED-050",
+    "earnedAt": "2026-07-17T00:00:00"
+  },
+  {
+    "id": "UMED-00195",
+    "userId": "u011",
+    "medalId": "MED-001",
+    "earnedAt": "2025-07-24T00:00:00"
+  },
+  {
+    "id": "UMED-00196",
+    "userId": "u011",
+    "medalId": "MED-004",
+    "earnedAt": "2024-11-30T00:00:00"
+  },
+  {
+    "id": "UMED-00197",
+    "userId": "u011",
+    "medalId": "MED-002",
+    "earnedAt": "2025-02-21T00:00:00"
+  },
+  {
+    "id": "UMED-00198",
+    "userId": "u011",
+    "medalId": "MED-005",
+    "earnedAt": "2026-02-11T00:00:00"
+  },
+  {
+    "id": "UMED-00199",
+    "userId": "u011",
+    "medalId": "MED-022",
+    "earnedAt": "2025-02-14T00:00:00"
+  },
+  {
+    "id": "UMED-00200",
+    "userId": "u011",
+    "medalId": "MED-045",
+    "earnedAt": "2025-05-23T00:00:00"
+  },
+  {
+    "id": "UMED-00201",
+    "userId": "u011",
+    "medalId": "MED-047",
+    "earnedAt": "2025-11-27T00:00:00"
+  },
+  {
+    "id": "UMED-00202",
+    "userId": "u011",
+    "medalId": "MED-048",
+    "earnedAt": "2025-04-23T00:00:00"
+  },
+  {
+    "id": "UMED-00203",
+    "userId": "u011",
+    "medalId": "MED-049",
+    "earnedAt": "2024-10-27T00:00:00"
+  },
+  {
+    "id": "UMED-00204",
+    "userId": "u011",
+    "medalId": "MED-050",
+    "earnedAt": "2025-11-07T00:00:00"
+  },
+  {
+    "id": "UMED-00205",
+    "userId": "u012",
+    "medalId": "MED-001",
+    "earnedAt": "2026-03-12T00:00:00"
+  },
+  {
+    "id": "UMED-00206",
+    "userId": "u012",
+    "medalId": "MED-004",
+    "earnedAt": "2024-10-16T00:00:00"
+  },
+  {
+    "id": "UMED-00207",
+    "userId": "u012",
+    "medalId": "MED-002",
+    "earnedAt": "2024-09-10T00:00:00"
+  },
+  {
+    "id": "UMED-00208",
+    "userId": "u012",
+    "medalId": "MED-005",
+    "earnedAt": "2024-11-29T00:00:00"
+  },
+  {
+    "id": "UMED-00209",
+    "userId": "u012",
+    "medalId": "MED-040",
+    "earnedAt": "2025-02-12T00:00:00"
+  },
+  {
+    "id": "UMED-00210",
+    "userId": "u012",
+    "medalId": "MED-006",
+    "earnedAt": "2025-12-31T00:00:00"
+  },
+  {
+    "id": "UMED-00211",
+    "userId": "u012",
+    "medalId": "MED-025",
+    "earnedAt": "2025-10-10T00:00:00"
+  },
+  {
+    "id": "UMED-00212",
+    "userId": "u012",
+    "medalId": "MED-036",
+    "earnedAt": "2024-10-25T00:00:00"
+  },
+  {
+    "id": "UMED-00213",
+    "userId": "u012",
+    "medalId": "MED-027",
+    "earnedAt": "2025-02-10T00:00:00"
+  },
+  {
+    "id": "UMED-00214",
+    "userId": "u012",
+    "medalId": "MED-018",
+    "earnedAt": "2025-09-18T00:00:00"
+  },
+  {
+    "id": "UMED-00215",
+    "userId": "u012",
+    "medalId": "MED-022",
+    "earnedAt": "2024-08-28T00:00:00"
+  },
+  {
+    "id": "UMED-00216",
+    "userId": "u012",
+    "medalId": "MED-026",
+    "earnedAt": "2025-09-29T00:00:00"
+  },
+  {
+    "id": "UMED-00217",
+    "userId": "u012",
+    "medalId": "MED-051",
+    "earnedAt": "2025-05-24T00:00:00"
+  },
+  {
+    "id": "UMED-00218",
+    "userId": "u012",
+    "medalId": "MED-045",
+    "earnedAt": "2025-12-04T00:00:00"
+  },
+  {
+    "id": "UMED-00219",
+    "userId": "u012",
+    "medalId": "MED-046",
+    "earnedAt": "2025-06-14T00:00:00"
+  },
+  {
+    "id": "UMED-00220",
+    "userId": "u012",
+    "medalId": "MED-047",
+    "earnedAt": "2025-11-02T00:00:00"
+  },
+  {
+    "id": "UMED-00221",
+    "userId": "u012",
+    "medalId": "MED-048",
+    "earnedAt": "2026-08-09T00:00:00"
+  },
+  {
+    "id": "UMED-00222",
+    "userId": "u012",
+    "medalId": "MED-050",
+    "earnedAt": "2026-09-13T00:00:00"
+  },
+  {
+    "id": "UMED-00223",
+    "userId": "u013",
+    "medalId": "MED-001",
+    "earnedAt": "2026-03-29T00:00:00"
+  },
+  {
+    "id": "UMED-00224",
+    "userId": "u013",
+    "medalId": "MED-004",
+    "earnedAt": "2026-09-11T00:00:00"
+  },
+  {
+    "id": "UMED-00225",
+    "userId": "u013",
+    "medalId": "MED-002",
+    "earnedAt": "2025-03-19T00:00:00"
+  },
+  {
+    "id": "UMED-00226",
+    "userId": "u013",
+    "medalId": "MED-005",
+    "earnedAt": "2025-07-06T00:00:00"
+  },
+  {
+    "id": "UMED-00227",
+    "userId": "u013",
+    "medalId": "MED-040",
+    "earnedAt": "2024-11-04T00:00:00"
+  },
+  {
+    "id": "UMED-00228",
+    "userId": "u013",
+    "medalId": "MED-006",
+    "earnedAt": "2024-11-07T00:00:00"
+  },
+  {
+    "id": "UMED-00229",
+    "userId": "u013",
+    "medalId": "MED-025",
+    "earnedAt": "2025-07-24T00:00:00"
+  },
+  {
+    "id": "UMED-00230",
+    "userId": "u013",
+    "medalId": "MED-036",
+    "earnedAt": "2024-11-03T00:00:00"
+  },
+  {
+    "id": "UMED-00231",
+    "userId": "u013",
+    "medalId": "MED-027",
+    "earnedAt": "2024-10-27T00:00:00"
+  },
+  {
+    "id": "UMED-00232",
+    "userId": "u013",
+    "medalId": "MED-022",
+    "earnedAt": "2026-04-27T00:00:00"
+  },
+  {
+    "id": "UMED-00233",
+    "userId": "u013",
+    "medalId": "MED-051",
+    "earnedAt": "2026-01-07T00:00:00"
+  },
+  {
+    "id": "UMED-00234",
+    "userId": "u013",
+    "medalId": "MED-045",
+    "earnedAt": "2026-02-02T00:00:00"
+  },
+  {
+    "id": "UMED-00235",
+    "userId": "u013",
+    "medalId": "MED-046",
+    "earnedAt": "2026-03-03T00:00:00"
+  },
+  {
+    "id": "UMED-00236",
+    "userId": "u013",
+    "medalId": "MED-047",
+    "earnedAt": "2025-02-14T00:00:00"
+  },
+  {
+    "id": "UMED-00237",
+    "userId": "u013",
+    "medalId": "MED-048",
+    "earnedAt": "2024-11-03T00:00:00"
+  },
+  {
+    "id": "UMED-00238",
+    "userId": "u013",
+    "medalId": "MED-050",
+    "earnedAt": "2026-02-08T00:00:00"
+  },
+  {
+    "id": "UMED-00239",
+    "userId": "u014",
+    "medalId": "MED-001",
+    "earnedAt": "2024-12-10T00:00:00"
+  },
+  {
+    "id": "UMED-00240",
+    "userId": "u014",
+    "medalId": "MED-004",
+    "earnedAt": "2025-03-28T00:00:00"
+  },
+  {
+    "id": "UMED-00241",
+    "userId": "u014",
+    "medalId": "MED-002",
+    "earnedAt": "2026-05-21T00:00:00"
+  },
+  {
+    "id": "UMED-00242",
+    "userId": "u014",
+    "medalId": "MED-005",
+    "earnedAt": "2024-11-27T00:00:00"
+  },
+  {
+    "id": "UMED-00243",
+    "userId": "u014",
+    "medalId": "MED-047",
+    "earnedAt": "2025-11-06T00:00:00"
+  },
+  {
+    "id": "UMED-00244",
+    "userId": "u014",
+    "medalId": "MED-050",
+    "earnedAt": "2025-01-19T00:00:00"
+  },
+  {
+    "id": "UMED-00245",
+    "userId": "u015",
+    "medalId": "MED-001",
+    "earnedAt": "2026-05-09T00:00:00"
+  },
+  {
+    "id": "UMED-00246",
+    "userId": "u015",
+    "medalId": "MED-004",
+    "earnedAt": "2026-05-18T00:00:00"
+  },
+  {
+    "id": "UMED-00247",
+    "userId": "u015",
+    "medalId": "MED-002",
+    "earnedAt": "2026-06-29T00:00:00"
+  },
+  {
+    "id": "UMED-00248",
+    "userId": "u015",
+    "medalId": "MED-005",
+    "earnedAt": "2024-12-25T00:00:00"
+  },
+  {
+    "id": "UMED-00249",
+    "userId": "u015",
+    "medalId": "MED-040",
+    "earnedAt": "2026-08-07T00:00:00"
+  },
+  {
+    "id": "UMED-00250",
+    "userId": "u015",
+    "medalId": "MED-006",
+    "earnedAt": "2026-03-22T00:00:00"
+  },
+  {
+    "id": "UMED-00251",
+    "userId": "u015",
+    "medalId": "MED-025",
+    "earnedAt": "2025-04-30T00:00:00"
+  },
+  {
+    "id": "UMED-00252",
+    "userId": "u015",
+    "medalId": "MED-036",
+    "earnedAt": "2026-08-19T00:00:00"
+  },
+  {
+    "id": "UMED-00253",
+    "userId": "u015",
+    "medalId": "MED-027",
+    "earnedAt": "2025-08-20T00:00:00"
+  },
+  {
+    "id": "UMED-00254",
+    "userId": "u015",
+    "medalId": "MED-018",
+    "earnedAt": "2025-06-04T00:00:00"
+  },
+  {
+    "id": "UMED-00255",
+    "userId": "u015",
+    "medalId": "MED-020",
+    "earnedAt": "2025-07-01T00:00:00"
+  },
+  {
+    "id": "UMED-00256",
+    "userId": "u015",
+    "medalId": "MED-022",
+    "earnedAt": "2025-11-12T00:00:00"
+  },
+  {
+    "id": "UMED-00257",
+    "userId": "u015",
+    "medalId": "MED-038",
+    "earnedAt": "2025-02-14T00:00:00"
+  },
+  {
+    "id": "UMED-00258",
+    "userId": "u015",
+    "medalId": "MED-026",
+    "earnedAt": "2026-08-21T00:00:00"
+  },
+  {
+    "id": "UMED-00259",
+    "userId": "u015",
+    "medalId": "MED-051",
+    "earnedAt": "2026-07-25T00:00:00"
+  },
+  {
+    "id": "UMED-00260",
+    "userId": "u015",
+    "medalId": "MED-045",
+    "earnedAt": "2025-08-06T00:00:00"
+  },
+  {
+    "id": "UMED-00261",
+    "userId": "u015",
+    "medalId": "MED-046",
+    "earnedAt": "2026-01-14T00:00:00"
+  },
+  {
+    "id": "UMED-00262",
+    "userId": "u015",
+    "medalId": "MED-047",
+    "earnedAt": "2025-08-22T00:00:00"
+  },
+  {
+    "id": "UMED-00263",
+    "userId": "u015",
+    "medalId": "MED-048",
+    "earnedAt": "2024-12-16T00:00:00"
+  },
+  {
+    "id": "UMED-00264",
+    "userId": "u015",
+    "medalId": "MED-049",
+    "earnedAt": "2024-10-12T00:00:00"
+  },
+  {
+    "id": "UMED-00265",
+    "userId": "u015",
+    "medalId": "MED-050",
+    "earnedAt": "2026-01-15T00:00:00"
+  },
+  {
+    "id": "UMED-00266",
+    "userId": "u016",
+    "medalId": "MED-001",
+    "earnedAt": "2026-07-19T00:00:00"
+  },
+  {
+    "id": "UMED-00267",
+    "userId": "u016",
+    "medalId": "MED-004",
+    "earnedAt": "2025-01-31T00:00:00"
+  },
+  {
+    "id": "UMED-00268",
+    "userId": "u016",
+    "medalId": "MED-002",
+    "earnedAt": "2025-05-27T00:00:00"
+  },
+  {
+    "id": "UMED-00269",
+    "userId": "u016",
+    "medalId": "MED-005",
+    "earnedAt": "2026-03-23T00:00:00"
+  },
+  {
+    "id": "UMED-00270",
+    "userId": "u016",
+    "medalId": "MED-040",
+    "earnedAt": "2025-03-05T00:00:00"
+  },
+  {
+    "id": "UMED-00271",
+    "userId": "u016",
+    "medalId": "MED-006",
+    "earnedAt": "2025-06-28T00:00:00"
+  },
+  {
+    "id": "UMED-00272",
+    "userId": "u016",
+    "medalId": "MED-025",
+    "earnedAt": "2025-03-31T00:00:00"
+  },
+  {
+    "id": "UMED-00273",
+    "userId": "u016",
+    "medalId": "MED-036",
+    "earnedAt": "2026-01-12T00:00:00"
+  },
+  {
+    "id": "UMED-00274",
+    "userId": "u016",
+    "medalId": "MED-027",
+    "earnedAt": "2026-04-30T00:00:00"
+  },
+  {
+    "id": "UMED-00275",
+    "userId": "u016",
+    "medalId": "MED-007",
+    "earnedAt": "2025-08-26T00:00:00"
+  },
+  {
+    "id": "UMED-00276",
+    "userId": "u016",
+    "medalId": "MED-018",
+    "earnedAt": "2026-07-09T00:00:00"
+  },
+  {
+    "id": "UMED-00277",
+    "userId": "u016",
+    "medalId": "MED-022",
+    "earnedAt": "2026-08-21T00:00:00"
+  },
+  {
+    "id": "UMED-00278",
+    "userId": "u016",
+    "medalId": "MED-037",
+    "earnedAt": "2026-04-15T00:00:00"
+  },
+  {
+    "id": "UMED-00279",
+    "userId": "u016",
+    "medalId": "MED-038",
+    "earnedAt": "2024-10-29T00:00:00"
+  },
+  {
+    "id": "UMED-00280",
+    "userId": "u016",
+    "medalId": "MED-026",
+    "earnedAt": "2026-09-04T00:00:00"
+  },
+  {
+    "id": "UMED-00281",
+    "userId": "u016",
+    "medalId": "MED-028",
+    "earnedAt": "2026-05-11T00:00:00"
+  },
+  {
+    "id": "UMED-00282",
+    "userId": "u016",
+    "medalId": "MED-051",
+    "earnedAt": "2025-08-23T00:00:00"
+  },
+  {
+    "id": "UMED-00283",
+    "userId": "u016",
+    "medalId": "MED-045",
+    "earnedAt": "2026-08-31T00:00:00"
+  },
+  {
+    "id": "UMED-00284",
+    "userId": "u016",
+    "medalId": "MED-046",
+    "earnedAt": "2025-02-04T00:00:00"
+  },
+  {
+    "id": "UMED-00285",
+    "userId": "u016",
+    "medalId": "MED-047",
+    "earnedAt": "2025-03-07T00:00:00"
+  },
+  {
+    "id": "UMED-00286",
+    "userId": "u016",
+    "medalId": "MED-048",
+    "earnedAt": "2025-07-18T00:00:00"
+  },
+  {
+    "id": "UMED-00287",
+    "userId": "u016",
+    "medalId": "MED-050",
+    "earnedAt": "2025-02-16T00:00:00"
+  },
+  {
+    "id": "UMED-00288",
+    "userId": "u017",
+    "medalId": "MED-001",
+    "earnedAt": "2025-02-26T00:00:00"
+  },
+  {
+    "id": "UMED-00289",
+    "userId": "u017",
+    "medalId": "MED-004",
+    "earnedAt": "2025-04-17T00:00:00"
+  },
+  {
+    "id": "UMED-00290",
+    "userId": "u017",
+    "medalId": "MED-002",
+    "earnedAt": "2026-07-21T00:00:00"
+  },
+  {
+    "id": "UMED-00291",
+    "userId": "u017",
+    "medalId": "MED-005",
+    "earnedAt": "2025-06-12T00:00:00"
+  },
+  {
+    "id": "UMED-00292",
+    "userId": "u017",
+    "medalId": "MED-040",
+    "earnedAt": "2025-06-05T00:00:00"
+  },
+  {
+    "id": "UMED-00293",
+    "userId": "u017",
+    "medalId": "MED-006",
+    "earnedAt": "2026-04-10T00:00:00"
+  },
+  {
+    "id": "UMED-00294",
+    "userId": "u017",
+    "medalId": "MED-025",
+    "earnedAt": "2025-07-24T00:00:00"
+  },
+  {
+    "id": "UMED-00295",
+    "userId": "u017",
+    "medalId": "MED-036",
+    "earnedAt": "2024-12-31T00:00:00"
+  },
+  {
+    "id": "UMED-00296",
+    "userId": "u017",
+    "medalId": "MED-027",
+    "earnedAt": "2025-02-11T00:00:00"
+  },
+  {
+    "id": "UMED-00297",
+    "userId": "u017",
+    "medalId": "MED-018",
+    "earnedAt": "2026-08-20T00:00:00"
+  },
+  {
+    "id": "UMED-00298",
+    "userId": "u017",
+    "medalId": "MED-022",
+    "earnedAt": "2026-01-16T00:00:00"
+  },
+  {
+    "id": "UMED-00299",
+    "userId": "u017",
+    "medalId": "MED-051",
+    "earnedAt": "2025-08-19T00:00:00"
+  },
+  {
+    "id": "UMED-00300",
+    "userId": "u017",
+    "medalId": "MED-045",
+    "earnedAt": "2024-12-24T00:00:00"
+  },
+  {
+    "id": "UMED-00301",
+    "userId": "u017",
+    "medalId": "MED-046",
+    "earnedAt": "2024-11-12T00:00:00"
+  },
+  {
+    "id": "UMED-00302",
+    "userId": "u017",
+    "medalId": "MED-047",
+    "earnedAt": "2025-10-16T00:00:00"
+  },
+  {
+    "id": "UMED-00303",
+    "userId": "u017",
+    "medalId": "MED-048",
+    "earnedAt": "2025-03-22T00:00:00"
+  },
+  {
+    "id": "UMED-00304",
+    "userId": "u017",
+    "medalId": "MED-050",
+    "earnedAt": "2026-08-23T00:00:00"
+  },
+  {
+    "id": "UMED-00305",
+    "userId": "u018",
+    "medalId": "MED-001",
+    "earnedAt": "2025-08-21T00:00:00"
+  },
+  {
+    "id": "UMED-00306",
+    "userId": "u018",
+    "medalId": "MED-004",
+    "earnedAt": "2025-05-10T00:00:00"
+  },
+  {
+    "id": "UMED-00307",
+    "userId": "u018",
+    "medalId": "MED-002",
+    "earnedAt": "2026-06-13T00:00:00"
+  },
+  {
+    "id": "UMED-00308",
+    "userId": "u018",
+    "medalId": "MED-005",
+    "earnedAt": "2026-02-06T00:00:00"
+  },
+  {
+    "id": "UMED-00309",
+    "userId": "u018",
+    "medalId": "MED-047",
+    "earnedAt": "2025-03-20T00:00:00"
+  },
+  {
+    "id": "UMED-00310",
+    "userId": "u018",
+    "medalId": "MED-050",
+    "earnedAt": "2025-02-11T00:00:00"
+  },
+  {
+    "id": "UMED-00311",
+    "userId": "u019",
+    "medalId": "MED-001",
+    "earnedAt": "2025-05-12T00:00:00"
+  },
+  {
+    "id": "UMED-00312",
+    "userId": "u019",
+    "medalId": "MED-004",
+    "earnedAt": "2025-01-16T00:00:00"
+  },
+  {
+    "id": "UMED-00313",
+    "userId": "u019",
+    "medalId": "MED-002",
+    "earnedAt": "2026-06-29T00:00:00"
+  },
+  {
+    "id": "UMED-00314",
+    "userId": "u019",
+    "medalId": "MED-005",
+    "earnedAt": "2025-05-11T00:00:00"
+  },
+  {
+    "id": "UMED-00315",
+    "userId": "u019",
+    "medalId": "MED-040",
+    "earnedAt": "2025-04-20T00:00:00"
+  },
+  {
+    "id": "UMED-00316",
+    "userId": "u019",
+    "medalId": "MED-006",
+    "earnedAt": "2025-12-19T00:00:00"
+  },
+  {
+    "id": "UMED-00317",
+    "userId": "u019",
+    "medalId": "MED-025",
+    "earnedAt": "2025-12-12T00:00:00"
+  },
+  {
+    "id": "UMED-00318",
+    "userId": "u019",
+    "medalId": "MED-036",
+    "earnedAt": "2025-07-14T00:00:00"
+  },
+  {
+    "id": "UMED-00319",
+    "userId": "u019",
+    "medalId": "MED-027",
+    "earnedAt": "2025-08-23T00:00:00"
+  },
+  {
+    "id": "UMED-00320",
+    "userId": "u019",
+    "medalId": "MED-018",
+    "earnedAt": "2025-03-26T00:00:00"
+  },
+  {
+    "id": "UMED-00321",
+    "userId": "u019",
+    "medalId": "MED-022",
+    "earnedAt": "2025-12-08T00:00:00"
+  },
+  {
+    "id": "UMED-00322",
+    "userId": "u019",
+    "medalId": "MED-051",
+    "earnedAt": "2026-07-07T00:00:00"
+  },
+  {
+    "id": "UMED-00323",
+    "userId": "u019",
+    "medalId": "MED-045",
+    "earnedAt": "2026-01-31T00:00:00"
+  },
+  {
+    "id": "UMED-00324",
+    "userId": "u019",
+    "medalId": "MED-046",
+    "earnedAt": "2026-09-07T00:00:00"
+  },
+  {
+    "id": "UMED-00325",
+    "userId": "u019",
+    "medalId": "MED-047",
+    "earnedAt": "2025-05-18T00:00:00"
+  },
+  {
+    "id": "UMED-00326",
+    "userId": "u019",
+    "medalId": "MED-048",
+    "earnedAt": "2025-08-10T00:00:00"
+  },
+  {
+    "id": "UMED-00327",
+    "userId": "u019",
+    "medalId": "MED-050",
+    "earnedAt": "2025-05-26T00:00:00"
+  },
+  {
+    "id": "UMED-00328",
+    "userId": "u020",
+    "medalId": "MED-001",
+    "earnedAt": "2025-07-06T00:00:00"
+  },
+  {
+    "id": "UMED-00329",
+    "userId": "u020",
+    "medalId": "MED-004",
+    "earnedAt": "2025-01-31T00:00:00"
+  },
+  {
+    "id": "UMED-00330",
+    "userId": "u020",
+    "medalId": "MED-002",
+    "earnedAt": "2026-03-03T00:00:00"
+  },
+  {
+    "id": "UMED-00331",
+    "userId": "u020",
+    "medalId": "MED-005",
+    "earnedAt": "2025-09-17T00:00:00"
+  },
+  {
+    "id": "UMED-00332",
+    "userId": "u020",
+    "medalId": "MED-040",
+    "earnedAt": "2025-06-18T00:00:00"
+  },
+  {
+    "id": "UMED-00333",
+    "userId": "u020",
+    "medalId": "MED-006",
+    "earnedAt": "2025-02-14T00:00:00"
+  },
+  {
+    "id": "UMED-00334",
+    "userId": "u020",
+    "medalId": "MED-025",
+    "earnedAt": "2025-07-29T00:00:00"
+  },
+  {
+    "id": "UMED-00335",
+    "userId": "u020",
+    "medalId": "MED-036",
+    "earnedAt": "2026-04-22T00:00:00"
+  },
+  {
+    "id": "UMED-00336",
+    "userId": "u020",
+    "medalId": "MED-027",
+    "earnedAt": "2025-11-14T00:00:00"
+  },
+  {
+    "id": "UMED-00337",
+    "userId": "u020",
+    "medalId": "MED-007",
+    "earnedAt": "2025-08-27T00:00:00"
+  },
+  {
+    "id": "UMED-00338",
+    "userId": "u020",
+    "medalId": "MED-018",
+    "earnedAt": "2025-08-22T00:00:00"
+  },
+  {
+    "id": "UMED-00339",
+    "userId": "u020",
+    "medalId": "MED-020",
+    "earnedAt": "2025-01-30T00:00:00"
+  },
+  {
+    "id": "UMED-00340",
+    "userId": "u020",
+    "medalId": "MED-022",
+    "earnedAt": "2025-07-22T00:00:00"
+  },
+  {
+    "id": "UMED-00341",
+    "userId": "u020",
+    "medalId": "MED-037",
+    "earnedAt": "2026-02-18T00:00:00"
+  },
+  {
+    "id": "UMED-00342",
+    "userId": "u020",
+    "medalId": "MED-038",
+    "earnedAt": "2025-12-08T00:00:00"
+  },
+  {
+    "id": "UMED-00343",
+    "userId": "u020",
+    "medalId": "MED-026",
+    "earnedAt": "2025-10-18T00:00:00"
+  },
+  {
+    "id": "UMED-00344",
+    "userId": "u020",
+    "medalId": "MED-008",
+    "earnedAt": "2025-03-18T00:00:00"
+  },
+  {
+    "id": "UMED-00345",
+    "userId": "u020",
+    "medalId": "MED-028",
+    "earnedAt": "2025-10-18T00:00:00"
+  },
+  {
+    "id": "UMED-00346",
+    "userId": "u020",
+    "medalId": "MED-033",
+    "earnedAt": "2025-12-31T00:00:00"
+  },
+  {
+    "id": "UMED-00347",
+    "userId": "u020",
+    "medalId": "MED-051",
+    "earnedAt": "2026-02-19T00:00:00"
+  },
+  {
+    "id": "UMED-00348",
+    "userId": "u020",
+    "medalId": "MED-045",
+    "earnedAt": "2026-07-09T00:00:00"
+  },
+  {
+    "id": "UMED-00349",
+    "userId": "u020",
+    "medalId": "MED-046",
+    "earnedAt": "2025-12-11T00:00:00"
+  },
+  {
+    "id": "UMED-00350",
+    "userId": "u020",
+    "medalId": "MED-047",
+    "earnedAt": "2025-02-03T00:00:00"
+  },
+  {
+    "id": "UMED-00351",
+    "userId": "u020",
+    "medalId": "MED-048",
+    "earnedAt": "2025-05-04T00:00:00"
+  },
+  {
+    "id": "UMED-00352",
+    "userId": "u020",
+    "medalId": "MED-050",
+    "earnedAt": "2025-09-30T00:00:00"
+  }
+]

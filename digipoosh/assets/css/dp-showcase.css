@@ -1,0 +1,542 @@
+/* ============================================================
+   دیجی‌پوش — ویترین محصولات واقعی در صفحات بخش‌ها
+   ============================================================ */
+
+.dpp-section { padding: 60px 0; }
+
+.dpp-wrap {
+  width: min(1320px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.dpp-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.dpp-eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #b8943c;
+}
+
+.dpp-head h2 {
+  margin: 5px 0 0;
+  font-size: clamp(21px, 2.7vw, 28px);
+  font-weight: 800;
+}
+
+.dpp-count {
+  padding: 6px 15px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #8a6d1f;
+  background: rgba(201, 168, 76, 0.14);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+}
+
+/* ---------- شبکه ---------- */
+.dpp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(228px, 1fr));
+  gap: 20px;
+}
+
+.dpp-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #faf8f5;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.42s ease, border-color 0.42s ease;
+}
+
+.dpp-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(201, 168, 76, 0.45);
+  box-shadow: 0 26px 50px -28px rgba(201, 168, 76, 0.5);
+}
+
+.dpp-thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 4.3;
+  overflow: hidden;
+  background: linear-gradient(150deg, #f5f0e8, #ede8e0);
+}
+
+.dpp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dpp-card:hover .dpp-thumb img { transform: scale(1.06); }
+
+.dpp-letter {
+  font-size: 52px;
+  font-weight: 800;
+  background-image: linear-gradient(135deg, #c9a84c, #d4b85a, #b8943c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dpp-tag {
+  position: absolute;
+  inset-block-start: 10px;
+  inset-inline-start: 10px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(201, 168, 76, 0.95);
+}
+
+.dpp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 14px;
+  flex: 1;
+}
+
+/* ---------- نام فروشگاه ---------- */
+.dpp-shop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: #796e64;
+  transition: color 0.25s ease;
+}
+
+.dpp-shop:hover { color: #b8943c; }
+
+.dpp-shop-ava {
+  width: 20px; height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 800;
+  color: #faf8f5;
+  background: linear-gradient(135deg, #c9a84c, #b8943c);
+  flex: none;
+}
+
+.dpp-shop-ava img { width: 100%; height: 100%; object-fit: cover; }
+
+.dpp-rate {
+  margin-inline-start: auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #8a6d1f;
+  background: rgba(201, 168, 76, 0.18);
+}
+
+.dpp-name {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dpp-cat { font-size: 11px; color: #b8943c; font-weight: 600; }
+
+.dpp-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 11px;
+  border-top: 1px dashed rgba(201, 168, 76, 0.25);
+}
+
+.dpp-price { font-size: 15.5px; font-weight: 800; }
+.dpp-price small { font-size: 10.5px; font-weight: 500; color: #796e64; margin-inline-start: 3px; }
+
+.dpp-add {
+  width: 36px; height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  color: #faf8f5;
+  background: linear-gradient(135deg, #c9a84c, #b8943c);
+  box-shadow: 0 7px 16px -8px rgba(201, 168, 76, 0.95);
+  transition: transform 0.25s ease, background 0.25s ease;
+  flex: none;
+}
+
+.dpp-add svg { width: 19px; height: 19px; }
+.dpp-add:hover { transform: scale(1.1); }
+
+.dpp-add.ok {
+  background: linear-gradient(135deg, #4a8f6b, #3e7c5c);
+  transform: scale(1.14);
+}
+
+/* ============================================================
+   صفحات تیره — مردانه و تینیجر
+   ============================================================ */
+[data-dp-page="man"] .dpp-card,
+[data-dp-page="teen"] .dpp-card {
+  background: rgba(22, 22, 22, 0.7);
+  border-color: rgba(201, 168, 76, 0.26);
+  color: #ede8e0;
+}
+
+[data-dp-page="man"] .dpp-thumb,
+[data-dp-page="teen"] .dpp-thumb {
+  background: linear-gradient(150deg, #1e1e1e, #141414);
+}
+
+[data-dp-page="man"] .dpp-count,
+[data-dp-page="teen"] .dpp-count { color: #e6ce86; background: rgba(201, 168, 76, 0.14); }
+
+[data-dp-page="man"] .dpp-foot,
+[data-dp-page="teen"] .dpp-foot { border-color: rgba(201, 168, 76, 0.22); }
+
+/* ============================================================
+   واکنش‌گرا
+   ============================================================ */
+@media (max-width: 640px) {
+  .dpp-section { padding: 40px 0; }
+  .dpp-wrap { width: calc(100% - 28px); }
+  .dpp-grid { grid-template-columns: repeat(2, 1fr); gap: 13px; }
+  .dpp-body { padding: 11px; }
+  .dpp-name { font-size: 13px; }
+  .dpp-price { font-size: 14px; }
+  .dpp-add { width: 32px; height: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dpp-card, .dpp-thumb img, .dpp-add { transition: none; }
+}
+
+/* ---------- نشان تخفیف ---------- */
+.dpp-off {
+  position: absolute;
+  inset-block-start: 10px;
+  inset-inline-end: 10px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #d05a54, #b4544f);
+  box-shadow: 0 4px 12px -4px rgba(180, 84, 79, 0.9);
+}
+
+.dpp-price s {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #796e64;
+  text-decoration: line-through;
+}
+
+/* ============================================================
+   انتخابگر رنگ و سایز روی خود کارت
+   ------------------------------------------------------------
+   کاربر بدون ترک صفحه رنگ و سایز را می‌چیند و کالا
+   همان لحظه به سبد می‌رود.
+   ============================================================ */
+.dpp-card { position: relative; }
+.dpp-card.is-pick { z-index: 20; }
+
+.dpp-pick {
+  position: absolute;
+  inset-inline: 8px;
+  bottom: 8px;
+  z-index: 5;
+  padding: 13px 14px;
+  border-radius: 15px;
+  background: #faf8f5;
+  border: 1px solid rgba(201, 168, 76, 0.34);
+  box-shadow: 0 22px 46px -22px rgba(0, 0, 0, 0.4);
+  animation: dppPickIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dppPickIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.dpp-pick-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.dpp-pick-head strong { font-size: 12.5px; font-weight: 800; color: #1a1a1a; }
+
+.dpp-pick-x {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(201, 168, 76, 0.12);
+  color: #796e64;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dpp-pick-x svg { width: 14px; height: 14px; }
+.dpp-pick-x:hover { background: rgba(201, 168, 76, 0.24); color: #1a1a1a; }
+
+.dpp-pick-lbl {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #796e64;
+}
+
+.dpp-pick-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+/* ---------- حباب رنگ ---------- */
+.dpp-dot {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--bg);
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.dpp-dot:hover { transform: scale(1.12); }
+.dpp-dot.on {
+  border-color: #faf8f5;
+  box-shadow: 0 0 0 2.5px #c9a84c;
+  transform: scale(1.1);
+}
+
+/* ---------- دکمه‌ی سایز ---------- */
+.dpp-chip {
+  min-width: 36px;
+  padding: 6px 11px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a1a1a;
+  cursor: pointer;
+  background: rgba(201, 168, 76, 0.09);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.dpp-chip:hover { background: rgba(201, 168, 76, 0.2); }
+.dpp-chip:active { transform: scale(0.94); }
+
+.dpp-chip.on {
+  color: #faf8f5;
+  border-color: transparent;
+  background: linear-gradient(135deg, #c9a84c, #b8943c);
+}
+
+.dpp-pick-warn {
+  margin: -4px 0 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #b25353;
+}
+
+.dpp-pick-warn[hidden] { display: none; }
+
+/* ---------- دکمه‌ی تأیید ---------- */
+.dpp-pick-go {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  color: #faf8f5;
+  cursor: pointer;
+  background: linear-gradient(135deg, #c9a84c, #b8943c);
+  box-shadow: 0 10px 22px -12px rgba(201, 168, 76, 0.95);
+  transition: transform 0.22s ease;
+}
+
+.dpp-pick-go svg { width: 17px; height: 17px; }
+.dpp-pick-go:hover { transform: translateY(-2px); }
+.dpp-pick-go:active { transform: translateY(0); }
+
+/* ---------- صفحه‌های تیره ---------- */
+[data-dp-page="man"] .dpp-pick,
+[data-dp-page="teen"] .dpp-pick {
+  background: #171717;
+  border-color: rgba(201, 168, 76, 0.34);
+}
+
+[data-dp-page="man"] .dpp-pick-head strong,
+[data-dp-page="teen"] .dpp-pick-head strong,
+[data-dp-page="man"] .dpp-chip,
+[data-dp-page="teen"] .dpp-chip { color: #ede8e0; }
+
+[data-dp-page="man"] .dpp-chip.on,
+[data-dp-page="teen"] .dpp-chip.on { color: #14100a; }
+
+[data-dp-page="man"] .dpp-dot.on,
+[data-dp-page="teen"] .dpp-dot.on { border-color: #171717; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dpp-pick { animation: none; }
+  .dpp-dot, .dpp-chip, .dpp-pick-go, .dpp-pick-x { transition-duration: 0.001ms !important; }
+}
+
+/* ============================================================
+   آمار کوتاه، فیلتر سبک و دکمه‌ی «بیشتر»
+   ============================================================ */
+.dpp-facts {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.dpp-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: rgba(201, 168, 76, 0.07);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.dpp-facts b {
+  font-size: 19px;
+  font-weight: 800;
+  color: #8a6d1f;
+  letter-spacing: 0.01em;
+}
+
+.dpp-facts span {
+  font-size: 12px;
+  color: #75695f;
+}
+
+.dpp-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 20px;
+}
+
+.dpp-fchip {
+  padding: 7px 15px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #75695f;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  transition: background 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+}
+
+.dpp-fchip:hover { border-color: rgba(201, 168, 76, 0.6); }
+
+.dpp-fchip.on {
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+  border-color: transparent;
+}
+
+.dpp-more-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+.dpp-more {
+  padding: 11px 30px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #8a6d1f;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dpp-more:hover {
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #d4b85a, #c9a84c);
+}
+
+/* ---------- صفحه‌های تیره ---------- */
+[data-dp-page="man"] .dpp-facts b,
+[data-dp-page="teen"] .dpp-facts b { color: #e6ce86; }
+
+[data-dp-page="man"] .dpp-facts span,
+[data-dp-page="teen"] .dpp-facts span { color: #b8ae9f; }
+
+[data-dp-page="man"] .dpp-facts li,
+[data-dp-page="teen"] .dpp-facts li { background: rgba(201, 168, 76, 0.08); }
+
+[data-dp-page="man"] .dpp-fchip,
+[data-dp-page="teen"] .dpp-fchip,
+[data-dp-page="man"] .dpp-more,
+[data-dp-page="teen"] .dpp-more { color: #e6ce86; }
+
+[data-dp-page="man"] .dpp-fchip.on,
+[data-dp-page="teen"] .dpp-fchip.on,
+[data-dp-page="man"] .dpp-more:hover,
+[data-dp-page="teen"] .dpp-more:hover { color: #1a1a1a; }
+
+@media (max-width: 640px) {
+  .dpp-facts { grid-template-columns: repeat(2, 1fr); gap: 9px; }
+  .dpp-facts li { padding: 10px 12px; }
+  .dpp-facts b { font-size: 16px; }
+}

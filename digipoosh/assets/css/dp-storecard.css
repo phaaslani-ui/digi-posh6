@@ -1,0 +1,246 @@
+/* ============================================================
+   دیجی‌پوش — کارت فروشگاه‌های واقعی
+   ------------------------------------------------------------
+   نمونه‌های ساختگی از صفحه‌ها حذف شدند. این شیوه‌نامه فقط
+   کارت فروشگاه‌هایی را می‌آراید که واقعاً ثبت‌نام کرده‌اند و
+   با فایل dp-public.js ساخته می‌شوند.
+
+   هر صفحه رنگ خودش را دارد؛ پایه یکی است.
+   ============================================================ */
+
+:root {
+  --dsc-gold: #c9a84c;
+  --dsc-gold-l: #d4b85a;
+  --dsc-bronze: #b8943c;
+  --dsc-bg: #faf8f5;
+  --dsc-ink: #1a1a1a;
+  --dsc-gray: #8a7e72;
+  --dsc-line: rgba(201, 168, 76, 0.22);
+  --dsc-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-dp-page="man"],
+[data-dp-page="teen"] {
+  --dsc-bg: #171717;
+  --dsc-ink: #ede8e0;
+  --dsc-gray: #9a9088;
+  --dsc-line: rgba(201, 168, 76, 0.3);
+}
+
+/* ============================================================
+   بدنه‌ی کارت
+   ============================================================ */
+.store-card,
+.store-card-m {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 26px 22px 24px;
+  text-align: center;
+  border-radius: 18px;
+  background: var(--dsc-bg);
+  border: 1px solid var(--dsc-line);
+  contain: layout paint style;
+  transition: transform 0.34s var(--dsc-ease), box-shadow 0.34s var(--dsc-ease);
+}
+
+.store-card:hover,
+.store-card-m:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 50px -30px rgba(0, 0, 0, 0.34);
+}
+
+/* ============================================================
+   نشان فروشگاه
+   ============================================================ */
+.store-avatar,
+.store-avatar-m {
+  width: 78px;
+  height: 78px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid var(--dsc-line);
+  background: rgba(201, 168, 76, 0.1);
+}
+
+.store-avatar img,
+.store-avatar-m img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* وقتی لوگو ندارد، حرف نخست نام نشان داده می‌شود */
+.dp-avatar-letter {
+  font-size: 30px;
+  font-weight: 800;
+  color: #faf8f5;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--dsc-gold-l), var(--dsc-bronze));
+}
+
+/* ============================================================
+   نام و دسته
+   ============================================================ */
+.store-name,
+.store-name-m {
+  margin: 4px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--dsc-ink);
+}
+
+.store-cat,
+.store-cat-m {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--dsc-bronze);
+}
+
+.store-desc {
+  margin: 2px 0 0;
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--dsc-gray);
+}
+
+/* ============================================================
+   ریزاطلاعات — شهر، تعداد کالا
+   ============================================================ */
+.store-meta,
+.store-meta-m,
+.store-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  font-size: 12px;
+  color: var(--dsc-gray);
+}
+
+.store-meta span,
+.store-meta-m span,
+.store-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.store-meta .ico,
+.store-meta-m .ico,
+.store-stats .ico {
+  width: 15px;
+  height: 15px;
+  color: var(--dsc-bronze);
+}
+
+/* ============================================================
+   برچسب‌ها
+   ============================================================ */
+.store-tags,
+.store-tags-m {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.store-tags span,
+.store-tags-m span {
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dsc-bronze);
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid var(--dsc-line);
+}
+
+/* ============================================================
+   دکمه‌ی «مشاهده فروشگاه»
+   ============================================================ */
+.btn-store,
+.btn-store-m,
+.btn-arena {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #faf8f5;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--dsc-gold), var(--dsc-bronze));
+  box-shadow: 0 10px 22px -14px rgba(201, 168, 76, 0.9);
+  transition: transform 0.24s var(--dsc-ease), box-shadow 0.24s var(--dsc-ease);
+}
+
+.btn-store:hover,
+.btn-store-m:hover,
+.btn-arena:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -14px rgba(201, 168, 76, 0.95);
+}
+
+[data-dp-page="teen"] .btn-arena,
+[data-dp-page="teen"] .btn-store { color: #0a0a0a; }
+
+/* ============================================================
+   نشان امتیاز
+   ============================================================ */
+.dp-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--dsc-bronze);
+  background: rgba(201, 168, 76, 0.14);
+}
+
+/* ============================================================
+   پیام «هنوز فروشگاهی نیست»
+   ============================================================ */
+.dp-empty-stores {
+  grid-column: 1 / -1;
+  padding: 46px 24px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 2.1;
+  color: var(--dsc-gray);
+  border-radius: 18px;
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px dashed var(--dsc-line);
+}
+
+.dp-empty-stores a {
+  font-weight: 700;
+  color: var(--dsc-bronze);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.dp-empty-stores a:hover { color: var(--dsc-gold); }
+
+@media (max-width: 600px) {
+  .store-card,
+  .store-card-m { padding: 22px 18px 20px; }
+  .store-avatar,
+  .store-avatar-m { width: 66px; height: 66px; }
+}

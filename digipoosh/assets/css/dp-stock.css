@@ -1,0 +1,199 @@
+/* ============================================================
+   دیجی‌پوش — نمایش موجودی
+   ------------------------------------------------------------
+   عدد دقیق هرگز دیده نمی‌شود. فقط حال‌وهوا:
+     آخرین عدد → قرمز با نبض
+     رو به اتمام → قرمز
+     محدود → کهربایی
+     موجود → سبز آرام
+   ============================================================ */
+
+:root {
+  --stk-red: #a33d38;
+  --stk-red-bg: rgba(163, 61, 56, 0.1);
+  --stk-amber: #8a5a20;
+  --stk-amber-bg: rgba(200, 130, 40, 0.13);
+  --stk-green: #2b5f45;
+  --stk-green-bg: rgba(61, 122, 89, 0.1);
+  --stk-gray: #6b6158;
+  --stk-gray-bg: rgba(107, 97, 88, 0.1);
+}
+
+/* ============================================================
+   نشان کوچک روی کارت کالا
+   ============================================================ */
+.dp-stk {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.dp-stk--last,
+.dp-stk--hot {
+  color: #fff;
+  background: linear-gradient(135deg, #c2564f, var(--stk-red));
+  box-shadow: 0 3px 10px -4px rgba(163, 61, 56, 0.8);
+}
+.dp-stk--low {
+  color: var(--stk-amber);
+  background: var(--stk-amber-bg);
+  box-shadow: inset 0 0 0 1px rgba(200, 130, 40, 0.3);
+}
+.dp-stk--out {
+  color: #fff;
+  background: rgba(26, 26, 26, 0.78);
+}
+
+/* نقطه‌ی تپنده — فقط برای «آخرین عدد» و «رو به اتمام» */
+.dp-stk-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: dp-stk-blink 1.4s ease-in-out infinite;
+}
+
+@keyframes dp-stk-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.7); }
+}
+
+/* ============================================================
+   نوار وضعیت — صفحه‌ی کالا
+   ============================================================ */
+.dp-stkbar {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 18px;
+  padding: 11px 14px;
+  border-radius: 13px;
+  border: 1px solid transparent;
+}
+
+.dp-stkbar--ok {
+  color: var(--stk-green);
+  background: var(--stk-green-bg);
+  border-color: rgba(61, 122, 89, 0.2);
+}
+.dp-stkbar--low {
+  color: var(--stk-amber);
+  background: var(--stk-amber-bg);
+  border-color: rgba(200, 130, 40, 0.28);
+}
+.dp-stkbar--hot,
+.dp-stkbar--last {
+  color: var(--stk-red);
+  background: var(--stk-red-bg);
+  border-color: rgba(163, 61, 56, 0.3);
+}
+.dp-stkbar--out {
+  color: var(--stk-gray);
+  background: var(--stk-gray-bg);
+  border-color: rgba(107, 97, 88, 0.2);
+}
+
+/* ---------- آیکون با حلقه‌ی تپنده ---------- */
+.dp-stkbar-ico {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+}
+.dp-stkbar-ico svg { width: 18px; height: 18px; }
+
+/* حلقه‌ای که بیرون می‌زند — حس فوریت */
+.dp-stk-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0;
+  animation: dp-stk-ring 1.9s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes dp-stk-ring {
+  0%   { transform: scale(0.85); opacity: 0.7; }
+  70%  { transform: scale(1.5);  opacity: 0; }
+  100% { transform: scale(1.5);  opacity: 0; }
+}
+
+/* ---------- متن ---------- */
+.dp-stkbar-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+.dp-stkbar-txt b { font-size: 13.5px; font-weight: 800; }
+.dp-stkbar-txt small {
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.7;
+  opacity: 0.86;
+}
+
+/* ---------- نشان تقاضا ---------- */
+.dp-stk-demand {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #6f571a;
+  background: rgba(201, 168, 76, 0.16);
+  white-space: nowrap;
+}
+.dp-stk-demand b { font-size: 12px; font-weight: 800; }
+
+/* ============================================================
+   صفحه‌های تیره — مردانه و نوجوان
+   ============================================================ */
+[data-dp-page="man"] .dp-stkbar,
+[data-dp-page="teen"] .dp-stkbar {
+  background: rgba(255, 255, 255, 0.05);
+}
+[data-dp-page="man"] .dp-stkbar--ok,
+[data-dp-page="teen"] .dp-stkbar--ok { color: #7fc7a3; }
+[data-dp-page="man"] .dp-stkbar--low,
+[data-dp-page="teen"] .dp-stkbar--low { color: #e5b370; }
+[data-dp-page="man"] .dp-stkbar--hot,
+[data-dp-page="man"] .dp-stkbar--last,
+[data-dp-page="teen"] .dp-stkbar--hot,
+[data-dp-page="teen"] .dp-stkbar--last { color: #e79a95; }
+[data-dp-page="man"] .dp-stkbar-ico,
+[data-dp-page="teen"] .dp-stkbar-ico { background: rgba(255, 255, 255, 0.08); }
+[data-dp-page="man"] .dp-stk-demand,
+[data-dp-page="teen"] .dp-stk-demand { color: #e6ce86; }
+
+/* ============================================================
+   گوشی
+   ============================================================ */
+@media (max-width: 560px) {
+  .dp-stkbar { flex-wrap: wrap; }
+  .dp-stk-demand { width: 100%; justify-content: center; }
+}
+
+/* ============================================================
+   کاهش حرکت — حس فوریت باید بماند ولی بدون تپش
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .dp-stk-dot, .dp-stk-ring { animation: none; }
+  .dp-stk-ring { opacity: 0.4; }
+}
